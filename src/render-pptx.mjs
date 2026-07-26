@@ -35,13 +35,13 @@ function elementByRole(slide, role) {
   return slide.elements.find((element) => element.role === role);
 }
 
-function commonChrome(slide, index, total, colors) {
-  slide.background.fill = colors.background;
+function commonChrome(slide, index, total, colors, deckSlide = {}) {
+  slide.background.fill = deckSlide.visual_plan?.background_variant === "quiet" ? colors.surface2 : colors.background;
   addLine(slide, `slide-${index + 1}-top-rule`, { left: 72, top: 34, width: 1136, height: 0 }, colors.border, 1);
   addText(slide, `slide-${index + 1}-page`, `${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`, { left: 1116, top: 668, width: 92, height: 20 }, { fontSize: 12, color: colors.muted, alignment: "right" });
 }
 
-async function addEvidenceImages(slide, deckSlide, assetRoot, { prominent = false, sourceStrip = false } = {}) {
+async function addEvidenceImages(slide, deckSlide, assetRoot, { prominent = false, sourceStrip = false, placements = [] } = {}) {
   const elements = deckSlide.elements.filter((element) => element.role === "evidence-figure");
   let count = 0;
   if (prominent && elements.length) addShape(slide, `${deckSlide.id}-evidence-frame`, "roundRect", { left: 900, top: 232, width: 300, height: 286 }, "#FFFFFF", "#D8CFC5", { borderRadius: "rounded-xl" });
@@ -58,7 +58,7 @@ async function addEvidenceImages(slide, deckSlide, assetRoot, { prominent = fals
       slide.images.add({
         blob,
         contentType: ext === ".png" ? "image/png" : ext === ".webp" ? "image/webp" : "image/jpeg",
-        position: prominent ? { left: 912, top: 244, width: 276, height: 262 } : sourceStrip ? { left: 912, top: 116, width: 276, height: 72 } : { left: 920 + (index % 2) * 142, top: 60 + Math.floor(index / 2) * 88, width: 126, height: 76 },
+        position: placements[index] || (prominent ? { left: 912, top: 244, width: 276, height: 262 } : sourceStrip ? { left: 912, top: 116, width: 276, height: 72 } : { left: 920 + (index % 2) * 142, top: 60 + Math.floor(index / 2) * 88, width: 126, height: 76 }),
         fit: prominent || sourceStrip ? "contain" : (element.data.fit || "cover"),
         alt: element.alt_text || element.data.caption || "Paper evidence image",
       });
@@ -167,6 +167,141 @@ async function renderInsightSlide(slide, deckSlide, colors, typography, assetRoo
   await addEvidenceImages(slide, deckSlide, assetRoot, { prominent: hasVisual });
 }
 
+function addLayoutHeading(slide, deckSlide, colors, typography, kicker, width = 1060) {
+  const title = elementByRole(deckSlide, "title")?.text || deckSlide.primary_claim;
+  const actualKicker = elementByRole(deckSlide, "kicker")?.text || kicker;
+  addText(slide, `${deckSlide.id}-kicker`, actualKicker, { left: 72, top: 76, width: 420, height: 22 }, { fontSize: 13, bold: true, color: colors.accent });
+  addText(slide, `${deckSlide.id}-title`, title, { left: 72, top: 114, width, height: 88 }, { fontSize: typography.slide_title_px, bold: true, color: colors.foreground, lineSpacing: .98 });
+}
+
+async function renderHeroImageSlide(slide, deckSlide, colors, typography, assetRoot) {
+  const eyebrow = elementByRole(deckSlide, "eyebrow")?.text || "RESEARCH BRIEF";
+  const title = elementByRole(deckSlide, "title")?.text || deckSlide.primary_claim;
+  const subtitle = elementByRole(deckSlide, "subtitle")?.text || "";
+  const note = elementByRole(deckSlide, "hero-note")?.data || {};
+  addText(slide, `${deckSlide.id}-eyebrow`, eyebrow, { left: 72, top: 88, width: 500, height: 22 }, { fontSize: 14, bold: true, color: colors.accent });
+  addText(slide, `${deckSlide.id}-title`, title, { left: 72, top: 154, width: 560, height: 180 }, { fontSize: typography.title_px, bold: true, color: colors.foreground, lineSpacing: .94 });
+  addText(slide, `${deckSlide.id}-subtitle`, subtitle, { left: 72, top: 372, width: 520, height: 94 }, { fontSize: typography.subtitle_px, color: colors.muted, lineSpacing: 1.2 });
+  const hasImage = deckSlide.elements.some((element) => element.role === "evidence-figure");
+  addShape(slide, `${deckSlide.id}-hero-frame`, "roundRect", { left: 690, top: 104, width: 510, height: 418 }, colors.surface, colors.border, { borderRadius: "rounded-xl" });
+  if (hasImage) await addEvidenceImages(slide, deckSlide, assetRoot, { placements: [{ left: 706, top: 120, width: 478, height: 385 }] });
+  else {
+    addShape(slide, `${deckSlide.id}-hero-orbit-a`, "ellipse", { left: 802, top: 154, width: 280, height: 280, rotation: -24 }, "none", colors.accent, { lineWidth: 1 });
+    addShape(slide, `${deckSlide.id}-hero-orbit-b`, "ellipse", { left: 858, top: 205, width: 170, height: 170, rotation: 34 }, "none", colors.accent2, { lineWidth: 1 });
+    addShape(slide, `${deckSlide.id}-hero-core`, "ellipse", { left: 890, top: 236, width: 106, height: 106 }, colors.accent, colors.accent, { lineWidth: 0 });
+    addText(slide, `${deckSlide.id}-hero-core-text`, "EVIDENCE", { left: 890, top: 276, width: 106, height: 22 }, { fontSize: 12, bold: true, color: colors.black, alignment: "center" });
+  }
+  addShape(slide, `${deckSlide.id}-note-bg`, "roundRect", { left: 72, top: 572, width: 1128, height: 62 }, colors.surface, colors.border, { borderRadius: "rounded-xl" });
+  addText(slide, `${deckSlide.id}-note-label`, note.label || "CORE CLAIM", { left: 94, top: 593, width: 180, height: 18 }, { fontSize: 12, bold: true, color: colors.accent });
+  addText(slide, `${deckSlide.id}-note-value`, note.value || deckSlide.primary_claim, { left: 286, top: 588, width: 860, height: 26 }, { fontSize: 17, bold: true, color: colors.foreground });
+}
+
+function renderMetricStageSlide(slide, deckSlide, colors, typography) {
+  const metric = elementByRole(deckSlide, "metric-stage")?.data || {};
+  addLayoutHeading(slide, deckSlide, colors, typography, "KEY CONTRIBUTION");
+  addShape(slide, `${deckSlide.id}-metric-bg`, "roundRect", { left: 72, top: 244, width: 780, height: 304 }, colors.surface, colors.border, { borderRadius: "rounded-xl" });
+  addText(slide, `${deckSlide.id}-metric-label`, metric.label || "KEY MOVE", { left: 108, top: 282, width: 280, height: 20 }, { fontSize: 13, bold: true, color: toneColor(metric.tone, colors) });
+  addText(slide, `${deckSlide.id}-metric-value`, metric.value || "01", { left: 108, top: 338, width: 690, height: 90 }, { fontSize: 64, bold: true, color: colors.foreground, lineSpacing: .9 });
+  addText(slide, `${deckSlide.id}-metric-detail`, metric.detail || deckSlide.primary_claim, { left: 112, top: 464, width: 630, height: 48 }, { fontSize: 18, color: colors.muted, lineSpacing: 1.12 });
+  addShape(slide, `${deckSlide.id}-metric-orbit-a`, "ellipse", { left: 926, top: 238, width: 218, height: 218, rotation: -25 }, "none", colors.accent, { lineWidth: 1 });
+  addShape(slide, `${deckSlide.id}-metric-orbit-b`, "ellipse", { left: 970, top: 288, width: 130, height: 130, rotation: 32 }, "none", colors.accent2, { lineWidth: 1 });
+  addShape(slide, `${deckSlide.id}-metric-core`, "ellipse", { left: 998, top: 316, width: 74, height: 74 }, colors.accent, colors.accent, { lineWidth: 0 });
+  addText(slide, `${deckSlide.id}-metric-core-text`, "+", { left: 998, top: 331, width: 74, height: 40 }, { fontSize: 34, bold: true, color: colors.black, alignment: "center" });
+}
+
+async function renderStorySplitSlide(slide, deckSlide, colors, typography, assetRoot) {
+  const primary = elementByRole(deckSlide, "story-primary")?.data || {};
+  const support = elementByRole(deckSlide, "story-support")?.data || {};
+  addLayoutHeading(slide, deckSlide, colors, typography, "THE STORY", 980);
+  const hasImage = deckSlide.elements.some((element) => element.role === "evidence-figure");
+  const widths = hasImage ? [468, 260] : [696, 416];
+  for (const [index, [data, left, width, role]] of [[primary, 72, widths[0], "primary"], [support, 72 + widths[0] + 20, widths[1], "support"]].entries()) {
+    const tone = toneColor(data.tone, colors);
+    addShape(slide, `${deckSlide.id}-story-${role}`, "roundRect", { left, top: 242, width, height: 304 }, colors.surface, colors.border, { borderRadius: "rounded-xl" });
+    addText(slide, `${deckSlide.id}-story-${role}-label`, data.label || (index ? "IMPLICATION" : "CONTEXT"), { left: left + 24, top: 270, width: width - 48, height: 18 }, { fontSize: 11, bold: true, color: tone });
+    addText(slide, `${deckSlide.id}-story-${role}-headline`, data.headline || deckSlide.primary_claim, { left: left + 24, top: 324, width: width - 48, height: 92 }, { fontSize: index ? 26 : 34, bold: true, color: colors.foreground, lineSpacing: 1.02 });
+    (data.points || []).slice(0, 2).forEach((point, pointIndex) => addText(slide, `${deckSlide.id}-story-${role}-point-${pointIndex + 1}`, `• ${String(point).slice(0, 42)}${String(point).length > 42 ? "…" : ""}`, { left: left + 24, top: 444 + pointIndex * 34, width: width - 48, height: 28 }, { fontSize: 13, color: colors.muted, lineSpacing: 1.04 }));
+  }
+  if (hasImage) {
+    addShape(slide, `${deckSlide.id}-story-image-bg`, "roundRect", { left: 850, top: 242, width: 350, height: 304 }, colors.surface, colors.border, { borderRadius: "rounded-xl" });
+    await addEvidenceImages(slide, deckSlide, assetRoot, { placements: [{ left: 864, top: 256, width: 322, height: 276 }] });
+  }
+}
+
+async function renderChartFocusSlide(slide, deckSlide, colors, typography, assetRoot) {
+  const callout = elementByRole(deckSlide, "result-callout")?.data || {};
+  addLayoutHeading(slide, deckSlide, colors, typography, "RESULT FOCUS", 820);
+  const tableElement = deckSlide.elements.find((element) => element.kind === "table");
+  const chartElement = deckSlide.elements.find((element) => element.kind === "chart");
+  addShape(slide, `${deckSlide.id}-chart-bg`, "roundRect", { left: 72, top: 240, width: 732, height: 330 }, colors.surface, colors.border, { borderRadius: "rounded-xl" });
+  if (chartElement) {
+    const data = chartData(chartElement);
+    if (data) slide.charts.add("bar", { position: { left: 96, top: 270, width: 686, height: 268 }, categories: data.categories, series: data.series, hasLegend: data.series.length > 1, barOptions: { direction: "bar", grouping: "clustered", gapWidth: 34 }, xAxis: { visible: false, majorGridlines: null }, yAxis: { textStyle: { fill: colors.muted, fontSize: 12 }, line: { style: "solid", fill: colors.border, width: 1 } }, dataLabels: { showValue: true, position: "outEnd", textStyle: { fill: colors.foreground, fontSize: 12, bold: true } }, chartFill: colors.surface, plotAreaFill: colors.surface });
+  } else if (tableElement) {
+    const values = tableElement.data?.values || [];
+    const rows = values.length;
+    const columns = Math.max(1, ...values.map((row) => row.length));
+    if (rows && columns) {
+      const table = slide.tables.add({ rows, columns, left: 96, top: 270, width: 684, height: 250, values });
+      table.styleOptions = { headerRow: true, bandedRows: true };
+    }
+  } else addText(slide, `${deckSlide.id}-chart-empty`, "等待结构化表格或图表证据", { left: 120, top: 370, width: 620, height: 28 }, { fontSize: 20, color: colors.muted, alignment: "center" });
+  addShape(slide, `${deckSlide.id}-callout-bg`, "roundRect", { left: 830, top: 240, width: 370, height: 330 }, colors.surface, colors.border, { borderRadius: "rounded-xl" });
+  addText(slide, `${deckSlide.id}-callout-label`, callout.label || "KEY RESULT", { left: 858, top: 270, width: 300, height: 18 }, { fontSize: 12, bold: true, color: toneColor(callout.tone, colors) });
+  addText(slide, `${deckSlide.id}-callout-value`, callout.value || deckSlide.primary_claim, { left: 858, top: 326, width: 312, height: 110 }, { fontSize: 31, bold: true, color: colors.foreground, lineSpacing: 1.01 });
+  addText(slide, `${deckSlide.id}-callout-detail`, callout.detail || "", { left: 858, top: 464, width: 312, height: 46 }, { fontSize: 15, color: colors.muted, lineSpacing: 1.08 });
+  await addEvidenceImages(slide, deckSlide, assetRoot, { placements: [{ left: 858, top: 522, width: 312, height: 40 }] });
+}
+
+function renderMatrixSlide(slide, deckSlide, colors, typography) {
+  const cells = deckSlide.elements.filter((element) => element.role === "matrix-cell").slice(0, 4);
+  addLayoutHeading(slide, deckSlide, colors, typography, "DECISION MATRIX");
+  const positions = [{ left: 72, top: 244 }, { left: 648, top: 244 }, { left: 72, top: 408 }, { left: 648, top: 408 }];
+  for (const [index, cell] of cells.entries()) {
+    const position = positions[index];
+    const data = cell.data || {};
+    const tone = toneColor(data.tone, colors);
+    addShape(slide, `${cell.id}-bg`, "rect", { ...position, width: 560, height: 146 }, colors.surface, colors.border, { lineWidth: 1 });
+    addShape(slide, `${cell.id}-rule`, "rect", { left: position.left, top: position.top, width: 6, height: 146 }, tone, tone, { lineWidth: 0 });
+    addText(slide, `${cell.id}-label`, data.title || "POINT", { left: position.left + 28, top: position.top + 22, width: 490, height: 16 }, { fontSize: 11, bold: true, color: tone });
+    addText(slide, `${cell.id}-text`, data.text || deckSlide.primary_claim, { left: position.left + 28, top: position.top + 60, width: 490, height: 58 }, { fontSize: 24, bold: true, color: colors.foreground, lineSpacing: 1.04 });
+  }
+}
+
+async function renderTimelineSlide(slide, deckSlide, colors, typography, assetRoot) {
+  const nodes = deckSlide.elements.filter((element) => element.role === "timeline-node").slice(0, 4);
+  addLayoutHeading(slide, deckSlide, colors, typography, "METHOD TIMELINE");
+  const count = Math.max(2, nodes.length);
+  const width = (1136 - (count - 1) * 18) / count;
+  const y = 262;
+  addLine(slide, `${deckSlide.id}-timeline-line`, { left: 110, top: y + 108, width: 1060, height: 0 }, colors.border, 2);
+  for (const [index, node] of nodes.entries()) {
+    const data = node.data || {};
+    const x = 72 + index * (width + 18);
+    const tone = toneColor(data.tone, colors);
+    addShape(slide, `${node.id}-bg`, "roundRect", { left: x, top: y, width, height: 270 }, colors.surface, colors.border, { borderRadius: "rounded-xl" });
+    addShape(slide, `${node.id}-dot`, "ellipse", { left: x + 24, top: y + 92, width: 24, height: 24 }, tone, colors.background, { lineWidth: 5 });
+    addText(slide, `${node.id}-metric`, data.metric || String(index + 1).padStart(2, "0"), { left: x + 24, top: y + 28, width: 70, height: 18 }, { fontSize: 11, bold: true, color: colors.muted });
+    addText(slide, `${node.id}-title`, data.title || "Step", { left: x + 24, top: y + 144, width: width - 48, height: 44 }, { fontSize: 24, bold: true, color: colors.foreground, lineSpacing: 1.02 });
+    addText(slide, `${node.id}-body`, data.text || "", { left: x + 24, top: y + 204, width: width - 48, height: 42 }, { fontSize: 14, color: colors.muted, lineSpacing: 1.08 });
+  }
+  await addEvidenceImages(slide, deckSlide, assetRoot, { placements: [{ left: 1040, top: 78, width: 148, height: 90 }] });
+}
+
+async function renderEvidenceCollageSlide(slide, deckSlide, colors, typography, assetRoot) {
+  const takeaway = elementByRole(deckSlide, "collage-takeaway")?.data || {};
+  addLayoutHeading(slide, deckSlide, colors, typography, "EVIDENCE COLLAGE");
+  const hasImages = deckSlide.elements.some((element) => element.role === "evidence-figure");
+  const placements = [{ left: 72, top: 242, width: 520, height: 288 }, { left: 614, top: 242, width: 282, height: 138 }, { left: 918, top: 242, width: 282, height: 138 }];
+  if (hasImages) await addEvidenceImages(slide, deckSlide, assetRoot, { placements });
+  else {
+    for (const [index, position] of placements.entries()) addShape(slide, `${deckSlide.id}-collage-empty-${index + 1}`, "rect", position, colors.surface, colors.border, { lineWidth: 1 });
+  }
+  addShape(slide, `${deckSlide.id}-collage-note-bg`, "roundRect", { left: 614, top: 402, width: 586, height: 128 }, colors.surface, colors.border, { borderRadius: "rounded-xl" });
+  addText(slide, `${deckSlide.id}-collage-label`, takeaway.label || "READOUT", { left: 640, top: 430, width: 130, height: 18 }, { fontSize: 11, bold: true, color: colors.accent });
+  addText(slide, `${deckSlide.id}-collage-value`, takeaway.value || deckSlide.primary_claim, { left: 640, top: 466, width: 520, height: 42 }, { fontSize: 19, bold: true, color: colors.foreground, lineSpacing: 1.06 });
+}
+
 function chartData(element) {
   const data = element?.data || {};
   const categories = (data.categories || []).map(String);
@@ -209,9 +344,16 @@ export async function renderPptx({ spec, outPath, previewDir, assetRoot: assetRo
   const objectSummary = [];
   for (const [index, deckSlide] of spec.slides.entries()) {
     const slide = presentation.slides.add();
-    commonChrome(slide, index, spec.slides.length, colors);
+    commonChrome(slide, index, spec.slides.length, colors, deckSlide);
     const hasDataVisual = deckSlide.elements.some((element) => element.kind === "table" || element.kind === "chart");
-    if (hasDataVisual) await renderDataSlide(slide, deckSlide, colors, typography, assetRoot);
+    if (deckSlide.layout === "hero-image") await renderHeroImageSlide(slide, deckSlide, colors, typography, assetRoot);
+    else if (deckSlide.layout === "metric-stage") renderMetricStageSlide(slide, deckSlide, colors, typography);
+    else if (deckSlide.layout === "story-split") await renderStorySplitSlide(slide, deckSlide, colors, typography, assetRoot);
+    else if (deckSlide.layout === "chart-focus") await renderChartFocusSlide(slide, deckSlide, colors, typography, assetRoot);
+    else if (deckSlide.layout === "matrix") renderMatrixSlide(slide, deckSlide, colors, typography);
+    else if (deckSlide.layout === "timeline") await renderTimelineSlide(slide, deckSlide, colors, typography, assetRoot);
+    else if (deckSlide.layout === "evidence-collage") await renderEvidenceCollageSlide(slide, deckSlide, colors, typography, assetRoot);
+    else if (hasDataVisual) await renderDataSlide(slide, deckSlide, colors, typography, assetRoot);
     else if (deckSlide.layout === "title") renderTitleSlide(slide, deckSlide, colors, typography);
     else if (deckSlide.layout === "pipeline") await renderPipelineSlide(slide, deckSlide, colors, typography, assetRoot);
     else if (deckSlide.layout === "comparison") await renderComparisonSlide(slide, deckSlide, colors, typography, assetRoot);

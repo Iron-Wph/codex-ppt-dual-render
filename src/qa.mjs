@@ -33,6 +33,30 @@ function slideIssues(spec) {
     }
     if (slide.elements.length === 0) issues.push(issue("EMPTY_PAGE", "error", "页面没有任何元素", { slide_id: slide.id }));
     const imageElements = slide.elements.filter((element) => element.kind === "image");
+    const visualPlan = slide.visual_plan || {};
+    if (imageElements.length > 3) issues.push(issue("TEMPLATE_IMAGE_LIMIT", "error", `页面使用 ${imageElements.length} 张图片，超过每页最多 3 张的产品约束`, { slide_id: slide.id }));
+    if (Number.isInteger(visualPlan.image_budget) && imageElements.length > visualPlan.image_budget) {
+      issues.push(issue("TEMPLATE_IMAGE_LIMIT", "error", `页面使用 ${imageElements.length} 张图片，超过 visual_plan.image_budget=${visualPlan.image_budget}`, { slide_id: slide.id }));
+    }
+    const plannedRoles = Array.isArray(visualPlan.image_roles) ? visualPlan.image_roles : [];
+    for (const element of imageElements) {
+      const imageRole = element.data?.visual_role;
+      if (!imageRole || !["hero", "evidence", "comparison", "context"].includes(imageRole)) {
+        issues.push(issue("TEMPLATE_IMAGE_ROLE", "error", "图片缺少合法的 visual_role（hero/evidence/comparison/context）", { slide_id: slide.id, element_id: element.id }));
+      } else if (!plannedRoles.includes(imageRole)) {
+        issues.push(issue("TEMPLATE_IMAGE_ROLE", "error", `图片角色 ${imageRole} 不在本页 visual_plan.image_roles 中`, { slide_id: slide.id, element_id: element.id }));
+      }
+    }
+    if (visualPlan.primary_visual && imageElements.length && !imageElements.some((element) => element.asset_ref === visualPlan.primary_visual)) {
+      issues.push(issue("TEMPLATE_IMAGE_PRIMARY", "warning", "primary_visual 未成为本页实际使用的图片资产", { slide_id: slide.id }));
+    }
+    for (const element of slide.elements.filter((item) => item.kind === "table")) {
+      const rows = Number(element.data?.rows || element.data?.values?.length || 0);
+      const columns = Number(element.data?.columns || Math.max(0, ...(element.data?.values || []).map((row) => row.length)));
+      if (rows > 12 || columns > 8) {
+        issues.push(issue("TEMPLATE_TABLE_DENSITY", "warning", `原生表格为 ${rows} 行 × ${columns} 列，建议拆分或改为图表`, { slide_id: slide.id, element_id: element.id }));
+      }
+    }
     if (imageElements.length) assetSlideCount += 1;
     if (slide.role && slide.role !== "title" && !slide.action_title) issues.push(issue("ACTION_TITLE_MISSING", "warning", "页面缺少 action_title，内容编排不完整", { slide_id: slide.id }));
     if (slide.role && !["title", "problem", "gap", "contribution", "method_overview", "method_detail", "experiment_setup", "main_results", "analysis", "limitations", "content"].includes(slide.role)) {

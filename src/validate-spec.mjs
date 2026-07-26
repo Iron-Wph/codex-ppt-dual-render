@@ -1,6 +1,7 @@
 import { readJson } from "./utils.mjs";
+import { BACKGROUND_VARIANTS, DATA_STRATEGIES, DENSITY_PROFILES, IMAGE_ROLES, LAYOUT_FAMILIES } from "./visual-plan.mjs";
 
-const LAYOUTS = new Set(["title", "pipeline", "comparison", "insight", "evidence"]);
+const LAYOUTS = new Set(LAYOUT_FAMILIES);
 const KINDS = new Set(["text", "shape", "image", "chart", "table", "connector", "code"]);
 const RENDER_MODES = new Set(["native", "asset", "html_only", "pptx_only"]);
 
@@ -36,6 +37,21 @@ export function validateSpec(spec) {
     if (!slide.id || ids.has(slide.id)) errors.push(issue("DUPLICATE_ID", "error", `页面 ID 重复或为空: ${slide.id || "(empty)"}`, { slide_id: slide.id }));
     ids.add(slide.id);
     if (!LAYOUTS.has(slide.layout)) errors.push(issue("UNKNOWN_LAYOUT", "error", `未知布局: ${slide.layout}`, { slide_id: slide.id }));
+    const visualPlan = slide.visual_plan;
+    if (!visualPlan || typeof visualPlan !== "object") {
+      errors.push(issue("VISUAL_PLAN_MISSING", "error", "页面缺少 visual_plan", { slide_id: slide.id }));
+    } else {
+      if (visualPlan.layout_family !== slide.layout || !LAYOUTS.has(visualPlan.layout_family)) errors.push(issue("VISUAL_PLAN_LAYOUT", "error", "visual_plan.layout_family 必须是已实现布局且与 layout 一致", { slide_id: slide.id }));
+      if (!Number.isInteger(visualPlan.image_budget) || visualPlan.image_budget < 0 || visualPlan.image_budget > 3) errors.push(issue("VISUAL_PLAN_IMAGE_BUDGET", "error", "visual_plan.image_budget 必须为 0–3 的整数", { slide_id: slide.id }));
+      const imageRoles = Array.isArray(visualPlan.image_roles) ? visualPlan.image_roles : [];
+      if (!Array.isArray(visualPlan.image_roles) || imageRoles.length > visualPlan.image_budget || imageRoles.length !== new Set(imageRoles).size || imageRoles.some((role) => !IMAGE_ROLES.includes(role))) {
+        errors.push(issue("VISUAL_PLAN_IMAGE_ROLES", "error", "visual_plan.image_roles 必须为不重复的合法图片角色，且数量不超过预算", { slide_id: slide.id }));
+      }
+      if (visualPlan.primary_visual !== null && typeof visualPlan.primary_visual !== "string") errors.push(issue("VISUAL_PLAN_PRIMARY", "error", "visual_plan.primary_visual 必须为资产 ID 或 null", { slide_id: slide.id }));
+      if (!DATA_STRATEGIES.includes(visualPlan.data_strategy)) errors.push(issue("VISUAL_PLAN_DATA", "error", "visual_plan.data_strategy 非法", { slide_id: slide.id }));
+      if (!BACKGROUND_VARIANTS.includes(visualPlan.background_variant)) errors.push(issue("VISUAL_PLAN_BACKGROUND", "error", "visual_plan.background_variant 非法", { slide_id: slide.id }));
+      if (!DENSITY_PROFILES.includes(visualPlan.density)) errors.push(issue("VISUAL_PLAN_DENSITY", "error", "visual_plan.density 非法", { slide_id: slide.id }));
+    }
     for (const key of ["slide_goal", "primary_claim"]) {
       if (!slide[key]) errors.push(issue("SLIDE_CLAIM", "error", `${key} 不能为空`, { slide_id: slide.id }));
     }

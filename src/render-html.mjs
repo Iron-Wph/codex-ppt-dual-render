@@ -8,12 +8,16 @@ function findElement(slide, role) {
   return slide.elements.find((element) => element.role === role);
 }
 
+function renderEvidenceFigures(slide, { className = "evidence-figure", limit = 1 } = {}) {
+  return slide.elements.filter((element) => element.role === "evidence-figure" && element.data?.path).slice(0, limit).map((element) => {
+    const data = element.data;
+    const imageClass = data.crop ? "evidence-image crop" : "evidence-image";
+    return `<figure class="${escapeHtml(className)}" data-asset-ref="${escapeHtml(element.asset_ref || "")}" data-image-role="${escapeHtml(data.visual_role || "evidence")}"><img class="${imageClass}" src="${escapeHtml(data.path)}" alt="${escapeHtml(element.alt_text || data.caption || "论文证据图片")}"><figcaption>${escapeHtml(data.caption || "论文证据图片")}</figcaption></figure>`;
+  }).join("");
+}
+
 function renderEvidenceFigure(slide) {
-  const element = findElement(slide, "evidence-figure");
-  if (!element?.data?.path) return "";
-  const data = element.data;
-  const imageClass = data.crop ? "evidence-image crop" : "evidence-image";
-  return `<figure class="evidence-figure" data-asset-ref="${escapeHtml(element.asset_ref || "")}"><img class="${imageClass}" src="${escapeHtml(data.path)}" alt="${escapeHtml(element.alt_text || data.caption || "论文证据图片")}"><figcaption>${escapeHtml(data.caption || "论文证据图片")}</figcaption></figure>`;
+  return renderEvidenceFigures(slide);
 }
 
 function renderTitleSlide(slide) {
@@ -148,9 +152,110 @@ function renderDataSlide(slide) {
     </div>`;
 }
 
+function visualHeading(slide, kicker) {
+  const title = findElement(slide, "title")?.text || slide.primary_claim;
+  const actualKicker = findElement(slide, "kicker")?.text || kicker;
+  return `<div class="slide-heading reveal"><div class="eyebrow">${escapeHtml(actualKicker)}</div><h2>${escapeHtml(title)}</h2></div>`;
+}
+
+function pointsMarkup(points = []) {
+  return points.slice(0, 3).map((point) => `<li>${escapeHtml(point)}</li>`).join("");
+}
+
+function renderHeroImageSlide(slide) {
+  const subtitle = findElement(slide, "subtitle")?.text || "";
+  const note = findElement(slide, "hero-note")?.data || {};
+  const media = renderEvidenceFigures(slide, { className: "hero-media-figure", limit: 1 }) || `<div class="hero-media-placeholder"><span>VISUAL</span><strong>${escapeHtml(slide.primary_claim)}</strong></div>`;
+  return `<div class="content-layout hero-image-layout">
+    <div class="hero-image-copy reveal"><div class="eyebrow">${escapeHtml(findElement(slide, "eyebrow")?.text || "RESEARCH BRIEF")}</div><h1>${escapeHtml(findElement(slide, "title")?.text || slide.primary_claim)}</h1><p>${escapeHtml(subtitle)}</p></div>
+    <div class="hero-media reveal">${media}</div>
+    <div class="hero-image-note reveal"><span>${escapeHtml(note.label || "CORE CLAIM")}</span><strong>${escapeHtml(note.value || slide.primary_claim)}</strong></div>
+  </div>`;
+}
+
+function renderMetricStageSlide(slide) {
+  const metric = findElement(slide, "metric-stage")?.data || {};
+  return `<div class="content-layout metric-stage-layout">
+    ${visualHeading(slide, "KEY CONTRIBUTION")}
+    <div class="metric-stage-card reveal tone-${escapeHtml(metric.tone || "lime")}"><span>${escapeHtml(metric.label || "KEY MOVE")}</span><strong>${escapeHtml(metric.value || "01")}</strong><p>${escapeHtml(metric.detail || slide.primary_claim)}</p></div>
+    <div class="metric-stage-orbit" aria-hidden="true"><i></i><i></i><b>+</b></div>
+  </div>`;
+}
+
+function renderStorySplitSlide(slide) {
+  const primary = findElement(slide, "story-primary")?.data || {};
+  const support = findElement(slide, "story-support")?.data || {};
+  const media = renderEvidenceFigures(slide, { className: "story-media-figure", limit: 1 });
+  return `<div class="content-layout story-split-layout">
+    ${visualHeading(slide, "THE STORY")}
+    <div class="story-split-grid">
+      <article class="story-primary reveal tone-${escapeHtml(primary.tone || "lime")}"><div class="column-label">${escapeHtml(primary.label || "CONTEXT")}</div><h3>${escapeHtml(primary.headline || slide.primary_claim)}</h3><ul>${pointsMarkup(primary.points)}</ul></article>
+      <article class="story-support reveal tone-${escapeHtml(support.tone || "coral")}"><div class="column-label">${escapeHtml(support.label || "IMPLICATION")}</div><h3>${escapeHtml(support.headline || "Evidence and implication")}</h3><ul>${pointsMarkup(support.points)}</ul></article>
+      <div class="story-media reveal">${media || `<div class="story-media-placeholder">${escapeHtml(slide.primary_claim)}</div>`}</div>
+    </div>
+  </div>`;
+}
+
+function renderChartMarkup(slide) {
+  const charts = slide.elements.filter((element) => element.kind === "chart");
+  return charts.map((element) => {
+    const data = element.data || {};
+    const categories = data.categories || [];
+    const values = data.series?.[0]?.values || [];
+    const max = Math.max(1, ...values.map((value) => Math.abs(Number(value) || 0)));
+    const bars = categories.map((category, index) => `<div class="bar-row"><span>${escapeHtml(category)}</span><div class="bar-track"><i style="width:${Math.max(3, Math.round(Math.abs(Number(values[index]) || 0) / max * 100))}%"></i></div><b>${escapeHtml(String(values[index] ?? ""))}</b></div>`).join("");
+    return `<div class="chart-card"><div class="chart-label">${escapeHtml(data.series?.[0]?.name || "Paper values")}</div>${bars}</div>`;
+  }).join("");
+}
+
+function renderChartFocusSlide(slide) {
+  const callout = findElement(slide, "result-callout")?.data || {};
+  const tables = slide.elements.filter((element) => element.kind === "table");
+  const tableMarkup = tables.map((element) => `<div class="chart-table-caption">${escapeHtml(element.data?.caption || "Native editable table")}</div>`).join("");
+  const visual = renderChartMarkup(slide) || tableMarkup || `<div class="chart-empty">等待结构化表格或图表证据</div>`;
+  const media = renderEvidenceFigures(slide, { className: "chart-media-figure", limit: 1 });
+  return `<div class="content-layout chart-focus-layout">
+    ${visualHeading(slide, "RESULT FOCUS")}
+    <div class="chart-focus-grid"><div class="chart-focus-visual reveal">${visual}</div><aside class="chart-callout reveal tone-${escapeHtml(callout.tone || "lime")}"><span>${escapeHtml(callout.label || "KEY RESULT")}</span><strong>${escapeHtml(callout.value || slide.primary_claim)}</strong><p>${escapeHtml(callout.detail || "")}</p>${media}</aside></div>
+  </div>`;
+}
+
+function renderMatrixSlide(slide) {
+  const cells = slide.elements.filter((element) => element.role === "matrix-cell");
+  return `<div class="content-layout matrix-layout">
+    ${visualHeading(slide, "DECISION MATRIX")}
+    <div class="matrix-grid">${cells.map((cell) => `<article class="matrix-cell reveal tone-${escapeHtml(cell.data?.tone || "lime")}"><span>${escapeHtml(cell.data?.title || "POINT")}</span><strong>${escapeHtml(cell.data?.text || slide.primary_claim)}</strong></article>`).join("")}</div>
+  </div>`;
+}
+
+function renderTimelineSlide(slide) {
+  const nodes = slide.elements.filter((element) => element.role === "timeline-node");
+  return `<div class="content-layout timeline-layout">
+    ${visualHeading(slide, "METHOD TIMELINE")}
+    <div class="timeline-track">${nodes.map((node, index) => `<article class="timeline-node reveal tone-${escapeHtml(node.data?.tone || "lime")}"><span>${escapeHtml(node.data?.metric || String(index + 1).padStart(2, "0"))}</span><h3>${escapeHtml(node.data?.title || "Step")}</h3><p>${escapeHtml(node.data?.text || "")}</p></article>`).join("")}</div>
+  </div>`;
+}
+
+function renderEvidenceCollageSlide(slide) {
+  const takeaway = findElement(slide, "collage-takeaway")?.data || {};
+  const images = renderEvidenceFigures(slide, { className: "collage-figure", limit: 3 });
+  return `<div class="content-layout evidence-collage-layout">
+    ${visualHeading(slide, "EVIDENCE COLLAGE")}
+    <div class="collage-grid reveal">${images || `<div class="collage-empty">本页保留给关键论文证据拼贴</div>`}</div>
+    <div class="collage-takeaway reveal"><span>${escapeHtml(takeaway.label || "READOUT")}</span><strong>${escapeHtml(takeaway.value || slide.primary_claim)}</strong></div>
+  </div>`;
+}
+
 function renderSlide(slide, index, total) {
   let body;
-  if (slide.elements.some((element) => element.kind === "table" || element.kind === "chart")) body = renderDataSlide(slide);
+  if (slide.layout === "hero-image") body = renderHeroImageSlide(slide);
+  else if (slide.layout === "metric-stage") body = renderMetricStageSlide(slide);
+  else if (slide.layout === "story-split") body = renderStorySplitSlide(slide);
+  else if (slide.layout === "chart-focus") body = renderChartFocusSlide(slide);
+  else if (slide.layout === "matrix") body = renderMatrixSlide(slide);
+  else if (slide.layout === "timeline") body = renderTimelineSlide(slide);
+  else if (slide.layout === "evidence-collage") body = renderEvidenceCollageSlide(slide);
+  else if (slide.elements.some((element) => element.kind === "table" || element.kind === "chart")) body = renderDataSlide(slide);
   else if (slide.layout === "title") body = renderTitleSlide(slide);
   else if (slide.layout === "pipeline") body = renderPipelineSlide(slide);
   else if (slide.layout === "comparison") body = renderComparisonSlide(slide);
@@ -294,6 +399,67 @@ function htmlDocument(spec) {
     .table-card th { color: var(--black); background: var(--lime); font-weight: 800; }
     .table-card tr:nth-child(even) td { background: rgba(241,243,233,.04); }
     .visual-caption { margin-top: 14px; color: var(--muted); font-size: 10px; }
+    .hero-image-layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(360px, 1.1fr); grid-template-rows: 1fr auto; gap: 3vh 4vw; align-items: center; }
+    .hero-image-copy h1 { max-width: 620px; margin: 0; font: 800 clamp(46px, 5.5vw, 82px)/.98 var(--heading); letter-spacing: -.065em; text-wrap: balance; }
+    .hero-image-copy p { max-width: 520px; margin: 3.2vh 0 0; color: var(--muted); font-size: clamp(17px, 1.55vw, 24px); line-height: 1.38; }
+    .hero-media { min-height: 420px; display: grid; place-items: center; overflow: hidden; border: 1px solid var(--border); background: linear-gradient(145deg, var(--surface), var(--surface-2)); }
+    .hero-media-figure, .story-media-figure, .chart-media-figure { width: 100%; height: 100%; margin: 0; padding: 12px; }
+    .hero-media-figure img, .story-media-figure img, .chart-media-figure img { display: block; width: 100%; height: calc(100% - 23px); object-fit: contain; background: var(--surface-2); }
+    .hero-media-figure figcaption, .story-media-figure figcaption, .chart-media-figure figcaption { margin-top: 6px; overflow: hidden; color: var(--muted); font: 10px var(--mono); text-overflow: ellipsis; white-space: nowrap; }
+    .hero-media-placeholder, .story-media-placeholder, .chart-empty, .collage-empty { display: grid; place-items: center; gap: 16px; width: 100%; height: 100%; padding: 40px; color: var(--muted); text-align: center; background: repeating-linear-gradient(135deg, transparent 0 22px, rgba(216,255,90,.05) 22px 23px); }
+    .hero-media-placeholder span { color: var(--lime); font: 700 12px var(--mono); letter-spacing: .2em; }
+    .hero-media-placeholder strong { max-width: 360px; color: var(--fg); font: 700 clamp(24px, 2.6vw, 40px)/1.04 var(--heading); }
+    .hero-image-note { grid-column: 1 / -1; display: flex; gap: 20px; align-items: center; padding-top: 2.4vh; border-top: 1px solid var(--border); }
+    .hero-image-note span, .metric-stage-card span, .chart-callout span, .collage-takeaway span { color: var(--lime); font: 700 12px var(--mono); letter-spacing: .16em; }
+    .hero-image-note strong { font: 700 18px var(--heading); }
+    .metric-stage-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(260px, .9fr); grid-template-rows: auto 1fr; gap: 3vh 4vw; }
+    .metric-stage-layout .slide-heading { grid-column: 1 / -1; }
+    .metric-stage-card { position: relative; align-self: center; min-height: 330px; padding: 38px; overflow: hidden; border: 1px solid var(--border); background: linear-gradient(155deg, var(--surface), rgba(216,255,90,.08)); }
+    .metric-stage-card::after { content: ""; position: absolute; right: -12%; bottom: -45%; width: 58%; aspect-ratio: 1; border: 1px solid var(--lime); border-radius: 50%; opacity: .55; }
+    .metric-stage-card strong { position: relative; display: block; max-width: 760px; margin: 4vh 0 2vh; color: var(--fg); font: 800 clamp(48px, 6vw, 92px)/.9 var(--heading); letter-spacing: -.07em; }
+    .metric-stage-card p { position: relative; max-width: 720px; margin: 0; color: var(--muted); font-size: clamp(16px, 1.35vw, 21px); line-height: 1.36; }
+    .metric-stage-orbit { position: relative; align-self: center; justify-self: center; width: min(30vw, 340px); aspect-ratio: 1; }
+    .metric-stage-orbit i { position: absolute; inset: 5%; border: 1px solid var(--lime); border-radius: 50%; transform: rotate(-25deg) scaleX(.7); }
+    .metric-stage-orbit i:nth-child(2) { inset: 21%; border-color: var(--coral); transform: rotate(35deg) scaleX(1.55); }
+    .metric-stage-orbit b { position: absolute; inset: 37%; display: grid; place-items: center; border-radius: 50%; background: var(--lime); color: var(--black); font: 700 44px var(--heading); }
+    .story-split-layout, .chart-focus-layout, .matrix-layout, .timeline-layout, .evidence-collage-layout { display: flex; flex-direction: column; gap: 3vh; }
+    .story-split-grid { display: grid; flex: 1; grid-template-columns: minmax(0, 1.05fr) minmax(230px, .72fr) minmax(240px, .76fr); gap: 1.7vw; min-height: 320px; }
+    .story-primary, .story-support { padding: 30px; border: 1px solid var(--border); background: var(--surface); }
+    .story-primary { display: flex; flex-direction: column; justify-content: flex-end; background: linear-gradient(145deg, var(--surface), rgba(216,255,90,.08)); }
+    .story-primary h3, .story-support h3 { margin: 2.8vh 0 2.4vh; font: 750 clamp(28px, 3vw, 44px)/1.02 var(--heading); letter-spacing: -.05em; }
+    .story-primary ul, .story-support ul { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; color: var(--muted); font-size: clamp(14px, 1.15vw, 17px); line-height: 1.32; }
+    .story-primary li, .story-support li { padding-left: 18px; position: relative; }
+    .story-primary li::before, .story-support li::before { content: "•"; position: absolute; left: 0; color: var(--lime); }
+    .story-support li::before { color: var(--coral); }
+    .story-media { overflow: hidden; border: 1px solid var(--border); background: var(--surface-2); }
+    .chart-focus-grid { display: grid; flex: 1; grid-template-columns: minmax(0, 1.3fr) minmax(280px, .7fr); gap: 1.8vw; min-height: 330px; }
+    .chart-focus-visual { min-width: 0; padding: 24px; border: 1px solid var(--border); background: var(--surface); }
+    .chart-focus-visual .chart-card { height: 100%; padding: 0; border: 0; background: transparent; }
+    .chart-callout { display: flex; flex-direction: column; gap: 18px; padding: 28px; border: 1px solid var(--border); background: linear-gradient(160deg, var(--surface), rgba(216,255,90,.08)); }
+    .chart-callout strong { font: 800 clamp(28px, 3vw, 46px)/1.02 var(--heading); letter-spacing: -.05em; }
+    .chart-callout p { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.35; }
+    .chart-media-figure { min-height: 120px; margin-top: auto; border-top: 1px solid var(--border); padding: 12px 0 0; }
+    .chart-table-caption { padding: 26px; color: var(--muted); font-size: 18px; }
+    .matrix-grid { display: grid; flex: 1; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; border: 1px solid var(--border); background: var(--border); }
+    .matrix-cell { display: flex; flex-direction: column; justify-content: flex-end; min-height: 180px; padding: 28px; background: var(--surface); }
+    .matrix-cell span { margin-bottom: 16px; color: var(--lime); font: 700 11px var(--mono); letter-spacing: .16em; }
+    .matrix-cell.tone-coral span { color: var(--coral); }
+    .matrix-cell strong { max-width: 440px; font: 700 clamp(22px, 2.3vw, 34px)/1.06 var(--heading); letter-spacing: -.04em; }
+    .timeline-track { position: relative; display: grid; flex: 1; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.25vw; align-items: center; }
+    .timeline-track::before { content: ""; position: absolute; left: 9%; right: 9%; top: 38%; height: 1px; background: var(--border); }
+    .timeline-node { position: relative; min-height: 260px; padding: 26px; border: 1px solid var(--border); background: var(--surface); }
+    .timeline-node::before { content: ""; position: absolute; top: calc(38% - 10px); left: 26px; width: 20px; height: 20px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 6px var(--bg); }
+    .timeline-node.tone-coral::before { background: var(--coral); }
+    .timeline-node span { display: block; color: var(--muted); font: 700 12px var(--mono); letter-spacing: .14em; }
+    .timeline-node h3 { margin: 88px 0 14px; font: 700 clamp(22px, 2.1vw, 31px)/1.04 var(--heading); }
+    .timeline-node p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.35; }
+    .collage-grid { display: grid; flex: 1; grid-template-columns: minmax(0, 1.25fr) repeat(2, minmax(190px, .75fr)); gap: 1.2vw; min-height: 310px; }
+    .collage-figure { min-width: 0; margin: 0; padding: 9px; overflow: hidden; border: 1px solid var(--border); background: var(--surface); }
+    .collage-figure:first-child { grid-row: 1 / span 2; }
+    .collage-figure img { display: block; width: 100%; height: calc(100% - 22px); object-fit: contain; background: var(--surface-2); }
+    .collage-figure figcaption { overflow: hidden; margin-top: 5px; color: var(--muted); font: 9px var(--mono); text-overflow: ellipsis; white-space: nowrap; }
+    .collage-takeaway { display: flex; gap: 20px; align-items: center; min-height: 64px; padding: 16px 20px; border: 1px solid var(--border); background: var(--surface); }
+    .collage-takeaway strong { font: 700 18px var(--heading); }
     .controls { position: absolute; right: 3vw; top: 50%; z-index: 10; display: grid; gap: 10px; transform: translateY(-50%); }
     .dot { width: 9px; height: 9px; padding: 0; border: 1px solid var(--muted); border-radius: 50%; background: transparent; cursor: pointer; transition: transform .25s ease, background .25s ease, border-color .25s ease; }
     .dot.is-active { transform: scale(1.8); border-color: var(--lime); background: var(--lime); }

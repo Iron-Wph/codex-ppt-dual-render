@@ -1,3 +1,5 @@
+import { normalizeVisualPlan } from "./visual-plan.mjs";
+
 const PAPER_ROLES = [
   "title",
   "problem",
@@ -31,8 +33,8 @@ function fallbackRole(index, paperMode) {
   return PAPER_ROLES[index] || "analysis";
 }
 
-function selectCandidateAsset(slide, index, evidenceIndex, usedAssets) {
-  if (!evidenceIndex?.assets?.length || slide.role === "title" || slide.visual_intent === "text_led") return [];
+function selectCandidateAssets(slide, index, evidenceIndex, usedAssets, count = 1) {
+  if (!evidenceIndex?.assets?.length || count <= 0 || slide.visual_intent === "text_led") return [];
   const usableAssets = evidenceIndex.assets.filter((asset) => {
     const extension = String(asset.path || "").toLowerCase();
     const tinyTransparentCandidate = extension.endsWith(".png") && asset.bytes && asset.bytes < 5000;
@@ -71,10 +73,15 @@ function selectCandidateAsset(slide, index, evidenceIndex, usedAssets) {
     return score(right) - score(left);
   });
   const visualPool = preferSnapshot ? rankedPool.filter((asset) => asset.snapshot).concat(rankedPool.filter((asset) => !asset.snapshot)) : rankedPool;
-  const candidate = visualPool.find((asset) => !usedAssets.has(asset.id)) || visualPool[0];
-  if (!candidate) return [];
-  usedAssets.add(candidate.id);
-  return [candidate.id];
+  const selected = [];
+  for (const candidate of visualPool) {
+    if (selected.length >= count) break;
+    if (usedAssets.has(candidate.id)) continue;
+    usedAssets.add(candidate.id);
+    selected.push(candidate.id);
+  }
+  if (!selected.length && visualPool[0]) selected.push(visualPool[0].id);
+  return selected;
 }
 
 function selectCandidateTable(slide, evidenceIndex, usedTables) {
@@ -102,10 +109,13 @@ export function normalizePlan(plan, { paperMode = false, evidenceIndex = null } 
     slide.table_refs = unique(slide.table_refs);
     slide.visual_intent = inferVisualIntent(slide, slide.role);
     slide.speaker_note = slide.speaker_note || slide.primary_claim || "围绕本页主张解释证据和边界。";
-    slide.asset_candidates = unique(slide.asset_candidates);
-    if (!slide.evidence_refs.length && !slide.asset_candidates.length) {
-      slide.asset_candidates = selectCandidateAsset(slide, index, evidenceIndex, usedAssets);
+    slide.visual_plan = normalizeVisualPlan(slide, { paperMode });
+    slide.layout = slide.visual_plan.layout_family;
+    slide.asset_candidates = unique(slide.asset_candidates).slice(0, slide.visual_plan.image_budget);
+    if (!slide.asset_candidates.length) {
+      slide.asset_candidates = selectCandidateAssets(slide, index, evidenceIndex, usedAssets, slide.visual_plan.image_budget);
     }
+    if (!slide.visual_plan.primary_visual && slide.asset_candidates[0]) slide.visual_plan.primary_visual = slide.asset_candidates[0];
     if (!slide.table_refs.length) slide.table_refs = selectCandidateTable(slide, evidenceIndex, usedTables);
     return slide;
   });
@@ -122,8 +132,8 @@ export function assertContentPlan(plan, { paperMode = false } = {}) {
     throw new Error(`论文内容编排必须为 8–10 页，实际为 ${slides.length} 页`);
   }
   for (const slide of slides) {
-    if (!slide.role || !slide.action_title || !slide.visual_intent) {
-      throw new Error(`页面 ${slide.id || "(unknown)"} 缺少 role/action_title/visual_intent`);
+    if (!slide.role || !slide.action_title || !slide.visual_intent || !slide.visual_plan) {
+      throw new Error(`页面 ${slide.id || "(unknown)"} 缺少 role/action_title/visual_intent/visual_plan`);
     }
   }
   return plan;

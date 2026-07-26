@@ -8,6 +8,7 @@ import { buildEvidenceIndex, evidencePromptContext, writeEvidenceIndex } from ".
 import { assertContentPlan, normalizePlan } from "./content-planner.mjs";
 import { themeDecisionContext } from "./theme-presets.mjs";
 import { materializeThemeReference } from "./theme-reference.mjs";
+import { LAYOUT_FAMILIES } from "./visual-plan.mjs";
 
 function extractSection(source, startMarker, endMarker = "") {
   const start = source.indexOf(startMarker);
@@ -161,8 +162,11 @@ function assertPlanShape(plan, { minSlides = 3, maxSlides = 10 } = {}) {
   for (const slide of plan.plan.slides) {
     if (!slide.id || ids.has(slide.id)) throw new Error(`Codex 规划存在重复页面 ID: ${slide.id}`);
     ids.add(slide.id);
-    if (!["title", "pipeline", "comparison", "insight", "evidence"].includes(slide.layout)) throw new Error(`Codex 规划使用了未实现布局: ${slide.layout}`);
+    if (!LAYOUT_FAMILIES.includes(slide.layout)) throw new Error(`Codex 规划使用了未实现布局: ${slide.layout}`);
     if (!slide.slide_goal || !slide.primary_claim) throw new Error(`Codex 页面 ${slide.id} 缺少 slide_goal 或 primary_claim`);
+    if (!slide.visual_plan || slide.visual_plan.layout_family !== slide.layout) throw new Error(`Codex 页面 ${slide.id} 的 visual_plan.layout_family 必须与 layout 一致`);
+    if (!Number.isInteger(slide.visual_plan.image_budget) || slide.visual_plan.image_budget < 0 || slide.visual_plan.image_budget > 3) throw new Error(`Codex 页面 ${slide.id} 的图片预算必须为 0–3`);
+    if ((slide.visual_plan.image_roles || []).length > slide.visual_plan.image_budget) throw new Error(`Codex 页面 ${slide.id} 的图片角色超过图片预算`);
     const content = slide.content || {};
     if (!content.title) throw new Error(`Codex 页面 ${slide.id} 缺少 content.title`);
     if (slide.layout === "title" && (!content.note || !content.subtitle)) throw new Error(`Codex 标题页 ${slide.id} 缺少 note 或 subtitle`);
@@ -175,8 +179,8 @@ function assertPlanShape(plan, { minSlides = 3, maxSlides = 10 } = {}) {
 
 function buildPlanPrompt({ sourceText, skillGuidance, paperMode, sourcePath, pageCount, evidenceContext }) {
   const task = paperMode
-    ? `任务：这是论文模式。根据下面的 PDF 全文，生成一个 8–10 页的中文论文汇报大纲，推荐 9 页。不要只做摘要，要覆盖论文的研究背景/问题、方法总览、关键算法或训练流程、实验设置、主结果、数据效率、泛化或 sim-to-real、关键分析/失败模式、局限与结论。每页只能有一个 primary_claim，页面之间形成“问题—方法—证据—分析—边界”的累积叙事。允许使用 title、pipeline、comparison、insight 四种布局；尽量避免连续三页相同布局。布局语义必须准确：只有真正按时间或因果顺序发生的步骤才使用 pipeline；并行的机制、独立的实验结果、基线对照和多维分析使用 comparison；分析、失败模式和限制优先使用 insight。特别是 Dynamic Sampling、Clip-Higher、Higher Temperature 这类并行增强机制，必须放在同一张 comparison 页中，不要画成串行 pipeline。`
-    : `任务：根据下面的 Markdown，生成一个 3–5 页、推荐 4 页的中文演示规划。允许使用 title、pipeline、comparison、insight 四种布局。每页只能有一个 primary_claim；页面之间形成清晰的“主张—方法—双输出—质量闭环”或同等叙事弧。`;
+    ? `任务：这是论文模式。根据下面的 PDF 全文，生成一个 8–10 页的中文论文汇报大纲，推荐 9 页。不要只做摘要，要覆盖论文的研究背景/问题、方法总览、关键算法或训练流程、实验设置、主结果、数据效率、泛化或 sim-to-real、关键分析/失败模式、局限与结论。每页只能有一个 primary_claim，页面之间形成“问题—方法—证据—分析—边界”的累积叙事。布局语义必须准确：只有真正按时间或因果顺序发生的步骤才使用 pipeline；并行的机制、独立的实验结果、基线对照和多维分析使用 comparison；分析、失败模式和限制优先使用 insight。特别是 Dynamic Sampling、Clip-Higher、Higher Temperature 这类并行增强机制，必须放在同一张 comparison 页中，不要画成串行 pipeline。`
+    : `任务：根据下面的 Markdown，生成一个 3–5 页、推荐 4 页的中文演示规划。每页只能有一个 primary_claim；页面之间形成清晰的“主张—方法—双输出—质量闭环”或同等叙事弧。`;
   const sourceDescription = paperMode
     ? `输入来源：${sourcePath}（已提取全文，共 ${pageCount || "未知"} 页）。必须基于全文中的真实章节、方法、实验和数字，不得把输入压缩成泛化的模板文案。`
     : `输入来源：${sourcePath}。`;
@@ -185,7 +189,8 @@ function buildPlanPrompt({ sourceText, skillGuidance, paperMode, sourcePath, pag
 ${task}
 内容必须简短，适合 16:9 页面，不要生成 HTML、CSS、PPTX 或解释文字。
 
-输出要求：最终回复必须是严格 JSON，符合 schemas/codex-plan.schema.json。每个 slide.content 必须同时包含 eyebrow、title、subtitle、note、kicker、steps、result、columns、takeaway 这 9 个字段；当前布局不使用的字段输出 null（数组字段输出 []）。每个 slide 还必须输出 role、action_title、evidence_refs、asset_candidates、visual_intent、speaker_note；没有确定的证据引用时输出空数组，不得编造页码。
+输出要求：最终回复必须是严格 JSON，符合 schemas/codex-plan.schema.json。每个 slide.content 必须同时包含 eyebrow、title、subtitle、note、kicker、steps、result、columns、takeaway 这 9 个字段；当前布局不使用的字段输出 null（数组字段输出 []）。每个 slide 还必须输出 role、action_title、evidence_refs、asset_candidates、visual_intent、visual_plan、speaker_note；没有确定的证据引用时输出空数组，不得编造页码。
+- visual_plan 是页面视觉合同：layout_family 必须和 layout 相同；image_budget 为 0–3；image_roles 数量不能超过预算；primary_visual 是候选资产 ID 或 null；data_strategy、background_variant、density 必须明确。数据图表、表格、流程图不计入图片预算。
 - title：使用 eyebrow、title、subtitle、note({label,value})，其余字段为 null 或 []；
 - pipeline：使用 kicker、steps(2–4 项，每项含 title,text,metric,tone)、result({label,value})，其余字段为 null 或 []；
 - comparison：使用 columns(2 项，每项含 label,headline,points,tone)、takeaway({label,value})，其余字段为 null 或 []。
@@ -233,7 +238,7 @@ ${JSON.stringify(report, null, 2)}
 function buildStoryboardPrompt({ sourceText, skillGuidance, paperMode, sourcePath, pageCount, evidenceContext, requestedTheme = "auto" }) {
   const slideCount = paperMode ? "8-10" : "3-6";
   return `You are the storyboard architect for a local-first PPT generator.
-Create a ${slideCount}-slide storyboard from the source below. This is stage 1 only: define the communication job, action title, one primary claim, evidence references, table references, asset candidates, and visual intent for every slide. Do not write slide body copy yet.
+Create a ${slideCount}-slide storyboard from the source below. This is stage 1 only: define the communication job, action title, one primary claim, evidence references, table references, asset candidates, visual intent, and a visual_plan for every slide. Do not write slide body copy yet.
 
 Hard rules:
 - Use the full source text, not a short summary.
@@ -245,6 +250,7 @@ Hard rules:
 - Apply the Presentation skill's narrative rules: define the audience outcome, choose a cumulative narrative arc, give every slide one job and one primary claim, turn evidence into meaning, and close the opening question deliberately.
 - Decide the deck-level visual style. If the requested theme is explicit, preserve it. Otherwise choose exactly one style_family from the theme catalog below based on audience, topic, and scene, and explain the choice in visual.style_reason and visual.style_context.
 - Choose a layout_system and density_profile that match the story. Use the Codex Grid principles as a composition reference: vary silhouettes, preserve whitespace and typography hierarchy, and do not repeat a card grid on every slide.
+- For every slide, output visual_plan. Its layout_family must equal layout and be one of: ${LAYOUT_FAMILIES.join(", ")}. Allocate 0–3 meaningful images only; use image_roles (hero, evidence, comparison, context), primary_visual (candidate asset ID or null), data_strategy, background_variant, and density. Native tables, native charts, and diagrams do not use image budget. Never allocate an image merely as decoration.
 - Return strict JSON matching schemas/codex-storyboard.schema.json.
 
 Source: ${sourcePath}; pages: ${pageCount}
@@ -301,12 +307,14 @@ Composition rules:
 - One viewer-facing action title, one primary claim, and a short speaker note.
 - Keep copy concise: title one line where possible, body as 2-4 short points, no paragraph dumping.
 - Match layout semantics. For source_table/data_chart, the renderer will consume table_refs; do not replace the table with generic bullets.
+- Fill content according to the locked layout: hero-image uses eyebrow/title/subtitle/note; metric-stage uses result or note; story-split and matrix use two concise columns; chart-focus uses result plus table/chart evidence; timeline uses 2–4 steps; evidence-collage uses takeaway plus up to three supplied source images. Fields not used by the layout remain null or [].
 - Turn each evidence item into meaning: label what the audience should notice, not just what exists.
 - Use the supplied evidence IDs only.
 - The deck has a locked visual contract. Preserve the selected style family, mood, composition language, image treatment, table treatment, density, and typography hierarchy on this slide.
 - Reference image: ${themeReferencePath || visual.style_reference || "not available"}. Treat it as a visual contract, not as a source of factual content.
 - Original style inspiration: ${visual.style_inspiration || "not available"}. When present, inspect it for composition, whitespace, image/table treatment, and hierarchy; never copy its content or use it as factual evidence.
 - Keep the slide silhouette varied across the deck while remaining inside the same theme system; do not turn every slide into the same two-column card grid.
+- Preserve the storyboard visual_plan exactly: layout_family must equal layout; do not add more images than image_budget; use only its allowed image_roles; primary_visual must be a supplied asset ID or null. Native chart/table/diagram visuals do not count as images.
 
 Relevant SKILL.md guidance:
 ${skillGuidance}
@@ -326,6 +334,7 @@ function assertSingleSlideShape(slide, storyboardSlide) {
   if (!slide?.content?.title) throw new Error(`Single-slide output ${storyboardSlide.id} is missing content.title.`);
   if (slide.id !== storyboardSlide.id) throw new Error(`Single-slide output ID mismatch: expected ${storyboardSlide.id}, got ${slide.id}.`);
   if (slide.layout !== storyboardSlide.layout) throw new Error(`Single-slide output layout mismatch for ${slide.id}.`);
+  if (!slide.visual_plan || slide.visual_plan.layout_family !== storyboardSlide.visual_plan?.layout_family) throw new Error(`Single-slide output visual_plan mismatch for ${slide.id}.`);
   return slide;
 }
 

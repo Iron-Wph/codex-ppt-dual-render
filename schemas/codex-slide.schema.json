@@ -4,10 +4,10 @@
   "title": "Codex Single Slide Plan",
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "layout", "role", "action_title", "slide_goal", "primary_claim", "evidence_refs", "table_refs", "asset_candidates", "visual_intent", "speaker_note", "content"],
+  "required": ["id", "layout", "role", "action_title", "slide_goal", "primary_claim", "evidence_refs", "table_refs", "asset_candidates", "visual_intent", "visual_plan", "speaker_note", "content"],
   "properties": {
     "id": { "type": "string", "minLength": 1 },
-    "layout": { "enum": ["title", "pipeline", "comparison", "insight", "evidence"] },
+    "layout": { "enum": ["title", "pipeline", "comparison", "insight", "evidence", "hero-image", "metric-stage", "story-split", "chart-focus", "matrix", "timeline", "evidence-collage"] },
     "role": { "type": "string", "minLength": 1 },
     "action_title": { "type": "string", "minLength": 1 },
     "slide_goal": { "type": "string", "minLength": 1 },
@@ -16,6 +16,20 @@
     "table_refs": { "type": "array", "maxItems": 4, "items": { "type": "string" } },
     "asset_candidates": { "type": "array", "maxItems": 8, "items": { "type": "string" } },
     "visual_intent": { "enum": ["source_figure", "source_table", "data_chart", "method_diagram", "concept_illustration", "comparison_matrix", "text_led", "decorative_none"] },
+    "visual_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["layout_family", "primary_visual", "image_budget", "image_roles", "data_strategy", "background_variant", "density"],
+      "properties": {
+        "layout_family": { "enum": ["title", "pipeline", "comparison", "insight", "evidence", "hero-image", "metric-stage", "story-split", "chart-focus", "matrix", "timeline", "evidence-collage"] },
+        "primary_visual": { "type": ["string", "null"] },
+        "image_budget": { "type": "integer", "minimum": 0, "maximum": 3 },
+        "image_roles": { "type": "array", "maxItems": 3, "uniqueItems": true, "items": { "enum": ["hero", "evidence", "comparison", "context"] } },
+        "data_strategy": { "enum": ["none", "native_chart", "native_table", "diagram", "source_figure"] },
+        "background_variant": { "enum": ["default", "light", "dark", "quiet", "immersive"] },
+        "density": { "enum": ["sparse", "balanced", "dense"] }
+      }
+    },
     "speaker_note": { "type": "string" },
     "content": {
       "type": "object",

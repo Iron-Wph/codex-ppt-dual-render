@@ -110,10 +110,10 @@
       "maxItems": 10,
       "items": {
         "type": "object",
-        "required": ["id", "layout", "slide_goal", "primary_claim", "elements", "review_flags"],
+          "required": ["id", "layout", "slide_goal", "primary_claim", "visual_plan", "elements", "review_flags"],
         "properties": {
           "id": { "type": "string", "minLength": 1 },
-          "layout": { "enum": ["title", "pipeline", "comparison", "insight", "evidence"] },
+          "layout": { "enum": ["title", "pipeline", "comparison", "insight", "evidence", "hero-image", "metric-stage", "story-split", "chart-focus", "matrix", "timeline", "evidence-collage"] },
           "role": { "type": "string" },
           "action_title": { "type": "string" },
           "slide_goal": { "type": "string", "minLength": 1 },
@@ -122,6 +122,20 @@
           "table_refs": { "type": "array", "items": { "type": "string" } },
           "asset_candidates": { "type": "array", "items": { "type": "string" } },
           "visual_intent": { "type": "string" },
+          "visual_plan": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["layout_family", "primary_visual", "image_budget", "image_roles", "data_strategy", "background_variant", "density"],
+            "properties": {
+              "layout_family": { "enum": ["title", "pipeline", "comparison", "insight", "evidence", "hero-image", "metric-stage", "story-split", "chart-focus", "matrix", "timeline", "evidence-collage"] },
+              "primary_visual": { "type": ["string", "null"] },
+              "image_budget": { "type": "integer", "minimum": 0, "maximum": 3 },
+              "image_roles": { "type": "array", "maxItems": 3, "uniqueItems": true, "items": { "enum": ["hero", "evidence", "comparison", "context"] } },
+              "data_strategy": { "enum": ["none", "native_chart", "native_table", "diagram", "source_figure"] },
+              "background_variant": { "enum": ["default", "light", "dark", "quiet", "immersive"] },
+              "density": { "enum": ["sparse", "balanced", "dense"] }
+            }
+          },
           "speaker_note": { "type": "string" },
           "reading_order": { "type": "array", "items": { "type": "string" } },
           "elements": {

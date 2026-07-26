@@ -4,6 +4,7 @@ import { assertValidSpec } from "./validate-spec.mjs";
 import { writeJson } from "./utils.mjs";
 import { resolveEvidenceAssets, resolveEvidenceTables } from "./evidence-index.mjs";
 import { chooseTheme } from "./theme-presets.mjs";
+import { normalizeVisualPlan } from "./visual-plan.mjs";
 
 function text(id, role, value, render_mode = "native") {
   return { id, kind: "text", role, text: value, editable: true, render_mode };
@@ -17,7 +18,7 @@ function connector(id, role, data) {
   return { id, kind: "connector", role, data, editable: true, render_mode: "native" };
 }
 
-function image(id, role, asset) {
+function image(id, role, asset, visualRole = "evidence") {
   return {
     id,
     kind: "image",
@@ -34,6 +35,7 @@ function image(id, role, asset) {
       fit: asset.crop ? "contain" : "cover",
       crop: Boolean(asset.crop),
       table_ref: asset.table_ref || null,
+      visual_role: visualRole,
     },
   };
 }
@@ -108,16 +110,118 @@ function compactStepTitle(value, fallback) {
   return aliases[title] || (title.length > 18 ? `${title.slice(0, 17)}…` : title);
 }
 
+function contentColumns(content, count = 2) {
+  const columns = Array.isArray(content.columns) ? content.columns.slice(0, count) : [];
+  return columns.map((column, index) => ({
+    label: visibleText(column?.label, `POINT ${index + 1}`),
+    headline: visibleText(column?.headline, "Key finding"),
+    points: Array.isArray(column?.points) ? column.points.slice(0, 2).map((point) => compactBody(point, "", 42)).filter(Boolean) : [],
+    tone: column?.tone || (index % 2 ? "coral" : "lime"),
+  }));
+}
+
+function makeFallbackColumns(content, claim, count = 2) {
+  const source = contentColumns(content, count);
+  while (source.length < count) {
+    const index = source.length;
+    source.push({
+      label: `POINT ${index + 1}`,
+      headline: index === 0 ? compactBody(content.subtitle || claim, "Key finding", 36) : "Evidence and implication",
+      points: index === 0 ? [compactBody(claim, "", 48)] : ["用原始证据支持页面主张"],
+      tone: index % 2 ? "coral" : "lime",
+    });
+  }
+  return source;
+}
+
+function addHeading(elements, id, content, claim, kicker) {
+  elements.push(text(`${id}-title`, "title", visibleText(content.title, claim)));
+  elements.push(text(`${id}-kicker`, "kicker", visibleText(content.kicker, kicker)));
+}
+
+function addCustomLayoutElements(elements, layout, slide, content) {
+  const columns = makeFallbackColumns(content, slide.primary_claim, 2);
+  const result = content.result || content.note || content.takeaway || {};
+  if (layout === "hero-image") {
+    elements.push(text(`${slide.id}-eyebrow`, "eyebrow", visibleText(content.eyebrow, "RESEARCH BRIEF")));
+    elements.push(text(`${slide.id}-title`, "title", visibleText(content.title, slide.primary_claim)));
+    elements.push(text(`${slide.id}-subtitle`, "subtitle", visibleText(content.subtitle, "")));
+    elements.push(shape(`${slide.id}-note`, "hero-note", { label: result.label || "CORE CLAIM", value: result.value || slide.primary_claim, tone: result.tone || "lime" }));
+    return;
+  }
+  if (layout === "metric-stage") {
+    addHeading(elements, slide.id, content, slide.primary_claim, "KEY CONTRIBUTION");
+    elements.push(shape(`${slide.id}-metric`, "metric-stage", {
+      label: result.label || "KEY MOVE",
+      value: compactBody(result.value || content.subtitle || "01", "01", 38),
+      detail: compactBody(slide.primary_claim, "", 110),
+      tone: result.tone || "lime",
+    }));
+    return;
+  }
+  if (layout === "story-split") {
+    addHeading(elements, slide.id, content, slide.primary_claim, "THE STORY");
+    for (const [index, column] of columns.entries()) {
+      elements.push(shape(`${slide.id}-story-${index + 1}`, index === 0 ? "story-primary" : "story-support", column));
+    }
+    return;
+  }
+  if (layout === "chart-focus") {
+    addHeading(elements, slide.id, content, slide.primary_claim, "RESULT FOCUS");
+    elements.push(shape(`${slide.id}-result-callout`, "result-callout", {
+      label: result.label || "KEY RESULT",
+      value: compactBody(result.value || columns[0].headline, "Evidence-backed result", 44),
+      detail: compactBody(result.detail || columns[0].points?.[0] || slide.primary_claim, "", 92),
+      tone: result.tone || "lime",
+    }));
+    return;
+  }
+  if (layout === "matrix") {
+    addHeading(elements, slide.id, content, slide.primary_claim, "DECISION MATRIX");
+    const cells = columns.flatMap((column) => [
+      { title: column.label, text: column.headline, tone: column.tone },
+      { title: "WHAT IT MEANS", text: column.points?.[0] || slide.primary_claim, tone: column.tone },
+    ]).slice(0, 4);
+    for (const [index, cell] of cells.entries()) elements.push(shape(`${slide.id}-matrix-${index + 1}`, "matrix-cell", cell));
+    return;
+  }
+  if (layout === "timeline") {
+    addHeading(elements, slide.id, content, slide.primary_claim, "METHOD TIMELINE");
+    const steps = Array.isArray(content.steps) && content.steps.length ? content.steps.slice(0, 4) : columns.map((column, index) => ({ title: column.headline, text: column.points?.[0], metric: String(index + 1).padStart(2, "0"), tone: column.tone }));
+    for (const [index, rawStep] of steps.entries()) {
+      const step = rawStep || {};
+      elements.push(shape(`${slide.id}-timeline-${index + 1}`, "timeline-node", {
+        title: compactStepTitle(step.title, `Step ${index + 1}`),
+        text: compactBody(step.text, "", 74),
+        metric: step.metric || String(index + 1).padStart(2, "0"),
+        tone: step.tone || (index % 2 ? "coral" : "lime"),
+      }));
+    }
+    return;
+  }
+  if (layout === "evidence-collage") {
+    addHeading(elements, slide.id, content, slide.primary_claim, "EVIDENCE COLLAGE");
+    elements.push(shape(`${slide.id}-collage-takeaway`, "collage-takeaway", {
+      label: result.label || "READOUT",
+      value: compactBody(result.value || content.takeaway?.value || slide.primary_claim, slide.primary_claim, 120),
+    }));
+    return;
+  }
+  addHeading(elements, slide.id, content, slide.primary_claim, "PAPER EVIDENCE");
+}
+
 function specSlideFromCodex(slide, evidenceAssets = [], evidenceTables = []) {
   const content = slide.content || {};
+  const visualPlan = normalizeVisualPlan(slide, { paperMode: Boolean(slide.role && slide.role !== "content") });
+  const layout = visualPlan.layout_family;
   const elements = [];
-  if (slide.layout === "title") {
+  if (layout === "title") {
     const note = content.note && typeof content.note === "object" ? content.note : { label: "THE CORE MOVE", value: content.note || "STRUCTURE ONCE → RENDER TWICE" };
     elements.push(text(`${slide.id}-eyebrow`, "eyebrow", visibleText(content.eyebrow, "CODEX / PRESENTATION MVP")));
     elements.push(text(`${slide.id}-title`, "title", visibleText(content.title, slide.primary_claim)));
     elements.push(text(`${slide.id}-subtitle`, "subtitle", visibleText(content.subtitle, "")));
     elements.push(shape(`${slide.id}-note`, "hero-note", { label: note.label || "THE CORE MOVE", value: note.value || "STRUCTURE ONCE → RENDER TWICE", tone: note.tone || "lime" }));
-  } else if (slide.layout === "pipeline") {
+  } else if (layout === "pipeline") {
     elements.push(text(`${slide.id}-title`, "title", visibleText(content.title, slide.primary_claim)));
     elements.push(text(`${slide.id}-kicker`, "kicker", visibleText(content.kicker, "THE PIPELINE")));
     const steps = Array.isArray(content.steps) ? content.steps.slice(0, 4) : [];
@@ -134,7 +238,7 @@ function specSlideFromCodex(slide, evidenceAssets = [], evidenceTables = []) {
     }
     const result = content.result || {};
     elements.push(shape(`${slide.id}-result`, "result", { label: result.label || "RESULT", value: result.value || "可交付结果" }));
-  } else if (slide.layout === "comparison") {
+  } else if (layout === "comparison") {
     elements.push(text(`${slide.id}-title`, "title", visibleText(content.title, slide.primary_claim)));
     for (const [index, rawColumn] of (Array.isArray(content.columns) ? content.columns.slice(0, 3) : []).entries()) {
       const column = rawColumn || {};
@@ -147,7 +251,7 @@ function specSlideFromCodex(slide, evidenceAssets = [], evidenceTables = []) {
     }
     const takeaway = content.takeaway || {};
     elements.push(shape(`${slide.id}-takeaway`, "takeaway", { label: takeaway.label || "SHARED SPEC", value: takeaway.value || "结构只维护一份" }));
-  } else if (slide.layout === "insight") {
+  } else if (layout === "insight") {
     elements.push(text(`${slide.id}-title`, "title", visibleText(content.title, slide.primary_claim)));
     for (const [index, rawColumn] of (Array.isArray(content.columns) ? content.columns.slice(0, 2) : []).entries()) {
       const column = rawColumn || {};
@@ -161,14 +265,21 @@ function specSlideFromCodex(slide, evidenceAssets = [], evidenceTables = []) {
     const takeaway = content.takeaway || {};
     elements.push(shape(`${slide.id}-insight-takeaway`, "takeaway", { label: takeaway.label || "TAKEAWAY", value: takeaway.value || "从证据中提炼可执行结论" }));
   }
-  if (slide.layout === "evidence") {
+  if (layout === "evidence") {
     elements.push(text(`${slide.id}-title`, "title", visibleText(content.title, slide.primary_claim)));
     elements.push(text(`${slide.id}-kicker`, "kicker", visibleText(content.kicker, "PAPER EVIDENCE")));
   }
-  const assetRefs = [...(slide.evidence_refs || []), ...(slide.asset_candidates || [])];
-  const assets = resolveEvidenceAssets({ assets: evidenceAssets }, assetRefs).slice(0, 2);
+  if (["hero-image", "metric-stage", "story-split", "chart-focus", "matrix", "timeline", "evidence-collage"].includes(layout)) {
+    addCustomLayoutElements(elements, layout, slide, content);
+  }
+  const assetRefs = [visualPlan.primary_visual, ...(slide.evidence_refs || []), ...(slide.asset_candidates || [])].filter(Boolean);
+  const resolvedAssets = resolveEvidenceAssets({ assets: evidenceAssets }, assetRefs);
+  const primaryAsset = visualPlan.primary_visual ? resolvedAssets.find((asset) => asset.id === visualPlan.primary_visual) : null;
+  const assets = [primaryAsset, ...resolvedAssets.filter((asset) => asset.id !== primaryAsset?.id)].filter(Boolean).slice(0, visualPlan.image_budget);
   if (assets.length && slide.visual_intent !== "text_led" && slide.visual_intent !== "decorative_none") {
-    for (const [index, asset] of assets.entries()) elements.push(image(`${slide.id}-evidence-figure-${index + 1}`, "evidence-figure", asset));
+    for (const [index, asset] of assets.entries()) {
+      elements.push(image(`${slide.id}-evidence-figure-${index + 1}`, "evidence-figure", asset, visualPlan.image_roles[index] || "evidence"));
+    }
   }
   const tableRefs = [...(slide.table_refs || [])];
   const tables = resolveEvidenceTables({ tables: evidenceTables }, tableRefs).slice(0, 1);
@@ -183,7 +294,7 @@ function specSlideFromCodex(slide, evidenceAssets = [], evidenceTables = []) {
   }
   return {
     id: slide.id,
-    layout: slide.layout,
+    layout,
     role: slide.role || "content",
     action_title: slide.action_title || slide.primary_claim,
     slide_goal: slide.slide_goal,
@@ -192,6 +303,7 @@ function specSlideFromCodex(slide, evidenceAssets = [], evidenceTables = []) {
     table_refs: slide.table_refs || [],
     asset_candidates: slide.asset_candidates || [],
     visual_intent: slide.visual_intent || "text_led",
+    visual_plan: visualPlan,
     speaker_note: slide.speaker_note || "",
     reading_order: elements.map((element) => element.id),
     elements,
@@ -207,6 +319,11 @@ function makePipelineSlide(id, goal, claim, title, kicker, steps, result) {
   }
   elements.push(shape(`${id}-result`, "result", result));
   return { id, layout: "pipeline", slide_goal: goal, primary_claim: claim, reading_order: elements.map((item) => item.id), elements, review_flags: [] };
+}
+
+function withVisualPlan(slide) {
+  const visualPlan = normalizeVisualPlan(slide);
+  return { ...slide, layout: visualPlan.layout_family, visual_plan: visualPlan };
 }
 
 export function specFromPlan(plan, { evidenceIndex = null, themeId = "auto" } = {}) {
@@ -301,7 +418,7 @@ export function specFromPlan(plan, { evidenceIndex = null, themeId = "auto" } = 
         ],
         { label: "DONE", value: "发现问题 → 修订规格 → 再次验证" }
       )
-    ]
+    ].map(withVisualPlan)
   };
 }
 

@@ -35,6 +35,7 @@ export async function materializeSlidePipeline({ plan, evidenceIndex = null, out
       table_refs: slide.table_refs || [],
       asset_candidates: slide.asset_candidates || [],
       visual_intent: slide.visual_intent,
+      visual_plan: slide.visual_plan,
     })),
   });
   const results = [];
