@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://codex.local/schemas/codex-slide.schema.json",
+  "title": "Codex Single Slide Plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "layout", "role", "action_title", "slide_goal", "primary_claim", "evidence_refs", "table_refs", "asset_candidates", "visual_intent", "speaker_note", "content"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "layout": { "enum": ["title", "pipeline", "comparison", "insight", "evidence"] },
+    "role": { "type": "string", "minLength": 1 },
+    "action_title": { "type": "string", "minLength": 1 },
+    "slide_goal": { "type": "string", "minLength": 1 },
+    "primary_claim": { "type": "string", "minLength": 1 },
+    "evidence_refs": { "type": "array", "maxItems": 8, "items": { "type": "string" } },
+    "table_refs": { "type": "array", "maxItems": 4, "items": { "type": "string" } },
+    "asset_candidates": { "type": "array", "maxItems": 8, "items": { "type": "string" } },
+    "visual_intent": { "enum": ["source_figure", "source_table", "data_chart", "method_diagram", "concept_illustration", "comparison_matrix", "text_led", "decorative_none"] },
+    "speaker_note": { "type": "string" },
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["eyebrow", "title", "subtitle", "note", "kicker", "steps", "result", "columns", "takeaway"],
+      "properties": {
+        "eyebrow": { "type": ["string", "null"] },
+        "title": { "type": "string", "minLength": 1 },
+        "subtitle": { "type": ["string", "null"] },
+        "note": { "type": ["object", "null"], "additionalProperties": false, "required": ["label", "value"], "properties": { "label": { "type": "string" }, "value": { "type": "string" } } },
+        "kicker": { "type": ["string", "null"] },
+        "steps": { "type": ["array", "null"], "maxItems": 4, "items": { "type": "object", "additionalProperties": false, "required": ["title", "text", "metric", "tone"], "properties": { "title": { "type": "string" }, "text": { "type": "string" }, "metric": { "type": "string" }, "tone": { "type": "string" } } } },
+        "result": { "type": ["object", "null"], "additionalProperties": false, "required": ["label", "value"], "properties": { "label": { "type": "string" }, "value": { "type": "string" } } },
+        "columns": { "type": ["array", "null"], "maxItems": 2, "items": { "type": "object", "additionalProperties": false, "required": ["label", "headline", "points", "tone"], "properties": { "label": { "type": "string" }, "headline": { "type": "string" }, "points": { "type": "array", "maxItems": 4, "items": { "type": "string" } }, "tone": { "type": "string" } } } },
+        "takeaway": { "type": ["object", "null"], "additionalProperties": false, "required": ["label", "value"], "properties": { "label": { "type": "string" }, "value": { "type": "string" } } }
+      }
+    }
+  }
+}

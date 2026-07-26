@@ -1,0 +1,22 @@
+{
+  "name": "codex-ppt-dual-render-mvp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local-first Codex MVP for dual HTML and editable PPTX rendering.",
+  "scripts": {
+    "generate": "node src/cli.mjs generate --input examples/demo.md --out dist/demo --format both --planner local-codex",
+    "validate": "node src/cli.mjs validate --spec dist/demo/deck.spec.json",
+    "render": "node src/cli.mjs render --spec dist/demo/deck.spec.json --format both",
+    "qa": "node src/cli.mjs qa --input dist/demo",
+    "web": "node src/serve.mjs --dir dist/demo --port 4173",
+    "review": "node src/cli.mjs review --input dist/demo",
+    "mvp": "npm run generate"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@openai/codex": "^0.144.4"
+  }
+}

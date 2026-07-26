@@ -1,0 +1,36 @@
+{
+  "id": "graphite-lime",
+  "aspect_ratio": "16:9",
+  "fonts": {
+    "heading": ["Aptos Display", "Microsoft YaHei", "sans-serif"],
+    "body": ["Aptos", "Microsoft YaHei", "sans-serif"],
+    "mono": ["Aptos Mono", "Consolas", "monospace"]
+  },
+  "colors": {
+    "background": "#101312",
+    "surface": "#181D1A",
+    "surface2": "#202721",
+    "foreground": "#F1F3E9",
+    "muted": "#A5AEA5",
+    "accent": "#D8FF5A",
+    "accent2": "#FF7757",
+    "accent3": "#8EE3C4",
+    "border": "#39443B",
+    "white": "#FFFFFF",
+    "black": "#0A0D0B"
+  },
+  "spacing": {
+    "page_margin": 64,
+    "section_gap": 28,
+    "card_gap": 18,
+    "text_gap": 10
+  },
+  "typography": {
+    "title_px": 58,
+    "slide_title_px": 38,
+    "subtitle_px": 21,
+    "body_px": 17,
+    "caption_px": 13,
+    "metric_px": 46
+  }
+}

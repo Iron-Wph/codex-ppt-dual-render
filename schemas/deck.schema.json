@@ -1,0 +1,173 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://codex.local/schemas/deck.schema.json",
+  "title": "Codex Dual Render Deck",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["spec_version", "deck", "theme", "narrative", "slides"],
+  "properties": {
+    "spec_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "deck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "purpose", "audience", "language", "aspect_ratio"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "purpose": { "type": "string", "minLength": 1 },
+        "audience": { "type": "string", "minLength": 1 },
+        "language": { "type": "string", "minLength": 2 },
+        "aspect_ratio": { "const": "16:9" }
+      }
+    },
+    "theme": {
+      "type": "object",
+      "required": ["id", "fonts", "colors", "spacing", "typography"],
+      "properties": {
+        "id": { "type": "string" },
+        "fonts": { "type": "object" },
+        "colors": { "type": "object" },
+        "spacing": { "type": "object" },
+        "typography": { "type": "object" }
+      }
+    },
+    "visual": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "style_family": { "type": "string" },
+        "image_policy": { "type": "string" },
+        "density_profile": { "type": "string" },
+        "style_reason": { "type": "string" },
+        "style_context": { "type": "string" },
+        "layout_system": { "type": "string" },
+        "style_reference": { "type": "string" },
+        "style_reference_html": { "type": "string" },
+        "style_lock": { "type": "string" },
+        "style_system": { "type": "object" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "input": { "type": "object" },
+        "parser": { "type": "string" },
+        "page_count": { "type": "integer", "minimum": 0 },
+        "character_count": { "type": "integer", "minimum": 0 },
+        "sections": { "type": "array" },
+        "claims": { "type": "array" }
+      }
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "path", "editable_level"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "type": { "type": "string", "minLength": 1 },
+          "path": { "type": "string", "minLength": 1 },
+          "source_page": { "type": ["integer", "null"] },
+          "mime_type": { "type": ["string", "null"] },
+          "caption": { "type": "string" },
+          "alt_text": { "type": "string" },
+          "editable_level": { "type": "string" }
+        }
+      }
+    },
+    "tables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "source_page", "values", "editable_level"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "type": { "type": "string" },
+          "source_page": { "type": ["integer", "null"] },
+          "rows": { "type": "integer", "minimum": 1 },
+          "columns": { "type": "integer", "minimum": 1 },
+          "values": { "type": "array", "items": { "type": "array", "items": { "type": "string" } } },
+          "bbox": { "type": ["array", "null"] },
+          "caption": { "type": "string" },
+          "editable_level": { "type": "string" }
+        }
+      }
+    },
+    "narrative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["arc", "key_message"],
+      "properties": {
+        "arc": { "type": "string", "minLength": 1 },
+        "key_message": { "type": "string", "minLength": 1 }
+      }
+    },
+    "slides": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "required": ["id", "layout", "slide_goal", "primary_claim", "elements", "review_flags"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "layout": { "enum": ["title", "pipeline", "comparison", "insight", "evidence"] },
+          "role": { "type": "string" },
+          "action_title": { "type": "string" },
+          "slide_goal": { "type": "string", "minLength": 1 },
+          "primary_claim": { "type": "string", "minLength": 1 },
+          "evidence_refs": { "type": "array", "items": { "type": "string" } },
+          "table_refs": { "type": "array", "items": { "type": "string" } },
+          "asset_candidates": { "type": "array", "items": { "type": "string" } },
+          "visual_intent": { "type": "string" },
+          "speaker_note": { "type": "string" },
+          "reading_order": { "type": "array", "items": { "type": "string" } },
+          "elements": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["id", "kind", "role", "editable", "render_mode"],
+              "properties": {
+                "id": { "type": "string", "minLength": 1 },
+                "kind": { "enum": ["text", "shape", "image", "chart", "table", "connector", "code"] },
+                "role": { "type": "string", "minLength": 1 },
+                "text": { "type": "string" },
+                "editable": { "type": "boolean" },
+                "render_mode": { "enum": ["native", "asset", "html_only", "pptx_only"] },
+                "data": { "type": "object" },
+                "asset_ref": { "type": "string" },
+                "source_page": { "type": ["integer", "null"] },
+                "alt_text": { "type": "string" },
+                "box": {
+                  "type": "object",
+                  "required": ["left", "top", "width", "height"],
+                  "properties": {
+                    "left": { "type": "number" },
+                    "top": { "type": "number" },
+                    "width": { "type": "number", "exclusiveMinimum": 0 },
+                    "height": { "type": "number", "exclusiveMinimum": 0 }
+                  }
+                }
+              }
+            }
+          },
+          "review_flags": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["rule_id", "severity", "message"],
+              "properties": {
+                "rule_id": { "type": "string" },
+                "severity": { "enum": ["info", "warning", "error"] },
+                "message": { "type": "string" },
+                "element_id": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
