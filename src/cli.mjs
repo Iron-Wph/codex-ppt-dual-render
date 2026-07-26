@@ -59,9 +59,9 @@ async function createPlan({ planner, inputPath, workspace, outDir, paperMode, th
   throw new Error(`未知 planner: ${planner}`);
 }
 
-async function ensureThemeReference(created, { outDir, themeId }) {
+async function ensureThemeReference(created, { outDir, themeId, workspace }) {
   if (created.themeReference) return created;
-  const themeReference = await materializeThemeReference({ plan: created.plan, evidenceIndex: created.evidenceIndex || null, outDir, themeId });
+  const themeReference = await materializeThemeReference({ plan: created.plan, evidenceIndex: created.evidenceIndex || null, outDir, themeId, styleAssetRoot: workspace });
   return {
     ...created,
     themeReference,
@@ -89,7 +89,7 @@ async function main(argv) {
     const paperMode = args.paper === true || isPdfPath(inputPath);
     const outDir = path.resolve(String(args.out || "dist/codex-plan"));
     const created = await createPlan({ planner, inputPath, workspace, paperMode, outDir, themeId: args.theme || "auto" });
-    const themed = await ensureThemeReference(created, { outDir, themeId: args.theme || "auto" });
+    const themed = await ensureThemeReference(created, { outDir, themeId: args.theme || "auto", workspace });
     console.log(JSON.stringify(themed.plan, null, 2));
     return;
   }
@@ -105,7 +105,7 @@ async function main(argv) {
     const paperMode = args.paper === true || isPdfPath(input);
     await ensureDir(outDir);
     const created = await createPlan({ planner, inputPath: input, workspace, paperMode, outDir, themeId: args.theme || "auto" });
-    const themed = await ensureThemeReference(created, { outDir, themeId: args.theme || "auto" });
+    const themed = await ensureThemeReference(created, { outDir, themeId: args.theme || "auto", workspace });
     const plan = themed.plan;
     await materializeSlidePipeline({ plan, evidenceIndex: created.evidenceIndex || null, outDir, themeId: args.theme || "auto", render: args["slide-previews"] !== false });
     const spec = await writeSpec(plan, path.join(outDir, "deck.spec.json"), { themeId: args.theme || "auto" });

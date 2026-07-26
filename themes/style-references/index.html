@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex PPT Style References</title>
+  <style>
+    :root { color-scheme: dark; font-family: Aptos, "Microsoft YaHei", sans-serif; background: #10151f; color: #f5f7fb; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { max-width: 1440px; margin: 0 auto; padding: 56px 32px 80px; }
+    h1 { margin: 0; font-size: clamp(34px, 5vw, 64px); letter-spacing: -.05em; }
+    .intro { max-width: 780px; color: #aab6c7; font-size: 18px; line-height: 1.55; }
+    .grid { display: grid; gap: 30px; }
+    article { overflow: hidden; border: 1px solid #2c394e; border-radius: 18px; background: #172131; box-shadow: 0 20px 50px rgba(0, 0, 0, .25); }
+    img { display: block; width: 100%; height: auto; background: #08111e; }
+    .copy { display: grid; grid-template-columns: minmax(190px, .25fr) 1fr; gap: 22px; padding: 24px 28px 30px; }
+    h2 { margin: 0; font-size: 25px; }
+    p { margin: 0; color: #b9c5d5; line-height: 1.55; }
+    code { color: #81e7ff; }
+    @media (max-width: 680px) { main { padding: 32px 18px 48px; } .copy { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Original PPT style references</h1>
+    <p class="intro">These boards are original AI-generated moodboards. They guide palette, typography hierarchy, image treatment, chart/table treatment, and whitespace; they are not copied presentation templates.</p>
+    <section class="grid">
+      <article>
+        <img src="future-tech-signal-v1.png" alt="Dark futuristic technology presentation reference with orbital visual and data table">
+        <div class="copy"><h2>Signal Dark<br><code>signal-dark</code></h2><p>For frontier technology, product launches, and systems demos. Midnight background, cyan signal lines, controlled violet contrast, large hero visual, and dark data modules.</p></div>
+      </article>
+      <article>
+        <img src="academic-evidence-v1.png" alt="Light academic evidence presentation reference with scientific image, chart, table, and annotation">
+        <div class="copy"><h2>Paper Blue<br><code>paper-blue</code></h2><p>For research, technical reports, and evidence-led discussion. Warm-white canvas, navy hierarchy, a framed source figure, native chart/table treatment, and restrained coral annotations.</p></div>
+      </article>
+      <article>
+        <img src="minimal-editorial-v1.png" alt="Warm minimalist editorial presentation reference with architecture image, large metric, and comparison table">
+        <div class="copy"><h2>Sunset Editorial<br><code>sunset-editorial</code></h2><p>For strategy, consulting, executive, and brand narratives. Ivory space, oversized metrics, warm photography, terracotta rules, and quiet comparison modules.</p></div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

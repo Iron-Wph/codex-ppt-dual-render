@@ -3,7 +3,7 @@ import path from "node:path";
 import { ensureDir, writeJson } from "./utils.mjs";
 import { renderHtml } from "./render-html.mjs";
 import { renderPptx } from "./render-pptx.mjs";
-import { chooseTheme } from "./theme-presets.mjs";
+import { buildStyleBrief } from "./theme-presets.mjs";
 
 function referenceTable() {
   return [
@@ -23,7 +23,31 @@ function referenceAsset(evidenceIndex) {
     || null;
 }
 
-function referenceSpec(plan, evidenceIndex, theme, asset) {
+async function copyStyleInspiration(theme, outDir, styleAssetRoot) {
+  if (!theme.style_reference_asset) return null;
+  const sourcePath = path.resolve(styleAssetRoot, theme.style_reference_asset);
+  const targetPath = path.join(outDir, "codex", "style-inspiration.png");
+  try {
+    await fs.access(sourcePath);
+    await ensureDir(path.dirname(targetPath));
+    await fs.copyFile(sourcePath, targetPath);
+    return {
+      id: "style-inspiration",
+      type: "style_reference",
+      path: "codex/style-inspiration.png",
+      source_page: null,
+      mime_type: "image/png",
+      caption: `Original ${theme.label} inspiration board used only as a visual contract.`,
+      alt_text: `${theme.label} PowerPoint style inspiration board with typography, image, data, and table treatment.`,
+      editable_level: "reference",
+    };
+  } catch {
+    return null;
+  }
+}
+
+function referenceSpec(plan, evidenceIndex, theme, asset, styleAsset, styleBrief) {
+  const displayAsset = styleAsset || asset;
   const elements = [
     {
       id: "theme-reference-title",
@@ -57,22 +81,22 @@ function referenceSpec(plan, evidenceIndex, theme, asset) {
       },
     },
   ];
-  if (asset?.path) {
+  if (displayAsset?.path) {
     elements.push({
       id: "theme-reference-image",
       kind: "image",
       role: "evidence-figure",
       editable: false,
       render_mode: "asset",
-      asset_ref: asset.id,
-      source_page: asset.source_page ?? null,
-      alt_text: "Source figure slot used by the selected theme",
+      asset_ref: displayAsset.id,
+      source_page: displayAsset.source_page ?? null,
+      alt_text: displayAsset.alt_text || "Style inspiration image used by the selected theme",
       data: {
-        path: asset.path,
-        caption: "Source figure slot / image treatment",
+        path: displayAsset.path,
+        caption: displayAsset.caption || "Source figure slot / image treatment",
         placement: "corner",
         fit: "contain",
-        crop: Boolean(asset.crop),
+        crop: Boolean(displayAsset.crop),
       },
     });
   }
@@ -84,7 +108,9 @@ function referenceSpec(plan, evidenceIndex, theme, asset) {
       ...(plan.visual || {}),
       style_family: theme.id,
       style_reference: "codex/theme-reference.png",
+      ...(styleAsset ? { style_inspiration: styleAsset.path } : {}),
       style_lock: "all slides inherit this theme's palette, typography, spacing, image treatment, and table treatment",
+      style_system: { ...styleBrief.style_system, selection: styleBrief.selection },
     },
     evidence: evidenceIndex ? {
       input: evidenceIndex.input,
@@ -94,7 +120,7 @@ function referenceSpec(plan, evidenceIndex, theme, asset) {
       sections: evidenceIndex.sections,
       claims: evidenceIndex.claims,
     } : undefined,
-    assets: evidenceIndex?.assets || [],
+    assets: [...(evidenceIndex?.assets || []), ...(styleAsset ? [styleAsset] : [])],
     tables: evidenceIndex?.tables || [],
     narrative: plan.narrative,
     slides: [{
@@ -106,7 +132,7 @@ function referenceSpec(plan, evidenceIndex, theme, asset) {
       primary_claim: "Every slide inherits the same visual contract.",
       evidence_refs: [],
       table_refs: [],
-      asset_candidates: asset ? [asset.id] : [],
+      asset_candidates: displayAsset ? [displayAsset.id] : [],
       visual_intent: "source_table",
       speaker_note: "Internal visual contract; not a presentation slide.",
       reading_order: elements.map((element) => element.id),
@@ -116,12 +142,14 @@ function referenceSpec(plan, evidenceIndex, theme, asset) {
   };
 }
 
-export async function materializeThemeReference({ plan, evidenceIndex = null, outDir, themeId = "auto" }) {
-  const theme = chooseTheme(plan, themeId);
-  const spec = referenceSpec(plan, evidenceIndex, theme, referenceAsset(evidenceIndex));
+export async function materializeThemeReference({ plan, evidenceIndex = null, outDir, themeId = "auto", styleAssetRoot = process.cwd() }) {
+  const styleBrief = buildStyleBrief(plan, themeId);
+  const theme = styleBrief.theme;
   const codexDir = path.join(outDir, "codex");
   const previewDir = path.join(codexDir, "theme-reference-preview");
   await ensureDir(codexDir);
+  const styleAsset = await copyStyleInspiration(theme, outDir, styleAssetRoot);
+  const spec = referenceSpec(plan, evidenceIndex, theme, referenceAsset(evidenceIndex), styleAsset, styleBrief);
   const htmlPath = path.join(codexDir, "theme-reference.html");
   const pptxPath = path.join(codexDir, "theme-reference.pptx");
   await writeJson(path.join(codexDir, "theme-reference.spec.json"), spec);
@@ -147,12 +175,11 @@ export async function materializeThemeReference({ plan, evidenceIndex = null, ou
       style_family: theme.id,
       style_reference: "codex/theme-reference.png",
       style_reference_html: "codex/theme-reference.html",
+      ...(styleAsset ? { style_inspiration: styleAsset.path } : {}),
       style_lock: "theme-reference",
       style_system: {
-        mood: theme.mood,
-        composition: theme.composition,
-        image_treatment: theme.image_treatment,
-        table_treatment: theme.table_treatment,
+        ...styleBrief.style_system,
+        selection: styleBrief.selection,
       },
     },
   };

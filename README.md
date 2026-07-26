@@ -9,6 +9,8 @@
 - 论文模式 8–10 页内容编排：页面角色、行动标题、证据引用、视觉意图和讲稿
 - PDF 页级全文证据索引：`evidence-index.json`、嵌入图片资产和页码信息
 - `graphite-lime`、`paper-blue`、`sunset-editorial`、`signal-dark` 主题 preset
+- 风格语义自动选择：主题、内容场景、受众与视觉禁用项共同形成可复现的 style brief
+- 三张原创风格参考图：炫酷科技、学术证据、简约编辑；生成时会复制到 `codex/style-inspiration.png`
 - HTML / PPTX 图片资产支持与图片覆盖率 QA
 - 零构建依赖的单文件 HTML 演示
 - 键盘、滚轮、触控和导航点切页
@@ -169,3 +171,9 @@ node src/cli.mjs generate `
 ```
 
 本地 Codex 已登录时，将 `--planner deterministic` 改为 `--planner local-codex`；后者会先调用 storyboard，再逐页调用 Codex。
+
+## 风格选择与参考图
+
+可用主题为 `graphite-lime`、`paper-blue`、`sunset-editorial`、`signal-dark`。`--theme` 优先级最高；未指定时，系统会先采纳 storyboard 的选择，再按输入的研究/产品/战略/工程语义确定主题，最后使用稳定回退，避免风格随机变化。
+
+三张原创风格参考图位于 `themes/style-references/`；可直接打开 `themes/style-references/index.html` 浏览。调研来源、风格判定方法、版权边界和布局约束见 `PPT AI风格研究与参考图库.md`。

@@ -177,7 +177,8 @@ function chartData(element) {
 
 async function renderDataSlide(slide, deckSlide, colors, typography, assetRoot) {
   const title = elementByRole(deckSlide, "title")?.text || deckSlide.primary_claim;
-  addText(slide, `${deckSlide.id}-kicker`, "PAPER EVIDENCE", { left: 72, top: 76, width: 360, height: 22 }, { fontSize: 13, bold: true, color: colors.accent });
+  const isThemeReference = deckSlide.role === "theme_reference";
+  addText(slide, `${deckSlide.id}-kicker`, isThemeReference ? "VISUAL CONTRACT" : "PAPER EVIDENCE", { left: 72, top: 76, width: 360, height: 22 }, { fontSize: 13, bold: true, color: colors.accent });
   addText(slide, `${deckSlide.id}-title`, title, { left: 72, top: 114, width: 800, height: 86 }, { fontSize: typography.slide_title_px, bold: true, color: colors.foreground, lineSpacing: .98 });
   const tableElement = deckSlide.elements.find((element) => element.kind === "table");
   const chartElement = deckSlide.elements.find((element) => element.kind === "chart");
@@ -190,12 +191,12 @@ async function renderDataSlide(slide, deckSlide, colors, typography, assetRoot) 
     const rows = values.length;
     const columns = Math.max(1, ...values.map((row) => row.length));
     if (rows && columns) {
-      const table = slide.tables.add({ rows, columns, left: chartElement ? 880 : 92, top: 236, width: chartElement ? 328 : 1040, height: 350, values });
+      const table = slide.tables.add({ rows, columns, left: chartElement ? 880 : 92, top: 236, width: chartElement ? 328 : isThemeReference ? 760 : 1040, height: 350, values });
       table.styleOptions = { headerRow: true, bandedRows: true };
     }
   }
   addText(slide, `${deckSlide.id}-caption`, tableElement?.data?.caption || chartElement?.data?.table_ref || "Source table from paper", { left: 92, top: 210, width: 760, height: 16 }, { fontSize: 11, color: colors.muted });
-  await addEvidenceImages(slide, deckSlide, assetRoot, { sourceStrip: true });
+  await addEvidenceImages(slide, deckSlide, assetRoot, isThemeReference ? { prominent: true } : { sourceStrip: true });
 }
 
 export async function renderPptx({ spec, outPath, previewDir, assetRoot: assetRootOverride = null }) {

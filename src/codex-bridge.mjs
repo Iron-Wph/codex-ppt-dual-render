@@ -305,6 +305,7 @@ Composition rules:
 - Use the supplied evidence IDs only.
 - The deck has a locked visual contract. Preserve the selected style family, mood, composition language, image treatment, table treatment, density, and typography hierarchy on this slide.
 - Reference image: ${themeReferencePath || visual.style_reference || "not available"}. Treat it as a visual contract, not as a source of factual content.
+- Original style inspiration: ${visual.style_inspiration || "not available"}. When present, inspect it for composition, whitespace, image/table treatment, and hierarchy; never copy its content or use it as factual evidence.
 - Keep the slide silhouette varied across the deck while remaining inside the same theme system; do not turn every slide into the same two-column card grid.
 
 Relevant SKILL.md guidance:
@@ -391,7 +392,7 @@ export async function planWithLocalCodex({ inputPath, workspace, outDir, paperMo
   });
   const normalizedStoryboard = normalizePlan(storyboard, { paperMode: effectivePaperMode, evidenceIndex });
   assertStoryboardShape(normalizedStoryboard, { paperMode: effectivePaperMode });
-  const themeReference = await materializeThemeReference({ plan: normalizedStoryboard, evidenceIndex, outDir, themeId });
+  const themeReference = await materializeThemeReference({ plan: normalizedStoryboard, evidenceIndex, outDir, themeId, styleAssetRoot: workspace });
   const styledStoryboard = {
     ...normalizedStoryboard,
     visual: {

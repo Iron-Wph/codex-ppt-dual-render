@@ -40,6 +40,7 @@
         "layout_system": { "type": "string" },
         "style_reference": { "type": "string" },
         "style_reference_html": { "type": "string" },
+        "style_inspiration": { "type": "string" },
         "style_lock": { "type": "string" },
         "style_system": { "type": "object" }
       }

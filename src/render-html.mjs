@@ -156,7 +156,7 @@ function renderSlide(slide, index, total) {
   else if (slide.layout === "comparison") body = renderComparisonSlide(slide);
   else if (slide.layout === "insight") body = renderInsightSlide(slide);
   else body = `<div class="content-layout"><div class="slide-heading"><h2>${escapeHtml(slide.primary_claim)}</h2></div></div>`;
-  return `<section class="slide slide-${escapeHtml(slide.layout)}" id="${escapeHtml(slide.id)}" data-slide-index="${index}" aria-labelledby="${escapeHtml(slide.id)}-label">
+  return `<section class="slide slide-${escapeHtml(slide.layout)}" id="${escapeHtml(slide.id)}" data-slide-index="${index}" data-slide-role="${escapeHtml(slide.role || "")}" aria-labelledby="${escapeHtml(slide.id)}-label">
       <div class="slide-grid" aria-hidden="true"></div>
       <div class="slide-id">${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}</div>
       <div class="slide-surface">${body}</div>
@@ -276,6 +276,10 @@ function htmlDocument(spec) {
     .paper-data-layout .slide-heading { max-width: calc(100% - 25vw); }
     .paper-data-layout .evidence-figure { top: 3vh; width: 22vw; height: 10vh; }
     .paper-data-layout .evidence-figure img { height: 6.7vh; object-fit: contain; }
+    .slide[data-slide-role="theme_reference"] .paper-data-layout .slide-heading { max-width: calc(100% - 26vw); }
+    .slide[data-slide-role="theme_reference"] .paper-data-layout .evidence-figure { top: 18vh; width: 22vw; height: 34vh; }
+    .slide[data-slide-role="theme_reference"] .paper-data-layout .evidence-figure img { height: 29vh; object-fit: contain; }
+    .slide[data-slide-role="theme_reference"] .data-visual-grid { width: calc(100% - 26vw); grid-template-columns: minmax(0, 1fr); }
     .data-visual-grid { flex: 1; min-height: 320px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, .42fr); gap: 1.6vw; align-items: stretch; }
     .chart-card, .table-card { min-width: 0; overflow: hidden; border: 1px solid var(--border); background: var(--surface); padding: 24px; }
     .chart-card { display: flex; flex-direction: column; justify-content: center; gap: 15px; }
