@@ -80,6 +80,8 @@ Markdown / PDF
 
 ## 6. 当前已验证基线
 
+GitHub 稳定基线：`https://github.com/Iron-Wph/codex-ppt-dual-render` 的 `main` 分支。后续开发从 `main` 创建 `codex/*` 功能分支。仓库截至 2026-08-25 处于公开状态，新增私人论文、客户材料或敏感基准前必须先确认可见性与授权。
+
 基准目录：`dist/real-paper-v2/`
 
 - 9 页真实论文汇报；

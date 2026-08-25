@@ -4,7 +4,9 @@
 
 当前阶段：双渲染论文 PPT MVP v0.4 已完成并通过真实论文验收
 
-当前推荐分支：`codex/migration-checkpoint`
+GitHub：`https://github.com/Iron-Wph/codex-ppt-dual-render`
+
+远端基线分支：`main`；后续开发继续使用 `codex/*` 功能分支。
 
 ## 已完成
 
@@ -42,14 +44,16 @@
 - PPTX 中来源截图不可编辑，但其旁边的文本、表格、图表和结构元素可编辑。
 - 自动风格选择来自主题目录与参考图，尚未形成可持续学习的用户偏好模型。
 - 图片策略目前以论文来源图和表格裁剪为主，尚未接入稳定的图片检索、授权判断和生成式插图闭环。
-- GitHub 远端尚未配置；本机未安装 GitHub CLI。
+- 本机未安装 GitHub CLI；当前通过 Git Credential Manager 和标准 `git` 命令同步。
+- 当前 GitHub 仓库可被未登录访问，处于公开状态；基准产物包含论文摘录和来源图，需立即确认是否改为私有，并持续检查再分发版权。
 
 ## 下一步优先级
 
-### P0：版本化与迁移
+### P0：版本化与迁移（已完成）
 
-- 创建私有 GitHub 仓库并配置 `origin`。
-- 推送迁移 checkpoint，启用 GitHub Actions。
+- 已配置 `origin` 并将迁移 checkpoint 推送至远端 `main`。
+- 已提交 GitHub Actions；首次工作流结果需在仓库 Actions 页面确认。
+- 确认仓库可见性；如不计划公开基准论文摘录与来源图，应在 GitHub Settings 中改为 Private。
 - 根据仓库策略决定是否把完整历史 `dist` ZIP 作为 GitHub Release 附件，而不是塞入 Git 历史。
 
 ### P1：文档识别与证据可靠性
@@ -79,6 +83,7 @@
 | 2026-07-30 | 原文截图定义为 `source-provenance` | 避免来源图抢占主视觉和阅读路径 |
 | 2026-07-30 | QA 区分实验协议与结果口径 | 防止 OOD 协议被误写成 OOD 结果 |
 | 2026-08-25 | GitHub 仅版本化源码、文档与基准产物 | 保留可复现性，同时避免历史构建缓存膨胀仓库 |
+| 2026-08-25 | 远端以 `main` 保存稳定基线，开发使用 `codex/*` 分支 | 兼顾标准仓库入口与 Agent 分支隔离 |
 
 ## Agent 更新区
 
@@ -89,4 +94,12 @@
 - 目标：让项目可被 GitHub 保存、在新机器恢复，并让后续 Agent 无上下文接手。
 - 变更：增加 `AGENTS.md`、`MIGRATION.md`、CI、归档脚本、基准产物版本化规则。
 - 验证：`npm run verify` 通过；4 组测试通过；基准 Schema 通过；基准 QA 为 0 error / 0 warning。
-- 遗留：配置私有 GitHub 远端并推送。
+- 遗留：已完成远端配置和首次推送；后续确认首次 GitHub Actions 结果。
+
+### 2026-08-25：GitHub 首次推送
+
+- 目标：把完整可复现项目、Git 历史、Agent 交接说明和版本化基准保存到 GitHub。
+- 变更：配置 `origin` 为 `Iron-Wph/codex-ppt-dual-render`，将本地 `codex/migration-checkpoint` 发布为远端 `main`，同步迁移文档。
+- 验证：远端 `main` 已创建；推送成功；本地分支跟踪 `origin/main`；GitHub 页面当前可被未登录访问。
+- 决策：远端稳定入口使用 `main`，后续实现继续在 `codex/*` 分支完成后合入。
+- 遗留：确认是否将当前公开仓库改为私有，并检查首次 Actions 运行结果。

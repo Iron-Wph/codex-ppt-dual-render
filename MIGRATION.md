@@ -1,5 +1,9 @@
 # 项目迁移与 GitHub 保存指南
 
+当前仓库：`https://github.com/Iron-Wph/codex-ppt-dual-render`
+
+稳定基线保存在远端 `main`；后续开发应从 `main` 创建新的 `codex/*` 功能分支。
+
 ## 1. 保存范围
 
 Git 仓库保存所有不可替代、需要协作和需要版本控制的内容：
@@ -43,15 +47,15 @@ git bundle verify ..\codex-ppt-history.bundle
 
 ZIP 保存完整工作目录，bundle 保存分支和提交历史，两者配合可在没有 GitHub 时完成离线迁移。
 
-## 3. 创建 GitHub 私有仓库
+## 3. GitHub 仓库配置
 
-推荐创建私有仓库，例如 `codex-ppt-dual-render`。在 GitHub 网页创建空仓库时，不要自动生成 README、License 或 `.gitignore`。
+本项目已配置 GitHub 仓库。截至 2026-08-25，该仓库可被未登录访问，处于公开状态。由于基准产物可能包含论文摘录和来源图，如不计划公开这些内容，应立即在 GitHub `Settings -> General -> Danger Zone -> Change repository visibility` 中改为 Private，并在调整可见性前检查版权与隐私。
 
 配置并推送：
 
 ```powershell
-git remote add origin https://github.com/<owner>/codex-ppt-dual-render.git
-git push -u origin codex/migration-checkpoint
+git remote add origin https://github.com/Iron-Wph/codex-ppt-dual-render.git
+git push -u origin codex/migration-checkpoint:main
 ```
 
 若以后安装 GitHub CLI：
@@ -68,9 +72,9 @@ gh repo create codex-ppt-dual-render --private --source . --remote origin --push
 ### 从 GitHub 恢复
 
 ```powershell
-git clone https://github.com/<owner>/codex-ppt-dual-render.git
+git clone https://github.com/Iron-Wph/codex-ppt-dual-render.git
 Set-Location codex-ppt-dual-render
-git switch codex/migration-checkpoint
+git switch -c codex/<work-name>
 npm ci
 npm run verify
 ```
