@@ -1,0 +1,33 @@
+{
+  "id": "editorial-research",
+  "label": "Editorial Research",
+  "category": "Editorial",
+  "visual_profile": "editorial",
+  "tags": ["editorial", "magazine", "research", "serif", "warm"],
+  "match_signals": ["editorial", "magazine", "essay", "humanities", "社会", "人文", "杂志", "报告文学"],
+  "density": "medium",
+  "mood": "thoughtful, literary, premium",
+  "recommended_for": ["research narrative", "humanities", "executive essay"],
+  "composition": "ivory print grid, asymmetric headlines, warm image wells, deliberate negative space",
+  "typography_treatment": "serif display moments with restrained sans-serif evidence labels",
+  "background_treatment": "soft ivory paper with terracotta rules",
+  "image_treatment": "warm editorial crops with caption blocks aligned to the print grid",
+  "table_treatment": "quiet cream tables with terracotta row markers",
+  "style_markers": ["ivory paper", "serif moment", "print grid", "terracotta rule"],
+  "layout_families": ["editorial-cover", "essay-split", "quote-interstitial", "evidence-column", "closing-statement"],
+  "avoid": ["corporate blue gradients", "dashboard card walls", "generic stock office scenes"],
+  "style_reference_asset": "themes/style-references/minimal-editorial-v1.png",
+  "provenance": { "type": "original", "inspiration": "independent magazine and research editorial systems" },
+  "fonts": {
+    "heading": ["Georgia", "Microsoft YaHei", "serif"],
+    "body": ["Aptos", "Microsoft YaHei", "sans-serif"],
+    "mono": ["Consolas", "Microsoft YaHei", "monospace"]
+  },
+  "colors": {
+    "background": "#FBF5E9", "surface": "#FFFDF8", "surface2": "#EFE2CF",
+    "foreground": "#30231F", "muted": "#7A665D", "accent": "#A94B35",
+    "accent2": "#D19A35", "accent3": "#3D7D74", "border": "#DCC9B5",
+    "white": "#FFFFFF", "black": "#241713"
+  },
+  "typography": { "title_px": 60, "slide_title_px": 39, "subtitle_px": 20, "body_px": 17 }
+}

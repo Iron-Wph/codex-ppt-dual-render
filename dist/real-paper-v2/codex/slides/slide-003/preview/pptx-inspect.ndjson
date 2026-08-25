@@ -1,0 +1,29 @@
+{"kind":"slide","id":"sl/c2abu5","slide":1,"title":"01 / 01","textShapes":20}
+{"kind":"shape","id":"sh/id0rmpo7","slide":1,"name":"slide-1-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/5gbah47y","slide":1,"name":"slide-1-page","text":"01 / 01","textPreview":"01 / 01","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/4f29oz6d","slide":1,"name":"s3-kicker","text":"THE PIPELINE","textPreview":"THE PIPELINE","textChars":12,"textLines":1,"bbox":[72,76,420,22]}
+{"kind":"textbox","id":"sh/va9sbapg","slide":1,"name":"s3-title","text":"RLinf 的训练信号来自一条完整链路","textPreview":"RLinf 的训练信号来自一条完整链路","textChars":19,"textLines":1,"bbox":[72,112,1080,106]}
+{"kind":"shape","id":"sh/u90ripob","slide":1,"name":"s3-flow-axis","bbox":[96,382,1088,0]}
+{"kind":"textbox","id":"sh/hcradk7m","slide":1,"name":"s3-flow-1-metric","text":"128 × 8 = 1024","textPreview":"128 × 8 = 1024","textChars":14,"textLines":1,"bbox":[72,252,212.8,18]}
+{"kind":"textbox","id":"sh/gbi9kf61","slide":1,"name":"s3-flow-1-title","text":"Rollout 采样","textPreview":"Rollout 采样","textChars":10,"textLines":1,"bbox":[72,296,204.8,68]}
+{"kind":"shape","id":"sh/f6dsnep0","slide":1,"name":"s3-flow-1-dot","bbox":[74,372,20,20]}
+{"kind":"textbox","id":"sh/e54bu9of","slide":1,"name":"s3-flow-1-body","text":"并行生成一轮轨迹，形成固定规模的训练输入。","textPreview":"并行生成一轮轨迹，形成固定规模的训练输入。","textChars":21,"textLines":1,"bbox":[72,424,204.8,86]}
+{"kind":"textbox","id":"sh/07e5ore1","slide":1,"name":"s3-flow-2-metric","text":"group size = 8","textPreview":"group size = 8","textChars":14,"textLines":1,"bbox":[302.8,252,212.8,18]}
+{"kind":"textbox","id":"sh/18nmxwvm","slide":1,"name":"s3-flow-2-title","text":"Group 组织","textPreview":"Group 组织","textChars":8,"textLines":1,"bbox":[302.8,296,204.8,68]}
+{"kind":"shape","id":"sh/elw3m1wv","slide":1,"name":"s3-flow-2-dot","bbox":[304.8,372,20,20]}
+{"kind":"textbox","id":"sh/zm54v6dg","slide":1,"name":"s3-flow-2-body","text":"按 group size 8 将轨迹组成比较单元，为组内优势估计准备数据。","textPreview":"按 group size 8 将轨迹组成比较单元，为组内优势估计准备数据。","textChars":37,"textLines":1,"bbox":[302.8,424,204.8,86]}
+{"kind":"textbox","id":"sh/cjelkrep","slide":1,"name":"s3-flow-3-metric","text":"reward_type = action_level","textPreview":"reward_type = action_level","textChars":26,"textLines":1,"bbox":[533.6,252,212.8,18]}
+{"kind":"textbox","id":"sh/dknmtwva","slide":1,"name":"s3-flow-3-title","text":"Action-level reward","textPreview":"Action-level reward","textChars":19,"textLines":1,"bbox":[533.6,296,204.8,68]}
+{"kind":"shape","id":"sh/qhc3ihwz","slide":1,"name":"s3-flow-3-dot","bbox":[535.6,372,20,20]}
+{"kind":"textbox","id":"sh/ri54rmx4","slide":1,"name":"s3-flow-3-body","text":"把任务反馈落到动作粒度，明确奖励在行为序列中的位置。","textPreview":"把任务反馈落到动作粒度，明确奖励在行为序列中的位置。","textChars":26,"textLines":1,"bbox":[533.6,424,204.8,86]}
+{"kind":"textbox","id":"sh/4fulg7et","slide":1,"name":"s3-flow-4-metric","text":"adv_type = grpo","textPreview":"adv_type = grpo","textChars":15,"textLines":1,"bbox":[764.4,252,212.8,18]}
+{"kind":"textbox","id":"sh/pg3mpcfe","slide":1,"name":"s3-flow-4-title","text":"GRPO 优势估计","textPreview":"GRPO 优势估计","textChars":9,"textLines":1,"bbox":[764.4,296,204.8,68]}
+{"kind":"shape","id":"sh/l0vaxo3q","slide":1,"name":"s3-flow-4-dot","bbox":[766.4,372,20,20]}
+{"kind":"textbox","id":"sh/kz2t4j25","slide":1,"name":"s3-flow-4-body","text":"结合 token-level logprob / entropy，计算用于 actor 更新的优势信号。","textPreview":"结合 token-level logprob / entropy，计算用于 actor 更新的优势信号。","textChars":52,"textLines":1,"bbox":[764.4,424,204.8,86]}
+{"kind":"textbox","id":"sh/jytsvel0","slide":1,"name":"s3-flow-5-metric","text":"is_lora = true · lr = 2.0e-4","textPreview":"is_lora = true · lr = 2.0e-4","textChars":28,"textLines":1,"bbox":[995.2,252,212.8,18]}
+{"kind":"textbox","id":"sh/yxkb29kf","slide":1,"name":"s3-flow-5-title","text":"LoRA 更新","textPreview":"LoRA 更新","textChars":7,"textLines":1,"bbox":[995.2,296,204.8,68]}
+{"kind":"shape","id":"sh/xwbat43u","slide":1,"name":"s3-flow-5-dot","bbox":[997.2,372,20,20]}
+{"kind":"textbox","id":"sh/wv2t0z29","slide":1,"name":"s3-flow-5-body","text":"在参数高效更新范围内完成策略优化，而非全参数更新。","textPreview":"在参数高效更新范围内完成策略优化，而非全参数更新。","textChars":25,"textLines":1,"bbox":[995.2,424,204.8,86]}
+{"kind":"shape","id":"sh/butsrulo","slide":1,"name":"s3-flow-result-rule","bbox":[72,562,1136,0]}
+{"kind":"textbox","id":"sh/a9kbypk3","slide":1,"name":"s3-flow-result-label","text":"训练配方的含义","textPreview":"训练配方的含义","textChars":7,"textLines":1,"bbox":[72,588,170,18]}
+{"kind":"textbox","id":"sh/hsfu583y","slide":1,"name":"s3-flow-result","text":"性能归因应落在 rollout、reward、优化与参数更新的完整路径上","textPreview":"性能归因应落在 rollout、reward、优化与参数更新的完整路径上","textChars":36,"textLines":1,"bbox":[252,580,920,42]}

@@ -1,0 +1,27 @@
+{
+  "id": "sunset-editorial",
+  "label": "Sunset Editorial",
+  "category": "Editorial",
+  "visual_profile": "editorial",
+  "tags": ["editorial", "warm", "strategy", "legacy"],
+  "match_signals": ["brand", "investor", "品牌", "投资"],
+  "density": "medium",
+  "mood": "warm, editorial, strategic",
+  "recommended_for": ["strategy", "consulting", "product narrative"],
+  "composition": "warm paper canvas, editorial headline, terracotta thesis, amber emphasis",
+  "typography_treatment": "warm editorial headline with compact supporting copy",
+  "background_treatment": "ivory field with warm surface bands",
+  "image_treatment": "warm framed figures with editorial captions",
+  "table_treatment": "quiet table with warm accent rows and strong labels",
+  "style_markers": ["ivory canvas", "oversized metric", "terracotta rule", "editorial whitespace"],
+  "layout_families": ["editorial-cover", "metric-stage", "story-split", "decision-table", "closing-statement"],
+  "avoid": ["generic office stock photography", "blue corporate gradients", "equal-weight card collections"],
+  "style_reference_asset": "themes/style-references/minimal-editorial-v1.png",
+  "provenance": { "type": "legacy-original" },
+  "colors": {
+    "background": "#FFF8F1", "surface": "#FFFFFF", "surface2": "#F9E8D8",
+    "foreground": "#2B1D1A", "muted": "#7D665F", "accent": "#B9462E",
+    "accent2": "#E5A33A", "accent3": "#2C8C83", "border": "#E5CABC",
+    "white": "#FFFFFF", "black": "#241512"
+  }
+}

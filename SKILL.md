@@ -1934,3 +1934,78 @@ SOP 如下：
 14. 输出必须是 machine-readable schema，而不是空泛审美说明。
 15. 用 checklist 审查：主旨、路径、焦点、分组、箭头、文字、缩小可读性、HTML 可映射性。
 16. 若失败，回退到 key message、figure type 或 layout 重新生成，不要只做表面美化。
+
+---
+
+# Part G. Presentation Narrative and Template Reference Layer
+
+本节在制作完整 PPT / HTML 演示时启用。它补充 Part C 的结构规则，但不把页面锁死为固定模板。
+
+## 1. 先定义 communication job
+
+在生成大纲前，必须回答：
+
+1. audience 是谁，他们已经知道什么；
+2. 他们最关心、最可能质疑什么；
+3. 演讲的工作是 educate、persuade、recommend、review 还是 enable a decision；
+4. 演讲结束时，观众应该 understand / believe / choose / approve / do 什么；
+5. 哪些工作是 core contribution，哪些只是 supporting context。
+
+必须形成一句：
+
+> By the end, [audience] should [outcome] because [central takeaway].
+
+## 2. 大纲不是目录
+
+- 使用累积叙事：上一页提出的问题，由下一页回答或推进。
+- 每页必须有 `audience_question`、`narrative_job`、`primary_claim`、`evidence`、`implication` 和 `transition_out`。
+- 标题必须表达结论，不使用“研究背景 / 方法介绍 / 实验结果”这类纯主题标题。
+- 重要性按 `core / support / context` 标注；当时间不足时，优先删 context，不压缩 core。
+- 开场提出值得听的 tension / question；结尾必须回答它，并给出边界或行动，不用通用 Thank you 结束。
+
+## 3. 每页内容最低论证单元
+
+除极简封面和章节页外，每页至少包含：
+
+1. 一个明确主张；
+2. 两项以内的关键证据，或一项主证据加一个解释；
+3. 证据对观众意味着什么；
+4. 一句通向下一页的过渡。
+
+演讲稿不能复制标题。每页 `talk_track` 应覆盖：承接、解释、证据、边界、过渡；论文汇报建议 120–260 个中文字。
+
+论文结果页必须保持证据口径：
+
+- 实验协议（seed、硬件、评估设置）只定义结论适用范围，不自动构成性能结果。
+- `train / validation / test / OOD` 指标不得互换；标题、图表、结论和演讲稿都必须显式保留原始 split 与 metric。
+- 若论文只展示 train SSR，不得因为存在 OOD 评估协议就推断或暗示 OOD 泛化已经得到验证。
+
+## 4. 模板只提供构图语法
+
+模板选择参考 `skill-references/presentation-layout-catalog.json`。其中的 recipe 是候选轮廓，不是 role 到 layout 的硬编码映射。
+
+- 同一种内容可以因受众问题和证据形态选择不同 recipe。
+- 相邻页面应避免连续使用相同轮廓。
+- 页面优先使用一个整体构图，避免默认生成卡片墙或 UI dashboard。
+- 组件可以复用，但视觉结果必须像 presentation composition，而不是网页后台。
+- React / HTML 与 PPTX 应共享同一 `composition_id` 和内容语义；允许在不同媒介上采用不同实现。
+
+## 5. 生成后必须做逻辑自检
+
+逐页检查：
+
+- 如果删掉本页，故事是否仍成立；若成立，本页可能是次要或重复内容。
+- 本页主张是否由证据支持，而不是只靠措辞。
+- 协议事实是否被误写成结果证据，train / validation / test / OOD 的口径是否贯穿标题、图表、结论与演讲稿。
+- 观众是否知道“这对我意味着什么”。
+- 本页结尾是否自然制造下一页的需求。
+- speaker notes 是否足以让另一个人按同样逻辑讲清楚。
+
+整套检查：
+
+- 开场问题是否在结尾得到回答；
+- core contribution 是否获得最多页面和最强证据；
+- 背景是否抢占过多篇幅；
+- 方法、结果、边界之间是否存在逻辑跳跃；
+- 是否出现连续三页相同构图；
+- 是否存在生产过程文案、占位文案或模型自述泄漏到观众页面。

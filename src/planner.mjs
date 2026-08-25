@@ -107,6 +107,9 @@ export function planFromText(source) {
   const output = sections.find((section) => /输出|双|html|pptx|结果|发现|实验/i.test(section.title)) || sections[1] || { title: "双输出", bullets: [] };
   const qa = sections.find((section) => /qa|质量|闭环|检查|局限|启示|结论/i.test(section.title)) || sections[2] || { title: "QA 闭环", bullets: [] };
   const safeBullets = (list, fallback) => (list.length ? list : fallback).slice(0, 4);
+  const methodBullets = safeBullets(method.bullets, ["明确受众和演讲目标", "提炼每页主张与证据", "选择与内容匹配的构图", "生成后进行逻辑和视觉复核"]);
+  const outputBullets = safeBullets(output.bullets, ["React 组件化 HTML 演示", "原生可编辑 PPTX", "共享语义规格与演讲稿"]);
+  const qaBullets = safeBullets(qa.bullets, ["检查叙事是否闭环", "检查证据是否支撑主张", "检查文字、溢出和视觉节奏"]);
 
   return {
     deck: {
@@ -118,15 +121,92 @@ export function planFromText(source) {
       aspect_ratio: "16:9"
     },
     narrative: {
-      arc: "主张—结构—双输出—质量闭环",
+      arc: "问题—方法—双输出—质量闭环—结论",
       key_message: "同一份结构化规格，同时驱动网页演示和原生可编辑 PPTX。"
     },
+    visual: { style_family: "auto", image_policy: "source-figure-first", density_profile: "balanced" },
     plan: {
       title: parsed.title,
       subtitle: parsed.subtitle,
-      method,
-      output,
-      qa
+      slides: [
+        {
+          id: "slide-001",
+          role: "title",
+          layout: "title",
+          action_title: "先明确演示要改变观众的哪一个判断",
+          slide_goal: "建立演示任务与核心承诺",
+          primary_claim: parsed.subtitle,
+          evidence_refs: [],
+          table_refs: [],
+          asset_candidates: [],
+          visual_intent: "text_led",
+          speaker_note: "先解释为什么这不是单纯的文件导出工具，而是一套从受众、叙事到双媒介表达的完整生成流程。",
+          content: {
+            eyebrow: "CODEX / PRESENTATION SYSTEM",
+            title: parsed.title,
+            subtitle: parsed.subtitle,
+            note: { label: "PROMISE", value: "内容先成立，视觉再放大" }
+          }
+        },
+        {
+          id: "slide-002",
+          role: "method_overview",
+          layout: "pipeline",
+          action_title: "先把受众、主张和证据变成一条可讲的故事",
+          slide_goal: "解释演示规划如何形成",
+          primary_claim: "高质量 PPT 的起点是 communication job，而不是模板。",
+          evidence_refs: [],
+          table_refs: [],
+          asset_candidates: [],
+          visual_intent: "method_diagram",
+          content: {
+            title: "大纲从受众问题开始，而不是从目录开始",
+            kicker: "NARRATIVE ENGINE",
+            steps: stepsFromBullets(methodBullets, methodBullets),
+            result: { label: "OUTPUT", value: "一条可讲、可证、可收束的叙事链" }
+          }
+        },
+        {
+          id: "slide-003",
+          role: "main_results",
+          layout: "comparison",
+          action_title: "同一语义规格可以生成两种真正互补的演示",
+          slide_goal: "说明 HTML 和 PPTX 的差异化价值",
+          primary_claim: "React HTML 负责沉浸式表达，PPTX 负责原生编辑与办公交付。",
+          evidence_refs: [],
+          table_refs: [],
+          asset_candidates: [],
+          visual_intent: "comparison_matrix",
+          content: {
+            title: "网页追求表现力，PPTX 保留编辑权",
+            columns: [
+              { label: "REACT / WEB", headline: "组件、动效与沉浸式舞台", points: outputBullets.slice(0, 2), tone: "lime" },
+              { label: "PPTX / OFFICE", headline: "文本、图表和表格原生可编辑", points: outputBullets.slice(1, 3), tone: "coral" }
+            ],
+            takeaway: { label: "SHARED MODEL", value: "内容语义与演讲逻辑只维护一份" }
+          }
+        },
+        {
+          id: "slide-004",
+          role: "limitations",
+          layout: "insight",
+          action_title: "生成之后还要证明它真的讲得通、看得清",
+          slide_goal: "解释逻辑和视觉复核闭环",
+          primary_claim: "质量不是一次生成的运气，而是规划—渲染—讲稿试讲—修订的闭环。",
+          evidence_refs: [],
+          table_refs: [],
+          asset_candidates: [],
+          visual_intent: "text_led",
+          content: {
+            title: "最后一轮不是美化，而是验证",
+            columns: [
+              { label: "LOGIC", headline: "开场问题必须在结尾得到回答", points: qaBullets.slice(0, 2), tone: "lime" },
+              { label: "DELIVERY", headline: "另一个人也能按讲稿讲清楚", points: qaBullets.slice(1, 3), tone: "coral" }
+            ],
+            takeaway: { label: "DONE WHEN", value: "删掉任何一页都会损失一段必要逻辑" }
+          }
+        }
+      ]
     }
   };
 }

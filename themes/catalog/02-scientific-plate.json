@@ -1,0 +1,29 @@
+{
+  "id": "scientific-plate",
+  "label": "Scientific Figure Plate",
+  "category": "Academic Research",
+  "visual_profile": "scientific",
+  "tags": ["scientific", "figure", "formula", "lab", "diagram"],
+  "match_signals": ["formula", "equation", "biology", "physics", "chemistry", "benchmark", "科学", "公式", "生物", "物理", "实验图"],
+  "density": "high",
+  "mood": "precise, analytical, laboratory",
+  "recommended_for": ["scientific results", "methods paper", "benchmark analysis"],
+  "composition": "figure-led plates, numbered callouts, compact legends, disciplined whitespace",
+  "typography_treatment": "small technical labels paired with compact high-authority headlines",
+  "background_treatment": "cool laboratory white with faint grid coordinates",
+  "image_treatment": "uncropped scientific figures with callout rails and explicit figure captions",
+  "table_treatment": "dense native tables with alternating cool rows and teal significance markers",
+  "style_markers": ["figure plate", "numbered callout", "technical grid", "teal measurement"],
+  "layout_families": ["figure-cover", "multi-panel-evidence", "formula-focus", "method-plate", "result-annotation"],
+  "avoid": ["cinematic backgrounds", "oversized decorative metrics", "cropping scientific axes"],
+  "style_reference_asset": "themes/style-references/academic-evidence-v1.png",
+  "provenance": { "type": "original", "inspiration": "scientific journal plates and laboratory readouts" },
+  "colors": {
+    "background": "#F2F7F7", "surface": "#FFFFFF", "surface2": "#E2EEEE",
+    "foreground": "#153238", "muted": "#587379", "accent": "#007C83",
+    "accent2": "#E36B46", "accent3": "#6D58B3", "border": "#BED1D2",
+    "white": "#FFFFFF", "black": "#0B2024"
+  },
+  "spacing": { "page_margin": 56, "section_gap": 24, "card_gap": 14 },
+  "typography": { "title_px": 52, "slide_title_px": 35, "body_px": 16, "caption_px": 11 }
+}

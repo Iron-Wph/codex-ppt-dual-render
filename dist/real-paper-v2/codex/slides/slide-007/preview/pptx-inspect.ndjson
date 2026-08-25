@@ -1,0 +1,17 @@
+{"kind":"slide","id":"sl/mhzhbk","slide":1,"title":"01 / 01","textShapes":12}
+{"kind":"shape","id":"sh/2x0ni18n","slide":1,"name":"slide-1-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/p0bmtwry","slide":1,"name":"slide-1-page","text":"01 / 01","textPreview":"01 / 01","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/oz25kbqt","slide":1,"name":"s7-answer-kicker","text":"THE ANSWER","textPreview":"THE ANSWER","textChars":10,"textLines":1,"bbox":[72,72,240,20]}
+{"kind":"textbox","id":"sh/fa94nm9w","slide":1,"name":"s7-answer-title","text":"初始化与评估温度会改变单点 SSR","textPreview":"初始化与评估温度会改变单点 SSR","textChars":17,"textLines":1,"bbox":[72,128,680,190]}
+{"kind":"textbox","id":"sh/u903eh8b","slide":1,"name":"s7-answer-claim","text":"在 place_empty_cup 上，pi0 与 pi05 的 SFT 基线不同，OFT 在 Temp_eval=-1 与 1.6 下的 PPO/GRPO 结果也不同；部分温度结果未重跑，且 RL 结果统一取 50 step。","textPreview":"在 place_empty_cup 上，pi0 与 pi05 的 SFT 基线不同，OFT 在 Temp_eval=-1 与 1.6 下的 PPO/GRPO 结果也不同；部分温度结果未重跑，且 RL 结果统一取 50 step。","textChars":114,"textLines":1,"bbox":[72,344,660,112]}
+{"kind":"textbox","id":"sh/hwrmpwr2","slide":1,"name":"s7-answer-point-1-label","text":"起点不同","textPreview":"起点不同","textChars":4,"textLines":1,"bbox":[790,142,170,18]}
+{"kind":"textbox","id":"sh/gbilgrqh","slide":1,"name":"s7-answer-point-1","text":"pi0 的 SFT 为 45.31%，pi05 为 85.16%；RL 增益不能脱离初始模型比较。","textPreview":"pi0 的 SFT 为 45.31%，pi05 为 85.16%；RL 增益不能脱离初始模型比较。","textChars":49,"textLines":1,"bbox":[790,176,390,70]}
+{"kind":"shape","id":"sh/z6d4zq9g","slide":1,"name":"s7-answer-point-1-rule","bbox":[790,256,390,0]}
+{"kind":"textbox","id":"sh/y5knql8v","slide":1,"name":"s7-answer-point-2-label","text":"温度改变结果","textPreview":"温度改变结果","textChars":6,"textLines":1,"bbox":[790,268,170,18]}
+{"kind":"textbox","id":"sh/kjet8bu9","slide":1,"name":"s7-answer-point-2","text":"OFT 的 PPO/GRPO 在 Temp_eval=-1 与 1.6 下呈现不同 SSR，评估温度应随数字一并报告。","textPreview":"OFT 的 PPO/GRPO 在 Temp_eval=-1 与 1.6 下呈现不同 SSR，评估温度应随数字一并报告。","textChars":59,"textLines":1,"bbox":[790,302,390,70]}
+{"kind":"shape","id":"sh/5kna1gbu","slide":1,"name":"s7-answer-point-2-rule","bbox":[790,382,390,0]}
+{"kind":"textbox","id":"sh/ihcb61c3","slide":1,"name":"s7-answer-point-3-label","text":"口径需固定","textPreview":"口径需固定","textChars":5,"textLines":1,"bbox":[790,394,170,18]}
+{"kind":"textbox","id":"sh/jilsz6to","slide":1,"name":"s7-answer-point-3","text":"相关温度结果部分未重跑，且 RL 结果统一取 50 step；复现时必须注明重跑状态与训练步数。","textPreview":"相关温度结果部分未重跑，且 RL 结果统一取 50 step；复现时必须注明重跑状态与训练步数。","textChars":48,"textLines":1,"bbox":[790,428,390,70]}
+{"kind":"shape","id":"sh/wvut4rux","slide":1,"name":"s7-boundary-rule","bbox":[72,562,1136,0]}
+{"kind":"textbox","id":"sh/xw3axwbi","slide":1,"name":"s7-boundary-label","text":"因此","textPreview":"因此","textChars":2,"textLines":1,"bbox":[72,590,160,18]}
+{"kind":"textbox","id":"sh/atcb21c7","slide":1,"name":"s7-boundary","text":"跨任务平均结果优先于单任务单温度结果。","textPreview":"跨任务平均结果优先于单任务单温度结果。","textChars":19,"textLines":1,"bbox":[250,582,930,34]}

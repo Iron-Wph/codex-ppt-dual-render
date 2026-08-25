@@ -1,0 +1,22 @@
+{"kind":"deck","id":"pr/517eej","name":"Deck"}
+{"kind":"layout","layoutId":"f5c9e07a-6eba-4d3f-a615-5663db0bd4f6","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"987d8c62-e8c7-44d2-8736-195ee9b02b74","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/efh396","slide":1,"title":"01 / 01","textShapes":13}
+{"kind":"shape","id":"sh/9o36dw72","slide":1,"name":"slide-1-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/m1cni18r","slide":1,"name":"slide-1-page","text":"01 / 01","textPreview":"01 / 01","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/n2lobm9w","slide":1,"name":"s6-kicker","text":"RLinf 的 RL 增益是否超过 SimpleVLA？","textPreview":"RLinf 的 RL 增益是否超过 SimpleVLA？","textChars":28,"textLines":1,"bbox":[72,62,1000,22]}
+{"kind":"textbox","id":"sh/0za5grql","slide":1,"name":"s6-title","text":"RLinf 的平均增幅高于 SimpleVLA","textPreview":"RLinf 的平均增幅高于 SimpleVLA","textChars":23,"textLines":1,"bbox":[72,102,1080,112]}
+{"kind":"shape","id":"sh/10369wr6","slide":1,"name":"s6-argument-1-rule","bbox":[72,244,642,4]}
+{"kind":"textbox","id":"sh/exsneh8f","slide":1,"name":"s6-argument-1-label","text":"RLinf","textPreview":"RLinf","textChars":5,"textLines":1,"bbox":[72,270,642,20]}
+{"kind":"textbox","id":"sh/zy147m90","slide":1,"name":"s6-argument-1-headline","text":"24.48% → 84.63%","textPreview":"24.48% → 84.63%","textChars":15,"textLines":1,"bbox":[72,314,622,94]}
+{"kind":"textbox","id":"sh/kve5sbqp","slide":1,"name":"s6-argument-1-point-1","text":"→ 平均提升 +60.15 个百分点","textPreview":"→ 平均提升 +60.15 个百分点","textChars":18,"textLines":1,"bbox":[72,424,618,46]}
+{"kind":"textbox","id":"sh/lwn6lg7a","slide":1,"name":"s6-argument-1-point-2","text":"→ 完整训练系统的平均变化更大","textPreview":"→ 完整训练系统的平均变化更大","textChars":15,"textLines":1,"bbox":[72,478,618,46]}
+{"kind":"shape","id":"sh/xcnalcru","slide":1,"name":"s6-argument-2-rule","bbox":[734,244,474,4]}
+{"kind":"textbox","id":"sh/wbe9c7a9","slide":1,"name":"s6-argument-2-label","text":"SimpleVLA","textPreview":"SimpleVLA","textChars":9,"textLines":1,"bbox":[734,270,474,20]}
+{"kind":"textbox","id":"sh/ba5sj294","slide":1,"name":"s6-argument-2-headline","text":"34.40% → 72.18%","textPreview":"34.40% → 72.18%","textChars":15,"textLines":1,"bbox":[734,314,454,94]}
+{"kind":"textbox","id":"sh/a9craxsj","slide":1,"name":"s6-argument-2-point-1","text":"→ 平均提升 +37.78 个百分点","textPreview":"→ 平均提升 +37.78 个百分点","textChars":18,"textLines":1,"bbox":[734,424,450,46]}
+{"kind":"textbox","id":"sh/983qhsry","slide":1,"name":"s6-argument-2-point-2","text":"→ 作为完整系统对照，而非单变量基线","textPreview":"→ 作为完整系统对照，而非单变量基线","textChars":18,"textLines":1,"bbox":[734,478,450,46]}
+{"kind":"shape","id":"sh/o7u987ad","slide":1,"name":"s6-argument-divider","bbox":[708,244,1,334]}
+{"kind":"textbox","id":"sh/n6l8f29s","slide":1,"name":"s6-implication-label","text":"一句话判断","textPreview":"一句话判断","textChars":5,"textLines":1,"bbox":[72,606,180,18]}
+{"kind":"textbox","id":"sh/m5cr6xs7","slide":1,"name":"s6-implication","text":"RLinf 的平均 RL 增幅更大，但证据指向的是系统级效果，而不是某个实现因素的独立贡献。","textPreview":"RLinf 的平均 RL 增幅更大，但证据指向的是系统级效果，而不是某个实现因素的独立贡献。","textChars":46,"textLines":1,"bbox":[268,598,900,32]}
+{"kind":"notes","id":"nt/efh396","slide":1,"text":"把两套系统的 SFT→RL 平均变化放在同一张表里。RLinf 从 24.48% 提升到 84.63%，增加 60.15 个百分点；SimpleVLA 从 34.40% 提升到 72.18%，增加 37.78 个百分点，所以 RLinf 的完整训练系统平均增幅更大。但这一页不构成单因素消融：精度、学习率、LoRA、轨迹收集和 reward 设计都不同。下一页继续检查初始模型与评估温度带来的敏感性。\n讲述提示：先读两组平均值和增幅，再明确“系统级比较”而非“纯算法因果”。\n[Sources] p6-table-1"}

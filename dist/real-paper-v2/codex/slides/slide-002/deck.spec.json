@@ -1,0 +1,1799 @@
+{
+  "spec_version": "0.4.0",
+  "deck": {
+    "id": "rlinf-robotwin-experiment-storyboard-revised",
+    "title": "RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束",
+    "purpose": "帮助具身智能与机器人学习研究者判断 RLinf 在 RoboTwin 上的性能与系统效率证据，并准确区分受控系统优势与纯算法因果结论。",
+    "audience": "具身智能、机器人学习与强化学习研究者、论文评审者和实验复现者。",
+    "language": "zh-CN",
+    "aspect_ratio": "16:9",
+    "communication_job": "By the end, embodied-AI researchers should be able to cite and reproduce RLinf’s RoboTwin result with the correct boundary because the experiments show a large cross-task SSR gain and competitive execution times under fixed seeds, evaluation protocol, and 8-card A800 conditions, while implementation differences prevent isolating a pure RLinf algorithm effect.",
+    "talk_duration_minutes": 12,
+    "audience_profile": {
+      "role": "具身智能与机器人学习研究者、论文评审者、实验复现者",
+      "prior_knowledge": "熟悉 VLA、SFT、GRPO、RoboTwin、SSR、OOD seed、多卡训练与基本实验对照方法。",
+      "cares_about": [
+        "RLinf 的性能增益是否跨任务成立",
+        "SFT→RL 的比较是否公平",
+        "reward、轨迹收集、精度和超参数差异是否改变结论",
+        "seed、GPU、评估温度和训练步数是否可复现",
+        "不同并行模式下 actor 与 rollout 的实际成本"
+      ],
+      "likely_questions": [
+        "RLinf 的提升能否归因于 RL 信号本身？",
+        "8 个任务上的增益是否一致，训练成本是多少？",
+        "RLinf 与 SimpleVLA 的比较到底控制了哪些变量？",
+        "评估温度、模型初始化和 GPU 是否会改变 SSR？",
+        "实际运行时应该选择哪种并行模式？"
+      ],
+      "desired_outcome": "能够复现实验契约，引用跨任务性能与系统效率结果，并将结论表述为受控条件下的 RLinf 完整训练系统优势，而非无条件的纯算法优越性。"
+    }
+  },
+  "theme": {
+    "id": "academic-evidence",
+    "label": "Academic Evidence",
+    "category": "Academic Research",
+    "visual_profile": "academic",
+    "tags": [
+      "academic",
+      "paper",
+      "evidence",
+      "research",
+      "clean"
+    ],
+    "match_signals": [
+      "academic",
+      "research",
+      "paper",
+      "thesis",
+      "science",
+      "study",
+      "experiment",
+      "论文",
+      "研究",
+      "学术",
+      "实验",
+      "综述"
+    ],
+    "density": "medium",
+    "mood": "credible, calm, evidence-first",
+    "recommended_for": [
+      "academic paper",
+      "literature review",
+      "technical briefing"
+    ],
+    "composition": "warm white canvas, strict evidence grid, navy hierarchy, restrained annotations",
+    "typography_treatment": "compact sans-serif labels with decisive navy action titles",
+    "background_treatment": "quiet paper ground with subtle blue section bands",
+    "image_treatment": "large source figures on white plates with visible captions and provenance",
+    "table_treatment": "native white tables with navy rules and one coral emphasis row",
+    "style_markers": [
+      "paper canvas",
+      "navy thesis",
+      "source figure plate",
+      "coral annotation"
+    ],
+    "layout_families": [
+      "research-cover",
+      "evidence-split",
+      "method-flow",
+      "chart-first",
+      "finding-boundary"
+    ],
+    "avoid": [
+      "decorative stock photography",
+      "poster text walls",
+      "unlabelled charts"
+    ],
+    "style_reference_asset": "themes/style-references/academic-evidence-v1.png",
+    "provenance": {
+      "type": "original",
+      "inspiration": "evidence-led academic editorial systems"
+    },
+    "colors": {
+      "background": "#F5F7FA",
+      "surface": "#FFFFFF",
+      "surface2": "#EAF0F7",
+      "foreground": "#13233A",
+      "muted": "#5C718A",
+      "accent": "#245CB7",
+      "accent2": "#D65F42",
+      "accent3": "#2B8A7E",
+      "border": "#C9D5E3",
+      "white": "#FFFFFF",
+      "black": "#0B1625"
+    },
+    "typography": {
+      "title_px": 56,
+      "slide_title_px": 37,
+      "subtitle_px": 21,
+      "body_px": 17,
+      "caption_px": 12,
+      "metric_px": 46
+    },
+    "fonts": {
+      "heading": [
+        "Aptos Display",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "body": [
+        "Aptos",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "mono": [
+        "Aptos Mono",
+        "Consolas",
+        "monospace"
+      ]
+    },
+    "spacing": {
+      "page_margin": 64,
+      "section_gap": 28,
+      "card_gap": 18,
+      "text_gap": 10
+    }
+  },
+  "visual": {
+    "style_family": "academic-evidence",
+    "image_policy": "仅使用证据索引中的源表、源图或页面快照；优先使用原生表格、原生图表与可追溯机制图，禁止装饰性图片。",
+    "density_profile": "中等密度、证据优先；核心结果使用大图表或大表格，实验边界使用短注释和明确的证据标记。",
+    "style_reason": "受众关心可比性、复现性和归因边界，因此采用暖白画布、深蓝标题、珊瑚强调和源证据板的学术证据风格。",
+    "layout_system": "Codex Grid evidence-first：统一左对齐标题与宽边距，交替使用证据表、机制流程、结果图表、对照构图和结论边界，避免连续页面使用同一轮廓。",
+    "style_reference": "codex/theme-reference.png",
+    "style_reference_html": "codex/theme-reference.html",
+    "style_inspiration": "codex/style-inspiration.png",
+    "style_lock": "theme-reference",
+    "style_system": {
+      "category": "Academic Research",
+      "visual_profile": "academic",
+      "tags": [
+        "academic",
+        "paper",
+        "evidence",
+        "research",
+        "clean"
+      ],
+      "density": "medium",
+      "mood": "credible, calm, evidence-first",
+      "composition": "warm white canvas, strict evidence grid, navy hierarchy, restrained annotations",
+      "typography_treatment": "compact sans-serif labels with decisive navy action titles",
+      "background_treatment": "quiet paper ground with subtle blue section bands",
+      "image_treatment": "large source figures on white plates with visible captions and provenance",
+      "table_treatment": "native white tables with navy rules and one coral emphasis row",
+      "style_markers": [
+        "paper canvas",
+        "navy thesis",
+        "source figure plate",
+        "coral annotation"
+      ],
+      "layout_families": [
+        "research-cover",
+        "evidence-split",
+        "method-flow",
+        "chart-first",
+        "finding-boundary"
+      ],
+      "avoid": [
+        "decorative stock photography",
+        "poster text walls",
+        "unlabelled charts"
+      ],
+      "inspiration_asset": "themes/style-references/academic-evidence-v1.png",
+      "provenance": {
+        "type": "original",
+        "inspiration": "evidence-led academic editorial systems"
+      },
+      "selection": {
+        "theme_id": "academic-evidence",
+        "basis": "planner_choice",
+        "semantic_scores": {}
+      }
+    }
+  },
+  "evidence": {
+    "input": {
+      "path": "C:\\Users\\Wph\\Desktop\\2026届本科毕业论文（设计）工作指南\\codex\\RLinf论文实验.pdf",
+      "type": "pdf"
+    },
+    "parser": "pymupdf",
+    "parser_details": {
+      "engine": "pymupdf",
+      "structured_blocks": 607,
+      "requested": "auto",
+      "selected": "pymupdf",
+      "fallback_reason": "MinerU unavailable: spawn mineru.exe ENOENT",
+      "diagnostics": {
+        "page_count": 8,
+        "text_page_ratio": 1,
+        "scanned_like_page_ratio": 0,
+        "character_count": 12722,
+        "asset_count": 29,
+        "table_count": 10,
+        "formula_count": 0,
+        "structured_block_count": 607
+      }
+    },
+    "page_count": 8,
+    "character_count": 12722,
+    "sections": [
+      {
+        "id": "p1-block-1",
+        "source_page": 1,
+        "title": "RLinf 论文实验 ​",
+        "level": 1,
+        "bbox": [
+          36.5,
+          55.01220703125,
+          152.9225616455078,
+          77.44921875
+        ]
+      },
+      {
+        "id": "p1-block-4",
+        "source_page": 1,
+        "title": "Rebuttal ​",
+        "level": 2,
+        "bbox": [
+          36.5,
+          114.99365234375,
+          96.77212524414062,
+          130.68505859375
+        ]
+      },
+      {
+        "id": "p1-block-26",
+        "source_page": 1,
+        "title": "Details​",
+        "level": 2,
+        "bbox": [
+          36.5,
+          474.49365234375,
+          79.16275024414062,
+          490.18505859375
+        ]
+      },
+      {
+        "id": "p4-block-28",
+        "source_page": 4,
+        "title": "与 SimpleVLA 对比 ​",
+        "level": 2,
+        "bbox": [
+          36.5,
+          415.24462890625,
+          139.45962524414062,
+          432.40234375
+        ]
+      },
+      {
+        "id": "p6-block-20",
+        "source_page": 6,
+        "title": "Lora ​",
+        "level": 2,
+        "bbox": [
+          36.5,
+          634.99365234375,
+          69.45181274414062,
+          650.68505859375
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "id": "p1-claim-1",
+        "source_page": 1,
+        "text": "RoboTwin 在数据生成过程中引入了多种领域随机化因素，包括 场景杂乱度（添加无关干扰物体）、背景纹理（从约 1.2 万种高质量纹理中采"
+      },
+      {
+        "id": "p1-claim-2",
+        "source_page": 1,
+        "text": "样）、光照条件（颜色温度与光源类型随机）、桌面高度（在物理合理范围内采样）以及语言指令（生成多样化的任务描述） 。这些随机化因素共"
+      },
+      {
+        "id": "p1-claim-3",
+        "source_page": 1,
+        "text": "在训练阶段，监督微调（ SFT ）和强化学习（ RL ）均使用同一组 基于 robotwin 官方随机化场景参数配置 的 1,000 个随机 seed 对环境进行初始"
+      },
+      {
+        "id": "p1-claim-4",
+        "source_page": 1,
+        "text": "在 SFT 阶段，每个 seed 仅用于初始化环境一次，共采集 1,000 条不同的专家示范轨迹用于训练。 ​"
+      },
+      {
+        "id": "p2-claim-1",
+        "source_page": 2,
+        "text": "max_episode_steps: 200 # max episode steps for truncation ​"
+      },
+      {
+        "id": "p2-claim-2",
+        "source_page": 2,
+        "text": "assets_path: \"/mnt/public/peihong/codes/RLinf_RoboTwin_gz\" ​"
+      },
+      {
+        "id": "p2-claim-3",
+        "source_page": 2,
+        "text": "seeds_path: \"/mnt/project_rlinf/guozhen/test_robotwin/SimpleVLA-RL/verl/utils/en"
+      },
+      {
+        "id": "p2-claim-4",
+        "source_page": 2,
+        "text": "video_base_dir: ${runner.logger.log_path}/video/train ​"
+      },
+      {
+        "id": "p3-claim-1",
+        "source_page": 3,
+        "text": "experiment_name: \"robotwin_grpo_openvlaoft\" ​"
+      },
+      {
+        "id": "p3-claim-2",
+        "source_page": 3,
+        "text": "logger_backends: [ \"tensorboard\" ] # wandb, swanlab ​"
+      },
+      {
+        "id": "p3-claim-3",
+        "source_page": 3,
+        "text": "eval_policy_path: null # Optional: .pt file or None, if None, will use the che"
+      },
+      {
+        "id": "p3-claim-4",
+        "source_page": 3,
+        "text": "resume_dir: /mnt/public/peihong/codes/RLinf_new/logs/beat_block_hammer_grpo_2e"
+      },
+      {
+        "id": "p4-claim-1",
+        "source_page": 4,
+        "text": "1. SFT 模型、 train/eval seeds 均采用 simple 提供 ​"
+      },
+      {
+        "id": "p4-claim-2",
+        "source_page": 4,
+        "text": "4. RLinf 中 GRPO 使用的 valid action mask 模式与 simple 的工程等价， simple 是等待所有 env trunc / terminate 后一起 reset​"
+      },
+      {
+        "id": "p4-claim-3",
+        "source_page": 4,
+        "text": "Simple ：模型精度是 FP32 ，整体是 bf16-fp32 的混合精度 ​"
+      },
+      {
+        "id": "p4-claim-4",
+        "source_page": 4,
+        "text": "对于初始 SSR （指 Simple ）低的 task ，如： beat_block_hammer ，模型在 train_seed 的 SSR 会更低（在 RLinf ）导致模型的训练步数需要更多； ​"
+      },
+      {
+        "id": "p5-claim-1",
+        "source_page": 5,
+        "text": "还有框架计算 log_prob 、模型 update 的 bsz 不同， but 不影响性能 ​"
+      },
+      {
+        "id": "p5-claim-2",
+        "source_page": 5,
+        "text": "RLinf: 其 rollout 固定轮次、固定数目的 traj 后，对 collected traj 进行 reward filter ，所以模型每次 step 得到 valid traj 数受模型当前对该 task 的 SSR 影"
+      },
+      {
+        "id": "p5-claim-3",
+        "source_page": 5,
+        "text": "Simple: 其在每次 rollout traj 后都立即进行 reward filter ，剩余的 traj 存在 buffer 中；循环往复直到收集到 rollout bsz 数量的 traj 再进行模型的更新 ​"
+      },
+      {
+        "id": "p5-claim-4",
+        "source_page": 5,
+        "text": "设置 use_custom_reward & use_rel_reward 为 True​"
+      },
+      {
+        "id": "p6-claim-1",
+        "source_page": 6,
+        "text": "RLinf SFT ​ RLinf RL ​ Simple SFT ​ Simple RL ​"
+      },
+      {
+        "id": "p6-claim-2",
+        "source_page": 6,
+        "text": "Average ​ 24.48%​ 84.63%​ 34.40%​ 72.18%​"
+      },
+      {
+        "id": "p6-claim-3",
+        "source_page": 6,
+        "text": "1. 模型实现微小差异： RLinf 加了 position_ids ，我之前跑的没加，简单验证后性能没差异就忽略了 ​"
+      },
+      {
+        "id": "p6-claim-4",
+        "source_page": 6,
+        "text": "镜像： cr.infini-ai.com/te-dbdcudoygepmq5vx/agentic-rlinf0.1-torch2.6.0-openvlaoft-pi0-robotwin:0.1 ​"
+      },
+      {
+        "id": "p7-claim-1",
+        "source_page": 7,
+        "text": "cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​"
+      },
+      {
+        "id": "p7-claim-2",
+        "source_page": 7,
+        "text": "bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope"
+      },
+      {
+        "id": "p7-claim-3",
+        "source_page": 7,
+        "text": "cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​"
+      },
+      {
+        "id": "p7-claim-4",
+        "source_page": 7,
+        "text": "bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope"
+      },
+      {
+        "id": "p8-claim-1",
+        "source_page": 8,
+        "text": "2026/4/4 20:47 ‌⁢​‬​‬⁤‬​⁣ ‬⁡‍​ ⁢‌​⁢‍‬⁣​‌⁡ ‬‌‍‬⁣‌​‬⁢ ⁡​ ‌⁡RLinf 论文实验 - 飞书云文档"
+      },
+      {
+        "id": "p8-claim-2",
+        "source_page": 8,
+        "text": "https://nics-efc.feishu.cn/wiki/MYEMwYNk8ihoNFkn0EbcexkbnTW 8/8"
+      }
+    ],
+    "diagnostics": {
+      "block_types": {
+        "title": 5,
+        "text": 573,
+        "table": 10,
+        "figure": 13,
+        "list": 6
+      },
+      "structured_block_count": 607,
+      "asset_count": 29,
+      "table_count": 10,
+      "formula_count": 0,
+      "captioned_asset_count": 0
+    }
+  },
+  "assets": [
+    {
+      "id": "p1-table-1-crop",
+      "type": "evidence_crop",
+      "source_page": 1,
+      "index": 1,
+      "bbox": [
+        36.999969482421875,
+        182.5,
+        408.9999694824219,
+        345.5
+      ],
+      "path": "assets/page-001-table-01-crop.png",
+      "mime_type": "image/png",
+      "width": 841,
+      "height": 382,
+      "bytes": 64148,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p1-table-1",
+      "caption": "Cropped paper figure or table region from page 1",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 1",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-table-2-crop",
+      "type": "evidence_crop",
+      "source_page": 1,
+      "index": 2,
+      "bbox": [
+        36.999969482421875,
+        362.5,
+        222.99996948242188,
+        417
+      ],
+      "path": "assets/page-001-table-02-crop.png",
+      "mime_type": "image/png",
+      "width": 432,
+      "height": 143,
+      "bytes": 11507,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p1-table-2",
+      "caption": "Cropped paper figure or table region from page 1",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 1",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-snapshot",
+      "type": "evidence_page_snapshot",
+      "source_page": 1,
+      "index": 1,
+      "bbox": null,
+      "path": "assets/page-001-snapshot.png",
+      "mime_type": "image/png",
+      "width": 714,
+      "height": 1011,
+      "bytes": 141859,
+      "snapshot": true,
+      "crop": false,
+      "table_ref": null,
+      "caption": "Full-page evidence snapshot from page 1",
+      "footnote": null,
+      "alt_text": "Full-page evidence snapshot from page 1",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-1",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 1,
+      "bbox": [
+        38,
+        87.50001525878906,
+        48,
+        97.50001525878906
+      ],
+      "path": "assets/page-001-image-01.jpeg",
+      "mime_type": "image/jpeg",
+      "width": 72,
+      "height": 72,
+      "bytes": 2387,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 1",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 1",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-2",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 2,
+      "bbox": [
+        79,
+        87.50001525878906,
+        89,
+        97.50001525878906
+      ],
+      "path": "assets/page-001-image-02.jpeg",
+      "mime_type": "image/jpeg",
+      "width": 72,
+      "height": 72,
+      "bytes": 1447,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 2",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 2",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-3",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 3,
+      "bbox": [
+        208.49998474121094,
+        207.5,
+        277,
+        224
+      ],
+      "path": "assets/page-001-image-03.png",
+      "mime_type": "image/png",
+      "width": 1124,
+      "height": 268,
+      "bytes": 57166,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 3",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 3",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-4",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 4,
+      "bbox": [
+        285.9999694824219,
+        207.50001525878906,
+        354.4999694824219,
+        223.50001525878906
+      ],
+      "path": "assets/page-001-image-04.png",
+      "mime_type": "image/png",
+      "width": 1280,
+      "height": 301,
+      "bytes": 260176,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 4",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 4",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-5",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 5,
+      "bbox": [
+        130.99998474121094,
+        252.5,
+        199.5,
+        259.5
+      ],
+      "path": "assets/page-001-image-05.png",
+      "mime_type": "image/png",
+      "width": 1943,
+      "height": 195,
+      "bytes": 150432,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 5",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 5",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-6",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 6,
+      "bbox": [
+        208.49998474121094,
+        252.5,
+        277,
+        262.5
+      ],
+      "path": "assets/page-001-image-06.png",
+      "mime_type": "image/png",
+      "width": 1701,
+      "height": 253,
+      "bytes": 59542,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 6",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 6",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-7",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 7,
+      "bbox": [
+        285.9999694824219,
+        252.5,
+        354.4999694824219,
+        262.5
+      ],
+      "path": "assets/page-001-image-07.png",
+      "mime_type": "image/png",
+      "width": 1681,
+      "height": 253,
+      "bytes": 61806,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 7",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 7",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-8",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 8,
+      "bbox": [
+        285.9999694824219,
+        291,
+        354.4999694824219,
+        300
+      ],
+      "path": "assets/page-001-image-08.png",
+      "mime_type": "image/png",
+      "width": 1638,
+      "height": 215,
+      "bytes": 50973,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 8",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 8",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-9",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 9,
+      "bbox": [
+        127.49996948242188,
+        387.5,
+        168.49996948242188,
+        393
+      ],
+      "path": "assets/page-001-image-09.png",
+      "mime_type": "image/png",
+      "width": 1676,
+      "height": 219,
+      "bytes": 44511,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 9",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 9",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-10",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 10,
+      "bbox": [
+        177.49996948242188,
+        387.5,
+        218.49996948242188,
+        393
+      ],
+      "path": "assets/page-001-image-10.png",
+      "mime_type": "image/png",
+      "width": 1719,
+      "height": 241,
+      "bytes": 51865,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 10",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 10",
+      "editable_level": "image"
+    },
+    {
+      "id": "p4-table-1-crop",
+      "type": "evidence_crop",
+      "source_page": 4,
+      "index": 1,
+      "bbox": [
+        36.74998612837358,
+        28.500039100646973,
+        402.2749847412109,
+        380.7083740234375
+      ],
+      "path": "assets/page-004-table-01-crop.png",
+      "mime_type": "image/png",
+      "width": 828,
+      "height": 798,
+      "bytes": 67573,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p4-table-1",
+      "caption": "Cropped paper figure or table region from page 4",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 4",
+      "editable_level": "image"
+    },
+    {
+      "id": "p4-table-2-crop",
+      "type": "evidence_crop",
+      "source_page": 4,
+      "index": 2,
+      "bbox": [
+        36.74998612837358,
+        708.875,
+        402.2749847412109,
+        791.125
+      ],
+      "path": "assets/page-004-table-02-crop.png",
+      "mime_type": "image/png",
+      "width": 828,
+      "height": 204,
+      "bytes": 15728,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p4-table-2",
+      "caption": "Cropped paper figure or table region from page 4",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 4",
+      "editable_level": "image"
+    },
+    {
+      "id": "p4-snapshot",
+      "type": "evidence_page_snapshot",
+      "source_page": 4,
+      "index": 1,
+      "bbox": null,
+      "path": "assets/page-004-snapshot.png",
+      "mime_type": "image/png",
+      "width": 714,
+      "height": 1011,
+      "bytes": 80815,
+      "snapshot": true,
+      "crop": false,
+      "table_ref": null,
+      "caption": "Full-page evidence snapshot from page 4",
+      "footnote": null,
+      "alt_text": "Full-page evidence snapshot from page 4",
+      "editable_level": "image"
+    },
+    {
+      "id": "p5-table-1-crop",
+      "type": "evidence_crop",
+      "source_page": 5,
+      "index": 1,
+      "bbox": [
+        36.94996948242188,
+        583.444566514757,
+        523.55,
+        795.055677625868
+      ],
+      "path": "assets/page-005-table-01-crop.png",
+      "mime_type": "image/png",
+      "width": 1093,
+      "height": 489,
+      "bytes": 65846,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p5-table-1",
+      "caption": "Cropped paper figure or table region from page 5",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 5",
+      "editable_level": "image"
+    },
+    {
+      "id": "p5-snapshot",
+      "type": "evidence_page_snapshot",
+      "source_page": 5,
+      "index": 1,
+      "bbox": null,
+      "path": "assets/page-005-snapshot.png",
+      "mime_type": "image/png",
+      "width": 714,
+      "height": 1011,
+      "bytes": 129638,
+      "snapshot": true,
+      "crop": false,
+      "table_ref": null,
+      "caption": "Full-page evidence snapshot from page 5",
+      "footnote": null,
+      "alt_text": "Full-page evidence snapshot from page 5",
+      "editable_level": "image"
+    },
+    {
+      "id": "p5-image-1",
+      "type": "evidence_figure",
+      "source_page": 5,
+      "index": 1,
+      "bbox": [
+        196.00001525878906,
+        240.50015258789062,
+        408.0000305175781,
+        366.0001525878906
+      ],
+      "path": "assets/page-005-image-01.png",
+      "mime_type": "image/png",
+      "width": 1280,
+      "height": 758,
+      "bytes": 291259,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 5 页嵌入图片 1",
+      "footnote": null,
+      "alt_text": "论文第 5 页嵌入图片 1",
+      "editable_level": "image"
+    },
+    {
+      "id": "p5-image-2",
+      "type": "evidence_figure",
+      "source_page": 5,
+      "index": 2,
+      "bbox": [
+        203,
+        429.000244140625,
+        426,
+        539.000244140625
+      ],
+      "path": "assets/page-005-image-02.png",
+      "mime_type": "image/png",
+      "width": 1280,
+      "height": 631,
+      "bytes": 276830,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 5 页嵌入图片 2",
+      "footnote": null,
+      "alt_text": "论文第 5 页嵌入图片 2",
+      "editable_level": "image"
+    },
+    {
+      "id": "p6-table-1-crop",
+      "type": "evidence_crop",
+      "source_page": 6,
+      "index": 1,
+      "bbox": [
+        36.81577180561266,
+        28.916666666666668,
+        286.1249694824219,
+        90.58333333333333
+      ],
+      "path": "assets/page-006-table-01-crop.png",
+      "mime_type": "image/png",
+      "width": 572,
+      "height": 159,
+      "bytes": 11437,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p6-table-1",
+      "caption": "Cropped paper figure or table region from page 6",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 6",
+      "editable_level": "image"
+    },
+    {
+      "id": "p6-table-2-crop",
+      "type": "evidence_crop",
+      "source_page": 6,
+      "index": 2,
+      "bbox": [
+        36.81577180561266,
+        496.3747253417969,
+        227.07139805385046,
+        619.624755859375
+      ],
+      "path": "assets/page-006-table-02-crop.png",
+      "mime_type": "image/png",
+      "width": 442,
+      "height": 294,
+      "bytes": 18975,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p6-table-2",
+      "caption": "Cropped paper figure or table region from page 6",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 6",
+      "editable_level": "image"
+    },
+    {
+      "id": "p6-snapshot",
+      "type": "evidence_page_snapshot",
+      "source_page": 6,
+      "index": 1,
+      "bbox": null,
+      "path": "assets/page-006-snapshot.png",
+      "mime_type": "image/png",
+      "width": 714,
+      "height": 1011,
+      "bytes": 80328,
+      "snapshot": true,
+      "crop": false,
+      "table_ref": null,
+      "caption": "Full-page evidence snapshot from page 6",
+      "footnote": null,
+      "alt_text": "Full-page evidence snapshot from page 6",
+      "editable_level": "image"
+    },
+    {
+      "id": "p6-image-1",
+      "type": "evidence_figure",
+      "source_page": 6,
+      "index": 1,
+      "bbox": [
+        238.00001525878906,
+        144.50015258789062,
+        366,
+        256.0001525878906
+      ],
+      "path": "assets/page-006-image-01.png",
+      "mime_type": "image/png",
+      "width": 812,
+      "height": 709,
+      "bytes": 25942,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 6 页嵌入图片 1",
+      "footnote": null,
+      "alt_text": "论文第 6 页嵌入图片 1",
+      "editable_level": "image"
+    },
+    {
+      "id": "p7-table-1-crop",
+      "type": "evidence_crop",
+      "source_page": 7,
+      "index": 1,
+      "bbox": [
+        36.783321126302084,
+        28.500077883402508,
+        401.39285714285717,
+        305.7084096272786
+      ],
+      "path": "assets/page-007-table-01-crop.png",
+      "mime_type": "image/png",
+      "width": 826,
+      "height": 633,
+      "bytes": 69623,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p7-table-1",
+      "caption": "Cropped paper figure or table region from page 7",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 7",
+      "editable_level": "image"
+    },
+    {
+      "id": "p7-table-2-crop",
+      "type": "evidence_crop",
+      "source_page": 7,
+      "index": 2,
+      "bbox": [
+        36.783321126302084,
+        707.400244140625,
+        251.58330281575522,
+        810.100244140625
+      ],
+      "path": "assets/page-007-table-02-crop.png",
+      "mime_type": "image/png",
+      "width": 496,
+      "height": 249,
+      "bytes": 18024,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p7-table-2",
+      "caption": "Cropped paper figure or table region from page 7",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 7",
+      "editable_level": "image"
+    },
+    {
+      "id": "p7-snapshot",
+      "type": "evidence_page_snapshot",
+      "source_page": 7,
+      "index": 1,
+      "bbox": null,
+      "path": "assets/page-007-snapshot.png",
+      "mime_type": "image/png",
+      "width": 714,
+      "height": 1011,
+      "bytes": 80979,
+      "snapshot": true,
+      "crop": false,
+      "table_ref": null,
+      "caption": "Full-page evidence snapshot from page 7",
+      "footnote": null,
+      "alt_text": "Full-page evidence snapshot from page 7",
+      "editable_level": "image"
+    },
+    {
+      "id": "p8-table-1-crop",
+      "type": "evidence_crop",
+      "source_page": 8,
+      "index": 1,
+      "bbox": [
+        36.899969482421874,
+        58.9,
+        236.09996948242187,
+        141.1
+      ],
+      "path": "assets/page-008-table-01-crop.png",
+      "mime_type": "image/png",
+      "width": 461,
+      "height": 204,
+      "bytes": 12278,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p8-table-1",
+      "caption": "Cropped paper figure or table region from page 8",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 8",
+      "editable_level": "image"
+    },
+    {
+      "id": "p8-snapshot",
+      "type": "evidence_page_snapshot",
+      "source_page": 8,
+      "index": 1,
+      "bbox": null,
+      "path": "assets/page-008-snapshot.png",
+      "mime_type": "image/png",
+      "width": 714,
+      "height": 1011,
+      "bytes": 45470,
+      "snapshot": true,
+      "crop": false,
+      "table_ref": null,
+      "caption": "Full-page evidence snapshot from page 8",
+      "footnote": null,
+      "alt_text": "Full-page evidence snapshot from page 8",
+      "editable_level": "image"
+    }
+  ],
+  "tables": [
+    {
+      "id": "p1-table-1",
+      "type": "evidence_table",
+      "source_page": 1,
+      "index": 1,
+      "bbox": [
+        36.999969482421875,
+        182.5,
+        408.9999694824219,
+        345.5
+      ],
+      "rows": 5,
+      "columns": 5,
+      "values": [
+        [
+          "Model​",
+          "SFT​",
+          "PPO​",
+          "GRPO​",
+          ""
+        ],
+        [
+          "pi0​",
+          "45.31%​",
+          "82.03%​",
+          "83.59%​",
+          ""
+        ],
+        [
+          "pi05​",
+          "85.16%​",
+          "96.88%​",
+          "95.31%​",
+          "RL 都取50 step​"
+        ],
+        [
+          "oft(Temp_eval=-1)​",
+          "75.78%​ ​",
+          "92.97%​ (没重跑故不需要重测)​",
+          "92.19%​",
+          ""
+        ],
+        [
+          "oft(Temp_eval=1.6)​",
+          "",
+          "86.72%​",
+          "88.28%​",
+          ""
+        ]
+      ],
+      "nonempty_ratio": 0.8,
+      "caption": "Paper table region on page 1",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p1-table-1-crop",
+      "editable_level": "native-table"
+    },
+    {
+      "id": "p1-table-2",
+      "type": "evidence_table",
+      "source_page": 1,
+      "index": 2,
+      "bbox": [
+        36.999969482421875,
+        362.5,
+        222.99996948242188,
+        417
+      ],
+      "rows": 2,
+      "columns": 3,
+      "values": [
+        [
+          "Temp_eval=1.6​",
+          "PPO​",
+          "GRPO​"
+        ],
+        [
+          "place_empty_cup​",
+          "86.72%​",
+          "88.28%​"
+        ]
+      ],
+      "nonempty_ratio": 1,
+      "caption": "Paper table region on page 1",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p1-table-2-crop",
+      "editable_level": "native-table"
+    },
+    {
+      "id": "p4-table-1",
+      "type": "evidence_table",
+      "source_page": 4,
+      "index": 1,
+      "bbox": [
+        36.74998612837358,
+        28.500039100646973,
+        402.2749847412109,
+        380.7083740234375
+      ],
+      "rows": 1,
+      "columns": 2,
+      "values": [
+        [
+          "58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89",
+          "clip_ratio_low: 0.2​ clip_ratio_c: 3.0​ value_clip: 0.2​ huber_delta: 10.0​ gamma: 1.0​ gae_lambda: 0.95​ reward_coef: 5.0​ filter_rewards: True​ rewards_lower_bound: 0.5​ rewards_upper_bound: 4.5​ # params for rollout​ sampling_params:​ do_sample: True​ temperature_train: 1.6​ temperature_eval: 1.6​ top_k: -1​ top_p: 1.0​ repetition_penalty: 1.0​ # length argument for autoregressive sampling​ # max length means max amount of tokens to generate​ length_params:​ max_new_token: null​ max_length: 1024​ min_length: 1​ env:​ group_name: \"EnvGroup\"​ enable_offload: True​"
+        ]
+      ],
+      "nonempty_ratio": 1,
+      "caption": "Paper table region on page 4",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p4-table-1-crop",
+      "editable_level": "native-table"
+    },
+    {
+      "id": "p4-table-2",
+      "type": "evidence_table",
+      "source_page": 4,
+      "index": 2,
+      "bbox": [
+        36.74998612837358,
+        708.875,
+        402.2749847412109,
+        791.125
+      ],
+      "rows": 4,
+      "columns": 3,
+      "values": [
+        [
+          "",
+          "RLinf​",
+          "Simple​"
+        ],
+        [
+          "Rollout bsz​",
+          "1024 (8 rollout_epoch * 128 num_envs)​",
+          "512 (8 n_samples * 64 train_bsz)​"
+        ],
+        [
+          "lr​",
+          "2.0e-4​",
+          "5e-6​"
+        ],
+        [
+          "is_lora​",
+          "true​",
+          "false（全参训练）​"
+        ]
+      ],
+      "nonempty_ratio": 0.917,
+      "caption": "Paper table region on page 4",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p4-table-2-crop",
+      "editable_level": "native-table"
+    },
+    {
+      "id": "p5-table-1",
+      "type": "evidence_table",
+      "source_page": 5,
+      "index": 1,
+      "bbox": [
+        36.94996948242188,
+        583.444566514757,
+        523.55,
+        795.055677625868
+      ],
+      "rows": 9,
+      "columns": 8,
+      "values": [
+        [
+          "Task​",
+          "RLinf SFT​",
+          "RLinf RL​",
+          "Avg improvement​",
+          "train step​ RLinf ​",
+          "Simple SFT​",
+          "Simple RL​ ​",
+          "train step​ Simple​"
+        ],
+        [
+          "place_empty_cup​",
+          "75.78%​",
+          "94.53%​",
+          "18.75​",
+          "40​",
+          "77.3%​",
+          "94.2%​",
+          "20​"
+        ],
+        [
+          "beat_block_hammer​",
+          "10.15%​",
+          "96.09%​",
+          "85.94​",
+          "200​",
+          "28.1%​",
+          "87.5%​",
+          "40​"
+        ],
+        [
+          "pick_dual_bottles​",
+          "20.31%​",
+          "92.96%​",
+          "72.65​",
+          "240​",
+          "29.7%​",
+          "68.3%​",
+          "100​"
+        ],
+        [
+          "move_can_pot​",
+          "9.37%​",
+          "83.59%​",
+          "74.22​",
+          "160​",
+          "28.1%​",
+          "61.2%​",
+          "50​"
+        ],
+        [
+          "lift_pot​",
+          "3.13%​",
+          "70.31%​",
+          "67.18​",
+          "30​",
+          "10.1%​",
+          "64.1%​",
+          "40​"
+        ],
+        [
+          "stack_bowls_two​",
+          "38.28%​",
+          "67.19%​",
+          "28.91​",
+          "150​",
+          "40.6%​",
+          "75.8%​",
+          "80​"
+        ],
+        [
+          "handover_block​",
+          "28.13%​",
+          "70.31%​",
+          "42.18​",
+          "150​",
+          "33.1%​",
+          "57.8%​",
+          "40​"
+        ],
+        [
+          "place_container_plat e​",
+          "54.69%​",
+          "95.31%​",
+          "40.62​",
+          "50​",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "nonempty_ratio": 0.958,
+      "caption": "Paper table region on page 5",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p5-table-1-crop",
+      "editable_level": "native-table"
+    },
+    {
+      "id": "p6-table-1",
+      "type": "evidence_table",
+      "source_page": 6,
+      "index": 1,
+      "bbox": [
+        36.81577180561266,
+        28.916666666666668,
+        286.1249694824219,
+        90.58333333333333
+      ],
+      "rows": 3,
+      "columns": 5,
+      "values": [
+        [
+          "",
+          "RLinf SFT​",
+          "RLinf RL​",
+          "Simple SFT​",
+          "Simple RL​"
+        ],
+        [
+          "Average​",
+          "24.48%​",
+          "84.63%​",
+          "34.40%​",
+          "72.18%​"
+        ],
+        [
+          "Δ Avg.​",
+          "",
+          "+60.15%​",
+          "",
+          "+37.78%​"
+        ]
+      ],
+      "nonempty_ratio": 0.8,
+      "caption": "Paper table region on page 6",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p6-table-1-crop",
+      "editable_level": "native-table"
+    },
+    {
+      "id": "p6-table-2",
+      "type": "evidence_table",
+      "source_page": 6,
+      "index": 2,
+      "bbox": [
+        36.81577180561266,
+        496.3747253417969,
+        227.07139805385046,
+        619.624755859375
+      ],
+      "rows": 6,
+      "columns": 3,
+      "values": [
+        [
+          "8卡​",
+          "actor（s）​",
+          "rollout（s）​"
+        ],
+        [
+          "Colocated​",
+          "49.15​",
+          "170.34​"
+        ],
+        [
+          "Disaggregated",
+          "90.67​",
+          "546.64​"
+        ],
+        [
+          "Hybrid(pipe=1)​",
+          "50.14​",
+          "303.7​"
+        ],
+        [
+          "Hybrid(pipe=2)​",
+          "49.91​",
+          "283.54​"
+        ],
+        [
+          "SimpleVLA​",
+          "94.05​",
+          "189.33​"
+        ]
+      ],
+      "nonempty_ratio": 1,
+      "caption": "Paper table region on page 6",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p6-table-2-crop",
+      "editable_level": "native-table"
+    },
+    {
+      "id": "p7-table-1",
+      "type": "evidence_table",
+      "source_page": 7,
+      "index": 1,
+      "bbox": [
+        36.783321126302084,
+        28.500077883402508,
+        401.39285714285717,
+        305.7084096272786
+      ],
+      "rows": 1,
+      "columns": 2,
+      "values": [
+        [
+          "13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36",
+          "if [ \"$RANK\" -eq 0 ]; then​ bash check_ray.sh 8; # 指定任意的卡数​ cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​ bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope else​ sleep 10d​ fi​ if [ \"$RANK\" -eq 0 ]; then​ bash check_ray.sh 16; # 指定任意的卡数​ cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​ bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope else​ sleep 10d​ fi​ if [ \"$RANK\" -eq 0 ]; then​ bash check_ray.sh 32; # 指定任意的卡数​ cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​ bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope else​ sleep 10d​ fi​"
+        ]
+      ],
+      "nonempty_ratio": 1,
+      "caption": "Paper table region on page 7",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p7-table-1-crop",
+      "editable_level": "native-table"
+    },
+    {
+      "id": "p7-table-2",
+      "type": "evidence_table",
+      "source_page": 7,
+      "index": 2,
+      "bbox": [
+        36.783321126302084,
+        707.400244140625,
+        251.58330281575522,
+        810.100244140625
+      ],
+      "rows": 5,
+      "columns": 4,
+      "values": [
+        [
+          "mode​",
+          "nodenum",
+          "actor​",
+          "generate​"
+        ],
+        [
+          "Hybrid(pipe=2)​",
+          "1n​",
+          "50.31​",
+          "317.07​"
+        ],
+        [
+          "disaggregated​",
+          "1n​",
+          "89.55​",
+          "549.97​"
+        ],
+        [
+          "disaggregated​",
+          "2n​",
+          "47.92​",
+          "289.74​"
+        ],
+        [
+          "disaggregated​",
+          "4n​",
+          "26.44​",
+          "168.57​"
+        ]
+      ],
+      "nonempty_ratio": 1,
+      "caption": "Paper table region on page 7",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p7-table-2-crop",
+      "editable_level": "native-table"
+    },
+    {
+      "id": "p8-table-1",
+      "type": "evidence_table",
+      "source_page": 8,
+      "index": 1,
+      "bbox": [
+        36.899969482421874,
+        58.9,
+        236.09996948242187,
+        141.1
+      ],
+      "rows": 4,
+      "columns": 4,
+      "values": [
+        [
+          "mode​",
+          "nodenum",
+          "actor​",
+          "generate​"
+        ],
+        [
+          "colocated​",
+          "1n​",
+          "115.52​",
+          "207.86​"
+        ],
+        [
+          "colocated​",
+          "2n​",
+          "66.21​",
+          "117.98​"
+        ],
+        [
+          "colocated​",
+          "4n​",
+          "42​",
+          "71.11​"
+        ]
+      ],
+      "nonempty_ratio": 1,
+      "caption": "Paper table region on page 8",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p8-table-1-crop",
+      "editable_level": "native-table"
+    }
+  ],
+  "formulas": [],
+  "narrative": {
+    "arc": "实验问题 → 实验契约与泛化口径 → RLinf 训练信号 → 与 SimpleVLA 的可比性边界 → 跨任务性能 → 框架级增益 → 敏感性边界 → 系统效率 → 受控条件下的结论",
+    "key_message": "在相同 RoboTwin 训练 seed、128 个 OOD 评估 seed、评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练使 8 个任务的平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下呈现有竞争力的 actor/rollout 时间；但由于精度、超参数、valid trajectory 收集和 reward 设计不同，证据支持的是受控条件下的完整系统优势，而不是纯算法因果结论。",
+    "opening_question": "在固定 RoboTwin seed、评估口径和 8 卡 A800 条件下，RLinf 的提升能否归因于 RL 信号本身，还是只能归因于完整训练系统的差异？",
+    "closing_answer": "证据支持这样的结论：在固定实验契约下，RLinf 的 RL 训练带来跨 8 个任务的显著 SSR 增益，并提供有竞争力的执行路径；但由于精度、超参数、轨迹收集和 reward 设计并非完全同构，不能把该结果表述为脱离实验契约的纯算法优越性。",
+    "sections": [
+      {
+        "id": "sec-1",
+        "title": "先锁定实验契约",
+        "job": "定义结果可比、可复现和可解释的边界",
+        "slide_ids": [
+          "s2"
+        ]
+      }
+    ],
+    "priority_map": {
+      "core": [],
+      "support": [
+        "s2"
+      ],
+      "context": []
+    },
+    "logic_check": {
+      "opening_resolved": true,
+      "core_has_evidence": true,
+      "no_redundant_slides": true,
+      "rationale": "已保留 9 页与原叙事顺序，并修复实验契约可见性、训练流程阅读顺序、比较表、平均值证据、效率矩阵、结论边界、标题密度、截断文案和演讲稿长度。所有核心主张均绑定有效证据 ID；结论页分别呈现答案、采用条件和归因边界。"
+    }
+  },
+  "slides": [
+    {
+      "id": "s2",
+      "layout": "evidence",
+      "role": "problem",
+      "composition_id": "image-thesis-split",
+      "content_priority": "support",
+      "action_title": "先锁定实验契约，再谈 SSR 增益",
+      "audience_question": "哪些条件决定这组结果能否复现和外推？",
+      "narrative_job": "合并实验契约与泛化口径，明确训练 seed、OOD seed、机器人、领域随机化、GPU 条件及其复现限制。",
+      "slide_goal": "把后续所有数字锁定在明确的实验边界内。",
+      "primary_claim": "SFT 与 RL 使用同一组 1,000 个 RoboTwin 随机 seed，评估使用额外 128 个未见 seed，采用 Piper 双臂，并统一在 8 卡 A800 平台上运行。",
+      "evidence": [
+        {
+          "claim_support": "训练阶段使用 1,000 个随机场景 seed，评估阶段额外使用 128 个未参与训练的 OOD seed，并采用双臂 Piper 机械臂。",
+          "evidence_ref": "p1-snapshot",
+          "interpretation": "后续 SSR 主要检验受随机化场景与未见 seed 约束的行为表现，而不是单一固定布局上的成功率。"
+        },
+        {
+          "claim_support": "RoboTwin 使用背景纹理、场景杂乱、光照、桌面高度和语言指令等领域随机化；相同 seed 集合在不同 Python、系统和硬件环境下可能无法完全复现，且观察到 H100 与 A800 的初始 SSR 差异。",
+          "evidence_ref": "p1-snapshot",
+          "interpretation": "复现时必须把运行环境和 GPU 视为实验变量，不能只复制 seed 数字。"
+        }
+      ],
+      "implication": "后续结论的有效范围是“固定 RoboTwin 配置、seed、评估口径和 8 卡 A800 条件下”，不是跨硬件、跨环境的普遍保证。",
+      "transition_in": "开场的归因问题首先需要一个稳定、可复现的比较边界。",
+      "transition_out": "边界确定后，还要看 RLinf 如何把 rollout 轨迹转换为更新信号。",
+      "evidence_refs": [
+        "p1-snapshot"
+      ],
+      "table_refs": [],
+      "asset_candidates": [
+        "p1-snapshot"
+      ],
+      "visual_intent": "source_figure",
+      "visual_plan": {
+        "layout_family": "evidence",
+        "primary_visual": "p1-snapshot",
+        "image_budget": 1,
+        "image_roles": [
+          "evidence"
+        ],
+        "data_strategy": "native_table",
+        "background_variant": "light",
+        "density": "balanced"
+      },
+      "speaker_note": "先把比较边界锁定。SFT 与 RL 共用 1,000 个 RoboTwin 随机 seed，使用双臂 Piper；评估再加入 128 个未见 seed，因此 SSR 反映的是随机化场景下的泛化，而不是固定布局记忆。背景、杂乱度、光照、桌高和语言都会变化，Python、系统和 GPU 也会影响可用 seed 与初始 SSR，所以本文统一采用 8 卡 A800。后面所有数字都只能在这个实验契约内理解。",
+      "speaker_notes": {
+        "talk_track": "先把比较边界锁定。SFT 与 RL 共用 1,000 个 RoboTwin 随机 seed，使用双臂 Piper；评估再加入 128 个未见 seed，因此 SSR 反映的是随机化场景下的泛化，而不是固定布局记忆。背景、杂乱度、光照、桌高和语言都会变化，Python、系统和 GPU 也会影响可用 seed 与初始 SSR，所以本文统一采用 8 卡 A800。后面所有数字都只能在这个实验契约内理解。",
+        "delivery_cue": "依次强调 1,000、128 和 8 卡三个契约指标；右侧快照只作为语义证据补充，不承担唯一阅读任务。",
+        "source_refs": [
+          "p1-snapshot"
+        ],
+        "estimated_seconds": 65
+      },
+      "content": {
+        "eyebrow": "实验契约",
+        "title": "先锁定实验契约，再谈 SSR 增益",
+        "subtitle": null,
+        "kicker": null,
+        "lede": "这组结果只有在训练、评估与硬件条件同时对齐时，才具备可比性。",
+        "note": {
+          "label": "证据说明",
+          "value": "1,000 个共同训练 seed；128 个未见 OOD seed；双臂 Piper；统一 8 卡 A800。领域随机化、运行环境和 GPU 仍是复现边界。"
+        },
+        "body_points": [
+          {
+            "label": "训练对齐",
+            "text": "SFT 与 RL 共用 1,000 个随机场景 seed，并采用双臂 Piper 机械臂。"
+          },
+          {
+            "label": "OOD 口径",
+            "text": "额外使用 128 个未见 seed，检验随机化场景下的外推，而不是固定布局上的记忆。"
+          },
+          {
+            "label": "复现边界",
+            "text": "领域随机化与运行环境会改变可用 seed 和初始 SSR；因此统一锁定 8 卡 A800。"
+          }
+        ],
+        "metrics": [
+          {
+            "label": "训练 seed",
+            "value": "1,000",
+            "meaning": "SFT 与 RL 的共同场景起点"
+          },
+          {
+            "label": "OOD seed",
+            "value": "128",
+            "meaning": "未参与训练的分布外评估"
+          },
+          {
+            "label": "硬件条件",
+            "value": "8× A800",
+            "meaning": "后续 SSR 比较的固定平台"
+          }
+        ],
+        "steps": [],
+        "result": null,
+        "columns": [],
+        "takeaway": {
+          "label": "实验契约",
+          "value": "后续数字只在固定 RoboTwin 配置、seed、评估口径与 A800 条件下成立。"
+        }
+      },
+      "flow_model": null,
+      "reading_order_groups": [],
+      "connector_legend": [],
+      "reading_order": [
+        "s2-title",
+        "s2-kicker",
+        "s2-evidence-figure-1"
+      ],
+      "elements": [
+        {
+          "id": "s2-title",
+          "kind": "text",
+          "role": "title",
+          "text": "先锁定实验契约，再谈 SSR 增益",
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s2-kicker",
+          "kind": "text",
+          "role": "kicker",
+          "text": "PAPER EVIDENCE",
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s2-evidence-figure-1",
+          "kind": "image",
+          "role": "evidence-figure",
+          "editable": false,
+          "render_mode": "asset",
+          "asset_ref": "p1-snapshot",
+          "source_page": 1,
+          "alt_text": "Full-page evidence snapshot from page 1",
+          "data": {
+            "path": "assets/page-001-snapshot.png",
+            "caption": "Full-page evidence snapshot from page 1",
+            "placement": "corner",
+            "fit": "cover",
+            "crop": false,
+            "table_ref": null,
+            "visual_role": "evidence"
+          }
+        }
+      ],
+      "review_flags": []
+    }
+  ]
+}

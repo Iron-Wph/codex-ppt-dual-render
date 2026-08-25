@@ -1,0 +1,177 @@
+{"kind":"deck","id":"pr/aqtmda","name":"Deck"}
+{"kind":"layout","layoutId":"d0457e0f-c77f-41a2-9306-0c4559c2a356","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"5de99dbc-53fc-43c7-88b9-8b959d8e2ff8","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/5bel2m","slide":1,"title":"01 / 09","textShapes":8}
+{"kind":"shape","id":"sh/zm1kv2x4","slide":1,"name":"slide-1-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/kna1o7y9","slide":1,"name":"slide-1-page","text":"01 / 09","textPreview":"01 / 09","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/loj2xsfu","slide":1,"name":"s1-eyebrow","text":"RoboTwin 实验解读","textPreview":"RoboTwin 实验解读","textChars":13,"textLines":1,"bbox":[72,78,560,24]}
+{"kind":"textbox","id":"sh/ax8jidg7","slide":1,"name":"s1-title","text":"RLinf 的增益成立，但归因受实验契约约束","textPreview":"RLinf 的增益成立，但归因受实验契约约束","textChars":22,"textLines":1,"bbox":[72,154,620,268]}
+{"kind":"textbox","id":"sh/bihkrixs","slide":1,"name":"s1-subtitle","text":"性能、效率与归因边界必须一起判断","textPreview":"性能、效率与归因边界必须一起判断","textChars":16,"textLines":1,"bbox":[72,438,590,72]}
+{"kind":"shape","id":"sh/cja1knyd","slide":1,"name":"s1-title-visual-plate","bbox":[738,152,420,390]}
+{"kind":"textbox","id":"sh/xkj2tsfy","slide":1,"name":"s1-title-visual-plate-label","text":"PAPER / ARGUMENT MAP","textPreview":"PAPER / ARGUMENT MAP","textChars":20,"textLines":1,"bbox":[762,172,372,18]}
+{"kind":"shape","id":"sh/utc3uhgr","slide":1,"name":"s1-title-visual-manuscript-line-1","bbox":[778,244,302.4,0]}
+{"kind":"shape","id":"sh/velk3mxc","slide":1,"name":"s1-title-visual-manuscript-line-2","bbox":[778,292,243.6,0]}
+{"kind":"shape","id":"sh/feh4jud4","slide":1,"name":"s1-title-visual-manuscript-line-3","bbox":[778,340,243.6,0]}
+{"kind":"shape","id":"sh/ed8nqpcj","slide":1,"name":"s1-title-visual-manuscript-line-4","bbox":[778,388,243.6,0]}
+{"kind":"shape","id":"sh/10zml4va","slide":1,"name":"s1-title-visual-manuscript-line-5","bbox":[778,436,193.2,0]}
+{"kind":"shape","id":"sh/gfq5szup","slide":1,"name":"s1-title-visual-annotation","bbox":[1023.6,238,75.6,163.8]}
+{"kind":"textbox","id":"sh/3214nedg","slide":1,"name":"s1-title-visual-annotation-label","text":"CLAIM\n→\nEVIDENCE","textPreview":"CLAIM | → | EVIDENCE","textChars":16,"textLines":3,"bbox":[1027.8,270,67.2,90]}
+{"kind":"shape","id":"sh/218nu9cv","slide":1,"name":"s1-note-bg","bbox":[72,568,720,66]}
+{"kind":"textbox","id":"sh/p4j6p4v6","slide":1,"name":"s1-note-label","text":"判断框架","textPreview":"判断框架","textChars":4,"textLines":1,"bbox":[94,584,170,18]}
+{"kind":"textbox","id":"sh/o3a5wju1","slide":1,"name":"s1-note-value","text":"性能提升 ≠ RL 单独贡献","textPreview":"性能提升 ≠ RL 单独贡献","textChars":14,"textLines":1,"bbox":[270,580,490,28]}
+{"kind":"notes","id":"nt/5bel2m","slide":1,"text":"我们通常先看最终 SSR，但这组实验真正需要回答的是：增益来自 RL 信号本身，还是来自一整套训练系统？今天沿着三个问题展开：train SSR 是否跨任务提升，运行是否具有效率，以及哪些实验条件限制归因。先把实验契约锁定，再看训练机制、结果和系统成本，最后给出可复现、但不越界的结论。\n讲述提示：先读出标题中的“增益成立”和“归因受约束”，随后明确三个判断维度。"}
+{"kind":"slide","id":"sl/36u9zi","slide":2,"title":"02 / 09","textShapes":15}
+{"kind":"shape","id":"sh/srexwv6t","slide":2,"name":"slide-2-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/rq5w3qp8","slide":2,"name":"slide-2-page","text":"02 / 09","textPreview":"02 / 09","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/qpwfulon","slide":2,"name":"s2-kicker","text":"实验契约","textPreview":"实验契约","textChars":4,"textLines":1,"bbox":[72,76,420,22]}
+{"kind":"textbox","id":"sh/1g7e907a","slide":2,"name":"s2-title","text":"先锁定实验契约，再谈 train SSR","textPreview":"先锁定实验契约，再谈 train SSR","textChars":20,"textLines":1,"bbox":[72,114,596,104]}
+{"kind":"textbox","id":"sh/0fyx0v6p","slide":2,"name":"s2-lede","text":"128 个 OOD seed 是评估契约；当前主结果报告的是 train SSR，不是 OOD SSR。","textPreview":"128 个 OOD seed 是评估契约；当前主结果报告的是 train SSR，不是 OOD SSR。","textChars":52,"textLines":1,"bbox":[72,228,590,54]}
+{"kind":"shape","id":"sh/fupw7qp4","slide":2,"name":"s2-contract-metric-1","bbox":[72,314,190.67,196]}
+{"kind":"shape","id":"sh/etwfyloz","slide":2,"name":"s2-contract-rule-1","bbox":[72,314,190.67,4]}
+{"kind":"textbox","id":"sh/hk3exg76","slide":2,"name":"s2-contract-label-1","text":"训练 seed","textPreview":"训练 seed","textChars":7,"textLines":1,"bbox":[90,338,154.67,18]}
+{"kind":"textbox","id":"sh/gjudob6l","slide":2,"name":"s2-contract-value-1","text":"1,000","textPreview":"1,000","textChars":5,"textLines":1,"bbox":[90,376,154.67,54]}
+{"kind":"textbox","id":"sh/yxkjm9wn","slide":2,"name":"s2-contract-meaning-1","text":"SFT 与 RL 的共同场景起点","textPreview":"SFT 与 RL 的共同场景起点","textChars":16,"textLines":1,"bbox":[90,448,154.67,46]}
+{"kind":"shape","id":"sh/zitkfex8","slide":2,"name":"s2-contract-metric-2","bbox":[274.67,314,190.67,196]}
+{"kind":"shape","id":"sh/0j21ojed","slide":2,"name":"s2-contract-rule-2","bbox":[274.67,314,190.67,4]}
+{"kind":"textbox","id":"sh/lkv2hofy","slide":2,"name":"s2-contract-label-2","text":"OOD 评估 seed","textPreview":"OOD 评估 seed","textChars":11,"textLines":1,"bbox":[292.67,338,154.67,18]}
+{"kind":"textbox","id":"sh/ml4jqtwj","slide":2,"name":"s2-contract-value-2","text":"128","textPreview":"128","textChars":3,"textLines":1,"bbox":[292.67,376,154.67,54]}
+{"kind":"textbox","id":"sh/nmdkjyx4","slide":2,"name":"s2-contract-meaning-2","text":"评估契约，不等于已报告的 OOD SSR 结果","textPreview":"评估契约，不等于已报告的 OOD SSR 结果","textChars":23,"textLines":1,"bbox":[292.67,448,154.67,46]}
+{"kind":"shape","id":"sh/8nm1s3ep","slide":2,"name":"s2-contract-metric-3","bbox":[477.33,314,190.67,196]}
+{"kind":"shape","id":"sh/9ov2l8fa","slide":2,"name":"s2-contract-rule-3","bbox":[477.33,314,190.67,4]}
+{"kind":"textbox","id":"sh/ap4jutwv","slide":2,"name":"s2-contract-label-3","text":"硬件条件","textPreview":"硬件条件","textChars":4,"textLines":1,"bbox":[495.33,338,154.67,18]}
+{"kind":"textbox","id":"sh/vqdknyd0","slide":2,"name":"s2-contract-value-3","text":"8× A800","textPreview":"8× A800","textChars":7,"textLines":1,"bbox":[495.33,376,154.67,54]}
+{"kind":"textbox","id":"sh/7ux0byt8","slide":2,"name":"s2-contract-meaning-3","text":"后续 train SSR 比较的固定平台","textPreview":"后续 train SSR 比较的固定平台","textChars":20,"textLines":1,"bbox":[495.33,448,154.67,46]}
+{"kind":"shape","id":"sh/6toj2dcn","slide":2,"name":"s2-contract-image-frame","bbox":[704,110,496,400]}
+{"kind":"shape","id":"sh/sv6143ut","slide":2,"name":"s2-contract-takeaway-rule","bbox":[72,566,1128,0]}
+{"kind":"textbox","id":"sh/jqd07ytc","slide":2,"name":"s2-contract-takeaway-label","text":"实验契约","textPreview":"实验契约","textChars":4,"textLines":1,"bbox":[72,592,190,18]}
+{"kind":"textbox","id":"sh/ip4jytcr","slide":2,"name":"s2-contract-takeaway","text":"后续主结果统一标注为 train SSR；128 个 OOD seed 不承担性能结果含义。","textPreview":"后续主结果统一标注为 train SSR；128 个 OOD seed 不承担性能结果含义。","textChars":46,"textLines":1,"bbox":[276,584,900,40]}
+{"kind":"image","id":"im/25o3m54n","slide":2,"name":"","alt":"论文第 1 页来源核验（p1-snapshot）：用于核对“先锁定实验契约，再谈 train SSR”的原始论文表格。","bbox":[720,126,464,368]}
+{"kind":"notes","id":"nt/36u9zi","slide":2,"text":"先把比较边界锁定。SFT 与 RL 共用 1,000 个 RoboTwin 随机 seed，使用双臂 Piper；评估再加入 128 个未见 seed。这里必须区分协议与结果：128 个 OOD seed 定义了评估契约，但当前主结果表呈现的是 train SSR，并没有提供 OOD SSR 数字。背景、杂乱度、光照、桌高和语言都会变化，运行环境与 GPU 也会影响复现，所以后面的结果只在固定契约内解释。\n讲述提示：依次强调 1,000、128 和 8 卡三个契约指标，并明确 OOD seed 不是 OOD SSR 结果。\n[Sources] p1-snapshot"}
+{"kind":"slide","id":"sl/4n3wfr","slide":3,"title":"03 / 09","textShapes":20}
+{"kind":"shape","id":"sh/61wze9wr","slide":3,"name":"slide-3-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/t47yp4fi","slide":3,"name":"slide-3-page","text":"03 / 09","textPreview":"03 / 09","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/s3ehgzex","slide":3,"name":"s3-kicker","text":"THE PIPELINE","textPreview":"THE PIPELINE","textChars":12,"textLines":1,"bbox":[72,76,420,22]}
+{"kind":"textbox","id":"sh/f6pgrex8","slide":3,"name":"s3-title","text":"RLinf 的训练信号来自一条完整链路","textPreview":"RLinf 的训练信号来自一条完整链路","textChars":19,"textLines":1,"bbox":[72,112,1080,106]}
+{"kind":"shape","id":"sh/u5gzi9w3","slide":3,"name":"s3-flow-axis","bbox":[96,382,1088,0]}
+{"kind":"textbox","id":"sh/hs7itofe","slide":3,"name":"s3-flow-1-metric","text":"128 × 8 = 1024","textPreview":"128 × 8 = 1024","textChars":14,"textLines":1,"bbox":[72,252,212.8,18]}
+{"kind":"textbox","id":"sh/g7yhkjet","slide":3,"name":"s3-flow-1-title","text":"Rollout 采样","textPreview":"Rollout 采样","textChars":10,"textLines":1,"bbox":[72,296,204.8,68]}
+{"kind":"shape","id":"sh/3up0vyxk","slide":3,"name":"s3-flow-1-dot","bbox":[74,372,20,20]}
+{"kind":"textbox","id":"sh/2tgzmtwz","slide":3,"name":"s3-flow-1-body","text":"并行生成一轮轨迹。","textPreview":"并行生成一轮轨迹。","textChars":9,"textLines":1,"bbox":[72,424,204.8,86]}
+{"kind":"textbox","id":"sh/gfit0vap","slide":3,"name":"s3-flow-2-metric","text":"group size = 8","textPreview":"group size = 8","textChars":14,"textLines":1,"bbox":[302.8,252,212.8,18]}
+{"kind":"textbox","id":"sh/hgrat0ra","slide":3,"name":"s3-flow-2-title","text":"Group 组织","textPreview":"Group 组织","textChars":8,"textLines":1,"bbox":[302.8,296,204.8,68]}
+{"kind":"shape","id":"sh/udgrylsj","slide":3,"name":"s3-flow-2-dot","bbox":[304.8,372,20,20]}
+{"kind":"textbox","id":"sh/vepsrq94","slide":3,"name":"s3-flow-2-body","text":"按 group size 8 形成比较单元。","textPreview":"按 group size 8 形成比较单元。","textChars":22,"textLines":1,"bbox":[302.8,424,204.8,86]}
+{"kind":"textbox","id":"sh/4jit4va1","slide":3,"name":"s3-flow-3-metric","text":"reward_type = action_level","textPreview":"reward_type = action_level","textChars":26,"textLines":1,"bbox":[533.6,252,212.8,18]}
+{"kind":"textbox","id":"sh/5krax0r6","slide":3,"name":"s3-flow-3-title","text":"Action-level reward","textPreview":"Action-level reward","textChars":19,"textLines":1,"bbox":[533.6,296,204.8,68]}
+{"kind":"shape","id":"sh/ih0b25sv","slide":3,"name":"s3-flow-3-dot","bbox":[535.6,372,20,20]}
+{"kind":"textbox","id":"sh/3i9sva9g","slide":3,"name":"s3-flow-3-body","text":"把任务反馈落到动作粒度。","textPreview":"把任务反馈落到动作粒度。","textChars":12,"textLines":1,"bbox":[533.6,424,204.8,86]}
+{"kind":"textbox","id":"sh/s72t8fax","slide":3,"name":"s3-flow-4-metric","text":"adv_type = grpo","textPreview":"adv_type = grpo","textChars":15,"textLines":1,"bbox":[764.4,252,212.8,18]}
+{"kind":"textbox","id":"sh/d8ba1kri","slide":3,"name":"s3-flow-4-title","text":"GRPO 优势估计","textPreview":"GRPO 优势估计","textChars":9,"textLines":1,"bbox":[764.4,296,204.8,68]}
+{"kind":"shape","id":"sh/147alkjm","slide":3,"name":"s3-flow-4-dot","bbox":[766.4,372,20,20]}
+{"kind":"textbox","id":"sh/03y9sf21","slide":3,"name":"s3-flow-4-body","text":"计算用于 actor 更新的优势信号。","textPreview":"计算用于 actor 更新的优势信号。","textChars":19,"textLines":1,"bbox":[764.4,424,204.8,86]}
+{"kind":"textbox","id":"sh/z2psja1g","slide":3,"name":"s3-flow-5-metric","text":"is_lora = true · lr = 2.0e-4","textPreview":"is_lora = true · lr = 2.0e-4","textChars":28,"textLines":1,"bbox":[995.2,252,212.8,18]}
+{"kind":"textbox","id":"sh/e1grq5kv","slide":3,"name":"s3-flow-5-title","text":"LoRA 更新","textPreview":"LoRA 更新","textChars":7,"textLines":1,"bbox":[995.2,296,204.8,68]}
+{"kind":"shape","id":"sh/9s7apkji","slide":3,"name":"s3-flow-5-dot","bbox":[997.2,372,20,20]}
+{"kind":"textbox","id":"sh/orytwf2d","slide":3,"name":"s3-flow-5-body","text":"在参数高效更新范围内优化策略。","textPreview":"在参数高效更新范围内优化策略。","textChars":15,"textLines":1,"bbox":[995.2,424,204.8,86]}
+{"kind":"shape","id":"sh/n6psna1s","slide":3,"name":"s3-flow-result-rule","bbox":[72,562,1136,0]}
+{"kind":"textbox","id":"sh/m5gbu5k7","slide":3,"name":"s3-flow-result-label","text":"训练配方的含义","textPreview":"训练配方的含义","textChars":7,"textLines":1,"bbox":[72,588,170,18]}
+{"kind":"textbox","id":"sh/pwnad0je","slide":3,"name":"s3-flow-result","text":"性能归因应落在 rollout、reward、优化与参数更新的完整路径上","textPreview":"性能归因应落在 rollout、reward、优化与参数更新的完整路径上","textChars":36,"textLines":1,"bbox":[252,580,920,42]}
+{"kind":"notes","id":"nt/4n3wfr","slide":3,"text":"实验契约说明评价什么，这一页补上 RLinf 如何学习。一次更新先按 128×8 组织出 1,024 条 rollout，并以 group size 8 形成比较单元；奖励落在 action level，logprob 与 entropy 保持 token level，再用 GRPO 计算优势并更新 actor。最后通过 LoRA 和 2.0e-4 学习率限定更新方式。配置说明的是完整训练配方，下一页继续核对它与 SimpleVLA 的差异。\n讲述提示：沿五个节点从左到右阅读，最后停在 LoRA 更新。\n[Sources] p4-snapshot"}
+{"kind":"slide","id":"sl/4q6plu","slide":4,"title":"04 / 09","textShapes":7}
+{"kind":"shape","id":"sh/orylg32l","slide":4,"name":"slide-4-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/nqp4ny10","slide":4,"name":"slide-4-page","text":"04 / 09","textPreview":"04 / 09","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/2pg3etkf","slide":4,"name":"s4-kicker","text":"PAPER EVIDENCE","textPreview":"PAPER EVIDENCE","textChars":14,"textLines":1,"bbox":[72,76,360,22]}
+{"kind":"textbox","id":"sh/xgrmt8j2","slide":4,"name":"s4-title","text":"共享基础，但不是同构训练","textPreview":"共享基础，但不是同构训练","textChars":12,"textLines":1,"bbox":[72,114,800,86]}
+{"kind":"textbox","id":"sh/bup4ry1w","slide":4,"name":"s4-caption","text":"这是完整训练系统的实际比较，不是单一算法组件的因果消融。","textPreview":"这是完整训练系统的实际比较，不是单一算法组件的因果消融。","textChars":28,"textLines":1,"bbox":[92,210,760,16]}
+{"kind":"shape","id":"sh/atgnidkr","slide":4,"name":"s4-source-frame","bbox":[900,88,300,112]}
+{"kind":"textbox","id":"sh/lkrmxsje","slide":4,"name":"s4-source-label","text":"SOURCE CROP","textPreview":"SOURCE CROP","textChars":11,"textLines":1,"bbox":[914,98,110,16]}
+{"kind":"shape","id":"sh/25cfitgb","slide":4,"name":"s4-data-takeaway-rule","bbox":[92,608,1040,0]}
+{"kind":"textbox","id":"sh/365wrexw","slide":4,"name":"s4-data-takeaway-label","text":"页面结论","textPreview":"页面结论","textChars":4,"textLines":1,"bbox":[92,626,150,16]}
+{"kind":"textbox","id":"sh/o7exkjyh","slide":4,"name":"s4-data-takeaway","text":"共享基础不等于同构训练，后续结果按系统级差异解读。","textPreview":"共享基础不等于同构训练，后续结果按系统级差异解读。","textChars":25,"textLines":1,"bbox":[254,620,878,30]}
+{"kind":"table","id":"tb/54ve10z2","slide":4,"name":"","rows":6,"cols":2,"preview":"RLinf | SimpleVLA","bbox":[92,236,1040,350]}
+{"kind":"image","id":"im/1cfapgji","slide":4,"name":"","alt":"论文第 4 页来源核验（p4-table-2）：用于核对 RLinf 与 SimpleVLA 的 rollout batch、learning rate 和 LoRA 差异。","bbox":[912,116,276,72]}
+{"kind":"notes","id":"nt/4q6plu","slide":4,"text":"这里把公平比较拆成可检查的变量。两套实现共享 SFT 模型、train/eval seeds、模型实现和 GRPO，因此有共同起点；但 RLinf 与 SimpleVLA 在精度、rollout batch、学习率和 LoRA 上不同。valid trajectory 的收集时机和 reward 粒度也不同，会改变每次更新接收到的学习信号。因此后面的结果可以作为系统级比较，但不能单独归因于某一个算法组件。\n讲述提示：先读共同基础，再按表格行读取差异，最后明确系统级解释边界。\n[Sources] p4-table-1-crop · p5-table-1-crop"}
+{"kind":"slide","id":"sl/ubj377","slide":5,"title":"05 / 09","textShapes":7}
+{"kind":"shape","id":"sh/kbe18rix","slide":5,"name":"slide-5-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/za5kfmhc","slide":5,"name":"slide-5-page","text":"05 / 09","textPreview":"05 / 09","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/y9wjmh0r","slide":5,"name":"s5-kicker","text":"RESULT FOCUS","textPreview":"RESULT FOCUS","textChars":12,"textLines":1,"bbox":[72,76,420,22]}
+{"kind":"textbox","id":"sh/x8n2dczm","slide":5,"name":"s5-title","text":"8/8 任务提升，平均 train SSR 显著上升","textPreview":"8/8 任务提升，平均 train SSR 显著上升","textChars":26,"textLines":1,"bbox":[72,112,820,106]}
+{"kind":"shape","id":"sh/c7e1k7i1","slide":5,"name":"s5-chart-bg","bbox":[72,240,732,330]}
+{"kind":"textbox","id":"sh/b650bmhg","slide":5,"name":"s5-chart-axis-label","text":"train SSR (%)","textPreview":"train SSR (%)","textChars":13,"textLines":1,"bbox":[110,254,300,16]}
+{"kind":"shape","id":"sh/h4r2pgzq","slide":5,"name":"s5-callout-bg","bbox":[830,240,370,330]}
+{"kind":"textbox","id":"sh/w3y1gbi5","slide":5,"name":"s5-callout-label","text":"核心结果","textPreview":"核心结果","textChars":4,"textLines":1,"bbox":[858,270,300,18]}
+{"kind":"textbox","id":"sh/uls7a1sb","slide":5,"name":"s5-callout-value","text":"8/8 任务提升\ntrain SSR 24.48%→84.63%\n+60.15 个百分点","textPreview":"8/8 任务提升 | train SSR 24.48%→84.63% | +60.15 个百分点","textChars":44,"textLines":3,"bbox":[858,320,312,140]}
+{"kind":"textbox","id":"sh/fm18369w","slide":5,"name":"s5-callout-detail","text":"任务级结果显示，RLinf 的 RL train SSR 增益不是单个任务的偶然现象；该页不报告 OOD SSR。","textPreview":"任务级结果显示，RLinf 的 RL train SSR 增益不是单个任务的偶然现象；该页不报告 OOD SSR。","textChars":57,"textLines":1,"bbox":[858,464,312,46]}
+{"kind":"chart","id":"ch/epwn6dk7","slide":5,"name":"","chartType":"bar","bbox":[96,278,686,260]}
+{"kind":"image","id":"im/rexgze5o","slide":5,"name":"","alt":"论文第 5 页来源核验（p5-table-1）：用于核对 8 个任务的 RLinf SFT→RL train SSR、提升幅度与训练步数。","bbox":[858,522,312,40]}
+{"kind":"notes","id":"nt/ubj377","slide":5,"text":"在可比性边界明确后，先看 RLinf 自身是否稳定地产生 train SSR 收益。8 个 RoboTwin 任务里，RLinf RL 的 train SSR 全部高于 SFT，平均从 24.48% 升到 84.63%，提升 60.15 个百分点。任务级结果还显示，增益幅度从 18.75 到 85.94 不等，训练步数从 30 到 240。这里证明的是 train SSR 上的跨任务训练收益，不是 OOD SSR 泛化，下一页再比较两套系统。\n讲述提示：先强调 train SSR、24.48%→84.63% 和 8/8，再指向任务级差异与训练步数。\n[Sources] p5-table-1 · p6-table-1"}
+{"kind":"slide","id":"sl/uibqm4","slide":6,"title":"06 / 09","textShapes":13}
+{"kind":"shape","id":"sh/knuh8r21","slide":6,"name":"slide-6-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/jmlgzmlg","slide":6,"name":"slide-6-page","text":"06 / 09","textPreview":"06 / 09","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/ilcz6hkv","slide":6,"name":"s6-kicker","text":"RLinf 的 train SSR 增益是否超过 SimpleVLA？","textPreview":"RLinf 的 train SSR 增益是否超过 SimpleVLA？","textChars":35,"textLines":1,"bbox":[72,62,1000,22]}
+{"kind":"textbox","id":"sh/xkjyxc3a","slide":6,"name":"s6-title","text":"RLinf 的平均 train SSR 增幅高于 SimpleVLA","textPreview":"RLinf 的平均 train SSR 增幅高于 SimpleVLA","textChars":34,"textLines":1,"bbox":[72,102,1080,112]}
+{"kind":"shape","id":"sh/wjah472p","slide":6,"name":"s6-argument-1-rule","bbox":[72,244,642,4]}
+{"kind":"textbox","id":"sh/bi1gv2l4","slide":6,"name":"s6-argument-1-label","text":"RLinf","textPreview":"RLinf","textChars":5,"textLines":1,"bbox":[72,270,642,20]}
+{"kind":"textbox","id":"sh/ahsz2hkj","slide":6,"name":"s6-argument-1-headline","text":"train SSR 24.48% → 84.63%","textPreview":"train SSR 24.48% → 84.63%","textChars":25,"textLines":1,"bbox":[72,314,622,94]}
+{"kind":"textbox","id":"sh/9gjytc3y","slide":6,"name":"s6-argument-1-point-1","text":"→ 平均提升 +60.15 个百分点","textPreview":"→ 平均提升 +60.15 个百分点","textChars":18,"textLines":1,"bbox":[72,424,618,46]}
+{"kind":"textbox","id":"sh/ofah072t","slide":6,"name":"s6-argument-1-point-2","text":"→ 完整训练系统的平均变化更大","textPreview":"→ 完整训练系统的平均变化更大","textChars":15,"textLines":1,"bbox":[72,478,618,46]}
+{"kind":"shape","id":"sh/it0na5kv","slide":6,"name":"s6-argument-2-rule","bbox":[734,244,474,4]}
+{"kind":"textbox","id":"sh/ju9o3alg","slide":6,"name":"s6-argument-2-label","text":"SimpleVLA","textPreview":"SimpleVLA","textChars":9,"textLines":1,"bbox":[734,270,474,20]}
+{"kind":"textbox","id":"sh/4vi5cv21","slide":6,"name":"s6-argument-2-headline","text":"train SSR 34.40% → 72.18%","textPreview":"train SSR 34.40% → 72.18%","textChars":25,"textLines":1,"bbox":[734,314,454,94]}
+{"kind":"textbox","id":"sh/5wr6503m","slide":6,"name":"s6-argument-2-point-1","text":"→ 平均提升 +37.78 个百分点","textPreview":"→ 平均提升 +37.78 个百分点","textChars":18,"textLines":1,"bbox":[734,424,450,46]}
+{"kind":"textbox","id":"sh/u50n6lkz","slide":6,"name":"s6-argument-2-point-2","text":"→ 作为完整系统对照，而非单变量基线","textPreview":"→ 作为完整系统对照，而非单变量基线","textChars":18,"textLines":1,"bbox":[734,478,450,46]}
+{"kind":"shape","id":"sh/v694zqlk","slide":6,"name":"s6-argument-divider","bbox":[708,244,1,334]}
+{"kind":"textbox","id":"sh/wri58v25","slide":6,"name":"s6-implication-label","text":"一句话判断","textPreview":"一句话判断","textChars":5,"textLines":1,"bbox":[72,606,180,18]}
+{"kind":"textbox","id":"sh/hsr6103q","slide":6,"name":"s6-implication","text":"RLinf 的平均 train SSR 增幅更大，但证据指向系统级效果，不是 OOD SSR 或独立算法贡献。","textPreview":"RLinf 的平均 train SSR 增幅更大，但证据指向系统级效果，不是 OOD SSR 或独立算法贡献。","textChars":55,"textLines":1,"bbox":[268,598,900,32]}
+{"kind":"notes","id":"nt/uibqm4","slide":6,"text":"把两套系统的 SFT→RL 平均 train SSR 变化放在同一张表里。RLinf 从 24.48% 提升到 84.63%，增加 60.15 个百分点；SimpleVLA 从 34.40% 提升到 72.18%，增加 37.78 个百分点，所以 RLinf 的完整训练系统平均增幅更大。但这一页不是 OOD SSR 结果，也不构成单因素消融：精度、学习率、LoRA、轨迹收集和 reward 设计都不同。下一页检查敏感性。\n讲述提示：先读两组 train SSR 平均值和增幅，再明确“系统级比较”而非“纯算法因果”。\n[Sources] p6-table-1"}
+{"kind":"slide","id":"sl/lwdau4","slide":7,"title":"07 / 09","textShapes":12}
+{"kind":"shape","id":"sh/b6pkju1w","slide":7,"name":"slide-7-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/c7ylsfih","slide":7,"name":"slide-7-page","text":"07 / 09","textPreview":"07 / 09","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/x872lkj2","slide":7,"name":"s7-answer-kicker","text":"THE ANSWER","textPreview":"THE ANSWER","textChars":10,"textLines":1,"bbox":[72,72,240,20]}
+{"kind":"textbox","id":"sh/2hw3m50f","slide":7,"name":"s7-answer-title","text":"初始化与评估温度会改变单点 SSR","textPreview":"初始化与评估温度会改变单点 SSR","textChars":17,"textLines":1,"bbox":[72,128,680,116]}
+{"kind":"textbox","id":"sh/ni5kfa1k","slide":7,"name":"s7-answer-claim","text":"在 place_empty_cup 上，pi0 与 pi05 的 SFT 基线不同，OFT 在 Temp_eval=-1 与 1.6 下的 PPO/GRPO 结果也不同；部分温度结果未重跑，且 RL 结果统一取 50 step。","textPreview":"在 place_empty_cup 上，pi0 与 pi05 的 SFT 基线不同，OFT 在 Temp_eval=-1 与 1.6 下的 PPO/GRPO 结果也不同；部分温度结果未重跑，且 RL 结果统一取 50 step。","textChars":114,"textLines":1,"bbox":[72,254,660,54]}
+{"kind":"textbox","id":"sh/pkn2hkjq","slide":7,"name":"s7-answer-point-1-label","text":"起点不同","textPreview":"起点不同","textChars":4,"textLines":1,"bbox":[790,142,170,18]}
+{"kind":"textbox","id":"sh/md03y90j","slide":7,"name":"s7-answer-point-1","text":"pi0 的 SFT 为 45.31%，pi05 为 85.16%；RL 增益不能脱离初始模型比较。","textPreview":"pi0 的 SFT 为 45.31%，pi05 为 85.16%；RL 增益不能脱离初始模型比较。","textChars":49,"textLines":1,"bbox":[790,176,390,70]}
+{"kind":"shape","id":"sh/7e94re14","slide":7,"name":"s7-answer-point-1-rule","bbox":[790,256,390,0]}
+{"kind":"textbox","id":"sh/by183u5g","slide":7,"name":"s7-answer-point-2-label","text":"温度改变结果","textPreview":"温度改变结果","textChars":6,"textLines":1,"bbox":[790,268,170,18]}
+{"kind":"textbox","id":"sh/ax87ap4v","slide":7,"name":"s7-answer-point-2","text":"OFT 的 PPO/GRPO 在 Temp_eval=-1 与 1.6 下呈现不同 SSR。","textPreview":"OFT 的 PPO/GRPO 在 Temp_eval=-1 与 1.6 下呈现不同 SSR。","textChars":46,"textLines":1,"bbox":[790,302,390,70]}
+{"kind":"shape","id":"sh/x0jq54nm","slide":7,"name":"s7-answer-point-2-rule","bbox":[790,382,390,0]}
+{"kind":"textbox","id":"sh/wzapczm1","slide":7,"name":"s7-answer-point-3-label","text":"口径需固定","textPreview":"口径需固定","textChars":5,"textLines":1,"bbox":[790,394,170,18]}
+{"kind":"textbox","id":"sh/j2187e5s","slide":7,"name":"s7-answer-point-3","text":"相关温度结果部分未重跑，且 RL 结果统一取 50 step。","textPreview":"相关温度结果部分未重跑，且 RL 结果统一取 50 step。","textChars":31,"textLines":1,"bbox":[790,428,390,70]}
+{"kind":"shape","id":"sh/y1s7e947","slide":7,"name":"s7-boundary-rule","bbox":[72,562,1136,0]}
+{"kind":"textbox","id":"sh/l4jq9oni","slide":7,"name":"s7-boundary-label","text":"因此","textPreview":"因此","textChars":2,"textLines":1,"bbox":[72,590,160,18]}
+{"kind":"textbox","id":"sh/k3a9gjmd","slide":7,"name":"s7-boundary","text":"跨任务 train SSR 结果优先于单任务单温度结果，且当前不替代 OOD SSR 证据。","textPreview":"跨任务 train SSR 结果优先于单任务单温度结果，且当前不替代 OOD SSR 证据。","textChars":46,"textLines":1,"bbox":[250,578,930,46]}
+{"kind":"table","id":"tb/dc7yto7u","slide":7,"name":"","rows":5,"cols":4,"preview":"Model | SFT | PPO | GRPO","bbox":[72,326,660,194]}
+{"kind":"notes","id":"nt/lwdau4","slide":7,"text":"平均 train SSR 增益成立后，还要看单任务结果是否依赖评估协议。place_empty_cup 中，pi0 与 pi05 的 SFT 起点不同；OFT 在 Temp_eval=-1 与 1.6 下的 PPO、GRPO 结果也不同，部分温度结果没有重跑，RL 统一取 50 step。因此这些数字适合作为敏感性证据，而不是方法独立能力。它们也不能替代 OOD SSR 结果。复现时应同时报告初始化、评估温度、训练步数和重跑状态，随后转向系统成本。\n讲述提示：先读两组不同 SFT 基线，再指向温度变化，最后强调单点结果边界。\n[Sources] p1-table-1-crop · p1-table-2-crop"}
+{"kind":"slide","id":"sl/5aws8r","slide":8,"title":"08 / 09","textShapes":7}
+{"kind":"shape","id":"sh/kb69grul","slide":8,"name":"slide-8-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/zad87md0","slide":8,"name":"slide-8-page","text":"08 / 09","textPreview":"08 / 09","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/y94rehcv","slide":8,"name":"s8-kicker","text":"PAPER EVIDENCE","textPreview":"PAPER EVIDENCE","textChars":14,"textLines":1,"bbox":[72,76,360,22]}
+{"kind":"textbox","id":"sh/x8vq5cva","slide":8,"name":"s8-title","text":"8 卡条件下，colocated 更有竞争力","textPreview":"8 卡条件下，colocated 更有竞争力","textChars":22,"textLines":1,"bbox":[72,114,800,86]}
+{"kind":"textbox","id":"sh/b6d832d4","slide":8,"name":"s8-caption","text":"Paper table region on page 6","textPreview":"Paper table region on page 6","textChars":28,"textLines":1,"bbox":[92,210,760,16]}
+{"kind":"shape","id":"sh/a547axcj","slide":8,"name":"s8-source-frame","bbox":[900,88,300,112]}
+{"kind":"textbox","id":"sh/h4zqhgve","slide":8,"name":"s8-source-label","text":"SOURCE CROP","textPreview":"SOURCE CROP","textChars":11,"textLines":1,"bbox":[914,98,110,16]}
+{"kind":"shape","id":"sh/mlk7ipcj","slide":8,"name":"s8-data-takeaway-rule","bbox":[92,608,1040,0]}
+{"kind":"textbox","id":"sh/7mtorat4","slide":8,"name":"s8-data-takeaway-label","text":"选型结论","textPreview":"选型结论","textChars":4,"textLines":1,"bbox":[92,626,150,16]}
+{"kind":"textbox","id":"sh/8n2pkfu9","slide":8,"name":"s8-data-takeaway","text":"在当前 8 卡条件下，colocated 的 actor/rollout 更有竞争力；其他模式应按同一口径逐项比较。","textPreview":"在当前 8 卡条件下，colocated 的 actor/rollout 更有竞争力；其他模式应按同一口径逐项比较。","textChars":58,"textLines":1,"bbox":[254,620,878,30]}
+{"kind":"table","id":"tb/1gvu5onm","slide":8,"name":"","rows":6,"cols":3,"preview":"8卡​ | actor（s）​ | rollout（s）​","bbox":[92,236,1040,350]}
+{"kind":"image","id":"im/h0zm9oji","slide":8,"name":"","alt":"论文第 6 页来源核验（p6-table-2）：用于核对 8 卡并行模式的 actor 与 rollout 时间。","bbox":[912,116,276,72]}
+{"kind":"notes","id":"nt/5aws8r","slide":8,"text":"这一页只回答当前 8 卡条件下应该优先考察哪种并行模式。RLinf colocated 的 actor/rollout 为 49.15/170.34 秒，低于 SimpleVLA 的 94.05/189.33 秒；同为 8 卡，disaggregated 的 rollout 达到 546.64 秒，两个 Hybrid 配置也高于 colocated。因而这里支持的是明确配置下的选型判断，不外推到不同节点规模；进入结论页后，再把效率证据与性能增益、归因边界合并起来。\n讲述提示：先比较 colocated 与 SimpleVLA，再指出其他 8 卡模式的成本，最后限定结论范围。\n[Sources] p6-table-2 · p6-table-2-crop"}
+{"kind":"slide","id":"sl/7bq6xk","slide":9,"title":"09 / 09","textShapes":12}
+{"kind":"shape","id":"sh/bm9kbytw","slide":9,"name":"slide-9-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/cnilk3ah","slide":9,"name":"slide-9-page","text":"09 / 09","textPreview":"09 / 09","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/xor2d8bm","slide":9,"name":"s9-answer-kicker","text":"THE ANSWER","textPreview":"THE ANSWER","textChars":10,"textLines":1,"bbox":[72,72,240,20]}
+{"kind":"textbox","id":"sh/2hgjetsz","slide":9,"name":"s9-answer-title","text":"可信的是受控 train SSR 增益，纯算法优越性尚未证实","textPreview":"可信的是受控 train SSR 增益，纯算法优越性尚未证实","textChars":30,"textLines":1,"bbox":[72,128,680,190]}
+{"kind":"textbox","id":"sh/ni9k7ytk","slide":9,"name":"s9-answer-claim","text":"在固定 RoboTwin seed、OOD 评估契约和 8 卡 A800 条件下，RLinf 的 RL 训练在 8 个任务上将平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下表现出有竞争力的 actor/rollout 时间；128 个 OOD seed 不是 OOD SSR 结果，当前证据未提供 OOD SSR。","textPreview":"在固定 RoboTwin seed、OOD 评估契约和 8 卡 A800 条件下，RLinf 的 RL 训练在 8 个任务上将平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下表现出有竞争力的 actor/rollout 时间...","textChars":183,"textLines":1,"bbox":[72,344,660,112]}
+{"kind":"textbox","id":"sh/oji1gja5","slide":9,"name":"s9-answer-point-1-label","text":"答案：train SSR 成立","textPreview":"答案：train SSR 成立","textChars":15,"textLines":1,"bbox":[790,142,170,18]}
+{"kind":"textbox","id":"sh/pkr29obq","slide":9,"name":"s9-answer-point-1","text":"8 个任务平均 train SSR：RLinf RL 84.63%，由 SFT 的 24.48% 提升；SimpleVLA RL 为 72.18%。","textPreview":"8 个任务平均 train SSR：RLinf RL 84.63%，由 SFT 的 24.48% 提升；SimpleVLA RL 为 72.18%。","textChars":74,"textLines":1,"bbox":[790,176,390,70]}
+{"kind":"shape","id":"sh/mdk3adsj","slide":9,"name":"s9-answer-point-1-rule","bbox":[790,256,390,0]}
+{"kind":"textbox","id":"sh/7etkjit4","slide":9,"name":"s9-answer-point-2-label","text":"采用条件：效率有范围","textPreview":"采用条件：效率有范围","textChars":10,"textLines":1,"bbox":[790,268,170,18]}
+{"kind":"textbox","id":"sh/3ad4faxc","slide":9,"name":"s9-answer-point-2","text":"8 卡 colocated 下，RLinf actor/rollout 为 49.15/170.34 秒，低于 SimpleVLA 的 94.05/189.33 秒。","textPreview":"8 卡 colocated 下，RLinf actor/rollout 为 49.15/170.34 秒，低于 SimpleVLA 的 94.05/189.33 秒。","textChars":83,"textLines":1,"bbox":[790,302,390,70]}
+{"kind":"shape","id":"sh/i943mpwr","slide":9,"name":"s9-answer-point-2-rule","bbox":[790,382,390,0]}
+{"kind":"textbox","id":"sh/5cvmhkfi","slide":9,"name":"s9-answer-point-3-label","text":"边界：OOD 与纯算法归因未证实","textPreview":"边界：OOD 与纯算法归因未证实","textChars":16,"textLines":1,"bbox":[790,394,170,18]}
+{"kind":"textbox","id":"sh/4bmlofex","slide":9,"name":"s9-answer-point-3","text":"128 个 OOD seed 是评估契约而非 OOD SSR 结果；精度、学习率、LoRA、valid trajectory 收集与 reward 设计不同。","textPreview":"128 个 OOD seed 是评估契约而非 OOD SSR 结果；精度、学习率、LoRA、valid trajectory 收集与 reward 设计不同。","textChars":79,"textLines":1,"bbox":[790,428,390,70]}
+{"kind":"shape","id":"sh/rex4jux8","slide":9,"name":"s9-boundary-rule","bbox":[72,562,1136,0]}
+{"kind":"textbox","id":"sh/qd43qpwn","slide":9,"name":"s9-boundary-label","text":"最终判断","textPreview":"最终判断","textChars":4,"textLines":1,"bbox":[72,590,160,18]}
+{"kind":"textbox","id":"sh/dgfml4fe","slide":9,"name":"s9-boundary","text":"受控条件下 RLinf 系统 train SSR 更强且具有效率优势；当前无 OOD SSR 结果，纯算法因果仍需额外控制变量。","textPreview":"受控条件下 RLinf 系统 train SSR 更强且具有效率优势；当前无 OOD SSR 结果，纯算法因果仍需额外控制变量。","textChars":64,"textLines":1,"bbox":[250,578,930,46]}
+{"kind":"notes","id":"nt/7bq6xk","slide":9,"text":"现在回到开场问题。固定 RoboTwin seed、OOD 评估契约和 8 卡 A800 后，RLinf 在 8 个任务上的平均 train SSR 从 24.48% 提升到 84.63%，colocated 下 actor 和 rollout 也具竞争力。但要明确：128 个 OOD seed 只是评估设置，当前证据没有给出 OOD SSR 结果。两边在精度、学习率、LoRA、轨迹收集和 reward 设计上并不完全一致，所以结论应归因于完整训练系统，而不是单一算法组件。\n讲述提示：先给出 train SSR 答案，再读效率证据，最后明确 OOD 结果缺失与系统级归因边界。\n[Sources] p6-table-1 · p6-table-2-crop · p4-table-1-crop"}

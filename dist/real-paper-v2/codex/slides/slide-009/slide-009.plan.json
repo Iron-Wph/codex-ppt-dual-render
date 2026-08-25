@@ -1,0 +1,236 @@
+{
+  "deck": {
+    "id": "rlinf-robotwin-experiment-storyboard-revised",
+    "title": "RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束",
+    "purpose": "帮助具身智能与机器人学习研究者判断 RLinf 在 RoboTwin 上的性能与系统效率证据，并准确区分受控系统优势与纯算法因果结论。",
+    "audience": "具身智能、机器人学习与强化学习研究者、论文评审者和实验复现者。",
+    "language": "zh-CN",
+    "aspect_ratio": "16:9",
+    "communication_job": "By the end, embodied-AI researchers should be able to cite and reproduce RLinf’s RoboTwin result with the correct boundary because the experiments show a large cross-task SSR gain and competitive execution times under fixed seeds, evaluation protocol, and 8-card A800 conditions, while implementation differences prevent isolating a pure RLinf algorithm effect.",
+    "talk_duration_minutes": 12,
+    "audience_profile": {
+      "role": "具身智能与机器人学习研究者、论文评审者、实验复现者",
+      "prior_knowledge": "熟悉 VLA、SFT、GRPO、RoboTwin、SSR、OOD seed、多卡训练与基本实验对照方法。",
+      "cares_about": [
+        "RLinf 的性能增益是否跨任务成立",
+        "SFT→RL 的比较是否公平",
+        "reward、轨迹收集、精度和超参数差异是否改变结论",
+        "seed、GPU、评估温度和训练步数是否可复现",
+        "不同并行模式下 actor 与 rollout 的实际成本"
+      ],
+      "likely_questions": [
+        "RLinf 的提升能否归因于 RL 信号本身？",
+        "8 个任务上的增益是否一致，训练成本是多少？",
+        "RLinf 与 SimpleVLA 的比较到底控制了哪些变量？",
+        "评估温度、模型初始化和 GPU 是否会改变 SSR？",
+        "实际运行时应该选择哪种并行模式？"
+      ],
+      "desired_outcome": "能够复现实验契约，引用跨任务性能与系统效率结果，并将结论表述为受控条件下的 RLinf 完整训练系统优势，而非无条件的纯算法优越性。"
+    }
+  },
+  "narrative": {
+    "arc": "实验问题 → 实验契约与泛化口径 → RLinf 训练信号 → 与 SimpleVLA 的可比性边界 → 跨任务性能 → 框架级增益 → 敏感性边界 → 系统效率 → 受控条件下的结论",
+    "key_message": "在相同 RoboTwin 训练 seed、128 个 OOD 评估 seed、评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练使 8 个任务的平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下呈现有竞争力的 actor/rollout 时间；但由于精度、超参数、valid trajectory 收集和 reward 设计不同，证据支持的是受控条件下的完整系统优势，而不是纯算法因果结论。",
+    "opening_question": "在固定 RoboTwin seed、评估口径和 8 卡 A800 条件下，RLinf 的提升能否归因于 RL 信号本身，还是只能归因于完整训练系统的差异？",
+    "closing_answer": "证据支持这样的结论：在固定实验契约下，RLinf 的 RL 训练带来跨 8 个任务的显著 SSR 增益，并提供有竞争力的执行路径；但由于精度、超参数、轨迹收集和 reward 设计并非完全同构，不能把该结果表述为脱离实验契约的纯算法优越性。",
+    "sections": [
+      {
+        "id": "sec-4",
+        "title": "落到系统与结论",
+        "job": "把性能证据连接到运行成本，并回答开场归因问题",
+        "slide_ids": [
+          "s9"
+        ]
+      }
+    ],
+    "priority_map": {
+      "core": [
+        "s9"
+      ],
+      "support": [],
+      "context": []
+    },
+    "logic_check": {
+      "opening_resolved": true,
+      "core_has_evidence": true,
+      "no_redundant_slides": true,
+      "rationale": "已保留 9 页与原叙事顺序，并修复实验契约可见性、训练流程阅读顺序、比较表、平均值证据、效率矩阵、结论边界、标题密度、截断文案和演讲稿长度。所有核心主张均绑定有效证据 ID；结论页分别呈现答案、采用条件和归因边界。"
+    }
+  },
+  "visual": {
+    "style_family": "academic-evidence",
+    "image_policy": "仅使用证据索引中的源表、源图或页面快照；优先使用原生表格、原生图表与可追溯机制图，禁止装饰性图片。",
+    "density_profile": "中等密度、证据优先；核心结果使用大图表或大表格，实验边界使用短注释和明确的证据标记。",
+    "style_reason": "受众关心可比性、复现性和归因边界，因此采用暖白画布、深蓝标题、珊瑚强调和源证据板的学术证据风格。",
+    "layout_system": "Codex Grid evidence-first：统一左对齐标题与宽边距，交替使用证据表、机制流程、结果图表、对照构图和结论边界，避免连续页面使用同一轮廓。",
+    "style_reference": "codex/theme-reference.png",
+    "style_reference_html": "codex/theme-reference.html",
+    "style_inspiration": "codex/style-inspiration.png",
+    "style_lock": "theme-reference",
+    "style_system": {
+      "category": "Academic Research",
+      "visual_profile": "academic",
+      "tags": [
+        "academic",
+        "paper",
+        "evidence",
+        "research",
+        "clean"
+      ],
+      "density": "medium",
+      "mood": "credible, calm, evidence-first",
+      "composition": "warm white canvas, strict evidence grid, navy hierarchy, restrained annotations",
+      "typography_treatment": "compact sans-serif labels with decisive navy action titles",
+      "background_treatment": "quiet paper ground with subtle blue section bands",
+      "image_treatment": "large source figures on white plates with visible captions and provenance",
+      "table_treatment": "native white tables with navy rules and one coral emphasis row",
+      "style_markers": [
+        "paper canvas",
+        "navy thesis",
+        "source figure plate",
+        "coral annotation"
+      ],
+      "layout_families": [
+        "research-cover",
+        "evidence-split",
+        "method-flow",
+        "chart-first",
+        "finding-boundary"
+      ],
+      "avoid": [
+        "decorative stock photography",
+        "poster text walls",
+        "unlabelled charts"
+      ],
+      "inspiration_asset": "themes/style-references/academic-evidence-v1.png",
+      "provenance": {
+        "type": "original",
+        "inspiration": "evidence-led academic editorial systems"
+      },
+      "selection": {
+        "theme_id": "academic-evidence",
+        "basis": "planner_choice",
+        "semantic_scores": {}
+      }
+    }
+  },
+  "plan": {
+    "title": "RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束",
+    "subtitle": "先确认比较口径，再判断性能、效率与结论边界",
+    "slides": [
+      {
+        "id": "s9",
+        "layout": "insight",
+        "composition_id": "answer-and-boundary",
+        "role": "limitations",
+        "content_priority": "core",
+        "action_title": "相信受控系统增益，保留纯算法归因边界",
+        "audience_question": "我现在应该相信什么，又必须保留什么？",
+        "narrative_job": "直接回答开场归因问题，综合跨任务性能、系统效率和实现边界，给出可引用的最终判断。",
+        "slide_goal": "让研究者带走一个强但不越界的结论与复现实验要求。",
+        "primary_claim": "在固定 RoboTwin seed、OOD 评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练在 8 个任务上将平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下表现出有竞争力的 actor/rollout 时间；但精度、超参数、轨迹收集和 reward 设计差异使其不能被表述为纯算法因果结论。",
+        "evidence": [
+          {
+            "claim_support": "RLinf 平均 train SSR 为 24.48%→84.63%，SimpleVLA 为 34.40%→72.18%。",
+            "evidence_ref": "p6-table-1",
+            "interpretation": "性能证据支持 RLinf 完整训练系统在这组任务上的较大平均增益。"
+          },
+          {
+            "claim_support": "8 卡 colocated 的 RLinf actor/rollout 为 49.15/170.34 秒，SimpleVLA 为 94.05/189.33 秒。",
+            "evidence_ref": "p6-table-2-crop",
+            "interpretation": "效率证据支持特定并行配置下的运行优势，但不代表所有模式和规模都相同。"
+          },
+          {
+            "claim_support": "RLinf 与 SimpleVLA 在精度、超参数、valid trajectory 收集和 reward 设计上存在差异。",
+            "evidence_ref": "p4-table-1-crop",
+            "interpretation": "这些差异决定了结论应归因于完整训练系统，而不是单独归因于 RLinf 的某一个算法组件。"
+          }
+        ],
+        "implication": "复现或引用时至少同时报告训练/评估 seed、GPU、评估温度、训练步数、reward 与轨迹收集策略、精度和并行模式。",
+        "transition_in": "系统效率补全了“更快”的证据，且所有结果都已绑定到实验契约。",
+        "transition_out": "开场问题的答案是：受控条件下 RLinf 系统确实更强且具有效率优势，但其纯算法归因仍需额外控制变量。",
+        "evidence_refs": [
+          "p6-table-1",
+          "p6-table-2-crop",
+          "p4-table-1-crop"
+        ],
+        "table_refs": [
+          "p6-table-1",
+          "p6-table-2",
+          "p4-table-1"
+        ],
+        "asset_candidates": [],
+        "visual_intent": "text_led",
+        "visual_plan": {
+          "layout_family": "insight",
+          "primary_visual": null,
+          "image_budget": 0,
+          "image_roles": [],
+          "data_strategy": "native_table",
+          "background_variant": "quiet",
+          "density": "sparse"
+        },
+        "speaker_notes": {
+          "talk_track": "现在回到开场问题。固定 RoboTwin seed、OOD 评估口径和 8 卡 A800 后，RLinf 在 8 个任务上的平均 train SSR 从 24.48% 提升到 84.63%，colocated 下 actor 和 rollout 也具竞争力。但两边在精度、学习率、LoRA、轨迹收集和 reward 设计上并不完全一致，所以结论应归因于完整训练系统，而不是单一算法组件。复现或引用时，必须同时报告这些采用条件与边界。",
+          "delivery_cue": "先给出答案，再读性能和效率证据，最后明确“系统结论，不是纯算法因果”。",
+          "source_refs": [
+            "p6-table-1",
+            "p6-table-2-crop",
+            "p4-table-1-crop"
+          ],
+          "estimated_seconds": 100
+        },
+        "content": {
+          "eyebrow": "最终判断",
+          "title": "可信的是受控系统增益，纯算法优越性尚未证实",
+          "subtitle": null,
+          "kicker": null,
+          "lede": "在固定 RoboTwin seed、OOD 评估口径与 8 卡 A800 条件下，RLinf 的完整 RL 训练系统更强且更具效率优势；但跨实现差异限制了纯算法归因。",
+          "note": {
+            "label": "采用条件",
+            "value": "引用时同时报告训练/评估 seed、GPU、评估温度、训练步数、reward、轨迹收集、精度与并行模式。"
+          },
+          "body_points": [
+            {
+              "label": "答案：性能成立",
+              "text": "8 个任务平均 train SSR：RLinf RL 84.63%，由 SFT 的 24.48% 提升；SimpleVLA RL 为 72.18%。"
+            },
+            {
+              "label": "采用条件：效率有范围",
+              "text": "8 卡 colocated 下，RLinf actor/rollout 为 49.15/170.34 秒，优于 SimpleVLA 的 94.05/189.33 秒。"
+            },
+            {
+              "label": "边界：不能纯算法归因",
+              "text": "精度、学习率、LoRA、valid trajectory 收集与 reward 设计不同，不能把增益单独归因于某个算法组件。"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "平均 train SSR",
+              "value": "24.48% → 84.63%",
+              "meaning": "RLinf 完整训练系统在 8 个任务上的平均提升"
+            },
+            {
+              "label": "colocated actor",
+              "value": "49.15 s",
+              "meaning": "8 卡条件下，低于 SimpleVLA 的 94.05 s"
+            },
+            {
+              "label": "colocated rollout",
+              "value": "170.34 s",
+              "meaning": "8 卡条件下，低于 SimpleVLA 的 189.33 s"
+            }
+          ],
+          "steps": [],
+          "result": null,
+          "columns": [],
+          "takeaway": {
+            "label": "最终判断",
+            "value": "受控条件下 RLinf 系统确实更强且具有效率优势；纯算法因果仍需额外控制变量。"
+          }
+        },
+        "speaker_note": "现在回到开场问题。固定 RoboTwin seed、OOD 评估口径和 8 卡 A800 后，RLinf 在 8 个任务上的平均 train SSR 从 24.48% 提升到 84.63%，colocated 下 actor 和 rollout 也具竞争力。但两边在精度、学习率、LoRA、轨迹收集和 reward 设计上并不完全一致，所以结论应归因于完整训练系统，而不是单一算法组件。复现或引用时，必须同时报告这些采用条件与边界。"
+      }
+    ]
+  }
+}

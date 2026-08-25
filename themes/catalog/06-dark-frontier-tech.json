@@ -1,0 +1,28 @@
+{
+  "id": "dark-frontier-tech",
+  "label": "Dark Frontier Tech",
+  "category": "Product",
+  "visual_profile": "frontier",
+  "tags": ["frontier", "ai", "robotics", "launch", "dark"],
+  "match_signals": ["frontier", "launch", "product", "innovation", "ai", "robotics", "发布", "产品", "未来", "科技", "人工智能"],
+  "density": "low",
+  "mood": "cinematic, confident, frontier-facing",
+  "recommended_for": ["AI product", "robotics launch", "future technology"],
+  "composition": "near-black stage, one immersive visual, oversized claim, cyan signal and magenta counterpoint",
+  "typography_treatment": "large sparse display typography with compact technical microcopy",
+  "background_treatment": "deep navy field with controlled orbital signal geometry",
+  "image_treatment": "one dramatic hero or evidence image in a luminous media well",
+  "table_treatment": "minimal dark tables with cyan structure and lime success states",
+  "style_markers": ["midnight stage", "cyan signal", "orbital geometry", "one bold claim"],
+  "layout_families": ["frontier-hero", "product-reveal", "orbit-system", "signal-chart", "closing-manifesto"],
+  "avoid": ["rainbow neon", "multiple competing hero images", "dense small text"],
+  "style_reference_asset": "themes/style-references/future-tech-signal-v1.png",
+  "provenance": { "type": "original", "inspiration": "cinematic product keynote and frontier technology art direction" },
+  "colors": {
+    "background": "#070B15", "surface": "#0E1728", "surface2": "#14233A",
+    "foreground": "#F4F8FF", "muted": "#91A2BD", "accent": "#4ED8FF",
+    "accent2": "#F35D91", "accent3": "#B6F36B", "border": "#2A4264",
+    "white": "#FFFFFF", "black": "#03060C"
+  },
+  "typography": { "title_px": 64, "slide_title_px": 40, "subtitle_px": 22, "body_px": 17, "metric_px": 58 }
+}

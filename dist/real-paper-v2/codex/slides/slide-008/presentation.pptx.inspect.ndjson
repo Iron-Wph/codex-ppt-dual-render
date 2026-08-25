@@ -1,0 +1,11 @@
+{"kind":"deck","id":"pr/7f2g7p","name":"Deck"}
+{"kind":"layout","layoutId":"16ee03ee-50f5-4269-87e5-e1db60a1164f","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"9ee5f71c-54fc-40cb-bde5-b48aa9ad185d","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/rc5hlw","slide":1,"title":"01 / 01","textShapes":4}
+{"kind":"shape","id":"sh/vytc7ihs","slide":1,"name":"slide-1-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/gz2d0nyd","slide":1,"name":"slide-1-page","text":"01 / 01","textPreview":"01 / 01","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/h0vu9szi","slide":1,"name":"s8-kicker","text":"PAPER EVIDENCE","textPreview":"PAPER EVIDENCE","textChars":14,"textLines":1,"bbox":[72,76,360,22]}
+{"kind":"textbox","id":"sh/i14v2xg3","slide":1,"name":"s8-title","text":"8 卡条件下，colocated 更有竞争力","textPreview":"8 卡条件下，colocated 更有竞争力","textChars":22,"textLines":1,"bbox":[72,114,800,86]}
+{"kind":"textbox","id":"sh/43md47y9","slide":1,"name":"s8-caption","text":"Paper table region on page 6","textPreview":"Paper table region on page 6","textChars":28,"textLines":1,"bbox":[92,210,760,16]}
+{"kind":"table","id":"tb/qhsvqt47","slide":1,"name":"","rows":6,"cols":3,"preview":"8卡​ | actor（s）​ | rollout（s）​","bbox":[92,236,1040,350]}
+{"kind":"notes","id":"nt/rc5hlw","slide":1,"text":"性能数字受评估协议约束，效率数字也必须绑定部署配置。8 卡对比中，RLinf colocated 的 actor/rollout 为 49.15/170.34 秒，低于 SimpleVLA 的 94.05/189.33 秒；但 disaggregated 的 rollout 达到 546.64 秒，Hybrid 也有不同成本。再看 1、2、4 节点，actor 与 generate 会随模式和规模变化。因此选型应先固定节点数、模式和指标，再判断哪条路径更合适。\n讲述提示：先读 8 卡横向对照，再指向矩阵的模式行与节点列，最后强调没有脱离配置的单一“更快”。\n[Sources] p6-table-2-crop · p8-table-1-crop"}

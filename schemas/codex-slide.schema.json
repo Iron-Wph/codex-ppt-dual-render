@@ -1,17 +1,43 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://codex.local/schemas/codex-slide.schema.json",
-  "title": "Codex Single Slide Plan",
+  "title": "Audience-driven Codex Single Slide",
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "layout", "role", "action_title", "slide_goal", "primary_claim", "evidence_refs", "table_refs", "asset_candidates", "visual_intent", "visual_plan", "speaker_note", "content"],
+  "required": [
+    "id", "layout", "composition_id", "role", "content_priority", "action_title",
+    "audience_question", "narrative_job", "slide_goal", "primary_claim", "evidence",
+    "implication", "transition_in", "transition_out", "evidence_refs", "table_refs",
+    "asset_candidates", "visual_intent", "visual_plan", "speaker_notes", "content"
+  ],
   "properties": {
-    "id": { "type": "string", "minLength": 1 },
+    "id": { "type": "string" },
     "layout": { "enum": ["title", "pipeline", "comparison", "insight", "evidence", "hero-image", "metric-stage", "story-split", "chart-focus", "matrix", "timeline", "evidence-collage"] },
-    "role": { "type": "string", "minLength": 1 },
-    "action_title": { "type": "string", "minLength": 1 },
-    "slide_goal": { "type": "string", "minLength": 1 },
-    "primary_claim": { "type": "string", "minLength": 1 },
+    "composition_id": { "enum": ["thesis-stage", "image-thesis-split", "argument-pair", "mechanism-triptych", "causal-flow", "metric-triad", "chart-with-interpretation-rail", "evidence-table", "evidence-collage", "answer-and-boundary"] },
+    "role": { "type": "string" },
+    "content_priority": { "enum": ["core", "support", "context"] },
+    "action_title": { "type": "string" },
+    "audience_question": { "type": "string" },
+    "narrative_job": { "type": "string" },
+    "slide_goal": { "type": "string" },
+    "primary_claim": { "type": "string" },
+    "evidence": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claim_support", "evidence_ref", "interpretation"],
+        "properties": {
+          "claim_support": { "type": "string" },
+          "evidence_ref": { "type": ["string", "null"] },
+          "interpretation": { "type": "string" }
+        }
+      }
+    },
+    "implication": { "type": "string" },
+    "transition_in": { "type": "string" },
+    "transition_out": { "type": "string" },
     "evidence_refs": { "type": "array", "maxItems": 8, "items": { "type": "string" } },
     "table_refs": { "type": "array", "maxItems": 4, "items": { "type": "string" } },
     "asset_candidates": { "type": "array", "maxItems": 8, "items": { "type": "string" } },
@@ -24,27 +50,117 @@
         "layout_family": { "enum": ["title", "pipeline", "comparison", "insight", "evidence", "hero-image", "metric-stage", "story-split", "chart-focus", "matrix", "timeline", "evidence-collage"] },
         "primary_visual": { "type": ["string", "null"] },
         "image_budget": { "type": "integer", "minimum": 0, "maximum": 3 },
-        "image_roles": { "type": "array", "maxItems": 3, "uniqueItems": true, "items": { "enum": ["hero", "evidence", "comparison", "context"] } },
+        "image_roles": { "type": "array", "maxItems": 3, "items": { "enum": ["hero", "evidence", "comparison", "context"] } },
         "data_strategy": { "enum": ["none", "native_chart", "native_table", "diagram", "source_figure"] },
         "background_variant": { "enum": ["default", "light", "dark", "quiet", "immersive"] },
         "density": { "enum": ["sparse", "balanced", "dense"] }
       }
     },
-    "speaker_note": { "type": "string" },
+    "speaker_notes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["talk_track", "delivery_cue", "source_refs", "estimated_seconds"],
+      "properties": {
+        "talk_track": { "type": "string", "minLength": 80 },
+        "delivery_cue": { "type": "string" },
+        "source_refs": { "type": "array", "maxItems": 8, "items": { "type": "string" } },
+        "estimated_seconds": { "type": "integer", "minimum": 20, "maximum": 240 }
+      }
+    },
     "content": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["eyebrow", "title", "subtitle", "note", "kicker", "steps", "result", "columns", "takeaway"],
+      "required": ["eyebrow", "title", "subtitle", "kicker", "lede", "note", "body_points", "metrics", "steps", "result", "columns", "takeaway"],
       "properties": {
         "eyebrow": { "type": ["string", "null"] },
-        "title": { "type": "string", "minLength": 1 },
+        "title": { "type": "string" },
         "subtitle": { "type": ["string", "null"] },
-        "note": { "type": ["object", "null"], "additionalProperties": false, "required": ["label", "value"], "properties": { "label": { "type": "string" }, "value": { "type": "string" } } },
         "kicker": { "type": ["string", "null"] },
-        "steps": { "type": ["array", "null"], "maxItems": 4, "items": { "type": "object", "additionalProperties": false, "required": ["title", "text", "metric", "tone"], "properties": { "title": { "type": "string" }, "text": { "type": "string" }, "metric": { "type": "string" }, "tone": { "type": "string" } } } },
-        "result": { "type": ["object", "null"], "additionalProperties": false, "required": ["label", "value"], "properties": { "label": { "type": "string" }, "value": { "type": "string" } } },
-        "columns": { "type": ["array", "null"], "maxItems": 2, "items": { "type": "object", "additionalProperties": false, "required": ["label", "headline", "points", "tone"], "properties": { "label": { "type": "string" }, "headline": { "type": "string" }, "points": { "type": "array", "maxItems": 4, "items": { "type": "string" } }, "tone": { "type": "string" } } } },
-        "takeaway": { "type": ["object", "null"], "additionalProperties": false, "required": ["label", "value"], "properties": { "label": { "type": "string" }, "value": { "type": "string" } } }
+        "lede": { "type": ["string", "null"] },
+        "note": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": ["label", "value"],
+          "properties": {
+            "label": { "type": "string" },
+            "value": { "type": "string" }
+          }
+        },
+        "body_points": {
+          "type": "array",
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["label", "text"],
+            "properties": {
+              "label": { "type": "string" },
+              "text": { "type": "string" }
+            }
+          }
+        },
+        "metrics": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["label", "value", "meaning"],
+            "properties": {
+              "label": { "type": "string" },
+              "value": { "type": "string" },
+              "meaning": { "type": "string" }
+            }
+          }
+        },
+        "steps": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["title", "text", "metric", "tone"],
+            "properties": {
+              "title": { "type": "string" },
+              "text": { "type": "string" },
+              "metric": { "type": "string" },
+              "tone": { "type": "string" }
+            }
+          }
+        },
+        "result": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": ["label", "value"],
+          "properties": {
+            "label": { "type": "string" },
+            "value": { "type": "string" }
+          }
+        },
+        "columns": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["label", "headline", "points", "tone"],
+            "properties": {
+              "label": { "type": "string" },
+              "headline": { "type": "string" },
+              "points": { "type": "array", "maxItems": 4, "items": { "type": "string" } },
+              "tone": { "type": "string" }
+            }
+          }
+        },
+        "takeaway": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": ["label", "value"],
+          "properties": {
+            "label": { "type": "string" },
+            "value": { "type": "string" }
+          }
+        }
       }
     }
   }

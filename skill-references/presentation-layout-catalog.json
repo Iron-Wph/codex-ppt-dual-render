@@ -1,0 +1,109 @@
+{
+  "version": "1.0.0",
+  "purpose": "A flexible presentation composition reference derived from the local Presentation Skill and Codex Grid layout library. These are candidate silhouettes, not mandatory page templates.",
+  "selection_principle": "Choose a layout only after defining the audience question, the slide's narrative job, the primary claim, and the evidence required to make that claim credible.",
+  "global_rules": [
+    "Use one dominant composition per slide; do not default to a dashboard of repeated cards.",
+    "Use takeaway titles that state the point, not topic labels.",
+    "Every evidence object must be paired with an interpretation or implication.",
+    "Vary adjacent silhouettes while keeping typography, palette, spacing, and image treatment coherent.",
+    "Prefer shortening or splitting content over shrinking body text.",
+    "A slide may deviate from these recipes when the content requires a clearer composition."
+  ],
+  "recipes": [
+    {
+      "id": "thesis-stage",
+      "best_for": ["opening", "section opener", "closing synthesis"],
+      "audience_question": "Why should I care, and what will I learn?",
+      "composition": "small context line + oversized thesis + one supporting sentence or evidence cue",
+      "density": "sparse",
+      "reference": ["codex-grid#slide-01", "codex-grid#slide-02", "codex-grid#slide-26"],
+      "avoid": ["production notes", "agenda inventory", "more than one competing visual"]
+    },
+    {
+      "id": "image-thesis-split",
+      "best_for": ["problem framing", "method overview with a real figure", "case evidence"],
+      "audience_question": "What does this look like in practice?",
+      "composition": "40–48% claim/explanation + 52–60% evidence image with caption",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-08"],
+      "avoid": ["decorative stock image unrelated to the claim", "tiny unreadable paper screenshot"]
+    },
+    {
+      "id": "argument-pair",
+      "best_for": ["before/after", "baseline/proposal", "trade-off", "known/unknown"],
+      "audience_question": "What changed, or what is the meaningful contrast?",
+      "composition": "one shared claim + two unequal argument fields + one explicit synthesis",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-04", "codex-grid#slide-05", "codex-grid#slide-11"],
+      "avoid": ["two columns with duplicated wording", "comparison without a conclusion"]
+    },
+    {
+      "id": "mechanism-triptych",
+      "best_for": ["three parallel mechanisms", "three contributions", "three failure modes"],
+      "audience_question": "Which parts jointly explain the result?",
+      "composition": "three aligned mechanisms with independent labels and a shared consequence",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-06", "codex-grid#slide-07"],
+      "avoid": ["presenting parallel mechanisms as a sequential pipeline", "generic icon cards"]
+    },
+    {
+      "id": "causal-flow",
+      "best_for": ["training loop", "method sequence", "timeline", "decision process"],
+      "audience_question": "What happens in what order, and where does the signal change?",
+      "composition": "3–5 stages on one visual axis; concise stage explanation; end-state implication",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-17", "codex-grid#slide-18"],
+      "avoid": ["using a flow for independent factors", "long paragraphs inside nodes"]
+    },
+    {
+      "id": "metric-triad",
+      "best_for": ["three headline outcomes", "performance/data-efficiency/transfer", "decision summary"],
+      "audience_question": "What are the three numbers I should remember?",
+      "composition": "brief interpretation rail + three large metrics + one sentence of meaning each",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-19", "codex-grid#slide-23"],
+      "avoid": ["numbers without baseline or unit", "equal emphasis on secondary metrics"]
+    },
+    {
+      "id": "chart-with-interpretation-rail",
+      "best_for": ["main quantitative result", "ablation", "trend", "benchmark comparison"],
+      "audience_question": "What pattern in the data changes the conclusion?",
+      "composition": "dominant native chart occupying 55–70% + 2–3 interpretation callouts",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-20", "codex-grid#slide-21", "codex-grid#slide-22"],
+      "avoid": ["chart as decoration", "callouts that merely repeat axis values"]
+    },
+    {
+      "id": "evidence-table",
+      "best_for": ["experimental setup", "compact benchmark matrix", "method configuration"],
+      "audience_question": "What was compared, under which conditions?",
+      "composition": "claim title + native table + highlighted rows/columns + one interpretation footer",
+      "density": "dense",
+      "reference": ["codex-grid#slide-03", "codex-grid#slide-14", "codex-grid#slide-24"],
+      "avoid": ["full paper table without pruning", "table smaller than readable size"]
+    },
+    {
+      "id": "evidence-collage",
+      "best_for": ["qualitative behavior", "failure modes", "sim-to-real examples"],
+      "audience_question": "Which examples make the claim tangible?",
+      "composition": "one dominant evidence image + up to two supporting crops + a single synthesis statement",
+      "density": "moderate",
+      "reference": ["project extension of image-thesis-split"],
+      "avoid": ["more than three images", "reusing the same image", "unreadable thumbnails"]
+    },
+    {
+      "id": "answer-and-boundary",
+      "best_for": ["conclusion", "recommendation", "limitations"],
+      "audience_question": "What should I believe now, and where does it stop being true?",
+      "composition": "resolved answer + 2–3 implications + explicit boundary or next decision",
+      "density": "sparse",
+      "reference": ["codex-grid#slide-26"],
+      "avoid": ["generic thank-you ending", "new evidence introduced at the end"]
+    }
+  ],
+  "provenance": {
+    "source": "Local OpenAI Presentation Skill 26.727.11326 and Codex Grid layout registry",
+    "adaptation": "The project stores semantic composition rules only. It does not copy sample wording or bind planning to exact coordinates."
+  }
+}

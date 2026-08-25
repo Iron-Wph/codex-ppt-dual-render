@@ -1,0 +1,27 @@
+{
+  "id": "paper-blue",
+  "label": "Paper Blue",
+  "category": "Academic Research",
+  "visual_profile": "academic",
+  "tags": ["paper", "blue", "clean", "legacy"],
+  "match_signals": ["technical report", "enterprise analysis", "技术报告", "企业分析"],
+  "density": "medium",
+  "mood": "credible, academic, clean",
+  "recommended_for": ["academic paper", "research review", "technical briefing"],
+  "composition": "light canvas, blue hierarchy, generous margins, restrained evidence panels",
+  "typography_treatment": "clean sans-serif hierarchy",
+  "background_treatment": "cool paper background",
+  "image_treatment": "clean source figures with white framing",
+  "table_treatment": "white table surface with blue structural rules",
+  "style_markers": ["warm white canvas", "navy thesis", "evidence image crop", "coral annotation"],
+  "layout_families": ["research-title", "evidence-split", "method-flow", "chart-first", "finding-and-limit"],
+  "avoid": ["poster-like text walls", "more than one primary chart", "colour-only comparisons"],
+  "style_reference_asset": "themes/style-references/academic-evidence-v1.png",
+  "provenance": { "type": "legacy-original" },
+  "colors": {
+    "background": "#F4F7FB", "surface": "#FFFFFF", "surface2": "#E8EFF8",
+    "foreground": "#14243A", "muted": "#58708D", "accent": "#1664D8",
+    "accent2": "#E06B47", "accent3": "#2C9D91", "border": "#C7D5E6",
+    "white": "#FFFFFF", "black": "#0C1725"
+  }
+}

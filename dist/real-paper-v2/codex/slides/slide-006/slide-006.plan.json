@@ -1,0 +1,234 @@
+{
+  "deck": {
+    "id": "rlinf-robotwin-experiment-storyboard-revised",
+    "title": "RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束",
+    "purpose": "帮助具身智能与机器人学习研究者判断 RLinf 在 RoboTwin 上的性能与系统效率证据，并准确区分受控系统优势与纯算法因果结论。",
+    "audience": "具身智能、机器人学习与强化学习研究者、论文评审者和实验复现者。",
+    "language": "zh-CN",
+    "aspect_ratio": "16:9",
+    "communication_job": "By the end, embodied-AI researchers should be able to cite and reproduce RLinf’s RoboTwin result with the correct boundary because the experiments show a large cross-task SSR gain and competitive execution times under fixed seeds, evaluation protocol, and 8-card A800 conditions, while implementation differences prevent isolating a pure RLinf algorithm effect.",
+    "talk_duration_minutes": 12,
+    "audience_profile": {
+      "role": "具身智能与机器人学习研究者、论文评审者、实验复现者",
+      "prior_knowledge": "熟悉 VLA、SFT、GRPO、RoboTwin、SSR、OOD seed、多卡训练与基本实验对照方法。",
+      "cares_about": [
+        "RLinf 的性能增益是否跨任务成立",
+        "SFT→RL 的比较是否公平",
+        "reward、轨迹收集、精度和超参数差异是否改变结论",
+        "seed、GPU、评估温度和训练步数是否可复现",
+        "不同并行模式下 actor 与 rollout 的实际成本"
+      ],
+      "likely_questions": [
+        "RLinf 的提升能否归因于 RL 信号本身？",
+        "8 个任务上的增益是否一致，训练成本是多少？",
+        "RLinf 与 SimpleVLA 的比较到底控制了哪些变量？",
+        "评估温度、模型初始化和 GPU 是否会改变 SSR？",
+        "实际运行时应该选择哪种并行模式？"
+      ],
+      "desired_outcome": "能够复现实验契约，引用跨任务性能与系统效率结果，并将结论表述为受控条件下的 RLinf 完整训练系统优势，而非无条件的纯算法优越性。"
+    }
+  },
+  "narrative": {
+    "arc": "实验问题 → 实验契约与泛化口径 → RLinf 训练信号 → 与 SimpleVLA 的可比性边界 → 跨任务性能 → 框架级增益 → 敏感性边界 → 系统效率 → 受控条件下的结论",
+    "key_message": "在相同 RoboTwin 训练 seed、128 个 OOD 评估 seed、评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练使 8 个任务的平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下呈现有竞争力的 actor/rollout 时间；但由于精度、超参数、valid trajectory 收集和 reward 设计不同，证据支持的是受控条件下的完整系统优势，而不是纯算法因果结论。",
+    "opening_question": "在固定 RoboTwin seed、评估口径和 8 卡 A800 条件下，RLinf 的提升能否归因于 RL 信号本身，还是只能归因于完整训练系统的差异？",
+    "closing_answer": "证据支持这样的结论：在固定实验契约下，RLinf 的 RL 训练带来跨 8 个任务的显著 SSR 增益，并提供有竞争力的执行路径；但由于精度、超参数、轨迹收集和 reward 设计并非完全同构，不能把该结果表述为脱离实验契约的纯算法优越性。",
+    "sections": [
+      {
+        "id": "sec-3",
+        "title": "建立性能结论",
+        "job": "从跨任务增益、框架比较和敏感性分析形成主结果判断",
+        "slide_ids": [
+          "s6"
+        ]
+      }
+    ],
+    "priority_map": {
+      "core": [
+        "s6"
+      ],
+      "support": [],
+      "context": []
+    },
+    "logic_check": {
+      "opening_resolved": true,
+      "core_has_evidence": true,
+      "no_redundant_slides": true,
+      "rationale": "已保留 9 页与原叙事顺序，并修复实验契约可见性、训练流程阅读顺序、比较表、平均值证据、效率矩阵、结论边界、标题密度、截断文案和演讲稿长度。所有核心主张均绑定有效证据 ID；结论页分别呈现答案、采用条件和归因边界。"
+    }
+  },
+  "visual": {
+    "style_family": "academic-evidence",
+    "image_policy": "仅使用证据索引中的源表、源图或页面快照；优先使用原生表格、原生图表与可追溯机制图，禁止装饰性图片。",
+    "density_profile": "中等密度、证据优先；核心结果使用大图表或大表格，实验边界使用短注释和明确的证据标记。",
+    "style_reason": "受众关心可比性、复现性和归因边界，因此采用暖白画布、深蓝标题、珊瑚强调和源证据板的学术证据风格。",
+    "layout_system": "Codex Grid evidence-first：统一左对齐标题与宽边距，交替使用证据表、机制流程、结果图表、对照构图和结论边界，避免连续页面使用同一轮廓。",
+    "style_reference": "codex/theme-reference.png",
+    "style_reference_html": "codex/theme-reference.html",
+    "style_inspiration": "codex/style-inspiration.png",
+    "style_lock": "theme-reference",
+    "style_system": {
+      "category": "Academic Research",
+      "visual_profile": "academic",
+      "tags": [
+        "academic",
+        "paper",
+        "evidence",
+        "research",
+        "clean"
+      ],
+      "density": "medium",
+      "mood": "credible, calm, evidence-first",
+      "composition": "warm white canvas, strict evidence grid, navy hierarchy, restrained annotations",
+      "typography_treatment": "compact sans-serif labels with decisive navy action titles",
+      "background_treatment": "quiet paper ground with subtle blue section bands",
+      "image_treatment": "large source figures on white plates with visible captions and provenance",
+      "table_treatment": "native white tables with navy rules and one coral emphasis row",
+      "style_markers": [
+        "paper canvas",
+        "navy thesis",
+        "source figure plate",
+        "coral annotation"
+      ],
+      "layout_families": [
+        "research-cover",
+        "evidence-split",
+        "method-flow",
+        "chart-first",
+        "finding-boundary"
+      ],
+      "avoid": [
+        "decorative stock photography",
+        "poster text walls",
+        "unlabelled charts"
+      ],
+      "inspiration_asset": "themes/style-references/academic-evidence-v1.png",
+      "provenance": {
+        "type": "original",
+        "inspiration": "evidence-led academic editorial systems"
+      },
+      "selection": {
+        "theme_id": "academic-evidence",
+        "basis": "planner_choice",
+        "semantic_scores": {}
+      }
+    }
+  },
+  "plan": {
+    "title": "RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束",
+    "subtitle": "先确认比较口径，再判断性能、效率与结论边界",
+    "slides": [
+      {
+        "id": "s6",
+        "layout": "comparison",
+        "composition_id": "argument-pair",
+        "role": "method_overview",
+        "content_priority": "core",
+        "action_title": "RLinf 的平均增幅高于 SimpleVLA",
+        "audience_question": "RLinf 的 RL 增益是否超过 SimpleVLA？",
+        "narrative_job": "直接比较两套框架的 SFT→RL 平均变化，并把结论绑定到前一页已经标出的实现差异。",
+        "slide_goal": "给出框架级性能判断，同时主动收紧因果措辞。",
+        "primary_claim": "RLinf 的平均 SSR 从 24.48% 升至 84.63%，增益为 60.15 个百分点；SimpleVLA 从 34.40% 升至 72.18%，增益为 37.78 个百分点，因此 RLinf 的平均 RL 增幅更大。",
+        "evidence": [
+          {
+            "claim_support": "平均 SSR 对比表同时给出 RLinf SFT/RL、Simple SFT/RL 及两者的 Δ Avg.。",
+            "evidence_ref": "p6-table-1",
+            "interpretation": "比较 SFT→RL 的变化比只比较最终 SSR 更能回答“RL 带来多少增益”。"
+          }
+        ],
+        "implication": "最稳妥的表述是“RLinf 完整训练系统带来更大的平均提升”；若要拆分精度、学习率、reward 或采样策略的单独贡献，还需要额外控制变量或消融。",
+        "transition_in": "跨任务结果证明 RLinf 有效，平均对照显示其系统增幅更大。",
+        "transition_out": "但平均数仍可能掩盖评估温度和初始模型能力造成的变化，因此要检查结果边界。",
+        "evidence_refs": [
+          "p6-table-1"
+        ],
+        "table_refs": [
+          "p6-table-1"
+        ],
+        "asset_candidates": [],
+        "visual_intent": "comparison_matrix",
+        "visual_plan": {
+          "layout_family": "comparison",
+          "primary_visual": null,
+          "image_budget": 0,
+          "image_roles": [],
+          "data_strategy": "native_table",
+          "background_variant": "light",
+          "density": "balanced"
+        },
+        "speaker_notes": {
+          "talk_track": "把两套系统的 SFT→RL 平均变化放在同一张表里。RLinf 从 24.48% 提升到 84.63%，增加 60.15 个百分点；SimpleVLA 从 34.40% 提升到 72.18%，增加 37.78 个百分点，所以 RLinf 的完整训练系统平均增幅更大。但这一页不构成单因素消融：精度、学习率、LoRA、轨迹收集和 reward 设计都不同。下一页继续检查初始模型与评估温度带来的敏感性。",
+          "delivery_cue": "先读两组平均值和增幅，再明确“系统级比较”而非“纯算法因果”。",
+          "source_refs": [
+            "p6-table-1"
+          ],
+          "estimated_seconds": 100
+        },
+        "content": {
+          "eyebrow": "框架级对照",
+          "title": "RLinf 的平均增幅高于 SimpleVLA",
+          "subtitle": null,
+          "kicker": null,
+          "lede": "比较 SFT→RL 的变化量，比只比较最终 SSR 更能回答哪套完整系统带来了更大提升。",
+          "note": {
+            "label": "结论边界",
+            "value": "支持系统级比较；不等同于单独归因于精度、学习率、reward 或采样策略。"
+          },
+          "body_points": [
+            {
+              "label": "先看变化量",
+              "text": "RLinf 的平均提升为 60.15 个百分点，SimpleVLA 为 37.78 个百分点。"
+            },
+            {
+              "label": "再看可比性",
+              "text": "两套系统的实现配置并不完全一致，平均差异不能拆解为单一因素贡献。"
+            },
+            {
+              "label": "因此",
+              "text": "RLinf 的完整训练系统平均提升更大，但单因素因果仍需控制变量或消融。"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "RLinf Δ Avg.",
+              "value": "+60.15 个百分点",
+              "meaning": "24.48% → 84.63%，平均提升更大"
+            },
+            {
+              "label": "SimpleVLA Δ Avg.",
+              "value": "+37.78 个百分点",
+              "meaning": "34.40% → 72.18%，作为系统级对照"
+            }
+          ],
+          "steps": [],
+          "result": null,
+          "columns": [
+            {
+              "label": "RLinf",
+              "headline": "24.48% → 84.63%",
+              "points": [
+                "平均提升 +60.15 个百分点",
+                "完整训练系统的平均变化更大"
+              ],
+              "tone": "accent"
+            },
+            {
+              "label": "SimpleVLA",
+              "headline": "34.40% → 72.18%",
+              "points": [
+                "平均提升 +37.78 个百分点",
+                "作为完整系统对照，而非单变量基线"
+              ],
+              "tone": "neutral"
+            }
+          ],
+          "takeaway": {
+            "label": "一句话判断",
+            "value": "RLinf 的平均 RL 增幅更大，但证据指向的是系统级效果，而不是某个实现因素的独立贡献。"
+          }
+        },
+        "speaker_note": "把两套系统的 SFT→RL 平均变化放在同一张表里。RLinf 从 24.48% 提升到 84.63%，增加 60.15 个百分点；SimpleVLA 从 34.40% 提升到 72.18%，增加 37.78 个百分点，所以 RLinf 的完整训练系统平均增幅更大。但这一页不构成单因素消融：精度、学习率、LoRA、轨迹收集和 reward 设计都不同。下一页继续检查初始模型与评估温度带来的敏感性。"
+      }
+    ]
+  }
+}

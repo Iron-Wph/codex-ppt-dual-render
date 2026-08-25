@@ -1,0 +1,999 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/0il7pa",
+    "id": "0il7pa",
+    "slide": 1,
+    "layoutId": "201513e7-6380-4a64-9151-4054a7034855",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "40b5210b-97b5-4da1-bf39-1b5c76ff11a4",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#EAF0F7",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "201513e7-6380-4a64-9151-4054a7034855",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "40b5210b-97b5-4da1-bf39-1b5c76ff11a4",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "40b5210b-97b5-4da1-bf39-1b5c76ff11a4",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/h0fipoje",
+      "id": "1",
+      "name": "slide-1-top-rule",
+      "bbox": [
+        72,
+        34,
+        1136,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#C9D5E3",
+      "lineWidth": 1
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ux4jet0n",
+      "id": "2",
+      "name": "slide-1-page",
+      "bbox": [
+        1116,
+        668,
+        92,
+        20
+      ],
+      "geometry": "rect",
+      "text": "01 / 01",
+      "textPreview": "01 / 01",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 12,
+        "typeface": "+mn-lt",
+        "color": "#5C718A",
+        "alignment": "right",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "01 / 01"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "01 / 01",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "color": "#5C718A",
+            "alignment": "right",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "01 / 01",
+              "fontSize": 12,
+              "color": "#5C718A",
+              "alignment": "right",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vyd0ny18",
+      "id": "3",
+      "name": "s9-answer-kicker",
+      "bbox": [
+        72,
+        72,
+        240,
+        20
+      ],
+      "geometry": "rect",
+      "text": "THE ANSWER",
+      "textPreview": "THE ANSWER",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 12,
+        "typeface": "+mn-lt",
+        "color": "#245CB7",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "THE ANSWER"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "THE ANSWER",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "color": "#245CB7",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "THE ANSWER",
+              "fontSize": 12,
+              "color": "#245CB7",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8vmhcj2h",
+      "id": "4",
+      "name": "s9-answer-title",
+      "bbox": [
+        72,
+        128,
+        680,
+        190
+      ],
+      "geometry": "rect",
+      "text": "可信的是受控系统增益，纯算法优越性尚未证实",
+      "textPreview": "可信的是受控系统增益，纯算法优越性尚未证实",
+      "resolvedFontSize": 48,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 48,
+        "typeface": "+mn-lt",
+        "color": "#13233A",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "可信的是受控系统增益，纯算"
+          },
+          {
+            "index": 2,
+            "text": "法优越性尚未证实"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "可信的是受控系统增益，纯算法优越性尚未证实",
+          "lineSpacingPercent": 94000,
+          "resolvedTextStyle": {
+            "fontSize": 48,
+            "color": "#13233A",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 0.94
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "可信的是受控系统增益，纯算法优越性尚未证实",
+              "fontSize": 48,
+              "color": "#13233A",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 0.94
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/twviloj2",
+      "id": "5",
+      "name": "s9-answer-claim",
+      "bbox": [
+        72,
+        344,
+        660,
+        112
+      ],
+      "geometry": "rect",
+      "text": "在固定 RoboTwin seed、OOD 评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练在 8 个任务上将平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下表现出有竞争力的 actor/rollout 时间；但精度、超参数、轨迹收集和 reward 设计差异使其不能被表述为纯算法因果结论。",
+      "textPreview": "在固定 RoboTwin seed、OOD 评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练在 8 个任务上将平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下表现出有竞争力的 actor/rollout 时间...",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#5C718A",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "在固定 RoboTwin seed、OOD 评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练在 8"
+          },
+          {
+            "index": 2,
+            "text": "个任务上将平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated"
+          },
+          {
+            "index": 3,
+            "text": "配置下表现出有竞争力的 actor/rollout 时间；但精度、超参数、轨迹收集和 reward"
+          },
+          {
+            "index": 4,
+            "text": "设计差异使其不能被表述为纯算法因果结论。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "在固定 RoboTwin seed、OOD 评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练在 8 个任务上将平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下表现出有竞争力的 actor/rollout 时间；但精度、超参数、轨迹收集和 reward 设计差异使其不能被表述为纯算法因果结论。",
+          "lineSpacingPercent": 118000,
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#5C718A",
+            "alignment": "left",
+            "lineSpacing": 1.18
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "在固定 RoboTwin seed、OOD 评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练在 8 个任务上将平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下表现出有竞争力的 actor/rollout 时间；但精度、超参数、轨迹收集和 reward 设计差异使其不能被表述为纯算法因果结论。",
+              "fontSize": 17,
+              "color": "#5C718A",
+              "alignment": "left",
+              "lineSpacing": 1.18
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/694za9kr",
+      "id": "6",
+      "name": "s9-answer-point-1-label",
+      "bbox": [
+        790,
+        142,
+        170,
+        18
+      ],
+      "geometry": "rect",
+      "text": "答案：性能成立",
+      "textPreview": "答案：性能成立",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#245CB7",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "答案：性能成立"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "答案：性能成立",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#245CB7",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "答案：性能成立",
+              "fontSize": 10,
+              "color": "#245CB7",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7ad0je1c",
+      "id": "7",
+      "name": "s9-answer-point-1",
+      "bbox": [
+        790,
+        176,
+        390,
+        70
+      ],
+      "geometry": "rect",
+      "text": "8 个任务平均 train SSR：RLinf RL 84.63%，由 SFT 的 24.48% 提升；SimpleVLA RL 为 72.18%。",
+      "textPreview": "8 个任务平均 train SSR：RLinf RL 84.63%，由 SFT 的 24.48% 提升；SimpleVLA RL 为 72.18%。",
+      "resolvedFontSize": 19,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 19,
+        "typeface": "+mn-lt",
+        "color": "#13233A",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "8 个任务平均 train SSR：RLinf RL 84.63%，由"
+          },
+          {
+            "index": 2,
+            "text": "SFT 的 24.48% 提升；SimpleVLA RL 为"
+          },
+          {
+            "index": 3,
+            "text": "72.18%。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "8 个任务平均 train SSR：RLinf RL 84.63%，由 SFT 的 24.48% 提升；SimpleVLA RL 为 72.18%。",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#13233A",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "8 个任务平均 train SSR：RLinf RL 84.63%，由 SFT 的 24.48% 提升；SimpleVLA RL 为 72.18%。",
+              "fontSize": 19,
+              "color": "#13233A",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/k72h8z2l",
+      "id": "8",
+      "name": "s9-answer-point-1-rule",
+      "bbox": [
+        790,
+        256,
+        390,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#C9D5E3",
+      "lineWidth": 1
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l8vih4j6",
+      "id": "9",
+      "name": "s9-answer-point-2-label",
+      "bbox": [
+        790,
+        268,
+        170,
+        18
+      ],
+      "geometry": "rect",
+      "text": "采用条件：效率有范围",
+      "textPreview": "采用条件：效率有范围",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#245CB7",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "采用条件：效率有范围"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "采用条件：效率有范围",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#245CB7",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "采用条件：效率有范围",
+              "fontSize": 10,
+              "color": "#245CB7",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1gvu50ni",
+      "id": "10",
+      "name": "s9-answer-point-2",
+      "bbox": [
+        790,
+        302,
+        390,
+        70
+      ],
+      "geometry": "rect",
+      "text": "8 卡 colocated 下，RLinf actor/rollout 为 49.15/170.34 秒，优于 SimpleVLA 的 94.05/189.33 秒。",
+      "textPreview": "8 卡 colocated 下，RLinf actor/rollout 为 49.15/170.34 秒，优于 SimpleVLA 的 94.05/189.33 秒。",
+      "resolvedFontSize": 19,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 19,
+        "typeface": "+mn-lt",
+        "color": "#13233A",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "8 卡 colocated 下，RLinf actor/rollout 为"
+          },
+          {
+            "index": 2,
+            "text": "49.15/170.34 秒，优于 SimpleVLA 的"
+          },
+          {
+            "index": 3,
+            "text": "94.05/189.33 秒。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "8 卡 colocated 下，RLinf actor/rollout 为 49.15/170.34 秒，优于 SimpleVLA 的 94.05/189.33 秒。",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#13233A",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "8 卡 colocated 下，RLinf actor/rollout 为 49.15/170.34 秒，优于 SimpleVLA 的 94.05/189.33 秒。",
+              "fontSize": 19,
+              "color": "#13233A",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0fmdwvmx",
+      "id": "11",
+      "name": "s9-answer-point-2-rule",
+      "bbox": [
+        790,
+        382,
+        390,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#C9D5E3",
+      "lineWidth": 1
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fedc3a5c",
+      "id": "12",
+      "name": "s9-answer-point-3-label",
+      "bbox": [
+        790,
+        394,
+        170,
+        18
+      ],
+      "geometry": "rect",
+      "text": "边界：不能纯算法归因",
+      "textPreview": "边界：不能纯算法归因",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#D65F42",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "边界：不能纯算法归因"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "边界：不能纯算法归因",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#D65F42",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "边界：不能纯算法归因",
+              "fontSize": 10,
+              "color": "#D65F42",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ed4vu5o7",
+      "id": "13",
+      "name": "s9-answer-point-3",
+      "bbox": [
+        790,
+        428,
+        390,
+        70
+      ],
+      "geometry": "rect",
+      "text": "精度、学习率、LoRA、valid trajectory 收集与 reward 设计不同，不能把增益单独归因于某个算法组件。",
+      "textPreview": "精度、学习率、LoRA、valid trajectory 收集与 reward 设计不同，不能把增益单独归因于某个算法组件。",
+      "resolvedFontSize": 19,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 19,
+        "typeface": "+mn-lt",
+        "color": "#13233A",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "精度、学习率、LoRA、valid trajectory"
+          },
+          {
+            "index": 2,
+            "text": "收集与 reward"
+          },
+          {
+            "index": 3,
+            "text": "设计不同，不能把增益单独归因于某个算法"
+          },
+          {
+            "index": 4,
+            "text": "组件。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "精度、学习率、LoRA、valid trajectory 收集与 reward 设计不同，不能把增益单独归因于某个算法组件。",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#13233A",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "精度、学习率、LoRA、valid trajectory 收集与 reward 设计不同，不能把增益单独归因于某个算法组件。",
+              "fontSize": 19,
+              "color": "#13233A",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dcvu10nm",
+      "id": "14",
+      "name": "s9-boundary-rule",
+      "bbox": [
+        72,
+        562,
+        1136,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#D65F42",
+      "lineWidth": 2
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sbmdsv61",
+      "id": "15",
+      "name": "s9-boundary-label",
+      "bbox": [
+        72,
+        590,
+        160,
+        18
+      ],
+      "geometry": "rect",
+      "text": "最终判断",
+      "textPreview": "最终判断",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 11,
+        "typeface": "+mn-lt",
+        "color": "#D65F42",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "最终判断"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "最终判断",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 11,
+            "color": "#D65F42",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "最终判断",
+              "fontSize": 11,
+              "color": "#D65F42",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ratczq5g",
+      "id": "16",
+      "name": "s9-boundary",
+      "bbox": [
+        250,
+        582,
+        930,
+        34
+      ],
+      "geometry": "rect",
+      "text": "受控条件下 RLinf 系统确实更强且具有效率优势；纯算法因果仍需额外控制变量。",
+      "textPreview": "受控条件下 RLinf 系统确实更强且具有效率优势；纯算法因果仍需额外控制变量。",
+      "resolvedFontSize": 19,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 19,
+        "typeface": "+mn-lt",
+        "color": "#13233A",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "受控条件下 RLinf 系统确实更强且具有效率优势；纯算法因果仍需额外控制变量。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "受控条件下 RLinf 系统确实更强且具有效率优势；纯算法因果仍需额外控制变量。",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#13233A",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "受控条件下 RLinf 系统确实更强且具有效率优势；纯算法因果仍需额外控制变量。",
+              "fontSize": 19,
+              "color": "#13233A",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

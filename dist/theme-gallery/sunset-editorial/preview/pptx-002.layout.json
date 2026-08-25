@@ -1,0 +1,474 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/swasy2",
+    "id": "swasy2",
+    "slide": 2,
+    "layoutId": "f5abc484-0219-46cf-9f1f-c918579f4ee0",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "dcc53014-52e8-498c-9fe3-742ba76a2e4c",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#FFF8F1",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "f5abc484-0219-46cf-9f1f-c918579f4ee0",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "dcc53014-52e8-498c-9fe3-742ba76a2e4c",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "dcc53014-52e8-498c-9fe3-742ba76a2e4c",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tobitcra",
+      "id": "1",
+      "name": "slide-2-top-rule",
+      "bbox": [
+        72,
+        34,
+        1136,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#E5CABC",
+      "lineWidth": 1
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6l0zixsj",
+      "id": "2",
+      "name": "slide-2-page",
+      "bbox": [
+        1116,
+        668,
+        92,
+        20
+      ],
+      "geometry": "rect",
+      "text": "02 / 02",
+      "textPreview": "02 / 02",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 12,
+        "typeface": "+mn-lt",
+        "color": "#7D665F",
+        "alignment": "right",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "02 / 02"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "02 / 02",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "color": "#7D665F",
+            "alignment": "right",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "02 / 02",
+              "fontSize": 12,
+              "color": "#7D665F",
+              "alignment": "right",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rmt0r294",
+      "id": "3",
+      "name": "slide-008-kicker",
+      "bbox": [
+        72,
+        76,
+        360,
+        22
+      ],
+      "geometry": "rect",
+      "text": "PAPER EVIDENCE",
+      "textPreview": "PAPER EVIDENCE",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#B9462E",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "PAPER EVIDENCE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "PAPER EVIDENCE",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#B9462E",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "PAPER EVIDENCE",
+              "fontSize": 13,
+              "color": "#B9462E",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0r21o7q1",
+      "id": "4",
+      "name": "slide-008-title",
+      "bbox": [
+        72,
+        114,
+        800,
+        86
+      ],
+      "geometry": "rect",
+      "text": "主要结果：性能、数据效率和迁移同时提升",
+      "textPreview": "主要结果：性能、数据效率和迁移同时提升",
+      "resolvedFontSize": 38,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 38,
+        "typeface": "+mn-lt",
+        "color": "#2B1D1A",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "主要结果：性能、数据效率和迁移同时提升"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "主要结果：性能、数据效率和迁移同时提升",
+          "lineSpacingPercent": 98000,
+          "resolvedTextStyle": {
+            "fontSize": 38,
+            "color": "#2B1D1A",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 0.98
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "主要结果：性能、数据效率和迁移同时提升",
+              "fontSize": 38,
+              "color": "#2B1D1A",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 0.98
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "chart",
+      "scope": "slide",
+      "aid": "ch/dsfe9sji",
+      "id": "5",
+      "bbox": [
+        92,
+        236,
+        1050,
+        350
+      ],
+      "chartType": "bar"
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/epkzmh8v",
+      "id": "6",
+      "name": "slide-008-caption",
+      "bbox": [
+        92,
+        210,
+        760,
+        16
+      ],
+      "geometry": "rect",
+      "text": "p10-table-1",
+      "textPreview": "p10-table-1",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 11,
+        "typeface": "+mn-lt",
+        "color": "#7D665F",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "p10-table-1"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "p10-table-1",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 11,
+            "color": "#7D665F",
+            "alignment": "left",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "p10-table-1",
+              "fontSize": 11,
+              "color": "#7D665F",
+              "alignment": "left",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fqt0vm9g",
+      "id": "7",
+      "name": "slide-008-source-frame",
+      "bbox": [
+        900,
+        88,
+        300,
+        112
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D8CFC5",
+      "lineWidth": 1
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ovm1srqx",
+      "id": "8",
+      "name": "slide-008-source-label",
+      "bbox": [
+        914,
+        98,
+        110,
+        16
+      ],
+      "geometry": "rect",
+      "text": "SOURCE CROP",
+      "textPreview": "SOURCE CROP",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#9B5C45",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "SOURCE CROP"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "SOURCE CROP",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#9B5C45",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "SOURCE CROP",
+              "fontSize": 10,
+              "color": "#9B5C45",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/g7ipo3yx",
+      "id": "9",
+      "bbox": [
+        912,
+        116,
+        276,
+        72
+      ],
+      "alt": "论文第 10 页图片",
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "8a270614-9469-46e9-9329-7ce992148359",
+        "contentType": "image/png",
+        "byteLength": 5054
+      }
+    }
+  ],
+  "composeRuns": []
+}

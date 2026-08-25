@@ -1,0 +1,27 @@
+{
+  "id": "signal-dark",
+  "label": "Signal Dark",
+  "category": "Product",
+  "visual_profile": "frontier",
+  "tags": ["signal", "dark", "technology", "legacy"],
+  "match_signals": ["demo", "future-facing", "演示"],
+  "density": "medium",
+  "mood": "futuristic, energetic, product-forward",
+  "recommended_for": ["frontier technology", "product launch", "systems architecture"],
+  "composition": "navy canvas, cyan signal lines, magenta contrast, lime success state",
+  "typography_treatment": "bold product typography with technical labels",
+  "background_treatment": "midnight navy with signal-line geometry",
+  "image_treatment": "dark media wells with cyan edge treatment",
+  "table_treatment": "dark evidence table with luminous signal accents",
+  "style_markers": ["midnight navy", "cyan signal lines", "controlled violet and magenta", "dark data grid"],
+  "layout_families": ["futuristic-hero", "orbit-system", "product-reveal", "signal-chart", "dark-comparison"],
+  "avoid": ["rainbow neon", "illegible glowing text", "sci-fi decoration without story purpose"],
+  "style_reference_asset": "themes/style-references/future-tech-signal-v1.png",
+  "provenance": { "type": "legacy-original" },
+  "colors": {
+    "background": "#090E1A", "surface": "#111B2D", "surface2": "#182640",
+    "foreground": "#F1F6FF", "muted": "#97A9C5", "accent": "#55D6FF",
+    "accent2": "#FF6E91", "accent3": "#B6F36B", "border": "#304565",
+    "white": "#FFFFFF", "black": "#060A12"
+  }
+}

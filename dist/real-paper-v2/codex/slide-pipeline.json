@@ -1,0 +1,249 @@
+{
+  "mode": "storyboard-to-slide-to-assembly",
+  "slide_count": 9,
+  "slides": [
+    {
+      "id": "s1",
+      "index": 1,
+      "plan": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-001\\slide-001.plan.json",
+      "spec": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-001\\deck.spec.json",
+      "html": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-001\\presentation.html",
+      "pptx": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-001\\presentation.pptx",
+      "preview": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-001\\preview\\pptx-001.png",
+      "qa": {
+        "run_id": "2026-07-30T15:19:56.064Z-rlinf-robotwin-experiment-storyboard-revised",
+        "spec_version": "0.4.0",
+        "status": "pass",
+        "summary": {
+          "slides": 1,
+          "errors": 0,
+          "warnings": 0,
+          "passed": 12
+        },
+        "issues": [],
+        "artifacts": {
+          "spec": "deck.spec.json",
+          "html": "presentation.html",
+          "pptx": "presentation.pptx",
+          "montage": "preview/pptx-montage.webp"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "index": 2,
+      "plan": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-002\\slide-002.plan.json",
+      "spec": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-002\\deck.spec.json",
+      "html": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-002\\presentation.html",
+      "pptx": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-002\\presentation.pptx",
+      "preview": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-002\\preview\\pptx-001.png",
+      "qa": {
+        "run_id": "2026-07-30T15:19:57.490Z-rlinf-robotwin-experiment-storyboard-revised",
+        "spec_version": "0.4.0",
+        "status": "pass",
+        "summary": {
+          "slides": 1,
+          "errors": 0,
+          "warnings": 0,
+          "passed": 12
+        },
+        "issues": [],
+        "artifacts": {
+          "spec": "deck.spec.json",
+          "html": "presentation.html",
+          "pptx": "presentation.pptx",
+          "montage": "preview/pptx-montage.webp"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "index": 3,
+      "plan": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-003\\slide-003.plan.json",
+      "spec": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-003\\deck.spec.json",
+      "html": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-003\\presentation.html",
+      "pptx": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-003\\presentation.pptx",
+      "preview": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-003\\preview\\pptx-001.png",
+      "qa": {
+        "run_id": "2026-07-30T15:19:59.689Z-rlinf-robotwin-experiment-storyboard-revised",
+        "spec_version": "0.4.0",
+        "status": "pass",
+        "summary": {
+          "slides": 1,
+          "errors": 0,
+          "warnings": 0,
+          "passed": 12
+        },
+        "issues": [],
+        "artifacts": {
+          "spec": "deck.spec.json",
+          "html": "presentation.html",
+          "pptx": "presentation.pptx",
+          "montage": "preview/pptx-montage.webp"
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "index": 4,
+      "plan": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-004\\slide-004.plan.json",
+      "spec": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-004\\deck.spec.json",
+      "html": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-004\\presentation.html",
+      "pptx": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-004\\presentation.pptx",
+      "preview": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-004\\preview\\pptx-001.png",
+      "qa": {
+        "run_id": "2026-07-30T15:20:01.216Z-rlinf-robotwin-experiment-storyboard-revised",
+        "spec_version": "0.4.0",
+        "status": "pass",
+        "summary": {
+          "slides": 1,
+          "errors": 0,
+          "warnings": 0,
+          "passed": 12
+        },
+        "issues": [],
+        "artifacts": {
+          "spec": "deck.spec.json",
+          "html": "presentation.html",
+          "pptx": "presentation.pptx",
+          "montage": "preview/pptx-montage.webp"
+        }
+      }
+    },
+    {
+      "id": "s5",
+      "index": 5,
+      "plan": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-005\\slide-005.plan.json",
+      "spec": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-005\\deck.spec.json",
+      "html": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-005\\presentation.html",
+      "pptx": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-005\\presentation.pptx",
+      "preview": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-005\\preview\\pptx-001.png",
+      "qa": {
+        "run_id": "2026-07-30T15:20:03.856Z-rlinf-robotwin-experiment-storyboard-revised",
+        "spec_version": "0.4.0",
+        "status": "pass",
+        "summary": {
+          "slides": 1,
+          "errors": 0,
+          "warnings": 0,
+          "passed": 12
+        },
+        "issues": [],
+        "artifacts": {
+          "spec": "deck.spec.json",
+          "html": "presentation.html",
+          "pptx": "presentation.pptx",
+          "montage": "preview/pptx-montage.webp"
+        }
+      }
+    },
+    {
+      "id": "s6",
+      "index": 6,
+      "plan": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-006\\slide-006.plan.json",
+      "spec": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-006\\deck.spec.json",
+      "html": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-006\\presentation.html",
+      "pptx": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-006\\presentation.pptx",
+      "preview": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-006\\preview\\pptx-001.png",
+      "qa": {
+        "run_id": "2026-07-30T15:20:05.724Z-rlinf-robotwin-experiment-storyboard-revised",
+        "spec_version": "0.4.0",
+        "status": "pass",
+        "summary": {
+          "slides": 1,
+          "errors": 0,
+          "warnings": 0,
+          "passed": 12
+        },
+        "issues": [],
+        "artifacts": {
+          "spec": "deck.spec.json",
+          "html": "presentation.html",
+          "pptx": "presentation.pptx",
+          "montage": "preview/pptx-montage.webp"
+        }
+      }
+    },
+    {
+      "id": "s7",
+      "index": 7,
+      "plan": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-007\\slide-007.plan.json",
+      "spec": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-007\\deck.spec.json",
+      "html": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-007\\presentation.html",
+      "pptx": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-007\\presentation.pptx",
+      "preview": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-007\\preview\\pptx-001.png",
+      "qa": {
+        "run_id": "2026-07-30T15:20:07.027Z-rlinf-robotwin-experiment-storyboard-revised",
+        "spec_version": "0.4.0",
+        "status": "pass",
+        "summary": {
+          "slides": 1,
+          "errors": 0,
+          "warnings": 0,
+          "passed": 12
+        },
+        "issues": [],
+        "artifacts": {
+          "spec": "deck.spec.json",
+          "html": "presentation.html",
+          "pptx": "presentation.pptx",
+          "montage": "preview/pptx-montage.webp"
+        }
+      }
+    },
+    {
+      "id": "s8",
+      "index": 8,
+      "plan": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-008\\slide-008.plan.json",
+      "spec": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-008\\deck.spec.json",
+      "html": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-008\\presentation.html",
+      "pptx": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-008\\presentation.pptx",
+      "preview": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-008\\preview\\pptx-001.png",
+      "qa": {
+        "run_id": "2026-07-30T15:20:09.294Z-rlinf-robotwin-experiment-storyboard-revised",
+        "spec_version": "0.4.0",
+        "status": "pass",
+        "summary": {
+          "slides": 1,
+          "errors": 0,
+          "warnings": 0,
+          "passed": 12
+        },
+        "issues": [],
+        "artifacts": {
+          "spec": "deck.spec.json",
+          "html": "presentation.html",
+          "pptx": "presentation.pptx",
+          "montage": "preview/pptx-montage.webp"
+        }
+      }
+    },
+    {
+      "id": "s9",
+      "index": 9,
+      "plan": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-009\\slide-009.plan.json",
+      "spec": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-009\\deck.spec.json",
+      "html": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-009\\presentation.html",
+      "pptx": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-009\\presentation.pptx",
+      "preview": "C:\\Users\\Wph\\Documents\\PPT制作\\dist\\real-paper-v2\\codex\\slides\\slide-009\\preview\\pptx-001.png",
+      "qa": {
+        "run_id": "2026-07-30T15:20:10.519Z-rlinf-robotwin-experiment-storyboard-revised",
+        "spec_version": "0.4.0",
+        "status": "pass",
+        "summary": {
+          "slides": 1,
+          "errors": 0,
+          "warnings": 0,
+          "passed": 12
+        },
+        "issues": [],
+        "artifacts": {
+          "spec": "deck.spec.json",
+          "html": "presentation.html",
+          "pptx": "presentation.pptx",
+          "montage": "preview/pptx-montage.webp"
+        }
+      }
+    }
+  ]
+}

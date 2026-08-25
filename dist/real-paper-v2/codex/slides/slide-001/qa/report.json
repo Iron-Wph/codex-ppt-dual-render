@@ -1,0 +1,18 @@
+{
+  "run_id": "2026-07-30T15:19:56.064Z-rlinf-robotwin-experiment-storyboard-revised",
+  "spec_version": "0.4.0",
+  "status": "pass",
+  "summary": {
+    "slides": 1,
+    "errors": 0,
+    "warnings": 0,
+    "passed": 12
+  },
+  "issues": [],
+  "artifacts": {
+    "spec": "deck.spec.json",
+    "html": "presentation.html",
+    "pptx": "presentation.pptx",
+    "montage": "preview/pptx-montage.webp"
+  }
+}

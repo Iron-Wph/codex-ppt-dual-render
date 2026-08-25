@@ -1,0 +1,15 @@
+{"kind":"deck","id":"pr/owe7z0","name":"Deck"}
+{"kind":"layout","layoutId":"8ee71cc5-8b3b-42f8-bea0-e81d64ec9489","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"a14aad6e-04ae-4032-936b-9f4ff0c17360","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/hfmdn0","slide":1,"title":"01 / 01","textShapes":6}
+{"kind":"shape","id":"sh/tg72p8fq","slide":1,"name":"slide-1-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/6dg3utwz","slide":1,"name":"slide-1-page","text":"01 / 01","textPreview":"01 / 01","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/7epknyxk","slide":1,"name":"s5-kicker","text":"RESULT FOCUS","textPreview":"RESULT FOCUS","textChars":12,"textLines":1,"bbox":[72,76,420,22]}
+{"kind":"textbox","id":"sh/gjil03e1","slide":1,"name":"s5-title","text":"8/8 任务提升，平均 SSR 显著上升","textPreview":"8/8 任务提升，平均 SSR 显著上升","textChars":20,"textLines":1,"bbox":[72,112,820,106]}
+{"kind":"shape","id":"sh/h4r2t8fm","slide":1,"name":"s5-chart-bg","bbox":[72,240,732,330]}
+{"kind":"shape","id":"sh/vipkryxg","slide":1,"name":"s5-callout-bg","bbox":[830,240,370,330]}
+{"kind":"textbox","id":"sh/47il4ned","slide":1,"name":"s5-callout-label","text":"核心结果","textPreview":"核心结果","textChars":4,"textLines":1,"bbox":[858,270,300,18]}
+{"kind":"textbox","id":"sh/58rmxsfy","slide":1,"name":"s5-callout-value","text":"8/8 任务提升；24.48%→84.63%；平均提升 +60.15 个百分点","textPreview":"8/8 任务提升；24.48%→84.63%；平均提升 +60.15 个百分点","textChars":39,"textLines":1,"bbox":[858,326,312,110]}
+{"kind":"textbox","id":"sh/1ojmtwby","slide":1,"name":"s5-callout-detail","text":"8 个 RoboTwin 任务的 RLinf RL train SSR 均高于 RLinf S…","textPreview":"8 个 RoboTwin 任务的 RLinf RL train SSR 均高于 RLinf S…","textChars":48,"textLines":1,"bbox":[858,464,312,46]}
+{"kind":"table","id":"tb/3exozip4","slide":1,"name":"","rows":9,"cols":8,"preview":"Task​ | RLinf SFT​ | RLinf RL​ | Avg improvement​ | train step​ RLinf ​ | Simple SFT​ | Simple RL​ ​ | train step​ Simple​","bbox":[96,270,684,250]}
+{"kind":"notes","id":"nt/hfmdn0","slide":1,"text":"在可比性边界明确后，先看 RLinf 自身是否稳定地产生收益。8 个 RoboTwin 任务里，RLinf RL 的 train SSR 全部高于 SFT，平均从 24.48% 升到 84.63%，提升 60.15 个百分点。任务级结果还显示，增益幅度从 18.75 到 85.94 不等，训练步数从 30 到 240，因此结果强度不能脱离训练成本与配置口径。这里证明的是 RLinf 自身有效，下一页再比较两套系统。\n讲述提示：先强调 24.48%→84.63% 和 8/8，再指向任务级差异与训练步数。\n[Sources] p5-table-1 · p6-table-1"}

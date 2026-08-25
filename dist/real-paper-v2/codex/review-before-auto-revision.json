@@ -1,0 +1,156 @@
+{
+  "status": "revise",
+  "summary": "总体叙事主线清楚，但多页存在可见内容与主张不一致、关键步骤未进入阅读顺序、原始配置表替代了真正证据，以及占位/截断文字。QA 警告也未同步到 review_flags。",
+  "changes": [
+    {
+      "slide_id": "s2",
+      "element_id": null,
+      "issue_id": "UNMAPPED_CONTRACT_CONTENT",
+      "action": "将 1,000 训练 seed、128 OOD seed、8×A800 等关键实验契约映射为可见原生指标块，并将阅读顺序改为标题→契约指标→证据→边界。",
+      "priority": "high"
+    },
+    {
+      "slide_id": "s3",
+      "element_id": null,
+      "issue_id": "READING_ORDER_OMITS_STEP",
+      "action": "补入 LoRA 更新的 s3-step-5、对应连接线及 reading_order；或从内容主张中删除该步骤。",
+      "priority": "high"
+    },
+    {
+      "slide_id": "s4",
+      "element_id": "s4-evidence-table",
+      "issue_id": "EVIDENCE_TABLE_MISMATCH_RAW_DUMP",
+      "action": "移除不可读的原始配置转储，改用与主张一致的精简比较表，至少呈现 rollout batch、学习率、LoRA、轨迹收集和 reward 粒度差异。",
+      "priority": "high"
+    },
+    {
+      "slide_id": "s6",
+      "element_id": "s6-evidence-table",
+      "issue_id": "EVIDENCE_TABLE_REF_MISMATCH",
+      "action": "将可见证据替换为 p6-table-1 的平均值对照或等价紧凑图表；当前 p5 任务明细表不能直接支撑平均增幅主张。",
+      "priority": "high"
+    },
+    {
+      "slide_id": "s8",
+      "element_id": null,
+      "issue_id": "MATRIX_TOPOLOGY_PLACEHOLDER",
+      "action": "删除 POINT、WHAT IT MEANS 和通用占位文案，明确矩阵行列轴、填入真实模式与 actor/rollout/generate 数据，并声明稳定阅读顺序。",
+      "priority": "high"
+    },
+    {
+      "slide_id": "s9",
+      "element_id": "s9-evidence-table",
+      "issue_id": "FINAL_EVIDENCE_NOT_ALIGNED",
+      "action": "移除原始配置转储，改为与最终结论对应的性能、效率和归因边界三块精简证据，或直接引用 p6 平均表、p6 效率表和 p4 对照表。",
+      "priority": "high"
+    },
+    {
+      "slide_id": "s2",
+      "element_id": "s2-evidence-figure-1",
+      "issue_id": "EVIDENCE_SNAPSHOT_ACCESSIBILITY",
+      "action": "不要把整页快照作为唯一证据；改用可读裁剪或原生摘要，并将 alt_text/caption 改为说明 seed、OOD、随机化和硬件边界的语义文本。",
+      "priority": "medium"
+    },
+    {
+      "slide_id": "s5",
+      "element_id": "s5-result-callout",
+      "issue_id": "TRUNCATED_CORE_MESSAGE",
+      "action": "删除省略号，改为完整短句或指标串，例如“8/8 任务提升；24.48%→84.63%；平均提升 +60.15 个百分点”。",
+      "priority": "medium"
+    },
+    {
+      "slide_id": "s1",
+      "element_id": "s1-eyebrow",
+      "issue_id": "PRODUCTION_TEXT_LEAKAGE",
+      "action": "删除“CODEX / PRESENTATION MVP”，改为受众可见的实验上下文标签或留空。",
+      "priority": "medium"
+    },
+    {
+      "slide_id": "s1",
+      "element_id": "s1-title",
+      "issue_id": "TITLE_DENSITY-9jkth1",
+      "action": "压缩为一个单一结论性标题，将性能、效率和归因边界拆到副标题或后续页面。",
+      "priority": "medium"
+    },
+    {
+      "slide_id": "s2",
+      "element_id": "s2-title",
+      "issue_id": "TITLE_DENSITY-9i6xcy",
+      "action": "缩短标题，只保留实验契约的核心结论；将 seed、OOD 和硬件细节移至指标块。",
+      "priority": "medium"
+    },
+    {
+      "slide_id": "s3",
+      "element_id": "s3-title",
+      "issue_id": "TITLE_DENSITY-7zeqk3",
+      "action": "缩短标题，只保留训练信号主张；将 batch、reward 粒度和 LoRA 放入流程节点。",
+      "priority": "medium"
+    },
+    {
+      "slide_id": "s4",
+      "element_id": "s4-title",
+      "issue_id": "TITLE_DENSITY-o03c8d",
+      "action": "缩短标题，只保留“共享基础但不是同构训练”的结论；差异清单移入比较表。",
+      "priority": "medium"
+    },
+    {
+      "slide_id": "s5",
+      "element_id": "s5-title",
+      "issue_id": "TITLE_DENSITY-yej1dm",
+      "action": "缩短标题，只保留“8/8 任务提升、平均 SSR 显著上升”的结论。",
+      "priority": "medium"
+    },
+    {
+      "slide_id": "s6",
+      "element_id": "s6-title",
+      "issue_id": "TITLE_DENSITY-n652gq",
+      "action": "缩短标题，只保留两套系统平均增幅对比；具体百分比放入指标或图表。",
+      "priority": "medium"
+    },
+    {
+      "slide_id": "s7",
+      "element_id": "s7-title",
+      "issue_id": "TITLE_DENSITY-qz5l5h",
+      "action": "缩短标题，只保留“初始化与评估温度会改变单点 SSR”的结论。",
+      "priority": "medium"
+    },
+    {
+      "slide_id": "s8",
+      "element_id": "s8-title",
+      "issue_id": "TITLE_DENSITY-ci3mz8",
+      "action": "缩短标题，只保留“colocated 在当前 8 卡条件下更有竞争力”的结论。",
+      "priority": "medium"
+    },
+    {
+      "slide_id": "deck",
+      "element_id": null,
+      "issue_id": "QA_WARNINGS_NOT_MIRRORED",
+      "action": "将 QA 的标题密度、演讲稿长度和论文资产覆盖警告同步到 deck 或对应 slide 的 review_flags，修订后重新运行 QA。",
+      "priority": "medium"
+    },
+    {
+      "slide_id": "s4",
+      "element_id": null,
+      "issue_id": "SPEAKER_NOTES_LENGTH-pa81bp",
+      "action": "将演讲稿压缩至 120–260 字，删除重复的变量清单或过渡解释。",
+      "priority": "low"
+    },
+    {
+      "slide_id": "s8",
+      "element_id": null,
+      "issue_id": "SPEAKER_NOTES_LENGTH-cxnyto",
+      "action": "将演讲稿压缩至 120–260 字，保留 8 卡关键对照和部署边界。",
+      "priority": "low"
+    }
+  ],
+  "content_flags": [
+    "QA_WARNINGS_PRESENT",
+    "UNMAPPED_CONTENT_FIELDS_S2",
+    "MISSING_PIPELINE_STEP_S3",
+    "RAW_CONFIG_TABLE_MISMATCH_S4_S9",
+    "WRONG_EVIDENCE_TABLE_S6",
+    "TRUNCATED_OR_PLACEHOLDER_TEXT_S5_S8",
+    "TITLE_DENSITY_WARNINGS_S1_S8",
+    "REVIEW_FLAGS_EMPTY_DESPITE_QA_WARNINGS"
+  ]
+}

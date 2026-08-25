@@ -1,0 +1,489 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/cnfhvp",
+    "id": "cnfhvp",
+    "slide": 1,
+    "layoutId": "46e3797a-304d-44eb-a5fd-08802c6781db",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "d2013f6b-e168-43cf-94ae-6a332dbe04d8",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#F5F7FA",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "46e3797a-304d-44eb-a5fd-08802c6781db",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "d2013f6b-e168-43cf-94ae-6a332dbe04d8",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "d2013f6b-e168-43cf-94ae-6a332dbe04d8",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/psbqhwza",
+      "id": "1",
+      "name": "slide-1-top-rule",
+      "bbox": [
+        72,
+        34,
+        1136,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#C9D5E3",
+      "lineWidth": 1
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2p07mhgj",
+      "id": "2",
+      "name": "slide-1-page",
+      "bbox": [
+        1116,
+        668,
+        92,
+        20
+      ],
+      "geometry": "rect",
+      "text": "01 / 01",
+      "textPreview": "01 / 01",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 12,
+        "typeface": "+mn-lt",
+        "color": "#5C718A",
+        "alignment": "right",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "01 / 01"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "01 / 01",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "color": "#5C718A",
+            "alignment": "right",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "01 / 01",
+              "fontSize": 12,
+              "color": "#5C718A",
+              "alignment": "right",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3qtofmh4",
+      "id": "3",
+      "name": "s2-eyebrow",
+      "bbox": [
+        72,
+        88,
+        500,
+        22
+      ],
+      "geometry": "rect",
+      "text": "RESEARCH BRIEF",
+      "textPreview": "RESEARCH BRIEF",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#245CB7",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "RESEARCH BRIEF"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "RESEARCH BRIEF",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#245CB7",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "RESEARCH BRIEF",
+              "fontSize": 14,
+              "color": "#245CB7",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cv2psbyl",
+      "id": "4",
+      "name": "s2-title",
+      "bbox": [
+        72,
+        142,
+        560,
+        230
+      ],
+      "geometry": "rect",
+      "text": "先锁定实验契约，再谈 SSR 增益",
+      "textPreview": "先锁定实验契约，再谈 SSR 增益",
+      "resolvedFontSize": 56,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 56,
+        "typeface": "+mn-lt",
+        "color": "#13233A",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "先锁定实验契约，再"
+          },
+          {
+            "index": 2,
+            "text": "谈 SSR 增益"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "先锁定实验契约，再谈 SSR 增益",
+          "lineSpacingPercent": 94000,
+          "resolvedTextStyle": {
+            "fontSize": 56,
+            "color": "#13233A",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 0.94
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "先锁定实验契约，再谈 SSR 增益",
+              "fontSize": 56,
+              "color": "#13233A",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 0.94
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dwbqlgz6",
+      "id": "5",
+      "name": "s2-hero-frame",
+      "bbox": [
+        690,
+        104,
+        510,
+        418
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#C9D5E3",
+      "lineWidth": 1
+    },
+    {
+      "order": 6,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/b6hwbih0",
+      "id": "6",
+      "bbox": [
+        706,
+        120,
+        478,
+        385
+      ],
+      "alt": "Full-page evidence snapshot from page 1",
+      "contentType": "image/png",
+      "imageFit": "cover",
+      "asset": {
+        "assetId": "fc60d6c7-283c-46f5-b8b6-ff79fc91ded4",
+        "contentType": "image/png",
+        "byteLength": 141859
+      }
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/but8j6hg",
+      "id": "7",
+      "name": "s2-note-bg",
+      "bbox": [
+        72,
+        572,
+        1128,
+        62
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#C9D5E3",
+      "lineWidth": 1
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0zmpwbyx",
+      "id": "8",
+      "name": "s2-note-label",
+      "bbox": [
+        94,
+        593,
+        180,
+        18
+      ],
+      "geometry": "rect",
+      "text": "CORE CLAIM",
+      "textPreview": "CORE CLAIM",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 12,
+        "typeface": "+mn-lt",
+        "color": "#245CB7",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CORE CLAIM"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CORE CLAIM",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "color": "#245CB7",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "CORE CLAIM",
+              "fontSize": 12,
+              "color": "#245CB7",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lkvqpgzi",
+      "id": "9",
+      "name": "s2-note-value",
+      "bbox": [
+        286,
+        588,
+        860,
+        26
+      ],
+      "geometry": "rect",
+      "text": "SFT 与 RL 使用同一组 1,000 个 RoboTwin 随机 seed，评估使用额外 128 个未见 seed，采用 Piper 双臂，并统一在 8 卡 A800 平台上运行。",
+      "textPreview": "SFT 与 RL 使用同一组 1,000 个 RoboTwin 随机 seed，评估使用额外 128 个未见 seed，采用 Piper 双臂，并统一在 8 卡 A800 平台上运行。",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#13233A",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "SFT 与 RL 使用同一组 1,000 个 RoboTwin 随机 seed，评估使用额外 128 个未见 seed，采用 Piper 双臂，并统一在 8"
+          },
+          {
+            "index": 2,
+            "text": "卡 A800 平台上运行。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "SFT 与 RL 使用同一组 1,000 个 RoboTwin 随机 seed，评估使用额外 128 个未见 seed，采用 Piper 双臂，并统一在 8 卡 A800 平台上运行。",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#13233A",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "SFT 与 RL 使用同一组 1,000 个 RoboTwin 随机 seed，评估使用额外 128 个未见 seed，采用 Piper 双臂，并统一在 8 卡 A800 平台上运行。",
+              "fontSize": 17,
+              "color": "#13233A",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "engineering-blueprint",
+  "label": "Engineering Blueprint",
+  "category": "Diagram",
+  "visual_profile": "blueprint",
+  "tags": ["engineering", "architecture", "blueprint", "robotics", "system"],
+  "match_signals": ["engineering", "architecture", "robotics", "system", "pipeline", "开发者", "工程", "架构", "系统", "机器人"],
+  "density": "medium",
+  "mood": "technical, rigorous, constructed",
+  "recommended_for": ["robotics", "systems architecture", "technical teardown"],
+  "composition": "deep blueprint field, precise rails, annotated components, one luminous signal",
+  "typography_treatment": "condensed technical labels with strong white system claims",
+  "background_treatment": "midnight blue drafting grid with restrained coordinate marks",
+  "image_treatment": "figures framed as annotated engineering assemblies",
+  "table_treatment": "dark specification tables with cyan headers and amber exceptions",
+  "style_markers": ["blueprint grid", "cyan rail", "component label", "amber exception"],
+  "layout_families": ["blueprint-cover", "architecture-map", "component-cutaway", "experiment-compare", "spec-table"],
+  "avoid": ["random neon", "glowing body copy", "unstructured card mosaics"],
+  "style_reference_asset": "themes/style-references/future-tech-signal-v1.png",
+  "provenance": { "type": "original", "inspiration": "engineering blueprint and technical cutaway grammar" },
+  "colors": {
+    "background": "#071A2A", "surface": "#0D2840", "surface2": "#123652",
+    "foreground": "#F1F7FA", "muted": "#91AEC0", "accent": "#4ED4E8",
+    "accent2": "#F2A53A", "accent3": "#8DE1B7", "border": "#2A5570",
+    "white": "#FFFFFF", "black": "#04111D"
+  },
+  "spacing": { "page_margin": 58, "card_gap": 16 },
+  "typography": { "title_px": 56, "slide_title_px": 36, "body_px": 16, "caption_px": 11 }
+}

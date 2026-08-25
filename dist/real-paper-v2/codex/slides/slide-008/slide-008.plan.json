@@ -1,0 +1,258 @@
+{
+  "deck": {
+    "id": "rlinf-robotwin-experiment-storyboard-revised",
+    "title": "RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束",
+    "purpose": "帮助具身智能与机器人学习研究者判断 RLinf 在 RoboTwin 上的性能与系统效率证据，并准确区分受控系统优势与纯算法因果结论。",
+    "audience": "具身智能、机器人学习与强化学习研究者、论文评审者和实验复现者。",
+    "language": "zh-CN",
+    "aspect_ratio": "16:9",
+    "communication_job": "By the end, embodied-AI researchers should be able to cite and reproduce RLinf’s RoboTwin result with the correct boundary because the experiments show a large cross-task SSR gain and competitive execution times under fixed seeds, evaluation protocol, and 8-card A800 conditions, while implementation differences prevent isolating a pure RLinf algorithm effect.",
+    "talk_duration_minutes": 12,
+    "audience_profile": {
+      "role": "具身智能与机器人学习研究者、论文评审者、实验复现者",
+      "prior_knowledge": "熟悉 VLA、SFT、GRPO、RoboTwin、SSR、OOD seed、多卡训练与基本实验对照方法。",
+      "cares_about": [
+        "RLinf 的性能增益是否跨任务成立",
+        "SFT→RL 的比较是否公平",
+        "reward、轨迹收集、精度和超参数差异是否改变结论",
+        "seed、GPU、评估温度和训练步数是否可复现",
+        "不同并行模式下 actor 与 rollout 的实际成本"
+      ],
+      "likely_questions": [
+        "RLinf 的提升能否归因于 RL 信号本身？",
+        "8 个任务上的增益是否一致，训练成本是多少？",
+        "RLinf 与 SimpleVLA 的比较到底控制了哪些变量？",
+        "评估温度、模型初始化和 GPU 是否会改变 SSR？",
+        "实际运行时应该选择哪种并行模式？"
+      ],
+      "desired_outcome": "能够复现实验契约，引用跨任务性能与系统效率结果，并将结论表述为受控条件下的 RLinf 完整训练系统优势，而非无条件的纯算法优越性。"
+    }
+  },
+  "narrative": {
+    "arc": "实验问题 → 实验契约与泛化口径 → RLinf 训练信号 → 与 SimpleVLA 的可比性边界 → 跨任务性能 → 框架级增益 → 敏感性边界 → 系统效率 → 受控条件下的结论",
+    "key_message": "在相同 RoboTwin 训练 seed、128 个 OOD 评估 seed、评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练使 8 个任务的平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下呈现有竞争力的 actor/rollout 时间；但由于精度、超参数、valid trajectory 收集和 reward 设计不同，证据支持的是受控条件下的完整系统优势，而不是纯算法因果结论。",
+    "opening_question": "在固定 RoboTwin seed、评估口径和 8 卡 A800 条件下，RLinf 的提升能否归因于 RL 信号本身，还是只能归因于完整训练系统的差异？",
+    "closing_answer": "证据支持这样的结论：在固定实验契约下，RLinf 的 RL 训练带来跨 8 个任务的显著 SSR 增益，并提供有竞争力的执行路径；但由于精度、超参数、轨迹收集和 reward 设计并非完全同构，不能把该结果表述为脱离实验契约的纯算法优越性。",
+    "sections": [
+      {
+        "id": "sec-4",
+        "title": "落到系统与结论",
+        "job": "把性能证据连接到运行成本，并回答开场归因问题",
+        "slide_ids": [
+          "s8"
+        ]
+      }
+    ],
+    "priority_map": {
+      "core": [
+        "s8"
+      ],
+      "support": [],
+      "context": []
+    },
+    "logic_check": {
+      "opening_resolved": true,
+      "core_has_evidence": true,
+      "no_redundant_slides": true,
+      "rationale": "已保留 9 页与原叙事顺序，并修复实验契约可见性、训练流程阅读顺序、比较表、平均值证据、效率矩阵、结论边界、标题密度、截断文案和演讲稿长度。所有核心主张均绑定有效证据 ID；结论页分别呈现答案、采用条件和归因边界。"
+    }
+  },
+  "visual": {
+    "style_family": "academic-evidence",
+    "image_policy": "仅使用证据索引中的源表、源图或页面快照；优先使用原生表格、原生图表与可追溯机制图，禁止装饰性图片。",
+    "density_profile": "中等密度、证据优先；核心结果使用大图表或大表格，实验边界使用短注释和明确的证据标记。",
+    "style_reason": "受众关心可比性、复现性和归因边界，因此采用暖白画布、深蓝标题、珊瑚强调和源证据板的学术证据风格。",
+    "layout_system": "Codex Grid evidence-first：统一左对齐标题与宽边距，交替使用证据表、机制流程、结果图表、对照构图和结论边界，避免连续页面使用同一轮廓。",
+    "style_reference": "codex/theme-reference.png",
+    "style_reference_html": "codex/theme-reference.html",
+    "style_inspiration": "codex/style-inspiration.png",
+    "style_lock": "theme-reference",
+    "style_system": {
+      "category": "Academic Research",
+      "visual_profile": "academic",
+      "tags": [
+        "academic",
+        "paper",
+        "evidence",
+        "research",
+        "clean"
+      ],
+      "density": "medium",
+      "mood": "credible, calm, evidence-first",
+      "composition": "warm white canvas, strict evidence grid, navy hierarchy, restrained annotations",
+      "typography_treatment": "compact sans-serif labels with decisive navy action titles",
+      "background_treatment": "quiet paper ground with subtle blue section bands",
+      "image_treatment": "large source figures on white plates with visible captions and provenance",
+      "table_treatment": "native white tables with navy rules and one coral emphasis row",
+      "style_markers": [
+        "paper canvas",
+        "navy thesis",
+        "source figure plate",
+        "coral annotation"
+      ],
+      "layout_families": [
+        "research-cover",
+        "evidence-split",
+        "method-flow",
+        "chart-first",
+        "finding-boundary"
+      ],
+      "avoid": [
+        "decorative stock photography",
+        "poster text walls",
+        "unlabelled charts"
+      ],
+      "inspiration_asset": "themes/style-references/academic-evidence-v1.png",
+      "provenance": {
+        "type": "original",
+        "inspiration": "evidence-led academic editorial systems"
+      },
+      "selection": {
+        "theme_id": "academic-evidence",
+        "basis": "planner_choice",
+        "semantic_scores": {}
+      }
+    }
+  },
+  "plan": {
+    "title": "RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束",
+    "subtitle": "先确认比较口径，再判断性能、效率与结论边界",
+    "slides": [
+      {
+        "id": "s8",
+        "layout": "matrix",
+        "composition_id": "evidence-table",
+        "role": "main_results",
+        "content_priority": "core",
+        "action_title": "8 卡条件下，colocated 更有竞争力",
+        "audience_question": "实际运行 RLinf 时，哪种并行路径更值得选？",
+        "narrative_job": "比较 8 卡模式和 1/2/4 节点数据，把“更高效”拆成 actor 与 rollout/generate 两个可测指标。",
+        "slide_goal": "将系统价值从抽象描述转化为具体的运行选择。",
+        "primary_claim": "8 卡数据中，RLinf colocated 的 actor/rollout 时间为 49.15/170.34 秒，SimpleVLA 为 94.05/189.33 秒；RLinf 的 disaggregated 与 hybrid 模式则显示出不同的时间成本。",
+        "evidence": [
+          {
+            "claim_support": "8 卡表列出 RLinf colocated、disaggregated、Hybrid(pipe=1)、Hybrid(pipe=2) 与 SimpleVLA 的 actor 和 rollout 时间。",
+            "evidence_ref": "p6-table-2-crop",
+            "interpretation": "在该测试条件下，colocated 的两个时间指标都低于 SimpleVLA 对应数据，而其他 RLinf 模式需要按具体成本选择。"
+          },
+          {
+            "claim_support": "1、2、4 节点表列出 RLinf 各模式随节点数变化的 actor 与 generate 时间，另列出 SimpleVLA colocated 数据。",
+            "evidence_ref": "p8-table-1-crop",
+            "interpretation": "并行模式和节点数会改变运行成本，因此不存在脱离模式与规模的单一效率结论。"
+          }
+        ],
+        "implication": "部署判断应明确节点数、并行模式和测量指标；“RLinf 更快”只能具体化为某一配置下的 actor/rollout 时间优势。",
+        "transition_in": "敏感性分析限定了性能数字，系统表则限定了效率数字。",
+        "transition_out": "现在可以用性能、效率和归因边界共同回答开场问题。",
+        "evidence_refs": [
+          "p6-table-2-crop",
+          "p8-table-1-crop"
+        ],
+        "table_refs": [
+          "p6-table-2",
+          "p8-table-1"
+        ],
+        "asset_candidates": [],
+        "visual_intent": "source_table",
+        "visual_plan": {
+          "layout_family": "matrix",
+          "primary_visual": null,
+          "image_budget": 0,
+          "image_roles": [],
+          "data_strategy": "native_table",
+          "background_variant": "light",
+          "density": "dense"
+        },
+        "speaker_notes": {
+          "talk_track": "性能数字受评估协议约束，效率数字也必须绑定部署配置。8 卡对比中，RLinf colocated 的 actor/rollout 为 49.15/170.34 秒，低于 SimpleVLA 的 94.05/189.33 秒；但 disaggregated 的 rollout 达到 546.64 秒，Hybrid 也有不同成本。再看 1、2、4 节点，actor 与 generate 会随模式和规模变化。因此选型应先固定节点数、模式和指标，再判断哪条路径更合适。",
+          "delivery_cue": "先读 8 卡横向对照，再指向矩阵的模式行与节点列，最后强调没有脱离配置的单一“更快”。",
+          "source_refs": [
+            "p6-table-2-crop",
+            "p8-table-1-crop"
+          ],
+          "estimated_seconds": 100
+        },
+        "content": {
+          "eyebrow": "系统效率",
+          "title": "8 卡条件下，colocated 更有竞争力",
+          "subtitle": null,
+          "kicker": null,
+          "lede": "选型不能只问“RLinf 快不快”，要同时看 actor、rollout/generate 和节点规模。",
+          "note": {
+            "label": "矩阵轴与阅读顺序",
+            "value": "行轴：并行模式；列轴：1n、2n、4n；单元格：actor / generate（秒）。先横向比较同一节点数的模式，再沿 colocated 行从 1n 读到 4n，最后回看 8 卡横向对照。"
+          },
+          "body_points": [
+            {
+              "label": "8 卡对比",
+              "text": "colocated 的 actor 与 rollout 都低于 SimpleVLA；disaggregated 与 Hybrid 的 rollout 成本更高。"
+            },
+            {
+              "label": "规模边界",
+              "text": "1/2/4 节点下，各模式的 actor 与 generate 随规模变化，效率结论必须绑定具体配置。"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "Colocated actor · 8 卡",
+              "value": "49.15 s",
+              "meaning": "低于 SimpleVLA 的 94.05 s"
+            },
+            {
+              "label": "Colocated rollout · 8 卡",
+              "value": "170.34 s",
+              "meaning": "低于 SimpleVLA 的 189.33 s"
+            },
+            {
+              "label": "Disaggregated rollout · 8 卡",
+              "value": "546.64 s",
+              "meaning": "同为 8 卡，但 rollout 成本显著更高"
+            }
+          ],
+          "steps": [],
+          "result": null,
+          "columns": [
+            {
+              "label": "1n",
+              "headline": "actor / generate（s）",
+              "points": [
+                "colocated 49.15 / 170.34",
+                "disaggregated 89.55 / 549.97",
+                "Hybrid(pipe=1) 50.14 / 303.70",
+                "Hybrid(pipe=2) 50.31 / 317.07"
+              ],
+              "tone": "navy"
+            },
+            {
+              "label": "2n",
+              "headline": "actor / generate（s）",
+              "points": [
+                "colocated 27.47 / 100.20",
+                "disaggregated 47.92 / 289.74",
+                "Hybrid(pipe=1) 27.53 / 166.00",
+                "Hybrid(pipe=2) 27.53 / 155.67"
+              ],
+              "tone": "blue"
+            },
+            {
+              "label": "4n",
+              "headline": "actor / generate（s）",
+              "points": [
+                "colocated 15.00 / 66.67",
+                "disaggregated 26.44 / 168.57",
+                "Hybrid(pipe=1) 15.03 / 95.37",
+                "Hybrid(pipe=2) 14.97 / 95.73"
+              ],
+              "tone": "coral"
+            }
+          ],
+          "takeaway": {
+            "label": "选型结论",
+            "value": "在当前 8 卡条件下优先考察 colocated；其他模式需结合节点规模与部署约束重新权衡。"
+          }
+        },
+        "speaker_note": "性能数字受评估协议约束，效率数字也必须绑定部署配置。8 卡对比中，RLinf colocated 的 actor/rollout 为 49.15/170.34 秒，低于 SimpleVLA 的 94.05/189.33 秒；但 disaggregated 的 rollout 达到 546.64 秒，Hybrid 也有不同成本。再看 1、2、4 节点，actor 与 generate 会随模式和规模变化。因此选型应先固定节点数、模式和指标，再判断哪条路径更合适。"
+      }
+    ]
+  }
+}

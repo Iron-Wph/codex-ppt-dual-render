@@ -1,0 +1,27 @@
+{
+  "id": "graphite-lime",
+  "label": "Graphite Lime",
+  "category": "Diagram",
+  "visual_profile": "graphite",
+  "tags": ["developer", "engineering", "graphite", "lime"],
+  "match_signals": ["developer", "platform", "api", "infrastructure", "tooling", "开发者", "平台", "基础设施"],
+  "density": "medium",
+  "mood": "technical, experimental, high-contrast",
+  "recommended_for": ["AI research", "engineering", "developer tools"],
+  "composition": "dark canvas, strong left thesis, lime evidence highlight, coral counterpoint",
+  "typography_treatment": "large technical headings with compact mono labels",
+  "background_treatment": "near-black graphite field with subtle technical rails",
+  "image_treatment": "bright source figures inside dark frames",
+  "table_treatment": "high-contrast evidence table with lime header accents",
+  "style_markers": ["near-black canvas", "luminous evidence accent", "technical line work"],
+  "layout_families": ["thesis-stage", "architecture-map", "experiment-comparison", "metric-strip", "evidence-panel"],
+  "avoid": ["dense dashboard grids", "low-contrast labels", "decorative neon without evidence"],
+  "style_reference_asset": "themes/style-references/future-tech-signal-v1.png",
+  "provenance": { "type": "legacy-original" },
+  "colors": {
+    "background": "#101312", "surface": "#181D1A", "surface2": "#202721",
+    "foreground": "#F1F3E9", "muted": "#A5AEA5", "accent": "#D8FF5A",
+    "accent2": "#FF7757", "accent3": "#8EE3C4", "border": "#39443B",
+    "white": "#FFFFFF", "black": "#0A0D0B"
+  }
+}

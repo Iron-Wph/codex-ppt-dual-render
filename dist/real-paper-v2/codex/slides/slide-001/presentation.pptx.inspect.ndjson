@@ -1,0 +1,22 @@
+{"kind":"deck","id":"pr/fjcs3y","name":"Deck"}
+{"kind":"layout","layoutId":"6bd692c5-7587-443f-b9c0-8e27dd5d4e02","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"795cbf05-cfdf-415a-931a-4562f6d963c8","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/stp021","slide":1,"title":"01 / 01","textShapes":8}
+{"kind":"shape","id":"sh/o7qp83ux","slide":1,"name":"slide-1-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/n6h8zydc","slide":1,"name":"slide-1-page","text":"01 / 01","textPreview":"01 / 01","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/25876tcr","slide":1,"name":"s1-eyebrow","text":"RoboTwin 实验解读","textPreview":"RoboTwin 实验解读","textChars":13,"textLines":1,"bbox":[72,78,560,24]}
+{"kind":"textbox","id":"sh/14z6xovm","slide":1,"name":"s1-title","text":"RLinf 的增益成立，但归因受实验契约约束","textPreview":"RLinf 的增益成立，但归因受实验契约约束","textChars":22,"textLines":1,"bbox":[72,154,620,268]}
+{"kind":"textbox","id":"sh/0j6p4ju1","slide":1,"name":"s1-subtitle","text":"性能、效率与归因边界必须一起判断","textPreview":"性能、效率与归因边界必须一起判断","textChars":16,"textLines":1,"bbox":[72,438,590,72]}
+{"kind":"shape","id":"sh/fixovydg","slide":1,"name":"s1-title-visual-plate","bbox":[738,152,420,390]}
+{"kind":"textbox","id":"sh/eho72tcv","slide":1,"name":"s1-title-visual-plate-label","text":"PAPER / ARGUMENT MAP","textPreview":"PAPER / ARGUMENT MAP","textChars":20,"textLines":1,"bbox":[762,172,372,18]}
+{"kind":"shape","id":"sh/l0jq9svq","slide":1,"name":"s1-title-visual-manuscript-line-1","bbox":[778,244,302.4,0]}
+{"kind":"shape","id":"sh/kzapgnu5","slide":1,"name":"s1-title-visual-manuscript-line-2","bbox":[778,292,243.6,0]}
+{"kind":"shape","id":"sh/ehor250n","slide":1,"name":"s1-title-visual-manuscript-line-3","bbox":[778,340,243.6,0]}
+{"kind":"shape","id":"sh/zih8bah8","slide":1,"name":"s1-title-visual-manuscript-line-4","bbox":[778,388,243.6,0]}
+{"kind":"shape","id":"sh/0jq94fit","slide":1,"name":"s1-title-visual-manuscript-line-5","bbox":[778,436,193.2,0]}
+{"kind":"shape","id":"sh/lkzqdkze","slide":1,"name":"s1-title-visual-annotation","bbox":[1023.6,238,75.6,163.8]}
+{"kind":"textbox","id":"sh/qdory50r","slide":1,"name":"s1-title-visual-annotation-label","text":"CLAIM\n→\nEVIDENCE","textPreview":"CLAIM | → | EVIDENCE","textChars":16,"textLines":3,"bbox":[1027.8,270,67.2,90]}
+{"kind":"shape","id":"sh/rex87ahw","slide":1,"name":"s1-note-bg","bbox":[72,568,720,66]}
+{"kind":"textbox","id":"sh/cf690vih","slide":1,"name":"s1-note-label","text":"判断框架","textPreview":"判断框架","textChars":4,"textLines":1,"bbox":[94,584,170,18]}
+{"kind":"textbox","id":"sh/dgfq90z2","slide":1,"name":"s1-note-value","text":"性能提升 ≠ RL 单独贡献","textPreview":"性能提升 ≠ RL 单独贡献","textChars":14,"textLines":1,"bbox":[270,580,490,28]}
+{"kind":"notes","id":"nt/stp021","slide":1,"text":"我们通常先看最终 SSR，但这组实验真正需要回答的是：增益来自 RL 信号本身，还是来自一整套训练系统？今天沿着三个问题展开：性能是否跨任务提升，运行是否具有效率，以及哪些实验条件限制归因。先把实验契约锁定，再看训练机制、结果和系统成本，最后给出可复现、但不越界的结论。\n讲述提示：先读出标题中的“增益成立”和“归因受约束”，随后明确三个判断维度。"}

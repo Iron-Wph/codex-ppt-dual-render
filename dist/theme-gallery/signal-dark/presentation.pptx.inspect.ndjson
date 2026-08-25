@@ -1,0 +1,30 @@
+{"kind":"deck","id":"pr/uspv5v","name":"Deck"}
+{"kind":"layout","layoutId":"4b9be0a0-9009-49e9-a3ab-0fdef632c828","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"ee613786-fede-4447-a19e-4bc984af47ff","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/7o111s","slide":1,"title":"01 / 02","textShapes":9}
+{"kind":"shape","id":"sh/e9wrm1cv","slide":1,"name":"slide-1-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/1cnqxwbm","slide":1,"name":"slide-1-page","text":"01 / 02","textPreview":"01 / 02","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/0be9obu1","slide":1,"name":"slide-001-eyebrow","text":"PAPER / RESEARCH BRIEF","textPreview":"PAPER / RESEARCH BRIEF","textChars":22,"textLines":1,"bbox":[72,78,560,24]}
+{"kind":"textbox","id":"sh/rml8rmdk","slide":1,"name":"slide-001-title","text":"SimpleVLA-RL Technical Report","textPreview":"SimpleVLA-RL Technical Report","textChars":29,"textLines":1,"bbox":[72,168,650,150]}
+{"kind":"textbox","id":"sh/qlc7ihcz","slide":1,"name":"slide-001-subtitle","text":"Full-paper deterministic storyboard generated from 24 PDF pages.","textPreview":"Full-paper deterministic storyboard generated from 24 PDF pages.","textChars":64,"textLines":1,"bbox":[72,352,590,80]}
+{"kind":"shape","id":"sh/d8nqtwva","slide":1,"name":"slide-001-ring-a","bbox":[728,176,404,332]}
+{"kind":"shape","id":"sh/c7e9krup","slide":1,"name":"slide-001-ring-b","bbox":[778,234,304,216]}
+{"kind":"shape","id":"sh/b2p83qto","slide":1,"name":"slide-001-core","bbox":[868,280,124,124]}
+{"kind":"textbox","id":"sh/ahgrulc3","slide":1,"name":"slide-001-core-text","text":"EVIDENCE","textPreview":"EVIDENCE","textChars":8,"textLines":1,"bbox":[868,321,124,28]}
+{"kind":"textbox","id":"sh/sbmt8vup","slide":1,"name":"slide-001-html","text":"METHOD","textPreview":"METHOD","textChars":6,"textLines":1,"bbox":[1068,184,100,24]}
+{"kind":"textbox","id":"sh/dcfu1gba","slide":1,"name":"slide-001-pptx","text":"RESULT","textPreview":"RESULT","textChars":6,"textLines":1,"bbox":[716,506,100,24]}
+{"kind":"shape","id":"sh/q94b6lcj","slide":1,"name":"slide-001-note-bg","bbox":[72,568,720,66]}
+{"kind":"textbox","id":"sh/radczqt4","slide":1,"name":"slide-001-note-label","text":"CORE CLAIM","textPreview":"CORE CLAIM","textChars":10,"textLines":1,"bbox":[94,584,170,18]}
+{"kind":"textbox","id":"sh/47mt4but","slide":1,"name":"slide-001-note-value","text":"Full-paper deterministic sto","textPreview":"Full-paper deterministic sto","textChars":28,"textLines":1,"bbox":[270,580,490,28]}
+{"kind":"notes","id":"nt/7o111s","slide":1,"text":""}
+{"kind":"slide","id":"sl/wi3uqm","slide":2,"title":"02 / 02","textShapes":5}
+{"kind":"shape","id":"sh/oru187ex","slide":2,"name":"slide-2-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/3ql0f2xc","slide":2,"name":"slide-2-page","text":"02 / 02","textPreview":"02 / 02","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/2pcj6xw7","slide":2,"name":"slide-008-kicker","text":"PAPER EVIDENCE","textPreview":"PAPER EVIDENCE","textChars":14,"textLines":1,"bbox":[72,76,360,22]}
+{"kind":"textbox","id":"sh/1ojidsfm","slide":2,"name":"slide-008-title","text":"主要结果：性能、数据效率和迁移同时提升","textPreview":"主要结果：性能、数据效率和迁移同时提升","textChars":19,"textLines":1,"bbox":[72,114,800,86]}
+{"kind":"textbox","id":"sh/fm10b2xg","slide":2,"name":"slide-008-caption","text":"p10-table-1","textPreview":"p10-table-1","textChars":11,"textLines":1,"bbox":[92,210,760,16]}
+{"kind":"shape","id":"sh/elsz2xwv","slide":2,"name":"slide-008-source-frame","bbox":[900,88,300,112]}
+{"kind":"textbox","id":"sh/tkji9sfa","slide":2,"name":"slide-008-source-label","text":"SOURCE CROP","textPreview":"SOURCE CROP","textChars":11,"textLines":1,"bbox":[914,98,110,16]}
+{"kind":"chart","id":"ch/8nmp0bud","slide":2,"name":"","chartType":"bar","bbox":[92,236,1050,350]}
+{"kind":"image","id":"im/xkni90vm","slide":2,"name":"","alt":"论文第 10 页图片","bbox":[912,116,276,72]}
+{"kind":"notes","id":"nt/wi3uqm","slide":2,"text":""}

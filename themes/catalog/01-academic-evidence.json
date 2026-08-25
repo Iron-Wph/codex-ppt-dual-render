@@ -1,0 +1,28 @@
+{
+  "id": "academic-evidence",
+  "label": "Academic Evidence",
+  "category": "Academic Research",
+  "visual_profile": "academic",
+  "tags": ["academic", "paper", "evidence", "research", "clean"],
+  "match_signals": ["academic", "research", "paper", "thesis", "science", "study", "experiment", "论文", "研究", "学术", "实验", "综述"],
+  "density": "medium",
+  "mood": "credible, calm, evidence-first",
+  "recommended_for": ["academic paper", "literature review", "technical briefing"],
+  "composition": "warm white canvas, strict evidence grid, navy hierarchy, restrained annotations",
+  "typography_treatment": "compact sans-serif labels with decisive navy action titles",
+  "background_treatment": "quiet paper ground with subtle blue section bands",
+  "image_treatment": "large source figures on white plates with visible captions and provenance",
+  "table_treatment": "native white tables with navy rules and one coral emphasis row",
+  "style_markers": ["paper canvas", "navy thesis", "source figure plate", "coral annotation"],
+  "layout_families": ["research-cover", "evidence-split", "method-flow", "chart-first", "finding-boundary"],
+  "avoid": ["decorative stock photography", "poster text walls", "unlabelled charts"],
+  "style_reference_asset": "themes/style-references/academic-evidence-v1.png",
+  "provenance": { "type": "original", "inspiration": "evidence-led academic editorial systems" },
+  "colors": {
+    "background": "#F5F7FA", "surface": "#FFFFFF", "surface2": "#EAF0F7",
+    "foreground": "#13233A", "muted": "#5C718A", "accent": "#245CB7",
+    "accent2": "#D65F42", "accent3": "#2B8A7E", "border": "#C9D5E3",
+    "white": "#FFFFFF", "black": "#0B1625"
+  },
+  "typography": { "title_px": 56, "slide_title_px": 37, "body_px": 17, "caption_px": 12 }
+}

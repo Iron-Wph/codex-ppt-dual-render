@@ -1,0 +1,7 @@
+{"kind":"slide","id":"sl/rc5hlw","slide":1,"title":"01 / 01","textShapes":4}
+{"kind":"shape","id":"sh/vytc7ihs","slide":1,"name":"slide-1-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/gz2d0nyd","slide":1,"name":"slide-1-page","text":"01 / 01","textPreview":"01 / 01","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/h0vu9szi","slide":1,"name":"s8-kicker","text":"PAPER EVIDENCE","textPreview":"PAPER EVIDENCE","textChars":14,"textLines":1,"bbox":[72,76,360,22]}
+{"kind":"textbox","id":"sh/i14v2xg3","slide":1,"name":"s8-title","text":"8 卡条件下，colocated 更有竞争力","textPreview":"8 卡条件下，colocated 更有竞争力","textChars":22,"textLines":1,"bbox":[72,114,800,86]}
+{"kind":"textbox","id":"sh/43md47y9","slide":1,"name":"s8-caption","text":"Paper table region on page 6","textPreview":"Paper table region on page 6","textChars":28,"textLines":1,"bbox":[92,210,760,16]}
+{"kind":"table","id":"tb/qhsvqt47","slide":1,"name":"","rows":6,"cols":3,"preview":"8卡​ | actor（s）​ | rollout（s）​","bbox":[92,236,1040,350]}

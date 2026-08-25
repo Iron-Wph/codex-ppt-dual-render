@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PPT Template Catalog</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#0c111b;color:#edf3ff;font:15px/1.45 "Microsoft YaHei",sans-serif}
+    main{width:min(1500px,94vw);margin:auto;padding:52px 0 80px}.hero{display:flex;justify-content:space-between;gap:40px;align-items:end;margin-bottom:36px}
+    h1{max-width:800px;margin:0;font-size:clamp(38px,5vw,74px);line-height:.95;letter-spacing:-.06em}.hero p{max-width:520px;margin:0;color:#9caeca}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(470px,1fr));gap:24px}.theme-card{padding:22px;border:1px solid #293853;background:#121a28}
+    .theme-card header{display:flex;justify-content:space-between;gap:20px;align-items:start;margin-bottom:16px}.theme-card small{color:#86a0c7;text-transform:uppercase;letter-spacing:.12em}
+    .theme-card h2{margin:3px 0 0;font-size:25px}.theme-card code{padding:6px 9px;background:#0b111d;color:#9eb6d9;font-size:11px}
+    .mini-slide{aspect-ratio:16/9;display:grid;grid-template-columns:1.04fr .96fr;grid-template-rows:1fr 118px;gap:16px;padding:28px;overflow:hidden;border:1px solid var(--border);background:var(--bg);color:var(--fg)}
+    .mini-copy b{display:block;margin-bottom:20px;color:var(--accent);font-size:9px;letter-spacing:.15em}.mini-copy h3{max-width:360px;margin:0;font-size:32px;line-height:.98;letter-spacing:-.05em}.mini-copy p{max-width:360px;margin:18px 0 0;color:var(--muted);font-size:11px}
+    figure{min-width:0;height:100%;margin:0;padding:8px;border:1px solid var(--border);background:var(--surface)}figure img,.media-placeholder{display:grid;place-items:center;width:100%;height:calc(100% - 20px);object-fit:cover;background:var(--surface2);color:var(--muted);font-size:11px;text-align:center}
+    figcaption{overflow:hidden;margin-top:5px;color:var(--muted);font-size:8px;text-overflow:ellipsis;white-space:nowrap}.mini-data{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .bars,table{height:100%;padding:13px;border:1px solid var(--border);background:var(--surface)}.bars{display:flex;flex-direction:column;justify-content:center;gap:10px}.bars i{display:block;height:10px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+    table{width:100%;border-collapse:collapse;color:var(--fg);font-size:9px}th,td{border:1px solid var(--border);padding:7px;text-align:left}th{background:var(--accent);color:var(--bg)}
+    .description{margin:15px 0 10px;color:#a6b6cf}.tags{display:flex;flex-wrap:wrap;gap:6px}.tags span{padding:4px 7px;border:1px solid #31405a;color:#aebed6;font-size:11px}
+    .palette{display:flex;margin-top:14px}.palette i{width:34px;height:18px;border:1px solid rgba(255,255,255,.2)}
+    @media(max-width:620px){.hero{display:block}.hero p{margin-top:20px}.grid{grid-template-columns:1fr}.theme-card{padding:12px}.mini-slide{padding:16px}.mini-copy h3{font-size:22px}}
+  </style>
+</head>
+<body><main>
+  <section class="hero"><h1>Editable PPT Template Catalog</h1><p>主题不是背景图，而是颜色、字体、间距、图片处理、表格处理和布局语法的共同合同。每张预览同时检查文字、图片、数据与表格。</p></section>
+  <section class="grid"><article class="theme-card" id="academic-evidence">
+    <header>
+      <div><small>Academic Research</small><h2>Academic Evidence</h2></div>
+      <code>academic-evidence</code>
+    </header>
+    <div class="mini-slide" style="
+      --bg:#F5F7FA;
+      --surface:#FFFFFF;
+      --surface2:#EAF0F7;
+      --fg:#13233A;
+      --muted:#5C718A;
+      --accent:#245CB7;
+      --accent2:#D65F42;
+      --border:#C9D5E3;">
+      <div class="mini-copy"><b>RESEARCH / EVIDENCE</b><h3>One claim, supported visually</h3><p>warm white canvas, strict evidence grid, navy hierarchy, restrained annotations</p></div>
+      <figure><img src="assets/academic-evidence.png" alt="Academic Evidence style reference"><figcaption>large source figures on white plates with visible captions and provenance</figcaption></figure>
+      <div class="mini-data">
+        <div class="bars"><i style="width:84%"></i><i style="width:62%"></i><i style="width:41%"></i></div>
+        <table><tbody><tr><th>Signal</th><th>Result</th></tr><tr><td>Evidence</td><td>+24%</td></tr></tbody></table>
+      </div>
+    </div>
+    <p class="description">credible, calm, evidence-first · medium density</p>
+    <div class="tags"><span>academic</span><span>paper</span><span>evidence</span><span>research</span><span>clean</span></div>
+    <div class="palette"><i title="background" style="background:#F5F7FA"></i><i title="surface" style="background:#FFFFFF"></i><i title="foreground" style="background:#13233A"></i><i title="accent" style="background:#245CB7"></i><i title="accent2" style="background:#D65F42"></i><i title="accent3" style="background:#2B8A7E"></i></div>
+  </article>
+<article class="theme-card" id="scientific-plate">
+    <header>
+      <div><small>Academic Research</small><h2>Scientific Figure Plate</h2></div>
+      <code>scientific-plate</code>
+    </header>
+    <div class="mini-slide" style="
+      --bg:#F2F7F7;
+      --surface:#FFFFFF;
+      --surface2:#E2EEEE;
+      --fg:#153238;
+      --muted:#587379;
+      --accent:#007C83;
+      --accent2:#E36B46;
+      --border:#BED1D2;">
+      <div class="mini-copy"><b>RESEARCH / EVIDENCE</b><h3>One claim, supported visually</h3><p>figure-led plates, numbered callouts, compact legends, disciplined whitespace</p></div>
+      <figure><img src="assets/scientific-plate.png" alt="Scientific Figure Plate style reference"><figcaption>uncropped scientific figures with callout rails and explicit figure captions</figcaption></figure>
+      <div class="mini-data">
+        <div class="bars"><i style="width:84%"></i><i style="width:62%"></i><i style="width:41%"></i></div>
+        <table><tbody><tr><th>Signal</th><th>Result</th></tr><tr><td>Evidence</td><td>+24%</td></tr></tbody></table>
+      </div>
+    </div>
+    <p class="description">precise, analytical, laboratory · high density</p>
+    <div class="tags"><span>scientific</span><span>figure</span><span>formula</span><span>lab</span><span>diagram</span></div>
+    <div class="palette"><i title="background" style="background:#F2F7F7"></i><i title="surface" style="background:#FFFFFF"></i><i title="foreground" style="background:#153238"></i><i title="accent" style="background:#007C83"></i><i title="accent2" style="background:#E36B46"></i><i title="accent3" style="background:#6D58B3"></i></div>
+  </article>
+<article class="theme-card" id="engineering-blueprint">
+    <header>
+      <div><small>Diagram</small><h2>Engineering Blueprint</h2></div>
+      <code>engineering-blueprint</code>
+    </header>
+    <div class="mini-slide" style="
+      --bg:#071A2A;
+      --surface:#0D2840;
+      --surface2:#123652;
+      --fg:#F1F7FA;
+      --muted:#91AEC0;
+      --accent:#4ED4E8;
+      --accent2:#F2A53A;
+      --border:#2A5570;">
+      <div class="mini-copy"><b>RESEARCH / EVIDENCE</b><h3>One claim, supported visually</h3><p>deep blueprint field, precise rails, annotated components, one luminous signal</p></div>
+      <figure><img src="assets/engineering-blueprint.png" alt="Engineering Blueprint style reference"><figcaption>figures framed as annotated engineering assemblies</figcaption></figure>
+      <div class="mini-data">
+        <div class="bars"><i style="width:84%"></i><i style="width:62%"></i><i style="width:41%"></i></div>
+        <table><tbody><tr><th>Signal</th><th>Result</th></tr><tr><td>Evidence</td><td>+24%</td></tr></tbody></table>
+      </div>
+    </div>
+    <p class="description">technical, rigorous, constructed · medium density</p>
+    <div class="tags"><span>engineering</span><span>architecture</span><span>blueprint</span><span>robotics</span><span>system</span></div>
+    <div class="palette"><i title="background" style="background:#071A2A"></i><i title="surface" style="background:#0D2840"></i><i title="foreground" style="background:#F1F7FA"></i><i title="accent" style="background:#4ED4E8"></i><i title="accent2" style="background:#F2A53A"></i><i title="accent3" style="background:#8DE1B7"></i></div>
+  </article>
+<article class="theme-card" id="editorial-research">
+    <header>
+      <div><small>Editorial</small><h2>Editorial Research</h2></div>
+      <code>editorial-research</code>
+    </header>
+    <div class="mini-slide" style="
+      --bg:#FBF5E9;
+      --surface:#FFFDF8;
+      --surface2:#EFE2CF;
+      --fg:#30231F;
+      --muted:#7A665D;
+      --accent:#A94B35;
+      --accent2:#D19A35;
+      --border:#DCC9B5;">
+      <div class="mini-copy"><b>RESEARCH / EVIDENCE</b><h3>One claim, supported visually</h3><p>ivory print grid, asymmetric headlines, warm image wells, deliberate negative space</p></div>
+      <figure><img src="assets/editorial-research.png" alt="Editorial Research style reference"><figcaption>warm editorial crops with caption blocks aligned to the print grid</figcaption></figure>
+      <div class="mini-data">
+        <div class="bars"><i style="width:84%"></i><i style="width:62%"></i><i style="width:41%"></i></div>
+        <table><tbody><tr><th>Signal</th><th>Result</th></tr><tr><td>Evidence</td><td>+24%</td></tr></tbody></table>
+      </div>
+    </div>
+    <p class="description">thoughtful, literary, premium · medium density</p>
+    <div class="tags"><span>editorial</span><span>magazine</span><span>research</span><span>serif</span><span>warm</span></div>
+    <div class="palette"><i title="background" style="background:#FBF5E9"></i><i title="surface" style="background:#FFFDF8"></i><i title="foreground" style="background:#30231F"></i><i title="accent" style="background:#A94B35"></i><i title="accent2" style="background:#D19A35"></i><i title="accent3" style="background:#3D7D74"></i></div>
+  </article>
+<article class="theme-card" id="consulting-data-story">
+    <header>
+      <div><small>Business &amp; Report</small><h2>Consulting Data Story</h2></div>
+      <code>consulting-data-story</code>
+    </header>
+    <div class="mini-slide" style="
+      --bg:#F6F8FB;
+      --surface:#FFFFFF;
+      --surface2:#E8EEF7;
+      --fg:#10233F;
+      --muted:#60728A;
+      --accent:#1E5CC8;
+      --accent2:#13A07A;
+      --border:#C9D5E5;">
+      <div class="mini-copy"><b>RESEARCH / EVIDENCE</b><h3>One claim, supported visually</h3><p>answer-first headline, disciplined KPI rail, one primary chart, compact implication panel</p></div>
+      <figure><img src="assets/consulting-data-story.png" alt="Consulting Data Story style reference"><figcaption>images used sparingly as evidence, never as decoration</figcaption></figure>
+      <div class="mini-data">
+        <div class="bars"><i style="width:84%"></i><i style="width:62%"></i><i style="width:41%"></i></div>
+        <table><tbody><tr><th>Signal</th><th>Result</th></tr><tr><td>Evidence</td><td>+24%</td></tr></tbody></table>
+      </div>
+    </div>
+    <p class="description">decisive, analytical, executive · high density</p>
+    <div class="tags"><span>consulting</span><span>data</span><span>strategy</span><span>executive</span><span>chart</span></div>
+    <div class="palette"><i title="background" style="background:#F6F8FB"></i><i title="surface" style="background:#FFFFFF"></i><i title="foreground" style="background:#10233F"></i><i title="accent" style="background:#1E5CC8"></i><i title="accent2" style="background:#13A07A"></i><i title="accent3" style="background:#F0A33A"></i></div>
+  </article>
+<article class="theme-card" id="dark-frontier-tech">
+    <header>
+      <div><small>Product</small><h2>Dark Frontier Tech</h2></div>
+      <code>dark-frontier-tech</code>
+    </header>
+    <div class="mini-slide" style="
+      --bg:#070B15;
+      --surface:#0E1728;
+      --surface2:#14233A;
+      --fg:#F4F8FF;
+      --muted:#91A2BD;
+      --accent:#4ED8FF;
+      --accent2:#F35D91;
+      --border:#2A4264;">
+      <div class="mini-copy"><b>RESEARCH / EVIDENCE</b><h3>One claim, supported visually</h3><p>near-black stage, one immersive visual, oversized claim, cyan signal and magenta counterpoint</p></div>
+      <figure><img src="assets/dark-frontier-tech.png" alt="Dark Frontier Tech style reference"><figcaption>one dramatic hero or evidence image in a luminous media well</figcaption></figure>
+      <div class="mini-data">
+        <div class="bars"><i style="width:84%"></i><i style="width:62%"></i><i style="width:41%"></i></div>
+        <table><tbody><tr><th>Signal</th><th>Result</th></tr><tr><td>Evidence</td><td>+24%</td></tr></tbody></table>
+      </div>
+    </div>
+    <p class="description">cinematic, confident, frontier-facing · low density</p>
+    <div class="tags"><span>frontier</span><span>ai</span><span>robotics</span><span>launch</span><span>dark</span></div>
+    <div class="palette"><i title="background" style="background:#070B15"></i><i title="surface" style="background:#0E1728"></i><i title="foreground" style="background:#F4F8FF"></i><i title="accent" style="background:#4ED8FF"></i><i title="accent2" style="background:#F35D91"></i><i title="accent3" style="background:#B6F36B"></i></div>
+  </article>
+<article class="theme-card" id="graphite-lime">
+    <header>
+      <div><small>Diagram</small><h2>Graphite Lime</h2></div>
+      <code>graphite-lime</code>
+    </header>
+    <div class="mini-slide" style="
+      --bg:#101312;
+      --surface:#181D1A;
+      --surface2:#202721;
+      --fg:#F1F3E9;
+      --muted:#A5AEA5;
+      --accent:#D8FF5A;
+      --accent2:#FF7757;
+      --border:#39443B;">
+      <div class="mini-copy"><b>RESEARCH / EVIDENCE</b><h3>One claim, supported visually</h3><p>dark canvas, strong left thesis, lime evidence highlight, coral counterpoint</p></div>
+      <figure><img src="assets/graphite-lime.png" alt="Graphite Lime style reference"><figcaption>bright source figures inside dark frames</figcaption></figure>
+      <div class="mini-data">
+        <div class="bars"><i style="width:84%"></i><i style="width:62%"></i><i style="width:41%"></i></div>
+        <table><tbody><tr><th>Signal</th><th>Result</th></tr><tr><td>Evidence</td><td>+24%</td></tr></tbody></table>
+      </div>
+    </div>
+    <p class="description">technical, experimental, high-contrast · medium density</p>
+    <div class="tags"><span>developer</span><span>engineering</span><span>graphite</span><span>lime</span></div>
+    <div class="palette"><i title="background" style="background:#101312"></i><i title="surface" style="background:#181D1A"></i><i title="foreground" style="background:#F1F3E9"></i><i title="accent" style="background:#D8FF5A"></i><i title="accent2" style="background:#FF7757"></i><i title="accent3" style="background:#8EE3C4"></i></div>
+  </article>
+<article class="theme-card" id="paper-blue">
+    <header>
+      <div><small>Academic Research</small><h2>Paper Blue</h2></div>
+      <code>paper-blue</code>
+    </header>
+    <div class="mini-slide" style="
+      --bg:#F4F7FB;
+      --surface:#FFFFFF;
+      --surface2:#E8EFF8;
+      --fg:#14243A;
+      --muted:#58708D;
+      --accent:#1664D8;
+      --accent2:#E06B47;
+      --border:#C7D5E6;">
+      <div class="mini-copy"><b>RESEARCH / EVIDENCE</b><h3>One claim, supported visually</h3><p>light canvas, blue hierarchy, generous margins, restrained evidence panels</p></div>
+      <figure><img src="assets/paper-blue.png" alt="Paper Blue style reference"><figcaption>clean source figures with white framing</figcaption></figure>
+      <div class="mini-data">
+        <div class="bars"><i style="width:84%"></i><i style="width:62%"></i><i style="width:41%"></i></div>
+        <table><tbody><tr><th>Signal</th><th>Result</th></tr><tr><td>Evidence</td><td>+24%</td></tr></tbody></table>
+      </div>
+    </div>
+    <p class="description">credible, academic, clean · medium density</p>
+    <div class="tags"><span>paper</span><span>blue</span><span>clean</span><span>legacy</span></div>
+    <div class="palette"><i title="background" style="background:#F4F7FB"></i><i title="surface" style="background:#FFFFFF"></i><i title="foreground" style="background:#14243A"></i><i title="accent" style="background:#1664D8"></i><i title="accent2" style="background:#E06B47"></i><i title="accent3" style="background:#2C9D91"></i></div>
+  </article>
+<article class="theme-card" id="sunset-editorial">
+    <header>
+      <div><small>Editorial</small><h2>Sunset Editorial</h2></div>
+      <code>sunset-editorial</code>
+    </header>
+    <div class="mini-slide" style="
+      --bg:#FFF8F1;
+      --surface:#FFFFFF;
+      --surface2:#F9E8D8;
+      --fg:#2B1D1A;
+      --muted:#7D665F;
+      --accent:#B9462E;
+      --accent2:#E5A33A;
+      --border:#E5CABC;">
+      <div class="mini-copy"><b>RESEARCH / EVIDENCE</b><h3>One claim, supported visually</h3><p>warm paper canvas, editorial headline, terracotta thesis, amber emphasis</p></div>
+      <figure><img src="assets/sunset-editorial.png" alt="Sunset Editorial style reference"><figcaption>warm framed figures with editorial captions</figcaption></figure>
+      <div class="mini-data">
+        <div class="bars"><i style="width:84%"></i><i style="width:62%"></i><i style="width:41%"></i></div>
+        <table><tbody><tr><th>Signal</th><th>Result</th></tr><tr><td>Evidence</td><td>+24%</td></tr></tbody></table>
+      </div>
+    </div>
+    <p class="description">warm, editorial, strategic · medium density</p>
+    <div class="tags"><span>editorial</span><span>warm</span><span>strategy</span><span>legacy</span></div>
+    <div class="palette"><i title="background" style="background:#FFF8F1"></i><i title="surface" style="background:#FFFFFF"></i><i title="foreground" style="background:#2B1D1A"></i><i title="accent" style="background:#B9462E"></i><i title="accent2" style="background:#E5A33A"></i><i title="accent3" style="background:#2C8C83"></i></div>
+  </article>
+<article class="theme-card" id="signal-dark">
+    <header>
+      <div><small>Product</small><h2>Signal Dark</h2></div>
+      <code>signal-dark</code>
+    </header>
+    <div class="mini-slide" style="
+      --bg:#090E1A;
+      --surface:#111B2D;
+      --surface2:#182640;
+      --fg:#F1F6FF;
+      --muted:#97A9C5;
+      --accent:#55D6FF;
+      --accent2:#FF6E91;
+      --border:#304565;">
+      <div class="mini-copy"><b>RESEARCH / EVIDENCE</b><h3>One claim, supported visually</h3><p>navy canvas, cyan signal lines, magenta contrast, lime success state</p></div>
+      <figure><img src="assets/signal-dark.png" alt="Signal Dark style reference"><figcaption>dark media wells with cyan edge treatment</figcaption></figure>
+      <div class="mini-data">
+        <div class="bars"><i style="width:84%"></i><i style="width:62%"></i><i style="width:41%"></i></div>
+        <table><tbody><tr><th>Signal</th><th>Result</th></tr><tr><td>Evidence</td><td>+24%</td></tr></tbody></table>
+      </div>
+    </div>
+    <p class="description">futuristic, energetic, product-forward · medium density</p>
+    <div class="tags"><span>signal</span><span>dark</span><span>technology</span><span>legacy</span></div>
+    <div class="palette"><i title="background" style="background:#090E1A"></i><i title="surface" style="background:#111B2D"></i><i title="foreground" style="background:#F1F6FF"></i><i title="accent" style="background:#55D6FF"></i><i title="accent2" style="background:#FF6E91"></i><i title="accent3" style="background:#B6F36B"></i></div>
+  </article></section>
+</main></body></html>

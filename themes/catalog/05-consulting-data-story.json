@@ -1,0 +1,29 @@
+{
+  "id": "consulting-data-story",
+  "label": "Consulting Data Story",
+  "category": "Business & Report",
+  "visual_profile": "consulting",
+  "tags": ["consulting", "data", "strategy", "executive", "chart"],
+  "match_signals": ["consulting", "strategy", "executive", "market", "growth", "business", "咨询", "战略", "高管", "市场", "增长", "商业"],
+  "density": "high",
+  "mood": "decisive, analytical, executive",
+  "recommended_for": ["strategy", "market analysis", "business review"],
+  "composition": "answer-first headline, disciplined KPI rail, one primary chart, compact implication panel",
+  "typography_treatment": "strong action titles and small factual labels with clear numerical hierarchy",
+  "background_treatment": "bright neutral field with navy anchors and controlled blue bands",
+  "image_treatment": "images used sparingly as evidence, never as decoration",
+  "table_treatment": "native decision tables with blue headers and green positive deltas",
+  "style_markers": ["answer first", "KPI rail", "blue data hierarchy", "decision table"],
+  "layout_families": ["answer-cover", "metric-strip", "chart-first", "decision-matrix", "recommendation-close"],
+  "avoid": ["ornamental illustration", "equal-weight card collections", "unexplained numbers"],
+  "style_reference_asset": "themes/style-references/minimal-editorial-v1.png",
+  "provenance": { "type": "original", "inspiration": "consulting-grade answer-first data stories" },
+  "colors": {
+    "background": "#F6F8FB", "surface": "#FFFFFF", "surface2": "#E8EEF7",
+    "foreground": "#10233F", "muted": "#60728A", "accent": "#1E5CC8",
+    "accent2": "#13A07A", "accent3": "#F0A33A", "border": "#C9D5E5",
+    "white": "#FFFFFF", "black": "#081529"
+  },
+  "spacing": { "page_margin": 58, "section_gap": 24, "card_gap": 14 },
+  "typography": { "title_px": 56, "slide_title_px": 36, "body_px": 16, "caption_px": 11, "metric_px": 50 }
+}

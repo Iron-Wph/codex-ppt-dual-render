@@ -1,48 +1,96 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://codex.local/schemas/codex-storyboard.schema.json",
-  "title": "Codex Slide Storyboard",
+  "title": "Audience-driven Codex Storyboard",
   "type": "object",
   "additionalProperties": false,
-  "required": ["deck", "narrative", "plan"],
+  "required": ["deck", "narrative", "visual", "plan"],
   "properties": {
     "deck": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "title", "purpose", "audience", "language", "aspect_ratio"],
+      "required": ["id", "title", "purpose", "audience", "language", "aspect_ratio", "communication_job", "talk_duration_minutes", "audience_profile"],
       "properties": {
-        "id": { "type": "string", "minLength": 1 },
-        "title": { "type": "string", "minLength": 1 },
-        "purpose": { "type": "string", "minLength": 1 },
-        "audience": { "type": "string", "minLength": 1 },
-        "language": { "type": "string", "minLength": 2 },
-        "aspect_ratio": { "const": "16:9" }
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "purpose": { "type": "string" },
+        "audience": { "type": "string" },
+        "language": { "type": "string" },
+        "aspect_ratio": { "type": "string", "const": "16:9" },
+        "communication_job": { "type": "string" },
+        "talk_duration_minutes": { "type": "integer", "minimum": 5, "maximum": 60 },
+        "audience_profile": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["role", "prior_knowledge", "cares_about", "likely_questions", "desired_outcome"],
+          "properties": {
+            "role": { "type": "string" },
+            "prior_knowledge": { "type": "string" },
+            "cares_about": { "type": "array", "maxItems": 5, "items": { "type": "string" } },
+            "likely_questions": { "type": "array", "maxItems": 5, "items": { "type": "string" } },
+            "desired_outcome": { "type": "string" }
+          }
+        }
       }
     },
     "narrative": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["arc", "key_message"],
+      "required": ["arc", "key_message", "opening_question", "closing_answer", "sections", "priority_map", "logic_check"],
       "properties": {
-        "arc": { "type": "string", "minLength": 1 },
-        "key_message": { "type": "string", "minLength": 1 }
+        "arc": { "type": "string" },
+        "key_message": { "type": "string" },
+        "opening_question": { "type": "string" },
+        "closing_answer": { "type": "string" },
+        "sections": {
+          "type": "array",
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "title", "job", "slide_ids"],
+            "properties": {
+              "id": { "type": "string" },
+              "title": { "type": "string" },
+              "job": { "type": "string" },
+              "slide_ids": { "type": "array", "maxItems": 6, "items": { "type": "string" } }
+            }
+          }
+        },
+        "priority_map": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["core", "support", "context"],
+          "properties": {
+            "core": { "type": "array", "maxItems": 8, "items": { "type": "string" } },
+            "support": { "type": "array", "maxItems": 8, "items": { "type": "string" } },
+            "context": { "type": "array", "maxItems": 8, "items": { "type": "string" } }
+          }
+        },
+        "logic_check": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["opening_resolved", "core_has_evidence", "no_redundant_slides", "rationale"],
+          "properties": {
+            "opening_resolved": { "type": "boolean" },
+            "core_has_evidence": { "type": "boolean" },
+            "no_redundant_slides": { "type": "boolean" },
+            "rationale": { "type": "string" }
+          }
+        }
       }
     },
     "visual": {
       "type": "object",
       "additionalProperties": false,
+      "required": ["style_family", "image_policy", "density_profile", "style_reason", "layout_system", "style_reference"],
       "properties": {
         "style_family": { "type": "string" },
         "image_policy": { "type": "string" },
         "density_profile": { "type": "string" },
         "style_reason": { "type": "string" },
-        "style_context": { "type": "string" },
         "layout_system": { "type": "string" },
-        "style_reference": { "type": "string" },
-        "style_reference_html": { "type": "string" },
-        "style_inspiration": { "type": "string" },
-        "style_lock": { "type": "string" },
-        "style_system": { "type": "object" }
+        "style_reference": { "type": ["string", "null"] }
       }
     },
     "plan": {
@@ -50,23 +98,49 @@
       "additionalProperties": false,
       "required": ["title", "subtitle", "slides"],
       "properties": {
-        "title": { "type": "string", "minLength": 1 },
-        "subtitle": { "type": "string", "minLength": 1 },
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
         "slides": {
           "type": "array",
-          "minItems": 8,
+          "minItems": 3,
           "maxItems": 10,
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["id", "layout", "role", "action_title", "slide_goal", "primary_claim", "evidence_refs", "table_refs", "asset_candidates", "visual_intent", "visual_plan"],
+            "required": [
+              "id", "layout", "composition_id", "role", "content_priority", "action_title",
+              "audience_question", "narrative_job", "slide_goal", "primary_claim", "evidence",
+              "implication", "transition_in", "transition_out", "evidence_refs", "table_refs",
+              "asset_candidates", "visual_intent", "visual_plan"
+            ],
             "properties": {
-              "id": { "type": "string", "minLength": 1 },
+              "id": { "type": "string" },
               "layout": { "enum": ["title", "pipeline", "comparison", "insight", "evidence", "hero-image", "metric-stage", "story-split", "chart-focus", "matrix", "timeline", "evidence-collage"] },
-              "role": { "type": "string", "minLength": 1 },
-              "action_title": { "type": "string", "minLength": 1 },
-              "slide_goal": { "type": "string", "minLength": 1 },
-              "primary_claim": { "type": "string", "minLength": 1 },
+              "composition_id": { "enum": ["thesis-stage", "image-thesis-split", "argument-pair", "mechanism-triptych", "causal-flow", "metric-triad", "chart-with-interpretation-rail", "evidence-table", "evidence-collage", "answer-and-boundary"] },
+              "role": { "type": "string" },
+              "content_priority": { "enum": ["core", "support", "context"] },
+              "action_title": { "type": "string" },
+              "audience_question": { "type": "string" },
+              "narrative_job": { "type": "string" },
+              "slide_goal": { "type": "string" },
+              "primary_claim": { "type": "string" },
+              "evidence": {
+                "type": "array",
+                "maxItems": 4,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["claim_support", "evidence_ref", "interpretation"],
+                  "properties": {
+                    "claim_support": { "type": "string" },
+                    "evidence_ref": { "type": ["string", "null"] },
+                    "interpretation": { "type": "string" }
+                  }
+                }
+              },
+              "implication": { "type": "string" },
+              "transition_in": { "type": "string" },
+              "transition_out": { "type": "string" },
               "evidence_refs": { "type": "array", "maxItems": 8, "items": { "type": "string" } },
               "table_refs": { "type": "array", "maxItems": 4, "items": { "type": "string" } },
               "asset_candidates": { "type": "array", "maxItems": 8, "items": { "type": "string" } },
@@ -79,13 +153,12 @@
                   "layout_family": { "enum": ["title", "pipeline", "comparison", "insight", "evidence", "hero-image", "metric-stage", "story-split", "chart-focus", "matrix", "timeline", "evidence-collage"] },
                   "primary_visual": { "type": ["string", "null"] },
                   "image_budget": { "type": "integer", "minimum": 0, "maximum": 3 },
-                  "image_roles": { "type": "array", "maxItems": 3, "uniqueItems": true, "items": { "enum": ["hero", "evidence", "comparison", "context"] } },
+                  "image_roles": { "type": "array", "maxItems": 3, "items": { "enum": ["hero", "evidence", "comparison", "context"] } },
                   "data_strategy": { "enum": ["none", "native_chart", "native_table", "diagram", "source_figure"] },
                   "background_variant": { "enum": ["default", "light", "dark", "quiet", "immersive"] },
                   "density": { "enum": ["sparse", "balanced", "dense"] }
                 }
-              },
-              "speaker_note": { "type": "string" }
+              }
             }
           }
         }

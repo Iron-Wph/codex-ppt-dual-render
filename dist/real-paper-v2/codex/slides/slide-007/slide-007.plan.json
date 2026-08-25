@@ -1,0 +1,228 @@
+{
+  "deck": {
+    "id": "rlinf-robotwin-experiment-storyboard-revised",
+    "title": "RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束",
+    "purpose": "帮助具身智能与机器人学习研究者判断 RLinf 在 RoboTwin 上的性能与系统效率证据，并准确区分受控系统优势与纯算法因果结论。",
+    "audience": "具身智能、机器人学习与强化学习研究者、论文评审者和实验复现者。",
+    "language": "zh-CN",
+    "aspect_ratio": "16:9",
+    "communication_job": "By the end, embodied-AI researchers should be able to cite and reproduce RLinf’s RoboTwin result with the correct boundary because the experiments show a large cross-task SSR gain and competitive execution times under fixed seeds, evaluation protocol, and 8-card A800 conditions, while implementation differences prevent isolating a pure RLinf algorithm effect.",
+    "talk_duration_minutes": 12,
+    "audience_profile": {
+      "role": "具身智能与机器人学习研究者、论文评审者、实验复现者",
+      "prior_knowledge": "熟悉 VLA、SFT、GRPO、RoboTwin、SSR、OOD seed、多卡训练与基本实验对照方法。",
+      "cares_about": [
+        "RLinf 的性能增益是否跨任务成立",
+        "SFT→RL 的比较是否公平",
+        "reward、轨迹收集、精度和超参数差异是否改变结论",
+        "seed、GPU、评估温度和训练步数是否可复现",
+        "不同并行模式下 actor 与 rollout 的实际成本"
+      ],
+      "likely_questions": [
+        "RLinf 的提升能否归因于 RL 信号本身？",
+        "8 个任务上的增益是否一致，训练成本是多少？",
+        "RLinf 与 SimpleVLA 的比较到底控制了哪些变量？",
+        "评估温度、模型初始化和 GPU 是否会改变 SSR？",
+        "实际运行时应该选择哪种并行模式？"
+      ],
+      "desired_outcome": "能够复现实验契约，引用跨任务性能与系统效率结果，并将结论表述为受控条件下的 RLinf 完整训练系统优势，而非无条件的纯算法优越性。"
+    }
+  },
+  "narrative": {
+    "arc": "实验问题 → 实验契约与泛化口径 → RLinf 训练信号 → 与 SimpleVLA 的可比性边界 → 跨任务性能 → 框架级增益 → 敏感性边界 → 系统效率 → 受控条件下的结论",
+    "key_message": "在相同 RoboTwin 训练 seed、128 个 OOD 评估 seed、评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练使 8 个任务的平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下呈现有竞争力的 actor/rollout 时间；但由于精度、超参数、valid trajectory 收集和 reward 设计不同，证据支持的是受控条件下的完整系统优势，而不是纯算法因果结论。",
+    "opening_question": "在固定 RoboTwin seed、评估口径和 8 卡 A800 条件下，RLinf 的提升能否归因于 RL 信号本身，还是只能归因于完整训练系统的差异？",
+    "closing_answer": "证据支持这样的结论：在固定实验契约下，RLinf 的 RL 训练带来跨 8 个任务的显著 SSR 增益，并提供有竞争力的执行路径；但由于精度、超参数、轨迹收集和 reward 设计并非完全同构，不能把该结果表述为脱离实验契约的纯算法优越性。",
+    "sections": [
+      {
+        "id": "sec-3",
+        "title": "建立性能结论",
+        "job": "从跨任务增益、框架比较和敏感性分析形成主结果判断",
+        "slide_ids": [
+          "s7"
+        ]
+      }
+    ],
+    "priority_map": {
+      "core": [
+        "s7"
+      ],
+      "support": [],
+      "context": []
+    },
+    "logic_check": {
+      "opening_resolved": true,
+      "core_has_evidence": true,
+      "no_redundant_slides": true,
+      "rationale": "已保留 9 页与原叙事顺序，并修复实验契约可见性、训练流程阅读顺序、比较表、平均值证据、效率矩阵、结论边界、标题密度、截断文案和演讲稿长度。所有核心主张均绑定有效证据 ID；结论页分别呈现答案、采用条件和归因边界。"
+    }
+  },
+  "visual": {
+    "style_family": "academic-evidence",
+    "image_policy": "仅使用证据索引中的源表、源图或页面快照；优先使用原生表格、原生图表与可追溯机制图，禁止装饰性图片。",
+    "density_profile": "中等密度、证据优先；核心结果使用大图表或大表格，实验边界使用短注释和明确的证据标记。",
+    "style_reason": "受众关心可比性、复现性和归因边界，因此采用暖白画布、深蓝标题、珊瑚强调和源证据板的学术证据风格。",
+    "layout_system": "Codex Grid evidence-first：统一左对齐标题与宽边距，交替使用证据表、机制流程、结果图表、对照构图和结论边界，避免连续页面使用同一轮廓。",
+    "style_reference": "codex/theme-reference.png",
+    "style_reference_html": "codex/theme-reference.html",
+    "style_inspiration": "codex/style-inspiration.png",
+    "style_lock": "theme-reference",
+    "style_system": {
+      "category": "Academic Research",
+      "visual_profile": "academic",
+      "tags": [
+        "academic",
+        "paper",
+        "evidence",
+        "research",
+        "clean"
+      ],
+      "density": "medium",
+      "mood": "credible, calm, evidence-first",
+      "composition": "warm white canvas, strict evidence grid, navy hierarchy, restrained annotations",
+      "typography_treatment": "compact sans-serif labels with decisive navy action titles",
+      "background_treatment": "quiet paper ground with subtle blue section bands",
+      "image_treatment": "large source figures on white plates with visible captions and provenance",
+      "table_treatment": "native white tables with navy rules and one coral emphasis row",
+      "style_markers": [
+        "paper canvas",
+        "navy thesis",
+        "source figure plate",
+        "coral annotation"
+      ],
+      "layout_families": [
+        "research-cover",
+        "evidence-split",
+        "method-flow",
+        "chart-first",
+        "finding-boundary"
+      ],
+      "avoid": [
+        "decorative stock photography",
+        "poster text walls",
+        "unlabelled charts"
+      ],
+      "inspiration_asset": "themes/style-references/academic-evidence-v1.png",
+      "provenance": {
+        "type": "original",
+        "inspiration": "evidence-led academic editorial systems"
+      },
+      "selection": {
+        "theme_id": "academic-evidence",
+        "basis": "planner_choice",
+        "semantic_scores": {}
+      }
+    }
+  },
+  "plan": {
+    "title": "RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束",
+    "subtitle": "先确认比较口径，再判断性能、效率与结论边界",
+    "slides": [
+      {
+        "id": "s7",
+        "layout": "insight",
+        "composition_id": "answer-and-boundary",
+        "role": "limitations",
+        "content_priority": "core",
+        "action_title": "初始化与评估温度会改变单点 SSR",
+        "audience_question": "为什么同一任务的结果会随模型和温度变化？",
+        "narrative_job": "用 place_empty_cup 的 rebuttal 结果说明初始模型、评估温度、训练步数和是否重跑会影响可见 SSR。",
+        "slide_goal": "把单任务结果降级为敏感性证据，避免其承担普遍优越性结论。",
+        "primary_claim": "在 place_empty_cup 上，pi0 与 pi05 的 SFT 基线不同，OFT 在 Temp_eval=-1 与 1.6 下的 PPO/GRPO 结果也不同；部分温度结果未重跑，且 RL 结果统一取 50 step。",
+        "evidence": [
+          {
+            "claim_support": "表格列出 pi0/pi05 的 SFT、PPO、GRPO 结果，以及 OFT 在 Temp_eval=-1 和 Temp_eval=1.6 下的 PPO/GRPO 结果。",
+            "evidence_ref": "p1-table-1-crop",
+            "interpretation": "初始模型和采样温度会改变最终可见成功率，不能把单点数字直接当作方法独立能力。"
+          },
+          {
+            "claim_support": "Temp_eval=1.6 下 place_empty_cup 的 PPO 为 86.72%，GRPO 为 88.28%；相关结果说明评估口径必须随数字一起报告。",
+            "evidence_ref": "p1-table-2-crop",
+            "interpretation": "评估温度是结果定义的一部分，复现或比较时需要固定并明确记录。"
+          }
+        ],
+        "implication": "跨任务平均结果应优先于单任务单温度结果；任何引用都应同时报告模型初始化、评估温度、训练步数和是否重跑。",
+        "transition_in": "框架级平均增益成立，但单点成绩揭示了结果对评估协议的敏感性。",
+        "transition_out": "性能判断之外，研究者还需要知道这套训练系统在实际运行时付出什么成本。",
+        "evidence_refs": [
+          "p1-table-1-crop",
+          "p1-table-2-crop"
+        ],
+        "table_refs": [
+          "p1-table-1",
+          "p1-table-2"
+        ],
+        "asset_candidates": [],
+        "visual_intent": "source_table",
+        "visual_plan": {
+          "layout_family": "insight",
+          "primary_visual": null,
+          "image_budget": 0,
+          "image_roles": [],
+          "data_strategy": "native_table",
+          "background_variant": "quiet",
+          "density": "balanced"
+        },
+        "speaker_notes": {
+          "talk_track": "平均增益成立后，还要看单任务结果是否依赖评估协议。place_empty_cup 中，pi0 与 pi05 的 SFT 起点不同；OFT 在 Temp_eval=-1 与 1.6 下的 PPO、GRPO 结果也不同，部分温度结果没有重跑，RL 统一取 50 step。因此这些数字适合作为敏感性证据，而不是方法独立能力。复现时应同时报告初始化、评估温度、训练步数和重跑状态，随后转向系统运行成本。",
+          "delivery_cue": "先读两组不同 SFT 基线，再指向温度变化，最后强调单点结果的边界。",
+          "source_refs": [
+            "p1-table-1-crop",
+            "p1-table-2-crop"
+          ],
+          "estimated_seconds": 100
+        },
+        "content": {
+          "eyebrow": "敏感性边界",
+          "title": "初始化与评估温度会改变单点 SSR",
+          "subtitle": null,
+          "kicker": null,
+          "lede": "同一任务的 SSR 不是只由 PPO/GRPO 决定；初始化、评估温度与实验口径都会改变可见结果。",
+          "note": {
+            "label": "边界",
+            "value": "单任务、单温度结果只能支持敏感性判断，不能直接承担普遍优越性结论。"
+          },
+          "body_points": [
+            {
+              "label": "起点不同",
+              "text": "pi0 的 SFT 为 45.31%，pi05 为 85.16%；RL 增益不能脱离初始模型比较。"
+            },
+            {
+              "label": "温度改变结果",
+              "text": "OFT 的 PPO/GRPO 在 Temp_eval=-1 与 1.6 下呈现不同 SSR，评估温度应随数字一并报告。"
+            },
+            {
+              "label": "口径需固定",
+              "text": "相关温度结果部分未重跑，且 RL 结果统一取 50 step；复现时必须注明重跑状态与训练步数。"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "pi0 → pi05 SFT",
+              "value": "45.31% → 85.16%",
+              "meaning": "初始模型本身带来不同的起点"
+            },
+            {
+              "label": "OFT · Temp_eval=1.6",
+              "value": "PPO 86.72%",
+              "meaning": "温度是结果定义的一部分"
+            },
+            {
+              "label": "OFT · Temp_eval=1.6",
+              "value": "GRPO 88.28%",
+              "meaning": "比较时必须固定评估协议"
+            }
+          ],
+          "steps": [],
+          "result": null,
+          "columns": [],
+          "takeaway": {
+            "label": "因此",
+            "value": "跨任务平均结果优先于单任务单温度结果。"
+          }
+        },
+        "speaker_note": "平均增益成立后，还要看单任务结果是否依赖评估协议。place_empty_cup 中，pi0 与 pi05 的 SFT 起点不同；OFT 在 Temp_eval=-1 与 1.6 下的 PPO、GRPO 结果也不同，部分温度结果没有重跑，RL 统一取 50 step。因此这些数字适合作为敏感性证据，而不是方法独立能力。复现时应同时报告初始化、评估温度、训练步数和重跑状态，随后转向系统运行成本。"
+      }
+    ]
+  }
+}

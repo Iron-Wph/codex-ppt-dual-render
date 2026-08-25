@@ -1,0 +1,946 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/4q6plu",
+    "id": "4q6plu",
+    "slide": 4,
+    "layoutId": "5de99dbc-53fc-43c7-88b9-8b959d8e2ff8",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "d0457e0f-c77f-41a2-9306-0c4559c2a356",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#F5F7FA",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "5de99dbc-53fc-43c7-88b9-8b959d8e2ff8",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "d0457e0f-c77f-41a2-9306-0c4559c2a356",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "d0457e0f-c77f-41a2-9306-0c4559c2a356",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/orylg32l",
+      "id": "1",
+      "name": "slide-4-top-rule",
+      "bbox": [
+        72,
+        34,
+        1136,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#C9D5E3",
+      "lineWidth": 1
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nqp4ny10",
+      "id": "2",
+      "name": "slide-4-page",
+      "bbox": [
+        1116,
+        668,
+        92,
+        20
+      ],
+      "geometry": "rect",
+      "text": "04 / 09",
+      "textPreview": "04 / 09",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 12,
+        "typeface": "+mn-lt",
+        "color": "#5C718A",
+        "alignment": "right",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "04 / 09"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "04 / 09",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "color": "#5C718A",
+            "alignment": "right",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "04 / 09",
+              "fontSize": 12,
+              "color": "#5C718A",
+              "alignment": "right",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2pg3etkf",
+      "id": "3",
+      "name": "s4-kicker",
+      "bbox": [
+        72,
+        76,
+        360,
+        22
+      ],
+      "geometry": "rect",
+      "text": "PAPER EVIDENCE",
+      "textPreview": "PAPER EVIDENCE",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#245CB7",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "PAPER EVIDENCE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "PAPER EVIDENCE",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#245CB7",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "PAPER EVIDENCE",
+              "fontSize": 13,
+              "color": "#245CB7",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xgrmt8j2",
+      "id": "4",
+      "name": "s4-title",
+      "bbox": [
+        72,
+        114,
+        800,
+        86
+      ],
+      "geometry": "rect",
+      "text": "共享基础，但不是同构训练",
+      "textPreview": "共享基础，但不是同构训练",
+      "resolvedFontSize": 37,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 37,
+        "typeface": "+mn-lt",
+        "color": "#13233A",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "共享基础，但不是同构训练"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "共享基础，但不是同构训练",
+          "lineSpacingPercent": 98000,
+          "resolvedTextStyle": {
+            "fontSize": 37,
+            "color": "#13233A",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 0.98
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "共享基础，但不是同构训练",
+              "fontSize": 37,
+              "color": "#13233A",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 0.98
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "table",
+      "scope": "slide",
+      "aid": "tb/54ve10z2",
+      "id": "5",
+      "bbox": [
+        92,
+        236,
+        1040,
+        350
+      ],
+      "text": "RLinf | SimpleVLA\n共同基础：SFT 模型、train/eval seeds、模型实现和 GRPO 保持一致。 | 共同基础：同左；valid action mask 工程等价\nbf16；rollout batch 1024 | 混合精度；rollout batch 512\nlearning rate 2.0e-4；LoRA=true | learning rate 5e-6；全参数训练\n固定轮次后过滤 collected trajectories | 每条 rollout 后即时过滤并缓存\naction-level reward | token-level success reward",
+      "textPreview": "RLinf | SimpleVLA | 共同基础：SFT 模型、train/eval seeds、模型实现和 GRPO 保持一致。 | 共同基础：同左；valid action mask 工程等价 | bf16；rollout batch 1024 | 混合精度；rollo...",
+      "rows": 6,
+      "cols": 2,
+      "cells": [
+        {
+          "index": 1,
+          "row": 1,
+          "column": 1,
+          "bbox": [
+            92,
+            236,
+            520,
+            58.33
+          ],
+          "text": "RLinf",
+          "textPreview": "RLinf",
+          "fillColor": "#245CB7",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "RLinf",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "RLinf"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "row": 1,
+          "column": 2,
+          "bbox": [
+            612,
+            236,
+            520,
+            58.33
+          ],
+          "text": "SimpleVLA",
+          "textPreview": "SimpleVLA",
+          "fillColor": "#245CB7",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "SimpleVLA",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "SimpleVLA"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "row": 2,
+          "column": 1,
+          "bbox": [
+            92,
+            294.33,
+            520,
+            58.33
+          ],
+          "text": "共同基础：SFT 模型、train/eval seeds、模型实现和 GRPO 保持一致。",
+          "textPreview": "共同基础：SFT 模型、train/eval seeds、模型实现和 GRPO 保持一致。",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "共同基础：SFT 模型、train/eval seeds、模型实现和 GRPO 保持一致。",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "共同基础：SFT 模型、train/eval seeds、模型实现和 GRPO 保持一致。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "row": 2,
+          "column": 2,
+          "bbox": [
+            612,
+            294.33,
+            520,
+            58.33
+          ],
+          "text": "共同基础：同左；valid action mask 工程等价",
+          "textPreview": "共同基础：同左；valid action mask 工程等价",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "共同基础：同左；valid action mask 工程等价",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "共同基础：同左；valid action mask 工程等价"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "row": 3,
+          "column": 1,
+          "bbox": [
+            92,
+            352.67,
+            520,
+            58.33
+          ],
+          "text": "bf16；rollout batch 1024",
+          "textPreview": "bf16；rollout batch 1024",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "bf16；rollout batch 1024",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "bf16；rollout batch 1024"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "row": 3,
+          "column": 2,
+          "bbox": [
+            612,
+            352.67,
+            520,
+            58.33
+          ],
+          "text": "混合精度；rollout batch 512",
+          "textPreview": "混合精度；rollout batch 512",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "混合精度；rollout batch 512",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "混合精度；rollout batch 512"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "row": 4,
+          "column": 1,
+          "bbox": [
+            92,
+            411,
+            520,
+            58.33
+          ],
+          "text": "learning rate 2.0e-4；LoRA=true",
+          "textPreview": "learning rate 2.0e-4；LoRA=true",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "learning rate 2.0e-4；LoRA=true",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "learning rate 2.0e-4；LoRA=true"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 8,
+          "row": 4,
+          "column": 2,
+          "bbox": [
+            612,
+            411,
+            520,
+            58.33
+          ],
+          "text": "learning rate 5e-6；全参数训练",
+          "textPreview": "learning rate 5e-6；全参数训练",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "learning rate 5e-6；全参数训练",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "learning rate 5e-6；全参数训练"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 9,
+          "row": 5,
+          "column": 1,
+          "bbox": [
+            92,
+            469.33,
+            520,
+            58.33
+          ],
+          "text": "固定轮次后过滤 collected trajectories",
+          "textPreview": "固定轮次后过滤 collected trajectories",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "固定轮次后过滤 collected trajectories",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "固定轮次后过滤 collected trajectories"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 10,
+          "row": 5,
+          "column": 2,
+          "bbox": [
+            612,
+            469.33,
+            520,
+            58.33
+          ],
+          "text": "每条 rollout 后即时过滤并缓存",
+          "textPreview": "每条 rollout 后即时过滤并缓存",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "每条 rollout 后即时过滤并缓存",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "每条 rollout 后即时过滤并缓存"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 11,
+          "row": 6,
+          "column": 1,
+          "bbox": [
+            92,
+            527.67,
+            520,
+            58.33
+          ],
+          "text": "action-level reward",
+          "textPreview": "action-level reward",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "action-level reward",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "action-level reward"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 12,
+          "row": 6,
+          "column": 2,
+          "bbox": [
+            612,
+            527.67,
+            520,
+            58.33
+          ],
+          "text": "token-level success reward",
+          "textPreview": "token-level success reward",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "token-level success reward",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "token-level success reward"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bup4ry1w",
+      "id": "6",
+      "name": "s4-caption",
+      "bbox": [
+        92,
+        210,
+        760,
+        16
+      ],
+      "geometry": "rect",
+      "text": "这是完整训练系统的实际比较，不是单一算法组件的因果消融。",
+      "textPreview": "这是完整训练系统的实际比较，不是单一算法组件的因果消融。",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 11,
+        "typeface": "+mn-lt",
+        "color": "#5C718A",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "这是完整训练系统的实际比较，不是单一算法组件的因果消融。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "这是完整训练系统的实际比较，不是单一算法组件的因果消融。",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 11,
+            "color": "#5C718A",
+            "alignment": "left",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "这是完整训练系统的实际比较，不是单一算法组件的因果消融。",
+              "fontSize": 11,
+              "color": "#5C718A",
+              "alignment": "left",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/atgnidkr",
+      "id": "7",
+      "name": "s4-source-frame",
+      "bbox": [
+        900,
+        88,
+        300,
+        112
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D8CFC5",
+      "lineWidth": 1
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lkrmxsje",
+      "id": "8",
+      "name": "s4-source-label",
+      "bbox": [
+        914,
+        98,
+        110,
+        16
+      ],
+      "geometry": "rect",
+      "text": "SOURCE CROP",
+      "textPreview": "SOURCE CROP",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#9B5C45",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "SOURCE CROP"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "SOURCE CROP",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#9B5C45",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "SOURCE CROP",
+              "fontSize": 10,
+              "color": "#9B5C45",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/1cfapgji",
+      "id": "9",
+      "bbox": [
+        912,
+        116,
+        276,
+        72
+      ],
+      "alt": "论文第 4 页来源核验（p4-table-2）：用于核对 RLinf 与 SimpleVLA 的 rollout batch、learning rate 和 LoRA 差异。",
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "0e833533-f5d4-4760-9738-7a7bd1b9db2e",
+        "contentType": "image/png",
+        "byteLength": 15728
+      }
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/25cfitgb",
+      "id": "10",
+      "name": "s4-data-takeaway-rule",
+      "bbox": [
+        92,
+        608,
+        1040,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#C9D5E3",
+      "lineWidth": 1
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/365wrexw",
+      "id": "11",
+      "name": "s4-data-takeaway-label",
+      "bbox": [
+        92,
+        626,
+        150,
+        16
+      ],
+      "geometry": "rect",
+      "text": "页面结论",
+      "textPreview": "页面结论",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 10,
+        "typeface": "+mn-lt",
+        "color": "#245CB7",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "页面结论"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "页面结论",
+          "lineSpacingPercent": 112000,
+          "resolvedTextStyle": {
+            "fontSize": 10,
+            "color": "#245CB7",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.12
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "页面结论",
+              "fontSize": 10,
+              "color": "#245CB7",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.12
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/o7exkjyh",
+      "id": "12",
+      "name": "s4-data-takeaway",
+      "bbox": [
+        254,
+        620,
+        878,
+        30
+      ],
+      "geometry": "rect",
+      "text": "共享基础不等于同构训练，后续结果按系统级差异解读。",
+      "textPreview": "共享基础不等于同构训练，后续结果按系统级差异解读。",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#13233A",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "共享基础不等于同构训练，后续结果按系统级差异解读。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "共享基础不等于同构训练，后续结果按系统级差异解读。",
+          "lineSpacingPercent": 106000,
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#13233A",
+            "bold": true,
+            "alignment": "left",
+            "lineSpacing": 1.06
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "共享基础不等于同构训练，后续结果按系统级差异解读。",
+              "fontSize": 16,
+              "color": "#13233A",
+              "bold": true,
+              "alignment": "left",
+              "lineSpacing": 1.06
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

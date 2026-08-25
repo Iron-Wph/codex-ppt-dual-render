@@ -1,0 +1,389 @@
+## 19. Review Checklist
+
+按 yes/no 检查：
+
+1. 主旨是否唯一？
+2. 图类型是否与主关系类型匹配？
+3. 起点是否明确？
+4. 主流程是否能不折返读完？
+5. 是否存在两个以上同等主焦点？
+6. 分组是否至少由两种 cue 支撑？
+7. 是否只靠颜色编码关键区别？
+8. 每个关键元素是否被定义？
+9. 箭头语义是否一一对应且已解释？
+10. 是否存在装饰性但无信息贡献的元素？
+11. 文本是否过长或漂浮无锚？
+12. 缩小后是否仍可读？
+13. 是否存在 faux figure 风险？
+14. representational genre 是否无故混杂？
+15. 是否可映射到 HTML / Pretext 的块级布局？
+16. 是否已满足目标期刊/平台的尺寸与字体约束？
+17. 是否存在 review_flags 未处理？
+
+结论规则：
+
+- `pass`：
+  - 第 1, 3, 4, 5, 7, 8, 9, 12, 15, 16 项全部为 yes。
+  - 且 review_flags 中无 high severity。
+- `revise`：
+  - 存在 1 到 3 个 high severity 问题，或多个 medium 问题。
+- `reject`：
+  - 主旨不唯一；或 reading path 不明确；或 faux figure；或颜色唯一编码；或缩小后不可读。
+
+---
+
+### Layout Pattern: pipeline
+- Definition: 明确输入到输出的多步骤流程，节点串联，通常单主链。
+- Suitable For: 方法流程、实验处理链、数据处理链。
+- Unsuitable For: 多个同权对比、无时间关系的概览图。
+- Reading Direction: 默认 left-to-right；空间不足时 top-to-bottom。
+- Required Structural Conditions: 单一主链、步骤间存在顺序依赖。
+- Common Mistakes: 每步塞太多解释、把分支例外混进主链。
+- Machine-friendly Representation: `narrative_structure = "sequential"`。
+- Example: 样本采集 → 预处理 → 模型 → 输出。
+- Strengths: 顺序清晰、最适合缩略浏览。
+- Risks: 容易线性化过度，掩盖并行或反馈。
+- Typical Failure Modes: 把并行结果强行串成时间顺序。
+### Layout Pattern: linear
+- Definition: 广义线性结构，未必是方法 pipeline，但有单一阅读主线。
+- Suitable For: 生物过程、病程演进、概念链。
+- Unsuitable For: 多维映射、矩阵对照。
+- Reading Direction: left-to-right 或 top-to-bottom。
+- Required Structural Conditions: start / middle / end 明确。
+- Common Mistakes: 局部 zoom-in 打断主线。
+- Machine-friendly Representation: `layout_pattern = "linear"`。
+- Example: 刺激 → 信号激活 → 细胞反应。
+- Strengths: 可读性高。
+- Risks: 对复杂系统表达不足。
+- Typical Failure Modes: 用过多交叉箭头破坏直线逻辑。
+### Layout Pattern: forking
+- Definition: 在单主线中至少一次分出多个后续路径。
+- Suitable For: 分化、决策树、不同处理路径。
+- Unsuitable For: 所有路径都同等重要且互相独立的并行比较。
+- Reading Direction: 先主干，后分支。
+- Required Structural Conditions: 分支点必须显著；分支必须有命名。
+- Common Mistakes: 分支无主次、无终点。
+- Machine-friendly Representation: `edges` 中存在 one-to-many branch node。
+- Example: 共同前处理后进入两个实验条件。
+- Strengths: 能表达 divergence。
+- Risks: 焦点过多。
+- Typical Failure Modes: 三个以上分支同时争夺注意力。
+### Layout Pattern: parallel
+- Definition: 多个替代方案、状态或视角并置展示。
+- Suitable For: 基线 vs 方法、条件 A/B、器官间对比。
+- Unsuitable For: 强因果推进过程。
+- Reading Direction: 通常先整体比较，再局部逐列/逐行。
+- Required Structural Conditions: 比较维度统一，对齐一致。
+- Common Mistakes: 每列结构不同，无法对齐比较。
+- Machine-friendly Representation: `narrative_structure = "juxtaposition"`。
+- Example: 对照组与处理组并列。
+- Strengths: 最适合显式比较。
+- Risks: 若无共同参照轴则阅读顺序弱。
+- Typical Failure Modes: 靠颜色区分两组但布局不对齐。
+
+---
+
+### Layout Pattern: comparison
+- Definition: 一类专门以差异点为核心的 parallel 结构。
+- Suitable For: before/after、old/new、baseline/method、normal/disease。
+- Unsuitable For: 无明确对照关系的概览。
+- Reading Direction: 先识别比较对象，再读差异项。
+- Required Structural Conditions: 对照项同位、同尺度、同语义位置。
+- Common Mistakes: 左右内容量差太大，导致一侧成主角。
+- Machine-friendly Representation: `comparison_axes` 明确列出。
+- Example: 传统流程 vs 新流程。
+- Strengths: 差异抓取快。
+- Risks: 容易忽略共性背景。
+- Typical Failure Modes: 把流程图和结果图并置，却没有相同比较轴。
+
+---
+
+# Part F. Final Compact Operational Summary
+
+1. 先问这张图的唯一主旨是什么，不允许把论文全塞进去。
+2. 识别主关系类型：sequence、comparison、cycle、feedback、containment、overview、matrix。
+3. 先选图型，再选表示方式；不要先想“画什么风格”。
+4. process 优先 linear/pipeline；对比优先 comparison/parallel；闭环优先 feedback/circular；多尺度优先 nesting；综述优先 overview；多维映射优先 matrix/grid。
+5. reading order 必须可解释为 start -> middle -> end；若不能，用 layout 重构，不要先补箭头。
+6. 一级、二级、三级信息必须分开；三级细节不能抢一级焦点。
+7. 分组不能只靠颜色；至少两种 cue。
+8. 一种 connector style 只表达一种语义；多语义共存必须区分并解释。
+9. 文字只做 label、short phrase、caption、legend、callout 等结构角色；不要让图变成段落。
+10. decorative icon 禁止；每个表示元素都要有信息贡献。
+11. 颜色用于 emphasis、grouping、status 或学科惯例，不得唯一编码。
+12. graphical abstract 默认按缩略浏览场景设计；Elsevier 场景优先宽幅 500:200 近似比例。
+13. summary / conceptual figure 默认检查 faux figure、overcrowding、ambiguous arrows。
+14. 输出必须是 machine-readable schema，而不是空泛审美说明。
+15. 用 checklist 审查：主旨、路径、焦点、分组、箭头、文字、缩小可读性、HTML 可映射性。
+16. 若失败，回退到 key message、figure type 或 layout 重新生成，不要只做表面美化。
+
+---
+
+---
+
+# Part G. Presentation Narrative and Template Reference Layer
+
+本节在制作完整 PPT / HTML 演示时启用。它补充 Part C 的结构规则，但不把页面锁死为固定模板。
+
+## 1. 先定义 communication job
+
+在生成大纲前，必须回答：
+
+1. audience 是谁，他们已经知道什么；
+2. 他们最关心、最可能质疑什么；
+3. 演讲的工作是 educate、persuade、recommend、review 还是 enable a decision；
+4. 演讲结束时，观众应该 understand / believe / choose / approve / do 什么；
+5. 哪些工作是 core contribution，哪些只是 supporting context。
+
+必须形成一句：
+
+> By the end, [audience] should [outcome] because [central takeaway].
+
+## 2. 大纲不是目录
+
+- 使用累积叙事：上一页提出的问题，由下一页回答或推进。
+- 每页必须有 `audience_question`、`narrative_job`、`primary_claim`、`evidence`、`implication` 和 `transition_out`。
+- 标题必须表达结论，不使用“研究背景 / 方法介绍 / 实验结果”这类纯主题标题。
+- 重要性按 `core / support / context` 标注；当时间不足时，优先删 context，不压缩 core。
+- 开场提出值得听的 tension / question；结尾必须回答它，并给出边界或行动，不用通用 Thank you 结束。
+
+## 3. 每页内容最低论证单元
+
+除极简封面和章节页外，每页至少包含：
+
+1. 一个明确主张；
+2. 两项以内的关键证据，或一项主证据加一个解释；
+3. 证据对观众意味着什么；
+4. 一句通向下一页的过渡。
+
+演讲稿不能复制标题。每页 `talk_track` 应覆盖：承接、解释、证据、边界、过渡；论文汇报建议 120–260 个中文字。
+
+## 4. 模板只提供构图语法
+
+模板选择参考 `skill-references/presentation-layout-catalog.json`。其中的 recipe 是候选轮廓，不是 role 到 layout 的硬编码映射。
+
+- 同一种内容可以因受众问题和证据形态选择不同 recipe。
+- 相邻页面应避免连续使用相同轮廓。
+- 页面优先使用一个整体构图，避免默认生成卡片墙或 UI dashboard。
+- 组件可以复用，但视觉结果必须像 presentation composition，而不是网页后台。
+- React / HTML 与 PPTX 应共享同一 `composition_id` 和内容语义；允许在不同媒介上采用不同实现。
+
+## 5. 生成后必须做逻辑自检
+
+逐页检查：
+
+- 如果删掉本页，故事是否仍成立；若成立，本页可能是次要或重复内容。
+- 本页主张是否由证据支持，而不是只靠措辞。
+- 观众是否知道“这对我意味着什么”。
+- 本页结尾是否自然制造下一页的需求。
+- speaker notes 是否足以让另一个人按同样逻辑讲清楚。
+
+整套检查：
+
+- 开场问题是否在结尾得到回答；
+- core contribution 是否获得最多页面和最强证据；
+- 背景是否抢占过多篇幅；
+- 方法、结果、边界之间是否存在逻辑跳跃；
+- 是否出现连续三页相同构图；
+- 是否存在生产过程文案、占位文案或模型自述泄漏到观众页面。
+
+=== PRESENTATION SKILL ===
+
+
+--- STYLE GUIDELINES ---
+# Presentation Style Guidelines
+
+Apply these guidelines to every deck. Explicit user instructions and supplied references override these defaults.
+
+## Define the Communication Job
+
+Before selecting slides, layouts, or visuals, infer:
+
+- The intended audience; do not assume the audience is the user.
+- The deck's job: educate, persuade, sell, recommend, facilitate, or enable a decision.
+- The audience outcome: what they should understand, believe, choose, approve, discuss, or do.
+- The central takeaway and the essential claims or evidence needed to support it.
+- Every content requirement and source constraint in the user's request.
+
+Express the communication job in one sentence:
+
+> By the end, **[audience]** should **[outcome]** because **[central takeaway]**.
+
+For an exploratory, reference, or neutral deck, define the questions or understanding the audience should leave with instead of forcing a recommendation.
+
+## Choose an Appropriate Narrative Arc
+
+Choose a structure that fits the communication job, such as:
+
+- Context -> stakes -> evidence -> implications -> action.
+- Question -> analysis -> answer.
+- Problem -> causes or options -> recommendation.
+- Current state -> change -> future state.
+- Chronology, process, learning progression, or claim -> evidence -> consequence.
+
+An agenda is not a narrative. Make the sequence cumulative so each section creates the need for the next. Do not force a persuasive or emotional arc onto a technical or reference deck; build those through logic, causality, chronology, learning progression, or decision flow.
+
+## Make Every Slide Advance the Story
+
+- Give each slide one narrative job and one primary claim.
+- Prefer takeaway-style titles that communicate the point instead of merely naming the topic.
+- Order slides so each answers a question raised by the prior slide or introduces one the next slide resolves; add a transition when the logic would otherwise jump.
+- Integrate requested topics into the throughline and remove repeated beats, redundant summaries, and content that does not advance it.
+- Use supplied visual references as constraints without copying irrelevant structure or weakening the narrative.
+
+## Turn Evidence into Meaning
+
+Do not present facts, metrics, charts, examples, or visuals as an inventory. For each important piece of evidence, show what it means, why it matters to this audience, and how it changes the conclusion, decision, discussion, or next step.
+
+Charts and visuals must reinforce the current claim. Use grounded examples, scenarios, case studies, or human impact only when they materially improve understanding. Never invent people, quotes, facts, data, or outcomes.
+
+## Open and Close Deliberately
+
+Open with the context, purpose, stakes, question, or tension that makes the deck worth attention. Close by resolving that opening with the appropriate outcome: a recommendation or decision, an explicit action, a synthesis or application, or implications and productive questions. Do not end abruptly on a detail, technical artifact, unframed summary, or generic "Thank you" slide.
+
+## Write Natural, Audience-Facing Copy
+
+Visible copy must serve the intended audience. Do not expose model instructions, planning notes, timing scaffolds, talk tracks, or implementation details unless the user explicitly requests them.
+
+Use a requested duration to set scope and pacing. Show timings only when explicitly requested or audience-facing; otherwise keep them in speaker notes. Remove anything the user marks irrelevant or out of scope. State exclusions only when the audience needs them or the user asks.
+
+Write titles and body copy in direct, specific, natural language:
+
+- Prefer concrete claims, active verbs, and plain language over vague slogans, jargon, abstract noun clusters, or inflated phrasing.
+- Avoid formulaic constructions such as repeated "From X to Y" titles, punctuation patterns, parallel structures, or advertising-style fragments.
+- Remove duplicated qualifiers and concepts, and vary sentence structure naturally.
+
+A title should communicate a point a human presenter would plausibly say aloud. If it sounds like a prompt, production note, slogan generator, or mechanical template, rewrite it.
+
+## Compose the Slides
+
+- Use a coherent visual system across the deck while varying slide silhouettes to fit the content.
+- Keep the title slide minimal and simple.
+- Prefer lower-density slides with high-value content. Shorten copy or change the layout before shrinking type.
+- Keep layouts clean and balanced. Avoid both crowding and excessive empty space; use equal left and right margins by default.
+- Use one composition instead of a collection of UI panels. Avoid card grids, pills, badges, button-like text boxes, tabs, navigation patterns, dense dashboard layouts, and other component-library styling that implies interactivity.
+- Use stylized text boxes sparingly and favor a flat structure on the canvas.
+- Keep palette, typography, spacing, alignment, and visual treatment consistent unless the content calls for a deliberate change.
+
+## Typography and Fit
+
+When the user does not provide explicit style guidance, use at least:
+
+- 50 pt for deck titles.
+- 35 pt for slide titles.
+- 24 pt for subheadings, callout headers, and text-box titles.
+- 16 pt for body text.
+
+Inspect for unexpected wrapping. Never allow a one-line title or banner to wrap to two lines. Ensure narrative copy fits the chosen layout; shorten it or change the layout instead of adding density or shrinking type below the minimums.
+
+
+=== FLEXIBLE TEMPLATE CATALOG ===
+{
+  "version": "1.0.0",
+  "purpose": "A flexible presentation composition reference derived from the local Presentation Skill and Codex Grid layout library. These are candidate silhouettes, not mandatory page templates.",
+  "selection_principle": "Choose a layout only after defining the audience question, the slide's narrative job, the primary claim, and the evidence required to make that claim credible.",
+  "global_rules": [
+    "Use one dominant composition per slide; do not default to a dashboard of repeated cards.",
+    "Use takeaway titles that state the point, not topic labels.",
+    "Every evidence object must be paired with an interpretation or implication.",
+    "Vary adjacent silhouettes while keeping typography, palette, spacing, and image treatment coherent.",
+    "Prefer shortening or splitting content over shrinking body text.",
+    "A slide may deviate from these recipes when the content requires a clearer composition."
+  ],
+  "recipes": [
+    {
+      "id": "thesis-stage",
+      "best_for": ["opening", "section opener", "closing synthesis"],
+      "audience_question": "Why should I care, and what will I learn?",
+      "composition": "small context line + oversized thesis + one supporting sentence or evidence cue",
+      "density": "sparse",
+      "reference": ["codex-grid#slide-01", "codex-grid#slide-02", "codex-grid#slide-26"],
+      "avoid": ["production notes", "agenda inventory", "more than one competing visual"]
+    },
+    {
+      "id": "image-thesis-split",
+      "best_for": ["problem framing", "method overview with a real figure", "case evidence"],
+      "audience_question": "What does this look like in practice?",
+      "composition": "40–48% claim/explanation + 52–60% evidence image with caption",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-08"],
+      "avoid": ["decorative stock image unrelated to the claim", "tiny unreadable paper screenshot"]
+    },
+    {
+      "id": "argument-pair",
+      "best_for": ["before/after", "baseline/proposal", "trade-off", "known/unknown"],
+      "audience_question": "What changed, or what is the meaningful contrast?",
+      "composition": "one shared claim + two unequal argument fields + one explicit synthesis",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-04", "codex-grid#slide-05", "codex-grid#slide-11"],
+      "avoid": ["two columns with duplicated wording", "comparison without a conclusion"]
+    },
+    {
+      "id": "mechanism-triptych",
+      "best_for": ["three parallel mechanisms", "three contributions", "three failure modes"],
+      "audience_question": "Which parts jointly explain the result?",
+      "composition": "three aligned mechanisms with independent labels and a shared consequence",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-06", "codex-grid#slide-07"],
+      "avoid": ["presenting parallel mechanisms as a sequential pipeline", "generic icon cards"]
+    },
+    {
+      "id": "causal-flow",
+      "best_for": ["training loop", "method sequence", "timeline", "decision process"],
+      "audience_question": "What happens in what order, and where does the signal change?",
+      "composition": "3–5 stages on one visual axis; concise stage explanation; end-state implication",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-17", "codex-grid#slide-18"],
+      "avoid": ["using a flow for independent factors", "long paragraphs inside nodes"]
+    },
+    {
+      "id": "metric-triad",
+      "best_for": ["three headline outcomes", "performance/data-efficiency/transfer", "decision summary"],
+      "audience_question": "What are the three numbers I should remember?",
+      "composition": "brief interpretation rail + three large metrics + one sentence of meaning each",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-19", "codex-grid#slide-23"],
+      "avoid": ["numbers without baseline or unit", "equal emphasis on secondary metrics"]
+    },
+    {
+      "id": "chart-with-interpretation-rail",
+      "best_for": ["main quantitative result", "ablation", "trend", "benchmark comparison"],
+      "audience_question": "What pattern in the data changes the conclusion?",
+      "composition": "dominant native chart occupying 55–70% + 2–3 interpretation callouts",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-20", "codex-grid#slide-21", "codex-grid#slide-22"],
+      "avoid": ["chart as decoration", "callouts that merely repeat axis values"]
+    },
+    {
+      "id": "evidence-table",
+      "best_for": ["experimental setup", "compact benchmark matrix", "method configuration"],
+      "audience_question": "What was compared, under which conditions?",
+      "composition": "claim title + native table + highlighted rows/columns + one interpretation footer",
+      "density": "dense",
+      "reference": ["codex-grid#slide-03", "codex-grid#slide-14", "codex-grid#slide-24"],
+      "avoid": ["full paper table without pruning", "table smaller than readable size"]
+    },
+    {
+      "id": "evidence-collage",
+      "best_for": ["qualitative behavior", "failure modes", "sim-to-real examples"],
+      "audience_question": "Which examples make the claim tangible?",
+      "composition": "one dominant evidence image + up to two supporting crops + a single synthesis statement",
+      "density": "moderate",
+      "reference": ["project extension of image-thesis-split"],
+      "avoid": ["more than three images", "reusing the same image", "unreadable thumbnails"]
+    },
+    {
+      "id": "answer-and-boundary",
+      "best_for": ["conclusion", "recommendation", "limitations"],
+      "audience_question": "What should I believe now, and where does it stop being true?",
+      "composition": "resolved answer + 2–3 implications + explicit boundary or next decision",
+      "density": "sparse",
+      "reference": ["codex-grid#slide-26"],
+      "avoid": ["generic thank-you ending", "new evidence introduced at the end"]
+    }
+  ],
+  "provenance": {
+    "source": "Local OpenAI Presentation Skill 26.727.11326 and Codex Grid layout registry",
+    "adaptation": "The project stores semantic composition rules only. It does not copy sample wording or bind planning to exact coordinates."
+  }
+}

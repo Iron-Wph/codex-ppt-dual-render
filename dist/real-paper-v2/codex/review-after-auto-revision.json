@@ -1,0 +1,44 @@
+{
+  "status": "revise",
+  "summary": "自动 QA 虽通过，但结构层存在关键内容未映射到可读元素、流程节点缺失、证据表过密及单页双焦点问题。",
+  "changes": [
+    {
+      "slide_id": "s2",
+      "element_id": "s2-evidence-figure-1",
+      "issue_id": "UNMAPPED_EXPERIMENT_CONTRACT",
+      "action": "将训练 seed、OOD seed、Piper 和 8×A800 等关键契约映射为实际可见的原生文字或指标元素；源快照仅作为辅助证据，并调整阅读顺序为标题→契约指标→证据→边界说明。",
+      "priority": "high"
+    },
+    {
+      "slide_id": "s3",
+      "element_id": null,
+      "issue_id": "MISSING_PIPELINE_NODE",
+      "action": "补齐 LoRA 更新节点及其连接线，更新 reading_order、reading_order_groups 和连接关系，使 Rollout→Group→Reward→GRPO→LoRA→结论完整闭合。",
+      "priority": "high"
+    },
+    {
+      "slide_id": "s4",
+      "element_id": "s4-evidence-table",
+      "issue_id": "EVIDENCE_TABLE_OVERLOAD_MISMATCH",
+      "action": "用紧凑、可编辑的共享变量/差异变量对照表替换当前原始配置转储，并将相关证据置于页面结论之前；避免让超长配置文本承担核心比较证据。",
+      "priority": "medium"
+    },
+    {
+      "slide_id": "s8",
+      "element_id": null,
+      "issue_id": "INCOMPLETE_DUAL_FOCUS_MATRIX",
+      "action": "在“8 卡模式对比”和“1/2/4 节点扩展”之间选择一个主焦点；若保留扩展矩阵，补齐 1n、2n、4n 的实际元素及 p8-table-1 证据，并同步更新标题和阅读顺序。",
+      "priority": "high"
+    },
+    {
+      "slide_id": "s5",
+      "element_id": "s5-evidence-table",
+      "issue_id": "EXCESSIVE_COMPARISON_TABLE_DENSITY",
+      "action": "将当前 8 列原始表压缩为突出 RLinf SFT→RL 的任务级图表或紧凑表格；把 SimpleVLA 对照移至 s6 或降为明确的次级证据，保留 8/8 与平均增益主焦点。",
+      "priority": "medium"
+    }
+  ],
+  "content_flags": [
+    "QA_REPORT_WARNING:PAPER_IMAGE_COVERAGE-hgvxzp；该警告已识别，但不作为本次通用结构审查的主要判定依据。"
+  ]
+}

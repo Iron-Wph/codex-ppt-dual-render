@@ -1,0 +1,1704 @@
+{"deck":{"id":"rlinf-robotwin-experiment-storyboard","title":"RLinf 在 RoboTwin 上的实验结论","purpose":"面向具身智能与机器人学习研究者，建立 RLinf 实验结果的可比性、性能增益、系统效率与结论边界。","audience":"具身智能、机器人学习与强化学习研究者；熟悉 VLA、SFT、PPO/GRPO 和 RoboTwin 基准。","language":"zh-CN","aspect_ratio":"16:9","communication_job":"By the end, embodied-AI researchers should judge RLinf’s performance and efficiency evidence under the correct experimental boundary because its gains are substantial under fixed RoboTwin/A800 conditions, but remain coupled to implementation and system choices.","talk_duration_minutes":12,"audience_profile":{"role":"具身智能与机器人学习研究者、论文评审或实验复现者","prior_knowledge":"了解 VLA、SFT、强化学习、GRPO、SSR、RoboTwin 与多卡训练基础。","cares_about":["结果是否可比且可复现","强化学习增益是否跨任务稳定","RLinf 与 SimpleVLA 的差异是否影响结论","训练与 rollout 的系统效率","硬件、seed、温度和实现细节造成的边界"],"likely_questions":["RLinf 的提升究竟来自 RL 信号还是实现差异？","训练 seed 与 OOD seed 如何设置？","不同任务上的增益是否稳定？","与 SimpleVLA 的比较是否公平？","哪种并行模式更适合实际运行？"],"desired_outcome":"能够基于证据判断 RLinf 的实际贡献、复现实验契约，并避免把受控条件下的系统性结果外推成无条件算法优势。"}},"narrative":{"arc":"question → experimental contract → generalization mechanism → RLinf training signal → controlled comparison → multi-task performance → framework-level uplift → sensitivity boundary → system efficiency → qualified answer","key_message":"在固定 RoboTwin 场景配置、OOD seed 与 8 卡 A800 条件下，RLinf 的 GRPO 训练将 8 个任务的平均 train SSR 从 24.48% 提升到 84.63%，同时提供具有竞争力的 actor/rollout 执行路径；但与 SimpleVLA 的精度、超参数、轨迹收集和 reward 设计差异要求将结论解释为受实验契约约束的系统性证据。","opening_question":"在相同任务与硬件约束下，RLinf 的提升究竟来自有效的强化学习信号，还是来自实现与系统差异？","closing_answer":"答案是：在固定 RoboTwin seed、评估口径与 8 卡 A800 条件下，RLinf 展现出显著且跨任务的 SSR 增益，并有可调的系统并行路径；但由于与 SimpleVLA 在精度、超参数、轨迹收集和 reward 设计上并非完全同构，证据支持的是受控条件下的 RLinf 系统优势，而不是脱离实验契约的普适算法胜负。","sections":[{"id":"sec-1","title":"先固定实验契约","job":"建立结果可信与可复现的条件","slide_ids":["s1","s2","s3"]},{"id":"sec-2","title":"解释训练与比较口径","job":"说明 RLinf 的训练信号并隔离与 SimpleVLA 的差异","slide_ids":["s4","s5"]},{"id":"sec-3","title":"展示性能证据与边界","job":"从跨任务结果、框架对比和敏感性分析建立结论","slide_ids":["s6","s7","s8"]},{"id":"sec-4","title":"连接到系统效率","job":"说明并行执行模式如何改变实际成本并给出合格结论","slide_ids":["s9","s10"]}],"priority_map":{"core":["s4","s5","s6","s7","s9","s10"],"support":["s2","s3","s8"],"context":["s1"]},"logic_check":{"opening_resolved":true,"core_has_evidence":true,"no_redundant_slides":true,"rationale":"开场提出 RL 信号与实现/系统差异的归因问题；中段依次固定实验契约、解释训练机制、展示跨任务和框架对比证据，再处理温度与初始 SSR 边界，最后用系统吞吐数据和明确限制完成回答。核心贡献与结果占主要页面，背景被限制在实验契约与必要机制内。"}},"visual":{"style_family":"academic-evidence","image_policy":"仅使用证据索引中的源表、源图或页面快照；优先使用原生表格、原生图表与机制图，禁止装饰性图片。","density_profile":"中等密度、证据优先；核心结果采用大图表或大表格，配置与边界采用紧凑注释。","style_reason":"主题是论文实验与 rebuttal 证据，受众具备技术背景，更需要可信、可核验和可复现的呈现，而不是产品化或情绪化视觉。academic-evidence 的暖白画布、深蓝层级、源证据板和珊瑚强调适合区分主张、数据与边界。","layout_system":"Codex Grid evidence-first：统一左对齐标题与宽边距，使用单一主构图；在证据表、原生图表、机制流程和边界解释之间交替轮廓，保留足够留白与明确的阅读路径。","style_reference":"themes/style-references/academic-evidence-v1.png"},"plan":{"title":"RLinf 在 RoboTwin 上的实验结论","subtitle":"性能增益成立，但必须连同实验契约与系统边界一起解释","slides":[{"id":"s1","layout":"title","composition_id":"thesis-stage","role":"opening","content_priority":"context","action_title":"RLinf 的实验价值，要同时回答“更强”与“更快”","audience_question":"这组实验到底要证明什么？","narrative_job":"提出核心张力：性能提升需要与训练信号、实现差异和系统效率一起解释。","slide_goal":"建立观众对整套实验的判断框架，并引出归因问题。","primary_claim":"RLinf 的实验结论不能只看单一成功率，而要同时判断强化学习增益与系统执行效率。","evidence":[],"implication":"观众会以“证据是否可比、增益是否稳定、成本是否可接受”作为后续阅读标准。","transition_in":"开场直接提出实验价值与归因张力。","transition_out":"要判断结果，首先必须知道哪些实验条件被固定、哪些条件可能改变结论。","evidence_refs":[],"table_refs":[],"asset_candidates":[],"visual_intent":"text_led","visual_plan":{"layout_family":"title","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"none","background_variant":"quiet","density":"sparse"}},{"id":"s2","layout":"evidence","composition_id":"image-thesis-split","role":"experimental-contract","content_priority":"support","action_title":"可信比较始于同一套 seed、硬件与运行契约","audience_question":"哪些条件必须先固定，结果才可信？","narrative_job":"建立实验可比性的边界，明确训练/评估 seed、RoboTwin 配置、Piper 双臂、8 卡 A800 以及运行镜像、代码路径和启动脚本。","slide_goal":"让观众把后续结果理解为受控实验，而不是跨环境的无条件结论。","primary_claim":"RLinf 实验被一套明确的可复现契约约束：训练使用 1,000 个随机 seed，评估使用额外 128 个 OOD seed，并统一在 8 卡 A800 与指定运行环境上执行。","evidence":[{"claim_support":"RoboTwin 使用 1,000 个训练场景 seed、128 个未见评估 seed、Piper 双臂，并说明所有强化学习实验统一在 8 卡 A800 平台进行。","evidence_ref":"p1-snapshot","interpretation":"这告诉研究者，性能差异首先是在固定环境、seed 与硬件条件下观察到的，复现时不能随意替换平台或 seed 集合。"},{"claim_support":"RLinf 与 SimpleVLA 分别给出容器镜像、代码路径、启动脚本和 Ray 卡数配置。","evidence_ref":"p6-snapshot","interpretation":"运行时配置本身是证据的一部分；它帮助复现者区分算法设置、框架设置和基础设施设置。"}],"implication":"后续性能结论应被表述为“在该实验契约下成立”，而不是脱离平台与运行环境的普遍保证。","transition_in":"开场的问题要求先定义可比条件。","transition_out":"固定条件之后，还要确认训练数据是否只覆盖熟悉布局，还是能检验未见场景。","evidence_refs":["p1-snapshot","p6-snapshot"],"table_refs":[],"asset_candidates":["p1-snapshot","p6-snapshot"],"visual_intent":"source_figure","visual_plan":{"layout_family":"evidence","primary_visual":"p1-snapshot","image_budget":1,"image_roles":["evidence"],"data_strategy":"source_figure","background_variant":"light","density":"balanced"}},{"id":"s3","layout":"pipeline","composition_id":"causal-flow","role":"generalization-mechanism","content_priority":"support","action_title":"随机化训练加 OOD seed，才把 SSR 变成泛化检验","audience_question":"模型是在记住训练布局，还是能适应未见场景？","narrative_job":"解释 RoboTwin 的领域随机化、训练 seed 与 OOD 评估如何共同构成泛化测试。","slide_goal":"把实验设置中的随机化因素连接到观众关心的 sim-to-real 与分布外鲁棒性。","primary_claim":"RoboTwin 通过随机背景、桌面杂乱、纹理、光照、桌面高度和语言指令扩大训练分布，再用未参与训练的 128 个 seed 检验未见场景。","evidence":[{"claim_support":"RoboTwin 的随机化因素包括场景杂乱度、约 1.2 万种背景纹理、光照、桌面高度和多样语言指令；训练与评估使用不同 seed 集合。","evidence_ref":"p1-snapshot","interpretation":"对研究者而言，SSR 的变化不只代表固定布局上的拟合，而是在被扰动的场景分布中测试行为稳定性。"},{"claim_support":"示例 task yaml 启用 random_background、cluttered_table、random_table_height、random_light，并配置 Piper、相机与数据采集选项。","evidence_ref":"p1-snapshot","interpretation":"环境配置将“随机化”落实为可复现的工程参数，复现实验时这些开关和采集设置不能被视为无关细节。"}],"implication":"后续跨任务结果的价值在于显示训练信号是否能在复杂、未见环境中持续提升，而不仅是单点 benchmark 分数。","transition_in":"实验契约固定了平台与 seed。","transition_out":"接下来需要说明 RLinf 在这些环境中到底如何产生训练信号。","evidence_refs":["p1-snapshot"],"table_refs":[],"asset_candidates":[],"visual_intent":"method_diagram","visual_plan":{"layout_family":"pipeline","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"diagram","background_variant":"default","density":"balanced"}},{"id":"s4","layout":"pipeline","composition_id":"causal-flow","role":"method-mechanism","content_priority":"core","action_title":"RLinf 用固定批量 rollout，把 action-level reward 送入 GRPO 更新","audience_question":"RLinf 的训练信号如何从机器人轨迹变成模型更新？","narrative_job":"用一条因果链解释 RLinf 的 GRPO 实验配方：环境 rollout、valid trajectory 过滤、action-level reward、优势估计与 LoRA 更新。","slide_goal":"让观众理解结果背后的训练机制与关键配置，而不是把 RL 视为黑箱。","primary_claim":"RLinf 的训练机制以 8×128=1024 的 rollout batch、group size 8 和 action-level reward 为核心，并在 token-level logprob/entropy 与 LoRA 更新配置下执行 GRPO。","evidence":[{"claim_support":"配置中给出 global batch size 1024、group_size 8、rollout_epoch 8、reward_type action_level、logprob_type token_level、adv_type grpo、is_lora true 与 learning rate 2.0e-4。","evidence_ref":"p4-snapshot","interpretation":"这些参数定义了 RLinf 的训练信号密度、更新规模和参数更新范围，是解释训练效率与最终 SSR 的必要机制证据。"}],"implication":"观众可以把后续性能变化追溯到具体的 rollout、reward 与更新路径，而不是只记住“用了 GRPO”。","transition_in":"OOD 评估说明了要测什么。","transition_out":"训练机制明确后，关键问题变成：与 SimpleVLA 的比较是否真的只改变了框架。","evidence_refs":["p4-snapshot"],"table_refs":[],"asset_candidates":[],"visual_intent":"method_diagram","visual_plan":{"layout_family":"pipeline","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"diagram","background_variant":"default","density":"balanced"}},{"id":"s5","layout":"comparison","composition_id":"evidence-table","role":"comparison-boundary","content_priority":"core","action_title":"RLinf 与 SimpleVLA 的共同基础相同，但训练动态并非同构","audience_question":"两套实现真的在同一实验上吗？","narrative_job":"并列展示共同点与关键差异，提前隔离影响结果解释的精度、超参数、轨迹收集和 reward 设计。","slide_goal":"防止观众把框架级比较误读成仅由算法名称造成的纯粹因果比较。","primary_claim":"RLinf 与 SimpleVLA 共享 SFT 模型、train/eval seeds、模型实现和 GRPO，但在数值精度、超参数、valid trajectory 收集策略与 reward 粒度上存在实质差异。","evidence":[{"claim_support":"对比材料明确列出共同点，以及 RLinf 的 bf16/FP32 loss、rollout batch 1024、learning rate 2.0e-4、LoRA 等与 SimpleVLA 的差异。","evidence_ref":"p4-table-1-crop","interpretation":"这意味着性能差异应被解释为完整训练系统的差异，而不能只归因于“RLinf 使用了 GRPO”。"},{"claim_support":"RLinf 固定轮次后过滤轨迹，并使用 action-level reward；SimpleVLA 即时过滤、使用 buffer，并采用 token-level success reward。","evidence_ref":"p5-table-1-crop","interpretation":"valid trajectory 数量和 reward 传播位置会改变每次更新看到的有效信号，直接影响训练速度与 SSR。"}],"implication":"后续结果可以证明 RLinf 系统有效，但若要声称纯算法优势，还需要进一步控制这些实现变量。","transition_in":"训练配方回答了 RLinf 如何学习。","transition_out":"在比较口径被标注之后，可以先看 RLinf 是否在多个任务上产生一致的 SSR 提升。","evidence_refs":["p4-table-1-crop","p5-table-1-crop"],"table_refs":["p4-table-1","p5-table-1"],"asset_candidates":["p4-table-1-crop","p5-table-1-crop"],"visual_intent":"source_table","visual_plan":{"layout_family":"comparison","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"native_table","background_variant":"light","density":"dense"}},{"id":"s6","layout":"chart-focus","composition_id":"chart-with-interpretation-rail","role":"multi-task-result","content_priority":"core","action_title":"跨 8 个任务，RLinf RL 把平均 train SSR 从 24.48% 推到 84.63%","audience_question":"RLinf 的提升是单个任务的偶然现象吗？","narrative_job":"用任务级 SSR 表格和平均值图表证明 RLinf RL 的提升跨越多种机器人任务，而不是只来自 place_empty_cup。","slide_goal":"建立整套实验最强的性能证据，并让观众看到任务间增益幅度与训练步数差异。","primary_claim":"在 8 个 RoboTwin 任务上，RLinf 的平均 train SSR 从 24.48% 提升到 84.63%，表中记录平均提升为 60.15%。","evidence":[{"claim_support":"place_empty_cup、beat_block_hammer、pick_dual_bottles、move_can_pot、lift_pot、stack_bowls_two、handover_block 和 place_container_plate 均列出 RLinf SFT、RLinf RL、提升幅度与训练步数。","evidence_ref":"p5-table-1","interpretation":"跨任务数据说明 RL 不是只改善高基线任务；低初始 SSR 任务也能获得大幅提升，但通常需要更多训练步数。"},{"claim_support":"平均值汇总为 RLinf SFT 24.48%、RLinf RL 84.63%。","evidence_ref":"p6-table-1","interpretation":"平均结果把任务级波动压缩为一个可比较的总体结论，适合判断 RLinf 的整体训练收益。"}],"implication":"对研究者而言，RLinf 的核心证据是跨任务的平均增益，同时需要把训练步数与初始 SSR 作为成本和条件一起报告。","transition_in":"比较口径已经明确。","transition_out":"下一步要回答：相同的 RL 目标在 SimpleVLA 中是否也能得到同样幅度的收益。","evidence_refs":["p5-table-1","p6-table-1"],"table_refs":["p5-table-1","p6-table-1"],"asset_candidates":[],"visual_intent":"data_chart","visual_plan":{"layout_family":"chart-focus","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"native_chart","background_variant":"light","density":"balanced"}},{"id":"s7","layout":"comparison","composition_id":"argument-pair","role":"framework-uplift","content_priority":"core","action_title":"RLinf 中 RL 的平均增益高于 SimpleVLA，但比较必须保留实现差异","audience_question":"RLinf 的 RL 增益是否超过了 SimpleVLA 的同类增益？","narrative_job":"将两套框架的 SFT→RL 平均变化并置，给出增益幅度的直接比较，同时承接上一页的可比性边界。","slide_goal":"展示 RLinf 的框架级优势，并明确它不是完全控制变量后的纯算法结论。","primary_claim":"RLinf 的平均 SSR 从 24.48% 升至 84.63%，增益为 60.15%；SimpleVLA 从 34.40% 升至 72.18%，增益为 37.78%，RLinf 的平均 RL 增益更大。","evidence":[{"claim_support":"平均 SSR 对比表同时给出 RLinf SFT/RL、Simple SFT/RL 及两者的 Δ Avg。","evidence_ref":"p6-table-1","interpretation":"观众可以直接比较两套框架中 RL 前后的变化，而不是只比较最终分数。"},{"claim_support":"任务级表展示 RLinf 与 SimpleVLA 在各任务上的 train SSR 与训练步数。","evidence_ref":"p5-table-1","interpretation":"平均增益并非凭空产生，但不同任务的初始 SSR、训练步数和收敛路径并不一致。"}],"implication":"最稳妥的表述是 RLinf 的完整训练系统带来了更大的平均提升；若要拆分 reward、精度或采样策略的单独贡献，需要额外消融。","transition_in":"跨任务结果证明 RLinf 自身有效。","transition_out":"但单点结果还可能受初始能力与评估温度影响，因此需要检查结论对评估口径的敏感性。","evidence_refs":["p6-table-1","p5-table-1"],"table_refs":["p6-table-1","p5-table-1"],"asset_candidates":[],"visual_intent":"comparison_matrix","visual_plan":{"layout_family":"comparison","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"native_table","background_variant":"light","density":"balanced"}},{"id":"s8","layout":"insight","composition_id":"answer-and-boundary","role":"sensitivity-boundary","content_priority":"support","action_title":"高基线任务与评估温度，会改变单点结果的解读","audience_question":"为什么 place_empty_cup 上的数字会随模型和温度明显变化？","narrative_job":"用 rebuttal 结果说明 pi0/pi05、SFT/PPO/GRPO、OFT 评估温度和训练步数会影响观察到的成功率。","slide_goal":"给出结果解释边界，避免把一个任务、一个温度下的数字当作普遍能力。","primary_claim":"在 place_empty_cup 上，初始模型能力与评估温度显著影响结果：OFT 在 Temp_eval=-1 与 1.6 下的 PPO/GRPO 表现不同，而 pi05 的 SFT 基线已高于 pi0。","evidence":[{"claim_support":"表格列出 pi0/pi05 在 SFT、PPO、GRPO 下的结果，以及 OFT Temp_eval=-1 与 Temp_eval=1.6 的 PPO/GRPO 结果；RL 统一取 50 step，部分温度结果未重跑。","evidence_ref":"p1-table-1-crop","interpretation":"研究者需要固定评估采样温度、训练步数和模型初始化，才能把差异解释为方法差异而非评估设置差异。"},{"claim_support":"单独表格给出 Temp_eval=1.6 下 PPO 86.72%、GRPO 88.28% 的 place_empty_cup 结果。","evidence_ref":"p1-table-2-crop","interpretation":"这说明评估协议本身会改变可见成绩，报告最终数字时必须同时报告温度与是否重跑。"}],"implication":"单点结果适合用于说明评估敏感性，不适合单独承担 RLinf 普遍优越性的结论。","transition_in":"框架级平均结果已经显示增益。","transition_out":"性能之外，实际采用还取决于 actor 与 rollout 的系统执行成本。","evidence_refs":["p1-table-1-crop","p1-table-2-crop"],"table_refs":["p1-table-1","p1-table-2"],"asset_candidates":["p1-table-1-crop","p1-table-2-crop"],"visual_intent":"source_table","visual_plan":{"layout_family":"insight","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"native_table","background_variant":"quiet","density":"balanced"}},{"id":"s9","layout":"matrix","composition_id":"evidence-table","role":"system-efficiency","content_priority":"core","action_title":"8 卡系统路径可调：colocated 更快，disaggregated 换取隔离与扩展","audience_question":"如果要实际跑起来，哪种 RLinf 并行模式更划算？","narrative_job":"比较 RLinf 的 colocated、disaggregated、Hybrid(pipe=1/2) 与 SimpleVLA 在 actor 和 generate 时间上的表现，并连接到 8/16/32 卡运行配置。","slide_goal":"把算法结果转化为系统部署判断，展示执行模式如何改变训练成本。","primary_claim":"在 8 卡数据中，RLinf colocated 的 actor/generate 时间为 49.15/170.34 秒，优于 SimpleVLA 的 94.05/189.33 秒；disaggregated 与 hybrid 提供不同的隔离和扩展取舍。","evidence":[{"claim_support":"8 卡对比表列出 RLinf 的 colocated、disaggregated、Hybrid(pipe=1)、Hybrid(pipe=2) 与 SimpleVLA 的 actor/rollout 时间。","evidence_ref":"p6-table-2-crop","interpretation":"这把 RLinf 的系统优势落到可测的 actor 和 rollout 成本，而非抽象地声称“更高效”。"},{"claim_support":"RLinf 与 SimpleVLA 在 1、2、4 节点下的 actor/generate 数据展示了随节点数增加的扩展趋势和模式差异。","evidence_ref":"p8-table-1-crop","interpretation":"部署者可以据此选择 colocated、disaggregated 或 hybrid，而不是把单一 8 卡配置当作唯一方案。"}],"implication":"RLinf 的系统价值不仅是最终 SSR，还包括可以通过并行模式在训练隔离、rollout 成本与扩展性之间做工程取舍。","transition_in":"性能结论必须落到实际运行成本。","transition_out":"现在可以把性能、效率和所有限制合并成一个可复现、可审慎引用的最终判断。","evidence_refs":["p6-table-2-crop","p8-table-1-crop"],"table_refs":["p6-table-2","p8-table-1"],"asset_candidates":["p6-table-2-crop","p8-table-1-crop"],"visual_intent":"source_table","visual_plan":{"layout_family":"matrix","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"native_table","background_variant":"light","density":"dense"}},{"id":"s10","layout":"insight","composition_id":"answer-and-boundary","role":"closing-synthesis","content_priority":"core","action_title":"结论成立，但它属于“受控条件下的 RLinf 系统优势”","audience_question":"我现在应该相信什么，又需要保留什么？","narrative_job":"回答开场问题，合并跨任务 SSR、SimpleVLA 对比、系统效率和实验边界，给出可复现与可引用的结论。","slide_goal":"让观众带走一个强但不过度外推的判断。","primary_claim":"在固定 RoboTwin seed、评估协议和 8 卡 A800 条件下，RLinf 的 RL 训练带来显著跨任务 SSR 增益，并提供有竞争力的系统执行路径；但实现差异、硬件敏感性和评估温度限制了无条件外推。","evidence":[{"claim_support":"RLinf 平均 train SSR 从 24.48% 提升到 84.63%，SimpleVLA 从 34.40% 提升到 72.18%。","evidence_ref":"p6-table-1","interpretation":"核心性能结论有跨任务平均值支撑，但应以完整实验设置和比较口径为前提。"},{"claim_support":"RLinf 多种并行模式与 SimpleVLA 的 actor/generate 时间对比显示 colocated 具有竞争力，其他模式存在明确成本差异。","evidence_ref":"p8-table-1-crop","interpretation":"系统效率结论应与部署模式绑定，不能用单一运行模式概括所有 RLinf 配置。"}],"implication":"论文或复现报告应同时报告 seed、GPU、温度、训练步数、reward/采样策略和并行模式；这样才能把 RLinf 的贡献准确定位为可复现的系统性增益。","transition_in":"系统效率补全了“更快”的一半证据。","transition_out":"开场问题得到回答：RLinf 在受控条件下确实更强且具备效率优势，但结论必须连同实验契约与边界一起引用。","evidence_refs":["p6-table-1","p8-table-1-crop"],"table_refs":["p6-table-1","p8-table-1"],"asset_candidates":[],"visual_intent":"text_led","visual_plan":{"layout_family":"insight","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"none","background_variant":"quiet","density":"sparse"}}]}}
+
+
+[stderr]
+2026-07-30T14:58:47.901740Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 86 column 5
+2026-07-30T14:58:50.063390Z  WARN codex_core::shell_snapshot: Failed to create shell snapshot for powershell: Shell snapshot not supported yet for PowerShell
+2026-07-30T14:58:58.470705Z ERROR codex_core::session::session: failed to load skill C:\Users\Wph\.codex\skills\imagen\SKILL.md: missing field `description`
+OpenAI Codex v0.144.4
+--------
+workdir: C:\Users\Wph\Documents\PPT制作
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019fb389-0846-7671-afa4-ccb15d11d814
+--------
+user
+You are the senior narrative architect for a local-first presentation generator.
+Create a 8-10-slide storyboard from the source below. This is stage 1 only: design the audience, communication job, cumulative narrative, content priority, evidence logic, transitions, and visual composition contract. Do not write slide body copy or speaker notes yet.
+
+Hard rules:
+- Use the full source text, not a short summary.
+- Infer the audience, prior knowledge, concerns, likely questions, and desired outcome.
+- Express the communication job as: "By the end, [audience] should [outcome] because [central takeaway]."
+- For a paper, allocate most pages to the authors' actual work and evidence. Background is context, not the presentation.
+- Mark each slide core, support, or context. Core contributions and results receive the strongest evidence and most speaking time.
+- Each slide has exactly one primary_claim, one audience_question, one narrative_job, one implication, and explicit transition_in / transition_out.
+- Use a viewer-facing takeaway title. Never expose planner language, page-production notes, "generated from N pages", or generic topic titles such as "Method" or "Results".
+- Make the sequence cumulative: every slide answers a question raised by the prior slide or creates the need for the next.
+- Put the opening question in narrative.opening_question and resolve it in narrative.closing_answer. Do not end with a generic thank-you slide.
+- Each core slide must cite real evidence from the evidence index, except a method-mechanism slide whose evidence is the described algorithm itself.
+- For every evidence object, state what supports the claim and what that evidence means to this audience.
+- Use comparison for parallel mechanisms/results, pipeline only for temporal or causal sequences, insight for interpretation/boundary.
+- Use source_table or data_chart when the evidence index has structured tables. Use source_figure when a figure or page snapshot is the best evidence.
+- Evidence refs must use IDs present in the evidence index. Never invent page numbers or asset IDs.
+- Select composition_id from: thesis-stage, image-thesis-split, argument-pair, mechanism-triptych, causal-flow, metric-triad, chart-with-interpretation-rail, evidence-table, evidence-collage, answer-and-boundary. Treat the catalog as flexible silhouettes, not a role-to-template lookup table. Avoid repeating the same composition three times in a row.
+- Decide the deck-level visual style. If the requested theme is explicit, preserve it. Otherwise choose one style_family based on audience, topic, and scene, and explain the choice in visual.style_reason.
+- Choose a layout_system and density_profile that match the story. Use the Codex Grid principles as a composition reference: vary silhouettes, preserve whitespace and typography hierarchy, and do not repeat a card grid on every slide.
+- For every slide, output visual_plan. Its layout_family must equal layout and be one of: title, pipeline, comparison, insight, evidence, hero-image, metric-stage, story-split, chart-focus, matrix, timeline, evidence-collage. Allocate 0–3 meaningful images only; use image_roles (hero, evidence, comparison, context), primary_visual (candidate asset ID or null), data_strategy, background_variant, and density. Native tables, native charts, and diagrams do not use image budget. Never allocate an image merely as decoration.
+- Before returning JSON, silently verify: opening resolved, no duplicate slide jobs, every core claim has evidence, background does not dominate, and every transition is logical. Report the verdict in narrative.logic_check.
+- Return strict JSON matching schemas/codex-storyboard.schema.json.
+
+Source: C:\Users\Wph\Desktop\2026届本科毕业论文（设计）工作指南\codex\RLinf论文实验.pdf; pages: 8
+
+Evidence index:
+---
+证据索引摘要：
+parser=pymupdf version=0.3.0
+diagnostics={"block_types":{"title":5,"text":573,"table":10,"figure":13,"list":6},"structured_block_count":607,"asset_count":29,"table_count":10,"formula_count":0,"captioned_asset_count":0}
+
+章节：
+p1-block-1 | page=1 | level=1 | RLinf 论文实验 ​
+p1-block-4 | page=1 | level=2 | Rebuttal ​
+p1-block-26 | page=1 | level=2 | Details​
+p4-block-28 | page=4 | level=2 | 与 SimpleVLA 对比 ​
+p6-block-20 | page=6 | level=2 | Lora ​
+
+图片/图表资产：
+p1-table-1-crop | type=evidence_crop | page=1 | bbox=[36.999969482421875,182.5,408.9999694824219,345.5] | path=assets/page-001-table-01-crop.png | Cropped paper figure or table region from page 1
+p1-table-2-crop | type=evidence_crop | page=1 | bbox=[36.999969482421875,362.5,222.99996948242188,417] | path=assets/page-001-table-02-crop.png | Cropped paper figure or table region from page 1
+p1-snapshot | type=evidence_page_snapshot | page=1 | bbox=null | path=assets/page-001-snapshot.png | Full-page evidence snapshot from page 1
+p1-image-1 | type=evidence_figure | page=1 | bbox=[38,87.50001525878906,48,97.50001525878906] | path=assets/page-001-image-01.jpeg | 论文第 1 页嵌入图片 1
+p1-image-2 | type=evidence_figure | page=1 | bbox=[79,87.50001525878906,89,97.50001525878906] | path=assets/page-001-image-02.jpeg | 论文第 1 页嵌入图片 2
+p1-image-3 | type=evidence_figure | page=1 | bbox=[208.49998474121094,207.5,277,224] | path=assets/page-001-image-03.png | 论文第 1 页嵌入图片 3
+p1-image-4 | type=evidence_figure | page=1 | bbox=[285.9999694824219,207.50001525878906,354.4999694824219,223.50001525878906] | path=assets/page-001-image-04.png | 论文第 1 页嵌入图片 4
+p1-image-5 | type=evidence_figure | page=1 | bbox=[130.99998474121094,252.5,199.5,259.5] | path=assets/page-001-image-05.png | 论文第 1 页嵌入图片 5
+p1-image-6 | type=evidence_figure | page=1 | bbox=[208.49998474121094,252.5,277,262.5] | path=assets/page-001-image-06.png | 论文第 1 页嵌入图片 6
+p1-image-7 | type=evidence_figure | page=1 | bbox=[285.9999694824219,252.5,354.4999694824219,262.5] | path=assets/page-001-image-07.png | 论文第 1 页嵌入图片 7
+p1-image-8 | type=evidence_figure | page=1 | bbox=[285.9999694824219,291,354.4999694824219,300] | path=assets/page-001-image-08.png | 论文第 1 页嵌入图片 8
+p1-image-9 | type=evidence_figure | page=1 | bbox=[127.49996948242188,387.5,168.49996948242188,393] | path=assets/page-001-image-09.png | 论文第 1 页嵌入图片 9
+p1-image-10 | type=evidence_figure | page=1 | bbox=[177.49996948242188,387.5,218.49996948242188,393] | path=assets/page-001-image-10.png | 论文第 1 页嵌入图片 10
+p4-table-1-crop | type=evidence_crop | page=4 | bbox=[36.74998612837358,28.500039100646973,402.2749847412109,380.7083740234375] | path=assets/page-004-table-01-crop.png | Cropped paper figure or table region from page 4
+p4-table-2-crop | type=evidence_crop | page=4 | bbox=[36.74998612837358,708.875,402.2749847412109,791.125] | path=assets/page-004-table-02-crop.png | Cropped paper figure or table region from page 4
+p4-snapshot | type=evidence_page_snapshot | page=4 | bbox=null | path=assets/page-004-snapshot.png | Full-page evidence snapshot from page 4
+p5-table-1-crop | type=evidence_crop | page=5 | bbox=[36.94996948242188,583.444566514757,523.55,795.055677625868] | path=assets/page-005-table-01-crop.png | Cropped paper figure or table region from page 5
+p5-snapshot | type=evidence_page_snapshot | page=5 | bbox=null | path=assets/page-005-snapshot.png | Full-page evidence snapshot from page 5
+p5-image-1 | type=evidence_figure | page=5 | bbox=[196.00001525878906,240.50015258789062,408.0000305175781,366.0001525878906] | path=assets/page-005-image-01.png | 论文第 5 页嵌入图片 1
+p5-image-2 | type=evidence_figure | page=5 | bbox=[203,429.000244140625,426,539.000244140625] | path=assets/page-005-image-02.png | 论文第 5 页嵌入图片 2
+p6-table-1-crop | type=evidence_crop | page=6 | bbox=[36.81577180561266,28.916666666666668,286.1249694824219,90.58333333333333] | path=assets/page-006-table-01-crop.png | Cropped paper figure or table region from page 6
+p6-table-2-crop | type=evidence_crop | page=6 | bbox=[36.81577180561266,496.3747253417969,227.07139805385046,619.624755859375] | path=assets/page-006-table-02-crop.png | Cropped paper figure or table region from page 6
+p6-snapshot | type=evidence_page_snapshot | page=6 | bbox=null | path=assets/page-006-snapshot.png | Full-page evidence snapshot from page 6
+p6-image-1 | type=evidence_figure | page=6 | bbox=[238.00001525878906,144.50015258789062,366,256.0001525878906] | path=assets/page-006-image-01.png | 论文第 6 页嵌入图片 1
+p7-table-1-crop | type=evidence_crop | page=7 | bbox=[36.783321126302084,28.500077883402508,401.39285714285717,305.7084096272786] | path=assets/page-007-table-01-crop.png | Cropped paper figure or table region from page 7
+p7-table-2-crop | type=evidence_crop | page=7 | bbox=[36.783321126302084,707.400244140625,251.58330281575522,810.100244140625] | path=assets/page-007-table-02-crop.png | Cropped paper figure or table region from page 7
+p7-snapshot | type=evidence_page_snapshot | page=7 | bbox=null | path=assets/page-007-snapshot.png | Full-page evidence snapshot from page 7
+p8-table-1-crop | type=evidence_crop | page=8 | bbox=[36.899969482421874,58.9,236.09996948242187,141.1] | path=assets/page-008-table-01-crop.png | Cropped paper figure or table region from page 8
+p8-snapshot | type=evidence_page_snapshot | page=8 | bbox=null | path=assets/page-008-snapshot.png | Full-page evidence snapshot from page 8
+
+结构化表格：
+p1-table-1 | page=1 | 5x5 | Paper table region on page 1
+p1-table-2 | page=1 | 2x3 | Paper table region on page 1
+p4-table-1 | page=4 | 1x2 | Paper table region on page 4
+p4-table-2 | page=4 | 4x3 | Paper table region on page 4
+p5-table-1 | page=5 | 9x8 | Paper table region on page 5
+p6-table-1 | page=6 | 3x5 | Paper table region on page 6
+p6-table-2 | page=6 | 6x3 | Paper table region on page 6
+p7-table-1 | page=7 | 1x2 | Paper table region on page 7
+p7-table-2 | page=7 | 5x4 | Paper table region on page 7
+p8-table-1 | page=8 | 4x4 | Paper table region on page 8
+
+公式：
+无结构化公式。
+
+页级文本摘要：
+PAGE 1 [RLinf 论文实验 ​ / Rebuttal ​ / Details​]: RLinf 论文实验​ 王培鸿 韦明杰 3月28日修改 Rebuttal​ place_empty_cup​ Model​ SFT​ PPO​ GRPO​ pi0​ 45.31%​ 82.03%​ 83.59%​ pi05​ 85.16%​ 96.88%​ 95.31%​ RL 都取50 step​ oft(Temp_eval=-1)​ 75.78%​ ​ 92.97%​ (没重跑故不需要重测)​ 92.19%​ oft(Temp_eval=1.6)​ 86.72%​ 88.28%​ Temp_eval=1.6​ PPO​ GRPO​ place_empty_cup​ 86.72%​ 88.28%​ Details​ 1. RoboTwin 的领域随机化设置​ RoboTwin 在数据生成过程中引入了多种领域随机化因素，包括场景杂乱度（添加无关干扰物体）、背景纹理（从约 1.2 万种高质量纹理中采 样）、光照条件（颜色温度与光源类型随机）、桌面高度（在物理合理范围内采样）以及语言指令（生成多样化的任务描述）。这些随机化因素共 同作用，用于增加数据多样性并缓解仿真到真实之间的分布差异。 a. 训练阶段（SFT 与 RL）​ 在训练阶段，监督微调（SFT）和强化学习（RL）均使用同一组 基于robotwin官方随机化场景参数配置的1,000 个随机 seed 对环境进行初始 化，采用 双臂的Piper 机械臂。​ 在 SFT 阶段，每个 seed 仅用于初始化环境一次，共采集 1,0
+PAGE 2: 环境ENV yaml配置​ 代码块 env_type: robotwin​ total_num_envs: null​ auto_reset: False​ ignore_terminations: False​ use_custom_reward: True​ use_rel_reward: True​ seed: 0​ group_size: 1​ use_fixed_reset_state_ids: False​ max_steps_per_rollout_epoch: 200​ max_episode_steps: 200 # max episode steps for truncation​ assets_path: "/mnt/public/peihong/codes/RLinf_RoboTwin_gz"​ seeds_path: "/mnt/project_rlinf/guozhen/test_robotwin/SimpleVLA-RL/verl/utils/en video_cfg: save_video: True​ info_on_video: True​ video_base_dir: ${runner.logger.log_path}/video/train​ task_config:​ task_name: beat_block_hammer​ step_lim: 200​ # if you want to modify the config, plea
+PAGE 3: Generate rollout bsz: 128 * 8 =1024​ Global bsz：1024​ is_lora: True​ lr: 2.0e-4 ​ adam_beta1: 0.9​ adam_beta2: 0.999 adam_eps: 1.0e-05​ weight_decay: 0.01​ clip_grad: 1.0​ 代码块 defaults:​ - env/robotwin_beat_block_hammer@env.train​ - env/robotwin_beat_block_hammer@env.eval​ - model/openvla_oft@actor.model​ - training_backend/fsdp@actor.fsdp_config​ - override hydra/job_logging: stdout​ hydra:​ run:​ dir: .​ output_subdir: null​ searchpath:​ - file://${oc.env:EMBODIED_PATH}/config/​ ​ cluster:​ num_nodes: 1​ component_placement:​ actor, env, rollout: 0-7​ runner:​ task_type: embodied​ logger:​ log_path: "../results"​ project_name: rlinf​ experi
+PAGE 4 [与 SimpleVLA 对比 ​]:  clip_ratio_low: 0.2​ clip_ratio_c: 3.0​ value_clip: 0.2​ huber_delta: 10.0​ gamma: 1.0​ gae_lambda: 0.95​ reward_coef: 5.0​ filter_rewards: True​ rewards_lower_bound: 0.5​ rewards_upper_bound: 4.5​ # params for rollout​ sampling_params:​ do_sample: True​ temperature_train: 1.6​ temperature_eval: 1.6​ top_k: -1​ top_p: 1.0​ repetition_penalty: 1.0​ # length argument for autoregressive sampling​ # max length means max amount of tokens to generate​ length_params:​ max_new_token: null​ max_length: 1024​ min_length: 1​ env:​ group_name: "EnvGroup"​ enable_offload: True​ 与SimpleVLA对比​ 相同点 1. SFT模型、train/eval seeds 均采用simple提供​ 2. 模型的实现与simple一致​ 3
+PAGE 5: 还有框架计算log_prob、模型update的bsz不同，but不影响性能​ 3. Valid traj collect策略不同​ RLinf: 其rollout固定轮次、固定数目的traj后，对collected traj进行reward filter，所以模型每次step得到valid traj数受模型当前对该task的SSR影 响； Simple: 其在每次rollout traj后都立即进行reward filter，剩余的traj存在buffer中；循环往复直到收集到rollout bsz 数量的traj 再进行模型的更新​ 4. GRPO的reward设计不一样​ RLinf：采用action_level的reward​ 具体实现： 设置use_custom_reward & use_rel_reward 为True​ 给最后一个chunk的最后一个action给reward；​ Simple: 采用是 token-level的reward​ 具体实现： 对于该traj如果是success ，则为1；反之为0 ​ 5. 模型train SSR Task​ RLinf SFT​ RLinf RL​ Avg improvement​ train step​ RLinf ​ Simple SFT​ Simple RL​ ​ train step​ Simple​ place_empty_cup​ 75.78%​ 94.53%​ 18.75​ 40​ 77.3%​ 94.2
+PAGE 6 [Lora ​]: RLinf SFT​ RLinf RL​ Simple SFT​ Simple RL​ Average​ 24.48%​ 84.63%​ 34.40%​ 72.18%​ Δ Avg.​ +60.15%​ +37.78%​ notice​ 1. 模型实现微小差异：RLinf加了position_ids，我之前跑的没加，简单验证后性能没差异就忽略了​ Rlinf使用​ 镜像：cr.infini-ai.com/te-dbdcudoygepmq5vx/agentic-rlinf0.1-torch2.6.0-openvlaoft-pi0-robotwin:0.1​ 路径：/mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main/examples/embodiment​ 运行指令：bash run_embodiment.sh​ Simple使用​ 镜像：cr.infini-ai.com/te-dbdcudoygepmq5vx/robotwin_simplevla_openvla_oft:2.2​ 路径： /mnt/project_rlinf_hs/wph/codes/SimpleVLA-RL/SimpleVLA-RL-main​ 运行指令：bash examples/run_openvla_oft_rl_twin2.sh​ 8卡​ actor（s）​ rollout（s）​ Colocated​ 49.15​ 170.34​ Disaggre
+PAGE 7: if [ "$RANK" -eq 0 ]; then​ bash check_ray.sh 8; # 指定任意的卡数​ cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​ bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope else​ sleep 10d​ fi​ if [ "$RANK" -eq 0 ]; then​ bash check_ray.sh 16; # 指定任意的卡数​ cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​ bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope else​ sleep 10d​ fi​ if [ "$RANK" -eq 0 ]; then​ bash check_ray.sh 32; # 指定任意的卡数​ cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​ bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope else​ sleep 10d​ fi​ 
+PAGE 8: Simple​ mode​ nodenum actor​ generate​ colocated​ 1n​ 115.52​ 207.86​ colocated​ 2n​ 66.21​ 117.98​ colocated​ 4n​ 42​ 71.11​ mode nodenum actor generate ​ colocated 1n 49.15 170.34​ colocated 2n 27.47 100.2 ​ colocated 4n 15.0 66.67​ disaggregated 1n 89.55 549.97​ disaggregated 2n 47.92 289.74​ disaggregated 4n 26.44 168.57​ Hybrid(pipe=1) 1n 50.14 303.7​ Hybrid(pipe=1) 2n 27.53 166.0​ Hybrid(pipe=1) 4n 15.03 95.37​ Hybrid(pipe=2) 1n 50.31 317.07​ Hybrid(pipe=2) 2n 27.53 155.67​ Hybrid(pipe=2) 4n 14.97 95.73​ simplevla​ mode nodenum actor generate​ colocated 1n 115.52 207.86​ colocated 2n 66.21 117.98​ colocated 4n 42 71.11​ 2026/4/4 20:47 ‌
+---
+
+Requested theme: auto. Theme catalog:
+---
+[
+  {
+    "id": "academic-evidence",
+    "label": "Academic Evidence",
+    "category": "Academic Research",
+    "visual_profile": "academic",
+    "tags": [
+      "academic",
+      "paper",
+      "evidence",
+      "research",
+      "clean"
+    ],
+    "density": "medium",
+    "mood": "credible, calm, evidence-first",
+    "recommended_for": [
+      "academic paper",
+      "literature review",
+      "technical briefing"
+    ],
+    "composition": "warm white canvas, strict evidence grid, navy hierarchy, restrained annotations",
+    "typography_treatment": "compact sans-serif labels with decisive navy action titles",
+    "background_treatment": "quiet paper ground with subtle blue section bands",
+    "image_treatment": "large source figures on white plates with visible captions and provenance",
+    "table_treatment": "native white tables with navy rules and one coral emphasis row",
+    "style_markers": [
+      "paper canvas",
+      "navy thesis",
+      "source figure plate",
+      "coral annotation"
+    ],
+    "layout_families": [
+      "research-cover",
+      "evidence-split",
+      "method-flow",
+      "chart-first",
+      "finding-boundary"
+    ],
+    "avoid": [
+      "decorative stock photography",
+      "poster text walls",
+      "unlabelled charts"
+    ],
+    "style_reference_asset": "themes/style-references/academic-evidence-v1.png"
+  },
+  {
+    "id": "scientific-plate",
+    "label": "Scientific Figure Plate",
+    "category": "Academic Research",
+    "visual_profile": "scientific",
+    "tags": [
+      "scientific",
+      "figure",
+      "formula",
+      "lab",
+      "diagram"
+    ],
+    "density": "high",
+    "mood": "precise, analytical, laboratory",
+    "recommended_for": [
+      "scientific results",
+      "methods paper",
+      "benchmark analysis"
+    ],
+    "composition": "figure-led plates, numbered callouts, compact legends, disciplined whitespace",
+    "typography_treatment": "small technical labels paired with compact high-authority headlines",
+    "background_treatment": "cool laboratory white with faint grid coordinates",
+    "image_treatment": "uncropped scientific figures with callout rails and explicit figure captions",
+    "table_treatment": "dense native tables with alternating cool rows and teal significance markers",
+    "style_markers": [
+      "figure plate",
+      "numbered callout",
+      "technical grid",
+      "teal measurement"
+    ],
+    "layout_families": [
+      "figure-cover",
+      "multi-panel-evidence",
+      "formula-focus",
+      "method-plate",
+      "result-annotation"
+    ],
+    "avoid": [
+      "cinematic backgrounds",
+      "oversized decorative metrics",
+      "cropping scientific axes"
+    ],
+    "style_reference_asset": "themes/style-references/academic-evidence-v1.png"
+  },
+  {
+    "id": "engineering-blueprint",
+    "label": "Engineering Blueprint",
+    "category": "Diagram",
+    "visual_profile": "blueprint",
+    "tags": [
+      "engineering",
+      "architecture",
+      "blueprint",
+      "robotics",
+      "system"
+    ],
+    "density": "medium",
+    "mood": "technical, rigorous, constructed",
+    "recommended_for": [
+      "robotics",
+      "systems architecture",
+      "technical teardown"
+    ],
+    "composition": "deep blueprint field, precise rails, annotated components, one luminous signal",
+    "typography_treatment": "condensed technical labels with strong white system claims",
+    "background_treatment": "midnight blue drafting grid with restrained coordinate marks",
+    "image_treatment": "figures framed as annotated engineering assemblies",
+    "table_treatment": "dark specification tables with cyan headers and amber exceptions",
+    "style_markers": [
+      "blueprint grid",
+      "cyan rail",
+      "component label",
+      "amber exception"
+    ],
+    "layout_families": [
+      "blueprint-cover",
+      "architecture-map",
+      "component-cutaway",
+      "experiment-compare",
+      "spec-table"
+    ],
+    "avoid": [
+      "random neon",
+      "glowing body copy",
+      "unstructured card mosaics"
+    ],
+    "style_reference_asset": "themes/style-references/future-tech-signal-v1.png"
+  },
+  {
+    "id": "editorial-research",
+    "label": "Editorial Research",
+    "category": "Editorial",
+    "visual_profile": "editorial",
+    "tags": [
+      "editorial",
+      "magazine",
+      "research",
+      "serif",
+      "warm"
+    ],
+    "density": "medium",
+    "mood": "thoughtful, literary, premium",
+    "recommended_for": [
+      "research narrative",
+      "humanities",
+      "executive essay"
+    ],
+    "composition": "ivory print grid, asymmetric headlines, warm image wells, deliberate negative space",
+    "typography_treatment": "serif display moments with restrained sans-serif evidence labels",
+    "background_treatment": "soft ivory paper with terracotta rules",
+    "image_treatment": "warm editorial crops with caption blocks aligned to the print grid",
+    "table_treatment": "quiet cream tables with terracotta row markers",
+    "style_markers": [
+      "ivory paper",
+      "serif moment",
+      "print grid",
+      "terracotta rule"
+    ],
+    "layout_families": [
+      "editorial-cover",
+      "essay-split",
+      "quote-interstitial",
+      "evidence-column",
+      "closing-statement"
+    ],
+    "avoid": [
+      "corporate blue gradients",
+      "dashboard card walls",
+      "generic stock office scenes"
+    ],
+    "style_reference_asset": "themes/style-references/minimal-editorial-v1.png"
+  },
+  {
+    "id": "consulting-data-story",
+    "label": "Consulting Data Story",
+    "category": "Business & Report",
+    "visual_profile": "consulting",
+    "tags": [
+      "consulting",
+      "data",
+      "strategy",
+      "executive",
+      "chart"
+    ],
+    "density": "high",
+    "mood": "decisive, analytical, executive",
+    "recommended_for": [
+      "strategy",
+      "market analysis",
+      "business review"
+    ],
+    "composition": "answer-first headline, disciplined KPI rail, one primary chart, compact implication panel",
+    "typography_treatment": "strong action titles and small factual labels with clear numerical hierarchy",
+    "background_treatment": "bright neutral field with navy anchors and controlled blue bands",
+    "image_treatment": "images used sparingly as evidence, never as decoration",
+    "table_treatment": "native decision tables with blue headers and green positive deltas",
+    "style_markers": [
+      "answer first",
+      "KPI rail",
+      "blue data hierarchy",
+      "decision table"
+    ],
+    "layout_families": [
+      "answer-cover",
+      "metric-strip",
+      "chart-first",
+      "decision-matrix",
+      "recommendation-close"
+    ],
+    "avoid": [
+      "ornamental illustration",
+      "equal-weight card collections",
+      "unexplained numbers"
+    ],
+    "style_reference_asset": "themes/style-references/minimal-editorial-v1.png"
+  },
+  {
+    "id": "dark-frontier-tech",
+    "label": "Dark Frontier Tech",
+    "category": "Product",
+    "visual_profile": "frontier",
+    "tags": [
+      "frontier",
+      "ai",
+      "robotics",
+      "launch",
+      "dark"
+    ],
+    "density": "low",
+    "mood": "cinematic, confident, frontier-facing",
+    "recommended_for": [
+      "AI product",
+      "robotics launch",
+      "future technology"
+    ],
+    "composition": "near-black stage, one immersive visual, oversized claim, cyan signal and magenta counterpoint",
+    "typography_treatment": "large sparse display typography with compact technical microcopy",
+    "background_treatment": "deep navy field with controlled orbital signal geometry",
+    "image_treatment": "one dramatic hero or evidence image in a luminous media well",
+    "table_treatment": "minimal dark tables with cyan structure and lime success states",
+    "style_markers": [
+      "midnight stage",
+      "cyan signal",
+      "orbital geometry",
+      "one bold claim"
+    ],
+    "layout_families": [
+      "frontier-hero",
+      "product-reveal",
+      "orbit-system",
+      "signal-chart",
+      "closing-manifesto"
+    ],
+    "avoid": [
+      "rainbow neon",
+      "multiple competing hero images",
+      "dense small text"
+    ],
+    "style_reference_asset": "themes/style-references/future-tech-signal-v1.png"
+  },
+  {
+    "id": "graphite-lime",
+    "label": "Graphite Lime",
+    "category": "Diagram",
+    "visual_profile": "graphite",
+    "tags": [
+      "developer",
+      "engineering",
+      "graphite",
+      "lime"
+    ],
+    "density": "medium",
+    "mood": "technical, experimental, high-contrast",
+    "recommended_for": [
+      "AI research",
+      "engineering",
+      "developer tools"
+    ],
+    "composition": "dark canvas, strong left thesis, lime evidence highlight, coral counterpoint",
+    "typography_treatment": "large technical headings with compact mono labels",
+    "background_treatment": "near-black graphite field with subtle technical rails",
+    "image_treatment": "bright source figures inside dark frames",
+    "table_treatment": "high-contrast evidence table with lime header accents",
+    "style_markers": [
+      "near-black canvas",
+      "luminous evidence accent",
+      "technical line work"
+    ],
+    "layout_families": [
+      "thesis-stage",
+      "architecture-map",
+      "experiment-comparison",
+      "metric-strip",
+      "evidence-panel"
+    ],
+    "avoid": [
+      "dense dashboard grids",
+      "low-contrast labels",
+      "decorative neon without evidence"
+    ],
+    "style_reference_asset": "themes/style-references/future-tech-signal-v1.png"
+  },
+  {
+    "id": "paper-blue",
+    "label": "Paper Blue",
+    "category": "Academic Research",
+    "visual_profile": "academic",
+    "tags": [
+      "paper",
+      "blue",
+      "clean",
+      "legacy"
+    ],
+    "density": "medium",
+    "mood": "credible, academic, clean",
+    "recommended_for": [
+      "academic paper",
+      "research review",
+      "technical briefing"
+    ],
+    "composition": "light canvas, blue hierarchy, generous margins, restrained evidence panels",
+    "typography_treatment": "clean sans-serif hierarchy",
+    "background_treatment": "cool paper background",
+    "image_treatment": "clean source figures with white framing",
+    "table_treatment": "white table surface with blue structural rules",
+    "style_markers": [
+      "warm white canvas",
+      "navy thesis",
+      "evidence image crop",
+      "coral annotation"
+    ],
+    "layout_families": [
+      "research-title",
+      "evidence-split",
+      "method-flow",
+      "chart-first",
+      "finding-and-limit"
+    ],
+    "avoid": [
+      "poster-like text walls",
+      "more than one primary chart",
+      "colour-only comparisons"
+    ],
+    "style_reference_asset": "themes/style-references/academic-evidence-v1.png"
+  },
+  {
+    "id": "sunset-editorial",
+    "label": "Sunset Editorial",
+    "category": "Editorial",
+    "visual_profile": "editorial",
+    "tags": [
+      "editorial",
+      "warm",
+      "strategy",
+      "legacy"
+    ],
+    "density": "medium",
+    "mood": "warm, editorial, strategic",
+    "recommended_for": [
+      "strategy",
+      "consulting",
+      "product narrative"
+    ],
+    "composition": "warm paper canvas, editorial headline, terracotta thesis, amber emphasis",
+    "typography_treatment": "warm editorial headline with compact supporting copy",
+    "background_treatment": "ivory field with warm surface bands",
+    "image_treatment": "warm framed figures with editorial captions",
+    "table_treatment": "quiet table with warm accent rows and strong labels",
+    "style_markers": [
+      "ivory canvas",
+      "oversized metric",
+      "terracotta rule",
+      "editorial whitespace"
+    ],
+    "layout_families": [
+      "editorial-cover",
+      "metric-stage",
+      "story-split",
+      "decision-table",
+      "closing-statement"
+    ],
+    "avoid": [
+      "generic office stock photography",
+      "blue corporate gradients",
+      "equal-weight card collections"
+    ],
+    "style_reference_asset": "themes/style-references/minimal-editorial-v1.png"
+  },
+  {
+    "id": "signal-dark",
+    "label": "Signal Dark",
+    "category": "Product",
+    "visual_profile": "frontier",
+    "tags": [
+      "signal",
+      "dark",
+      "technology",
+      "legacy"
+    ],
+    "density": "medium",
+    "mood": "futuristic, energetic, product-forward",
+    "recommended_for": [
+      "frontier technology",
+      "product launch",
+      "systems architecture"
+    ],
+    "composition": "navy canvas, cyan signal lines, magenta contrast, lime success state",
+    "typography_treatment": "bold product typography with technical labels",
+    "background_treatment": "midnight navy with signal-line geometry",
+    "image_treatment": "dark media wells with cyan edge treatment",
+    "table_treatment": "dark evidence table with luminous signal accents",
+    "style_markers": [
+      "midnight navy",
+      "cyan signal lines",
+      "controlled violet and magenta",
+      "dark data grid"
+    ],
+    "layout_families": [
+      "futuristic-hero",
+      "orbit-system",
+      "product-reveal",
+      "signal-chart",
+      "dark-comparison"
+    ],
+    "avoid": [
+      "rainbow neon",
+      "illegible glowing text",
+      "sci-fi decoration without story purpose"
+    ],
+    "style_reference_asset": "themes/style-references/future-tech-signal-v1.png"
+  }
+]
+---
+
+Relevant presentation guidance from SKILL.md:
+---
+## 19. Review Checklist
+
+按 yes/no 检查：
+
+1. 主旨是否唯一？
+2. 图类型是否与主关系类型匹配？
+3. 起点是否明确？
+4. 主流程是否能不折返读完？
+5. 是否存在两个以上同等主焦点？
+6. 分组是否至少由两种 cue 支撑？
+7. 是否只靠颜色编码关键区别？
+8. 每个关键元素是否被定义？
+9. 箭头语义是否一一对应且已解释？
+10. 是否存在装饰性但无信息贡献的元素？
+11. 文本是否过长或漂浮无锚？
+12. 缩小后是否仍可读？
+13. 是否存在 faux figure 风险？
+14. representational genre 是否无故混杂？
+15. 是否可映射到 HTML / Pretext 的块级布局？
+16. 是否已满足目标期刊/平台的尺寸与字体约束？
+17. 是否存在 review_flags 未处理？
+
+结论规则：
+
+- `pass`：
+  - 第 1, 3, 4, 5, 7, 8, 9, 12, 15, 16 项全部为 yes。
+  - 且 review_flags 中无 high severity。
+- `revise`：
+  - 存在 1 到 3 个 high severity 问题，或多个 medium 问题。
+- `reject`：
+  - 主旨不唯一；或 reading path 不明确；或 faux figure；或颜色唯一编码；或缩小后不可读。
+
+---
+
+### Layout Pattern: pipeline
+- Definition: 明确输入到输出的多步骤流程，节点串联，通常单主链。
+- Suitable For: 方法流程、实验处理链、数据处理链。
+- Unsuitable For: 多个同权对比、无时间关系的概览图。
+- Reading Direction: 默认 left-to-right；空间不足时 top-to-bottom。
+- Required Structural Conditions: 单一主链、步骤间存在顺序依赖。
+- Common Mistakes: 每步塞太多解释、把分支例外混进主链。
+- Machine-friendly Representation: `narrative_structure = "sequential"`。
+- Example: 样本采集 → 预处理 → 模型 → 输出。
+- Strengths: 顺序清晰、最适合缩略浏览。
+- Risks: 容易线性化过度，掩盖并行或反馈。
+- Typical Failure Modes: 把并行结果强行串成时间顺序。
+### Layout Pattern: linear
+- Definition: 广义线性结构，未必是方法 pipeline，但有单一阅读主线。
+- Suitable For: 生物过程、病程演进、概念链。
+- Unsuitable For: 多维映射、矩阵对照。
+- Reading Direction: left-to-right 或 top-to-bottom。
+- Required Structural Conditions: start / middle / end 明确。
+- Common Mistakes: 局部 zoom-in 打断主线。
+- Machine-friendly Representation: `layout_pattern = "linear"`。
+- Example: 刺激 → 信号激活 → 细胞反应。
+- Strengths: 可读性高。
+- Risks: 对复杂系统表达不足。
+- Typical Failure Modes: 用过多交叉箭头破坏直线逻辑。
+### Layout Pattern: forking
+- Definition: 在单主线中至少一次分出多个后续路径。
+- Suitable For: 分化、决策树、不同处理路径。
+- Unsuitable For: 所有路径都同等重要且互相独立的并行比较。
+- Reading Direction: 先主干，后分支。
+- Required Structural Conditions: 分支点必须显著；分支必须有命名。
+- Common Mistakes: 分支无主次、无终点。
+- Machine-friendly Representation: `edges` 中存在 one-to-many branch node。
+- Example: 共同前处理后进入两个实验条件。
+- Strengths: 能表达 divergence。
+- Risks: 焦点过多。
+- Typical Failure Modes: 三个以上分支同时争夺注意力。
+### Layout Pattern: parallel
+- Definition: 多个替代方案、状态或视角并置展示。
+- Suitable For: 基线 vs 方法、条件 A/B、器官间对比。
+- Unsuitable For: 强因果推进过程。
+- Reading Direction: 通常先整体比较，再局部逐列/逐行。
+- Required Structural Conditions: 比较维度统一，对齐一致。
+- Common Mistakes: 每列结构不同，无法对齐比较。
+- Machine-friendly Representation: `narrative_structure = "juxtaposition"`。
+- Example: 对照组与处理组并列。
+- Strengths: 最适合显式比较。
+- Risks: 若无共同参照轴则阅读顺序弱。
+- Typical Failure Modes: 靠颜色区分两组但布局不对齐。
+
+---
+
+### Layout Pattern: comparison
+- Definition: 一类专门以差异点为核心的 parallel 结构。
+- Suitable For: before/after、old/new、baseline/method、normal/disease。
+- Unsuitable For: 无明确对照关系的概览。
+- Reading Direction: 先识别比较对象，再读差异项。
+- Required Structural Conditions: 对照项同位、同尺度、同语义位置。
+- Common Mistakes: 左右内容量差太大，导致一侧成主角。
+- Machine-friendly Representation: `comparison_axes` 明确列出。
+- Example: 传统流程 vs 新流程。
+- Strengths: 差异抓取快。
+- Risks: 容易忽略共性背景。
+- Typical Failure Modes: 把流程图和结果图并置，却没有相同比较轴。
+
+---
+
+# Part F. Final Compact Operational Summary
+
+1. 先问这张图的唯一主旨是什么，不允许把论文全塞进去。
+2. 识别主关系类型：sequence、comparison、cycle、feedback、containment、overview、matrix。
+3. 先选图型，再选表示方式；不要先想“画什么风格”。
+4. process 优先 linear/pipeline；对比优先 comparison/parallel；闭环优先 feedback/circular；多尺度优先 nesting；综述优先 overview；多维映射优先 matrix/grid。
+5. reading order 必须可解释为 start -> middle -> end；若不能，用 layout 重构，不要先补箭头。
+6. 一级、二级、三级信息必须分开；三级细节不能抢一级焦点。
+7. 分组不能只靠颜色；至少两种 cue。
+8. 一种 connector style 只表达一种语义；多语义共存必须区分并解释。
+9. 文字只做 label、short phrase、caption、legend、callout 等结构角色；不要让图变成段落。
+10. decorative icon 禁止；每个表示元素都要有信息贡献。
+11. 颜色用于 emphasis、grouping、status 或学科惯例，不得唯一编码。
+12. graphical abstract 默认按缩略浏览场景设计；Elsevier 场景优先宽幅 500:200 近似比例。
+13. summary / conceptual figure 默认检查 faux figure、overcrowding、ambiguous arrows。
+14. 输出必须是 machine-readable schema，而不是空泛审美说明。
+15. 用 checklist 审查：主旨、路径、焦点、分组、箭头、文字、缩小可读性、HTML 可映射性。
+16. 若失败，回退到 key message、figure type 或 layout 重新生成，不要只做表面美化。
+
+---
+
+---
+
+# Part G. Presentation Narrative and Template Reference Layer
+
+本节在制作完整 PPT / HTML 演示时启用。它补充 Part C 的结构规则，但不把页面锁死为固定模板。
+
+## 1. 先定义 communication job
+
+在生成大纲前，必须回答：
+
+1. audience 是谁，他们已经知道什么；
+2. 他们最关心、最可能质疑什么；
+3. 演讲的工作是 educate、persuade、recommend、review 还是 enable a decision；
+4. 演讲结束时，观众应该 understand / believe / choose / approve / do 什么；
+5. 哪些工作是 core contribution，哪些只是 supporting context。
+
+必须形成一句：
+
+> By the end, [audience] should [outcome] because [central takeaway].
+
+## 2. 大纲不是目录
+
+- 使用累积叙事：上一页提出的问题，由下一页回答或推进。
+- 每页必须有 `audience_question`、`narrative_job`、`primary_claim`、`evidence`、`implication` 和 `transition_out`。
+- 标题必须表达结论，不使用“研究背景 / 方法介绍 / 实验结果”这类纯主题标题。
+- 重要性按 `core / support / context` 标注；当时间不足时，优先删 context，不压缩 core。
+- 开场提出值得听的 tension / question；结尾必须回答它，并给出边界或行动，不用通用 Thank you 结束。
+
+## 3. 每页内容最低论证单元
+
+除极简封面和章节页外，每页至少包含：
+
+1. 一个明确主张；
+2. 两项以内的关键证据，或一项主证据加一个解释；
+3. 证据对观众意味着什么；
+4. 一句通向下一页的过渡。
+
+演讲稿不能复制标题。每页 `talk_track` 应覆盖：承接、解释、证据、边界、过渡；论文汇报建议 120–260 个中文字。
+
+## 4. 模板只提供构图语法
+
+模板选择参考 `skill-references/presentation-layout-catalog.json`。其中的 recipe 是候选轮廓，不是 role 到 layout 的硬编码映射。
+
+- 同一种内容可以因受众问题和证据形态选择不同 recipe。
+- 相邻页面应避免连续使用相同轮廓。
+- 页面优先使用一个整体构图，避免默认生成卡片墙或 UI dashboard。
+- 组件可以复用，但视觉结果必须像 presentation composition，而不是网页后台。
+- React / HTML 与 PPTX 应共享同一 `composition_id` 和内容语义；允许在不同媒介上采用不同实现。
+
+## 5. 生成后必须做逻辑自检
+
+逐页检查：
+
+- 如果删掉本页，故事是否仍成立；若成立，本页可能是次要或重复内容。
+- 本页主张是否由证据支持，而不是只靠措辞。
+- 观众是否知道“这对我意味着什么”。
+- 本页结尾是否自然制造下一页的需求。
+- speaker notes 是否足以让另一个人按同样逻辑讲清楚。
+
+整套检查：
+
+- 开场问题是否在结尾得到回答；
+- core contribution 是否获得最多页面和最强证据；
+- 背景是否抢占过多篇幅；
+- 方法、结果、边界之间是否存在逻辑跳跃；
+- 是否出现连续三页相同构图；
+- 是否存在生产过程文案、占位文案或模型自述泄漏到观众页面。
+
+=== PRESENTATION SKILL ===
+
+
+--- STYLE GUIDELINES ---
+# Presentation Style Guidelines
+
+Apply these guidelines to every deck. Explicit user instructions and supplied references override these defaults.
+
+## Define the Communication Job
+
+Before selecting slides, layouts, or visuals, infer:
+
+- The intended audience; do not assume the audience is the user.
+- The deck's job: educate, persuade, sell, recommend, facilitate, or enable a decision.
+- The audience outcome: what they should understand, believe, choose, approve, discuss, or do.
+- The central takeaway and the essential claims or evidence needed to support it.
+- Every content requirement and source constraint in the user's request.
+
+Express the communication job in one sentence:
+
+> By the end, **[audience]** should **[outcome]** because **[central takeaway]**.
+
+For an exploratory, reference, or neutral deck, define the questions or understanding the audience should leave with instead of forcing a recommendation.
+
+## Choose an Appropriate Narrative Arc
+
+Choose a structure that fits the communication job, such as:
+
+- Context -> stakes -> evidence -> implications -> action.
+- Question -> analysis -> answer.
+- Problem -> causes or options -> recommendation.
+- Current state -> change -> future state.
+- Chronology, process, learning progression, or claim -> evidence -> consequence.
+
+An agenda is not a narrative. Make the sequence cumulative so each section creates the need for the next. Do not force a persuasive or emotional arc onto a technical or reference deck; build those through logic, causality, chronology, learning progression, or decision flow.
+
+## Make Every Slide Advance the Story
+
+- Give each slide one narrative job and one primary claim.
+- Prefer takeaway-style titles that communicate the point instead of merely naming the topic.
+- Order slides so each answers a question raised by the prior slide or introduces one the next slide resolves; add a transition when the logic would otherwise jump.
+- Integrate requested topics into the throughline and remove repeated beats, redundant summaries, and content that does not advance it.
+- Use supplied visual references as constraints without copying irrelevant structure or weakening the narrative.
+
+## Turn Evidence into Meaning
+
+Do not present facts, metrics, charts, examples, or visuals as an inventory. For each important piece of evidence, show what it means, why it matters to this audience, and how it changes the conclusion, decision, discussion, or next step.
+
+Charts and visuals must reinforce the current claim. Use grounded examples, scenarios, case studies, or human impact only when they materially improve understanding. Never invent people, quotes, facts, data, or outcomes.
+
+## Open and Close Deliberately
+
+Open with the context, purpose, stakes, question, or tension that makes the deck worth attention. Close by resolving that opening with the appropriate outcome: a recommendation or decision, an explicit action, a synthesis or application, or implications and productive questions. Do not end abruptly on a detail, technical artifact, unframed summary, or generic "Thank you" slide.
+
+## Write Natural, Audience-Facing Copy
+
+Visible copy must serve the intended audience. Do not expose model instructions, planning notes, timing scaffolds, talk tracks, or implementation details unless the user explicitly requests them.
+
+Use a requested duration to set scope and pacing. Show timings only when explicitly requested or audience-facing; otherwise keep them in speaker notes. Remove anything the user marks irrelevant or out of scope. State exclusions only when the audience needs them or the user asks.
+
+Write titles and body copy in direct, specific, natural language:
+
+- Prefer concrete claims, active verbs, and plain language over vague slogans, jargon, abstract noun clusters, or inflated phrasing.
+- Avoid formulaic constructions such as repeated "From X to Y" titles, punctuation patterns, parallel structures, or advertising-style fragments.
+- Remove duplicated qualifiers and concepts, and vary sentence structure naturally.
+
+A title should communicate a point a human presenter would plausibly say aloud. If it sounds like a prompt, production note, slogan generator, or mechanical template, rewrite it.
+
+## Compose the Slides
+
+- Use a coherent visual system across the deck while varying slide silhouettes to fit the content.
+- Keep the title slide minimal and simple.
+- Prefer lower-density slides with high-value content. Shorten copy or change the layout before shrinking type.
+- Keep layouts clean and balanced. Avoid both crowding and excessive empty space; use equal left and right margins by default.
+- Use one composition instead of a collection of UI panels. Avoid card grids, pills, badges, button-like text boxes, tabs, navigation patterns, dense dashboard layouts, and other component-library styling that implies interactivity.
+- Use stylized text boxes sparingly and favor a flat structure on the canvas.
+- Keep palette, typography, spacing, alignment, and visual treatment consistent unless the content calls for a deliberate change.
+
+## Typography and Fit
+
+When the user does not provide explicit style guidance, use at least:
+
+- 50 pt for deck titles.
+- 35 pt for slide titles.
+- 24 pt for subheadings, callout headers, and text-box titles.
+- 16 pt for body text.
+
+Inspect for unexpected wrapping. Never allow a one-line title or banner to wrap to two lines. Ensure narrative copy fits the chosen layout; shorten it or change the layout instead of adding density or shrinking type below the minimums.
+
+
+=== FLEXIBLE TEMPLATE CATALOG ===
+{
+  "version": "1.0.0",
+  "purpose": "A flexible presentation composition reference derived from the local Presentation Skill and Codex Grid layout library. These are candidate silhouettes, not mandatory page templates.",
+  "selection_principle": "Choose a layout only after defining the audience question, the slide's narrative job, the primary claim, and the evidence required to make that claim credible.",
+  "global_rules": [
+    "Use one dominant composition per slide; do not default to a dashboard of repeated cards.",
+    "Use takeaway titles that state the point, not topic labels.",
+    "Every evidence object must be paired with an interpretation or implication.",
+    "Vary adjacent silhouettes while keeping typography, palette, spacing, and image treatment coherent.",
+    "Prefer shortening or splitting content over shrinking body text.",
+    "A slide may deviate from these recipes when the content requires a clearer composition."
+  ],
+  "recipes": [
+    {
+      "id": "thesis-stage",
+      "best_for": ["opening", "section opener", "closing synthesis"],
+      "audience_question": "Why should I care, and what will I learn?",
+      "composition": "small context line + oversized thesis + one supporting sentence or evidence cue",
+      "density": "sparse",
+      "reference": ["codex-grid#slide-01", "codex-grid#slide-02", "codex-grid#slide-26"],
+      "avoid": ["production notes", "agenda inventory", "more than one competing visual"]
+    },
+    {
+      "id": "image-thesis-split",
+      "best_for": ["problem framing", "method overview with a real figure", "case evidence"],
+      "audience_question": "What does this look like in practice?",
+      "composition": "40–48% claim/explanation + 52–60% evidence image with caption",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-08"],
+      "avoid": ["decorative stock image unrelated to the claim", "tiny unreadable paper screenshot"]
+    },
+    {
+      "id": "argument-pair",
+      "best_for": ["before/after", "baseline/proposal", "trade-off", "known/unknown"],
+      "audience_question": "What changed, or what is the meaningful contrast?",
+      "composition": "one shared claim + two unequal argument fields + one explicit synthesis",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-04", "codex-grid#slide-05", "codex-grid#slide-11"],
+      "avoid": ["two columns with duplicated wording", "comparison without a conclusion"]
+    },
+    {
+      "id": "mechanism-triptych",
+      "best_for": ["three parallel mechanisms", "three contributions", "three failure modes"],
+      "audience_question": "Which parts jointly explain the result?",
+      "composition": "three aligned mechanisms with independent labels and a shared consequence",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-06", "codex-grid#slide-07"],
+      "avoid": ["presenting parallel mechanisms as a sequential pipeline", "generic icon cards"]
+    },
+    {
+      "id": "causal-flow",
+      "best_for": ["training loop", "method sequence", "timeline", "decision process"],
+      "audience_question": "What happens in what order, and where does the signal change?",
+      "composition": "3–5 stages on one visual axis; concise stage explanation; end-state implication",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-17", "codex-grid#slide-18"],
+      "avoid": ["using a flow for independent factors", "long paragraphs inside nodes"]
+    },
+    {
+      "id": "metric-triad",
+      "best_for": ["three headline outcomes", "performance/data-efficiency/transfer", "decision summary"],
+      "audience_question": "What are the three numbers I should remember?",
+      "composition": "brief interpretation rail + three large metrics + one sentence of meaning each",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-19", "codex-grid#slide-23"],
+      "avoid": ["numbers without baseline or unit", "equal emphasis on secondary metrics"]
+    },
+    {
+      "id": "chart-with-interpretation-rail",
+      "best_for": ["main quantitative result", "ablation", "trend", "benchmark comparison"],
+      "audience_question": "What pattern in the data changes the conclusion?",
+      "composition": "dominant native chart occupying 55–70% + 2–3 interpretation callouts",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-20", "codex-grid#slide-21", "codex-grid#slide-22"],
+      "avoid": ["chart as decoration", "callouts that merely repeat axis values"]
+    },
+    {
+      "id": "evidence-table",
+      "best_for": ["experimental setup", "compact benchmark matrix", "method configuration"],
+      "audience_question": "What was compared, under which conditions?",
+      "composition": "claim title + native table + highlighted rows/columns + one interpretation footer",
+      "density": "dense",
+      "reference": ["codex-grid#slide-03", "codex-grid#slide-14", "codex-grid#slide-24"],
+      "avoid": ["full paper table without pruning", "table smaller than readable size"]
+    },
+    {
+      "id": "evidence-collage",
+      "best_for": ["qualitative behavior", "failure modes", "sim-to-real examples"],
+      "audience_question": "Which examples make the claim tangible?",
+      "composition": "one dominant evidence image + up to two supporting crops + a single synthesis statement",
+      "density": "moderate",
+      "reference": ["project extension of image-thesis-split"],
+      "avoid": ["more than three images", "reusing the same image", "unreadable thumbnails"]
+    },
+    {
+      "id": "answer-and-boundary",
+      "best_for": ["conclusion", "recommendation", "limitations"],
+      "audience_question": "What should I believe now, and where does it stop being true?",
+      "composition": "resolved answer + 2–3 implications + explicit boundary or next decision",
+      "density": "sparse",
+      "reference": ["codex-grid#slide-26"],
+      "avoid": ["generic thank-you ending", "new evidence introduced at the end"]
+    }
+  ],
+  "provenance": {
+    "source": "Local OpenAI Presentation Skill 26.727.11326 and Codex Grid layout registry",
+    "adaptation": "The project stores semantic composition rules only. It does not copy sample wording or bind planning to exact coordinates."
+  }
+}
+
+---
+
+Full source text:
+---
+--- PAGE 1 ---
+RLinf 论文实验​
+王培鸿
+韦明杰
+3月28日修改
+Rebuttal​
+place_empty_cup​
+Model​
+SFT​
+PPO​
+GRPO​
+pi0​
+45.31%​
+82.03%​
+83.59%​
+pi05​
+85.16%​
+96.88%​
+95.31%​
+RL 都取50 
+step​
+oft(Temp_eval=-1)​
+75.78%​
+​
+92.97%​
+(没重跑故不需要重测)​
+92.19%​
+oft(Temp_eval=1.6)​
+86.72%​
+88.28%​
+Temp_eval=1.6​
+PPO​
+GRPO​
+place_empty_cup​
+86.72%​
+88.28%​
+Details​
+1. RoboTwin 的领域随机化设置​
+ RoboTwin 在数据生成过程中引入了多种领域随机化因素，包括场景杂乱度（添加无关干扰物体）、背景纹理（从约 1.2 万种高质量纹理中采
+样）、光照条件（颜色温度与光源类型随机）、桌面高度（在物理合理范围内采样）以及语言指令（生成多样化的任务描述）。这些随机化因素共
+同作用，用于增加数据多样性并缓解仿真到真实之间的分布差异。
+a. 训练阶段（SFT 与 RL）​
+ 在训练阶段，监督微调（SFT）和强化学习（RL）均使用同一组 基于robotwin官方随机化场景参数配置的1,000 个随机 seed 对环境进行初始
+化，采用 双臂的Piper 机械臂。​
+ 在 SFT 阶段，每个 seed 仅用于初始化环境一次，共采集 1,000 条不同的专家示范轨迹用于训练。​
+ 在 RL 阶段，针对每个任务，基于同样的 1,000 个场景配置进行强化学习训练。​
+b. 评估阶段（OOD Seed）​
+ 在评估阶段，为每个任务额外采集 128 个未在训练阶段使用的 seed，用于初始化模型未见过的强化学习场景，从而评估模型在分布外环境下的
+性能。​
+2. Seed 的可复现性问题​
+ 由于 Python 运行环境（如torch及相关依赖版本）、系统环境（操作系统版本）以及硬件条件（显卡型号等）的差异，在相同随机数区间内可成功
+初始化的 seed 集合并不完全一致。因此，某些在特定运行环境下可用的 seed，可能在其他环境中出现初始化失败或不稳定（如 seed unstable 或 
+scene initialization failed）的情况。​
+3. 训练初始成功率（SSR）的差异​
+ 在固定使用相同 seed 列表的条件下，观察到模型在不同 GPU 平台上训练时的初始成功率（SSR）存在差异。具体而言，在 H100 GPU 上训练的模
+型，其初始 SSR 低于在 A800 GPU 上训练的模型。该现象可能与不同显卡架构以及其对数值计算和仿真过程的影响有关。基于这一观察，本文中所
+有强化学习实验均统一在 8 卡 A800 GPU 平台上进行。​
+4. 示例task yaml配置​
+以beat_block_hammer任务示例​
+2026/4/4 20:47
+‌⁢​‬​‬⁤‬​⁣﻿‬⁡‍​﻿⁢‌​⁢‍‬⁣​‌⁡﻿‬‌‍‬⁣‌​‬⁢﻿⁡​﻿‌⁡RLinf 论文实验 - 飞书云文档
+https://nics-efc.feishu.cn/wiki/MYEMwYNk8ihoNFkn0EbcexkbnTW
+1/8
+
+
+--- PAGE 2 ---
+环境ENV yaml配置​
+代码块
+env_type: robotwin​
+total_num_envs: null​
+auto_reset: False​
+ignore_terminations: False​
+use_custom_reward: True​
+use_rel_reward: True​
+seed: 0​
+group_size: 1​
+use_fixed_reset_state_ids: False​
+max_steps_per_rollout_epoch: 200​
+max_episode_steps: 200 # max episode steps for truncation​
+assets_path: "/mnt/public/peihong/codes/RLinf_RoboTwin_gz"​
+seeds_path: "/mnt/project_rlinf/guozhen/test_robotwin/SimpleVLA-RL/verl/utils/en
+video_cfg:
+  save_video: True​
+  info_on_video: True​
+  video_base_dir: ${runner.logger.log_path}/video/train​
+task_config:​
+  task_name: beat_block_hammer​
+  step_lim: 200​
+  # if you want to modify the config, please check the following tutorial first:
+  # https://robotwin-platform.github.io/doc/usage/configurations.html​
+  render_freq: 0​
+  episode_num: 100​
+  use_seed: false​
+  save_freq: 15​
+  embodiment: [piper, piper, 0.6]​
+  language_num: 100​
+  domain_randomization:​
+    random_background: true​
+    cluttered_table: true​
+    clean_background_rate: 0.02​
+    random_head_camera_dis: 0​
+    random_table_height: 0.03​
+    random_light: true​
+    crazy_random_light_rate: 0.02​
+  camera:​
+    head_camera_type: D435​
+    wrist_camera_type: D435​
+    collect_head_camera: true​
+    collect_wrist_camera: false​
+  data_type:​
+    rgb: true​
+    third_view: false​
+    depth: false​
+    pointcloud: false​
+    observer: false​
+    endpose: false​
+    qpos: true​
+    mesh_segmentation: false​
+    actor_segmentation: false​
+  pcd_down_sample_num: 1024​
+  pcd_crop: true​
+  save_path: ./data​
+  clear_cache_freq: 1​
+  collect_data: true​
+  eval_video_log: true​
+RLinf 模型RL GRPO 训练yaml配置​
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+2026/4/4 20:47
+‌⁢​‬​‬⁤‬​⁣﻿‬⁡‍​﻿⁢‌​⁢‍‬⁣​‌⁡﻿‬‌‍‬⁣‌​‬⁢﻿⁡​﻿‌⁡RLinf 论文实验 - 飞书云文档
+https://nics-efc.feishu.cn/wiki/MYEMwYNk8ihoNFkn0EbcexkbnTW
+2/8
+
+
+--- PAGE 3 ---
+Generate rollout bsz: 128 * 8 =1024​
+Global bsz：1024​
+is_lora: True​
+lr: 2.0e-4 ​
+adam_beta1: 0.9​
+adam_beta2: 0.999
+adam_eps: 1.0e-05​
+weight_decay: 0.01​
+clip_grad: 1.0​
+代码块
+defaults:​
+  - env/robotwin_beat_block_hammer@env.train​
+  - env/robotwin_beat_block_hammer@env.eval​
+  - model/openvla_oft@actor.model​
+  - training_backend/fsdp@actor.fsdp_config​
+  - override hydra/job_logging: stdout​
+hydra:​
+  run:​
+    dir: .​
+  output_subdir: null​
+  searchpath:​
+    - file://${oc.env:EMBODIED_PATH}/config/​
+    ​
+cluster:​
+  num_nodes: 1​
+  component_placement:​
+    actor, env, rollout: 0-7​
+runner:​
+  task_type: embodied​
+  logger:​
+    log_path: "../results"​
+    project_name: rlinf​
+    experiment_name: "robotwin_grpo_openvlaoft"​
+    logger_backends: ["tensorboard"] # wandb, swanlab​
+  max_epochs: 1000​
+  max_steps: -1​
+  only_eval: False​
+  eval_policy_path: null # Optional: .pt file or None, if None, will use the che
+  val_check_interval: 10​
+  save_interval: 10​
+  seq_length: 4096​
+  max_prompt_length: 512​
+  resume_dir: /mnt/public/peihong/codes/RLinf_new/logs/beat_block_hammer_grpo_2e
+  # resume_dir: "/mnt/public/peihong/codes/RLinf_new/logs/test_new/robotwin_grpo
+algorithm:
+  normalize_advantages: True​
+  kl_penalty: kl  # how to estimate kl divergence: kl or kl_penalty​
+  group_size: 8​
+  rollout_epoch: 8​
+  eval_rollout_epoch: 1 # set eval_rollout_epoch > 0 when enable runner.only_eva
+  reward_type: action_level # chunk_level​
+  logprob_type: token_level​
+  entropy_type: token_level​
+  adv_type: grpo​
+  loss_type: actor​
+  loss_agg_func: "token-mean"​
+  kl_beta: 0.0​
+  entropy_bonus: 0​
+  clip_ratio_high: 0.28​
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+2026/4/4 20:47
+‌⁢​‬​‬⁤‬​⁣﻿‬⁡‍​﻿⁢‌​⁢‍‬⁣​‌⁡﻿‬‌‍‬⁣‌​‬⁢﻿⁡​﻿‌⁡RLinf 论文实验 - 飞书云文档
+https://nics-efc.feishu.cn/wiki/MYEMwYNk8ihoNFkn0EbcexkbnTW
+3/8
+
+
+--- PAGE 4 ---
+  clip_ratio_low: 0.2​
+  clip_ratio_c: 3.0​
+  value_clip: 0.2​
+  huber_delta: 10.0​
+  gamma: 1.0​
+  gae_lambda: 0.95​
+  reward_coef: 5.0​
+  filter_rewards: True​
+  rewards_lower_bound: 0.5​
+  rewards_upper_bound: 4.5​
+  # params for rollout​
+  sampling_params:​
+    do_sample: True​
+    temperature_train: 1.6​
+    temperature_eval: 1.6​
+    top_k: -1​
+    top_p: 1.0​
+    repetition_penalty: 1.0​
+  # length argument for autoregressive sampling​
+  # max length means max amount of tokens to generate​
+  length_params:​
+    max_new_token: null​
+    max_length: 1024​
+    min_length: 1​
+env:​
+  group_name: "EnvGroup"​
+  enable_offload: True​
+与SimpleVLA对比​
+相同点
+1. SFT模型、train/eval seeds 均采用simple提供​
+2. 模型的实现与simple一致​
+3. 同为GRPO算法​
+4. RLinf中GRPO使用的valid action mask模式与simple的工程等价，simple是等待所有env trunc / terminate 后一起reset​
+不同点
+1. 模型精度区别​
+Simple：模型精度是FP32，整体是bf16-fp32的混合精度​
+RLinf：模型精度是bf16，除了loss部分是fp32​
+精度的差异最明显体现在模型的SSR上​
+对于初始SSR（指Simple）低的task，如：beat_block_hammer，模型在train_seed的SSR会更低（在RLinf）导致模型的训练步数需要更多；​
+ 对于初始SSR（指Simple）高的task，如：place_empty_cup，影响较小，训练步数是simple的一倍​
+2. 超参数区别​
+RLinf​
+Simple​
+Rollout bsz​
+1024 (8 rollout_epoch * 128 num_envs)​
+512 (8 n_samples * 64 train_bsz)​
+lr​
+2.0e-4​
+5e-6​
+is_lora​
+true​
+false（全参训练）​
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+2026/4/4 20:47
+‌⁢​‬​‬⁤‬​⁣﻿‬⁡‍​﻿⁢‌​⁢‍‬⁣​‌⁡﻿‬‌‍‬⁣‌​‬⁢﻿⁡​﻿‌⁡RLinf 论文实验 - 飞书云文档
+https://nics-efc.feishu.cn/wiki/MYEMwYNk8ihoNFkn0EbcexkbnTW
+4/8
+
+
+--- PAGE 5 ---
+还有框架计算log_prob、模型update的bsz不同，but不影响性能​
+3. Valid traj collect策略不同​
+RLinf: 其rollout固定轮次、固定数目的traj后，对collected traj进行reward filter，所以模型每次step得到valid traj数受模型当前对该task的SSR影
+响；
+Simple: 其在每次rollout traj后都立即进行reward filter，剩余的traj存在buffer中；循环往复直到收集到rollout bsz 数量的traj 再进行模型的更新​
+4. GRPO的reward设计不一样​
+RLinf：采用action_level的reward​
+具体实现：
+设置use_custom_reward & use_rel_reward 为True​
+给最后一个chunk的最后一个action给reward；​
+Simple: 采用是 token-level的reward​
+具体实现：
+对于该traj如果是success ，则为1；反之为0 ​
+5. 模型train SSR
+Task​
+RLinf SFT​
+RLinf RL​
+Avg 
+improvement​
+train step​
+RLinf ​
+Simple SFT​
+Simple RL​
+​
+train step​
+Simple​
+place_empty_cup​
+75.78%​
+94.53%​
+18.75​
+40​
+77.3%​
+94.2%​
+20​
+beat_block_hammer​
+10.15%​
+96.09%​
+85.94​
+200​
+28.1%​
+87.5%​
+40​
+pick_dual_bottles​
+20.31%​
+92.96%​
+72.65​
+240​
+29.7%​
+68.3%​
+100​
+move_can_pot​
+9.37%​
+83.59%​
+74.22​
+160​
+28.1%​
+61.2%​
+50​
+lift_pot​
+3.13%​
+70.31%​
+67.18​
+30​
+10.1%​
+64.1%​
+40​
+stack_bowls_two​
+38.28%​
+67.19%​
+28.91​
+150​
+40.6%​
+75.8%​
+80​
+handover_block​
+28.13%​
+70.31%​
+42.18​
+150​
+33.1%​
+57.8%​
+40​
+place_container_plat
+e​
+54.69%​
+95.31%​
+40.62​
+50​
+2026/4/4 20:47
+‌⁢​‬​‬⁤‬​⁣﻿‬⁡‍​﻿⁢‌​⁢‍‬⁣​‌⁡﻿‬‌‍‬⁣‌​‬⁢﻿⁡​﻿‌⁡RLinf 论文实验 - 飞书云文档
+https://nics-efc.feishu.cn/wiki/MYEMwYNk8ihoNFkn0EbcexkbnTW
+5/8
+
+
+--- PAGE 6 ---
+RLinf SFT​
+RLinf RL​
+Simple SFT​
+Simple RL​
+Average​
+24.48%​
+84.63%​
+34.40%​
+72.18%​
+Δ Avg.​
++60.15%​
++37.78%​
+notice​
+1. 模型实现微小差异：RLinf加了position_ids，我之前跑的没加，简单验证后性能没差异就忽略了​
+Rlinf使用​
+镜像：cr.infini-ai.com/te-dbdcudoygepmq5vx/agentic-rlinf0.1-torch2.6.0-openvlaoft-pi0-robotwin:0.1​
+路径：/mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main/examples/embodiment​
+运行指令：bash run_embodiment.sh​
+Simple使用​
+镜像：cr.infini-ai.com/te-dbdcudoygepmq5vx/robotwin_simplevla_openvla_oft:2.2​
+路径： /mnt/project_rlinf_hs/wph/codes/SimpleVLA-RL/SimpleVLA-RL-main​
+运行指令：bash examples/run_openvla_oft_rl_twin2.sh​
+8卡​
+actor（s）​
+rollout（s）​
+Colocated​
+49.15​
+170.34​
+Disaggregated
+90.67​
+546.64​
+Hybrid(pipe=1)​
+50.14​
+303.7​
+Hybrid(pipe=2)​
+49.91​
+283.54​
+SimpleVLA​
+94.05​
+189.33​
+Lora ​
+代码块
+cd /mnt/public/mjwei/ray_utils_1/;​
+rm /mnt/public/mjwei/ray_utils_1/ray_head_ip.txt;​
+source switch_env openvla-oft​
+export TOKENIZERS_PARALLELISM=false​
+bash start_ray.sh;​
+if [ "$RANK" -eq 0 ]; then​
+    bash check_ray.sh 8; # 指定任意的卡数​
+    cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​
+    bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope
+else​
+    sleep 10d​
+fi​
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+2026/4/4 20:47
+‌⁢​‬​‬⁤‬​⁣﻿‬⁡‍​﻿⁢‌​⁢‍‬⁣​‌⁡﻿‬‌‍‬⁣‌​‬⁢﻿⁡​﻿‌⁡RLinf 论文实验 - 飞书云文档
+https://nics-efc.feishu.cn/wiki/MYEMwYNk8ihoNFkn0EbcexkbnTW
+6/8
+
+
+--- PAGE 7 ---
+if [ "$RANK" -eq 0 ]; then​
+    bash check_ray.sh 8; # 指定任意的卡数​
+    cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​
+    bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope
+else​
+    sleep 10d​
+fi​
+if [ "$RANK" -eq 0 ]; then​
+    bash check_ray.sh 16; # 指定任意的卡数​
+    cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​
+    bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope
+else​
+    sleep 10d​
+fi​
+if [ "$RANK" -eq 0 ]; then​
+    bash check_ray.sh 32; # 指定任意的卡数​
+    cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​
+    bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope
+else​
+    sleep 10d​
+fi​
+代码块
+cd /mnt/public/mjwei/ray_utils_1/;​
+rm /mnt/public/mjwei/ray_utils_1/ray_head_ip.txt;​
+export TOKENIZERS_PARALLELISM=false​
+bash start_ray.sh;​
+if [ "$RANK" -eq 0 ]; then​
+    bash check_ray.sh 8; # 指定任意的卡数​
+    cd /mnt/project_rlinf_hs/wph/codes/SimpleVLA-RL/SimpleVLA-RL-main​
+    bash examples/run_openvla_oft_rl_twin2.sh
+else​
+    sleep 10d​
+fi​
+if [ "$RANK" -eq 0 ]; then​
+    bash check_ray.sh 16; # 指定任意的卡数​
+    cd /mnt/project_rlinf_hs/wph/codes/SimpleVLA-RL/SimpleVLA-RL-main​
+    bash examples/run_openvla_oft_rl_twin2_2n.sh​
+else​
+    sleep 10d​
+fi​
+if [ "$RANK" -eq 0 ]; then​
+    bash check_ray.sh 32; # 指定任意的卡数​
+    cd /mnt/project_rlinf_hs/wph/codes/SimpleVLA-RL/SimpleVLA-RL-main​
+    bash examples/run_openvla_oft_rl_twin2_4n.sh​
+else​
+    sleep 10d​
+fi​
+RLinf​
+mode​
+nodenum
+actor​
+generate​
+Hybrid(pipe=2)​
+1n​
+50.31​
+317.07​
+disaggregated​
+1n​
+89.55​
+549.97​
+disaggregated​
+2n​
+47.92​
+289.74​
+disaggregated​
+4n​
+26.44​
+168.57​
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+2026/4/4 20:47
+‌⁢​‬​‬⁤‬​⁣﻿‬⁡‍​﻿⁢‌​⁢‍‬⁣​‌⁡﻿‬‌‍‬⁣‌​‬⁢﻿⁡​﻿‌⁡RLinf 论文实验 - 飞书云文档
+https://nics-efc.feishu.cn/wiki/MYEMwYNk8ihoNFkn0EbcexkbnTW
+7/8
+
+
+--- PAGE 8 ---
+Simple​
+mode​
+nodenum
+actor​
+generate​
+colocated​
+1n​
+115.52​
+207.86​
+colocated​
+2n​
+66.21​
+117.98​
+colocated​
+4n​
+42​
+71.11​
+ mode               nodenum         actor       generate  ​
+colocated                 1n                 49.15      170.34​
+colocated                 2n                 27.47      100.2 ​
+colocated                 4n                 15.0        66.67​
+disaggregated          1n                 89.55      549.97​
+disaggregated          2n                 47.92      289.74​
+disaggregated          4n                 26.44      168.57​
+Hybrid(pipe=1)          1n                50.14        303.7​
+Hybrid(pipe=1)          2n                27.53        166.0​
+Hybrid(pipe=1)          4n                15.03         95.37​
+Hybrid(pipe=2)          1n                 50.31        317.07​
+Hybrid(pipe=2)          2n                 27.53        155.67​
+Hybrid(pipe=2)          4n                 14.97        95.73​
+simplevla​
+mode           nodenum         actor       generate​
+colocated         1n              115.52       207.86​
+colocated         2n               66.21        117.98​
+colocated         4n                  42           71.11​
+2026/4/4 20:47
+‌⁢​‬​‬⁤‬​⁣﻿‬⁡‍​﻿⁢‌​⁢‍‬⁣​‌⁡﻿‬‌‍‬⁣‌​‬⁢﻿⁡​﻿‌⁡RLinf 论文实验 - 飞书云文档
+https://nics-efc.feishu.cn/wiki/MYEMwYNk8ihoNFkn0EbcexkbnTW
+8/8
+
+---
+warning: Exceeded skills context budget of 2%. All skill descriptions were removed and 777 additional skills were not included in the model-visible skills list.
+2026-07-30T14:59:10.785627Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 86 column 5
+codex
+{"deck":{"id":"rlinf-robotwin-experiment-storyboard","title":"RLinf 在 RoboTwin 上的实验结论","purpose":"面向具身智能与机器人学习研究者，建立 RLinf 实验结果的可比性、性能增益、系统效率与结论边界。","audience":"具身智能、机器人学习与强化学习研究者；熟悉 VLA、SFT、PPO/GRPO 和 RoboTwin 基准。","language":"zh-CN","aspect_ratio":"16:9","communication_job":"By the end, embodied-AI researchers should judge RLinf’s performance and efficiency evidence under the correct experimental boundary because its gains are substantial under fixed RoboTwin/A800 conditions, but remain coupled to implementation and system choices.","talk_duration_minutes":12,"audience_profile":{"role":"具身智能与机器人学习研究者、论文评审或实验复现者","prior_knowledge":"了解 VLA、SFT、强化学习、GRPO、SSR、RoboTwin 与多卡训练基础。","cares_about":["结果是否可比且可复现","强化学习增益是否跨任务稳定","RLinf 与 SimpleVLA 的差异是否影响结论","训练与 rollout 的系统效率","硬件、seed、温度和实现细节造成的边界"],"likely_questions":["RLinf 的提升究竟来自 RL 信号还是实现差异？","训练 seed 与 OOD seed 如何设置？","不同任务上的增益是否稳定？","与 SimpleVLA 的比较是否公平？","哪种并行模式更适合实际运行？"],"desired_outcome":"能够基于证据判断 RLinf 的实际贡献、复现实验契约，并避免把受控条件下的系统性结果外推成无条件算法优势。"}},"narrative":{"arc":"question → experimental contract → generalization mechanism → RLinf training signal → controlled comparison → multi-task performance → framework-level uplift → sensitivity boundary → system efficiency → qualified answer","key_message":"在固定 RoboTwin 场景配置、OOD seed 与 8 卡 A800 条件下，RLinf 的 GRPO 训练将 8 个任务的平均 train SSR 从 24.48% 提升到 84.63%，同时提供具有竞争力的 actor/rollout 执行路径；但与 SimpleVLA 的精度、超参数、轨迹收集和 reward 设计差异要求将结论解释为受实验契约约束的系统性证据。","opening_question":"在相同任务与硬件约束下，RLinf 的提升究竟来自有效的强化学习信号，还是来自实现与系统差异？","closing_answer":"答案是：在固定 RoboTwin seed、评估口径与 8 卡 A800 条件下，RLinf 展现出显著且跨任务的 SSR 增益，并有可调的系统并行路径；但由于与 SimpleVLA 在精度、超参数、轨迹收集和 reward 设计上并非完全同构，证据支持的是受控条件下的 RLinf 系统优势，而不是脱离实验契约的普适算法胜负。","sections":[{"id":"sec-1","title":"先固定实验契约","job":"建立结果可信与可复现的条件","slide_ids":["s1","s2","s3"]},{"id":"sec-2","title":"解释训练与比较口径","job":"说明 RLinf 的训练信号并隔离与 SimpleVLA 的差异","slide_ids":["s4","s5"]},{"id":"sec-3","title":"展示性能证据与边界","job":"从跨任务结果、框架对比和敏感性分析建立结论","slide_ids":["s6","s7","s8"]},{"id":"sec-4","title":"连接到系统效率","job":"说明并行执行模式如何改变实际成本并给出合格结论","slide_ids":["s9","s10"]}],"priority_map":{"core":["s4","s5","s6","s7","s9","s10"],"support":["s2","s3","s8"],"context":["s1"]},"logic_check":{"opening_resolved":true,"core_has_evidence":true,"no_redundant_slides":true,"rationale":"开场提出 RL 信号与实现/系统差异的归因问题；中段依次固定实验契约、解释训练机制、展示跨任务和框架对比证据，再处理温度与初始 SSR 边界，最后用系统吞吐数据和明确限制完成回答。核心贡献与结果占主要页面，背景被限制在实验契约与必要机制内。"}},"visual":{"style_family":"academic-evidence","image_policy":"仅使用证据索引中的源表、源图或页面快照；优先使用原生表格、原生图表与机制图，禁止装饰性图片。","density_profile":"中等密度、证据优先；核心结果采用大图表或大表格，配置与边界采用紧凑注释。","style_reason":"主题是论文实验与 rebuttal 证据，受众具备技术背景，更需要可信、可核验和可复现的呈现，而不是产品化或情绪化视觉。academic-evidence 的暖白画布、深蓝层级、源证据板和珊瑚强调适合区分主张、数据与边界。","layout_system":"Codex Grid evidence-first：统一左对齐标题与宽边距，使用单一主构图；在证据表、原生图表、机制流程和边界解释之间交替轮廓，保留足够留白与明确的阅读路径。","style_reference":"themes/style-references/academic-evidence-v1.png"},"plan":{"title":"RLinf 在 RoboTwin 上的实验结论","subtitle":"性能增益成立，但必须连同实验契约与系统边界一起解释","slides":[{"id":"s1","layout":"title","composition_id":"thesis-stage","role":"opening","content_priority":"context","action_title":"RLinf 的实验价值，要同时回答“更强”与“更快”","audience_question":"这组实验到底要证明什么？","narrative_job":"提出核心张力：性能提升需要与训练信号、实现差异和系统效率一起解释。","slide_goal":"建立观众对整套实验的判断框架，并引出归因问题。","primary_claim":"RLinf 的实验结论不能只看单一成功率，而要同时判断强化学习增益与系统执行效率。","evidence":[],"implication":"观众会以“证据是否可比、增益是否稳定、成本是否可接受”作为后续阅读标准。","transition_in":"开场直接提出实验价值与归因张力。","transition_out":"要判断结果，首先必须知道哪些实验条件被固定、哪些条件可能改变结论。","evidence_refs":[],"table_refs":[],"asset_candidates":[],"visual_intent":"text_led","visual_plan":{"layout_family":"title","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"none","background_variant":"quiet","density":"sparse"}},{"id":"s2","layout":"evidence","composition_id":"image-thesis-split","role":"experimental-contract","content_priority":"support","action_title":"可信比较始于同一套 seed、硬件与运行契约","audience_question":"哪些条件必须先固定，结果才可信？","narrative_job":"建立实验可比性的边界，明确训练/评估 seed、RoboTwin 配置、Piper 双臂、8 卡 A800 以及运行镜像、代码路径和启动脚本。","slide_goal":"让观众把后续结果理解为受控实验，而不是跨环境的无条件结论。","primary_claim":"RLinf 实验被一套明确的可复现契约约束：训练使用 1,000 个随机 seed，评估使用额外 128 个 OOD seed，并统一在 8 卡 A800 与指定运行环境上执行。","evidence":[{"claim_support":"RoboTwin 使用 1,000 个训练场景 seed、128 个未见评估 seed、Piper 双臂，并说明所有强化学习实验统一在 8 卡 A800 平台进行。","evidence_ref":"p1-snapshot","interpretation":"这告诉研究者，性能差异首先是在固定环境、seed 与硬件条件下观察到的，复现时不能随意替换平台或 seed 集合。"},{"claim_support":"RLinf 与 SimpleVLA 分别给出容器镜像、代码路径、启动脚本和 Ray 卡数配置。","evidence_ref":"p6-snapshot","interpretation":"运行时配置本身是证据的一部分；它帮助复现者区分算法设置、框架设置和基础设施设置。"}],"implication":"后续性能结论应被表述为“在该实验契约下成立”，而不是脱离平台与运行环境的普遍保证。","transition_in":"开场的问题要求先定义可比条件。","transition_out":"固定条件之后，还要确认训练数据是否只覆盖熟悉布局，还是能检验未见场景。","evidence_refs":["p1-snapshot","p6-snapshot"],"table_refs":[],"asset_candidates":["p1-snapshot","p6-snapshot"],"visual_intent":"source_figure","visual_plan":{"layout_family":"evidence","primary_visual":"p1-snapshot","image_budget":1,"image_roles":["evidence"],"data_strategy":"source_figure","background_variant":"light","density":"balanced"}},{"id":"s3","layout":"pipeline","composition_id":"causal-flow","role":"generalization-mechanism","content_priority":"support","action_title":"随机化训练加 OOD seed，才把 SSR 变成泛化检验","audience_question":"模型是在记住训练布局，还是能适应未见场景？","narrative_job":"解释 RoboTwin 的领域随机化、训练 seed 与 OOD 评估如何共同构成泛化测试。","slide_goal":"把实验设置中的随机化因素连接到观众关心的 sim-to-real 与分布外鲁棒性。","primary_claim":"RoboTwin 通过随机背景、桌面杂乱、纹理、光照、桌面高度和语言指令扩大训练分布，再用未参与训练的 128 个 seed 检验未见场景。","evidence":[{"claim_support":"RoboTwin 的随机化因素包括场景杂乱度、约 1.2 万种背景纹理、光照、桌面高度和多样语言指令；训练与评估使用不同 seed 集合。","evidence_ref":"p1-snapshot","interpretation":"对研究者而言，SSR 的变化不只代表固定布局上的拟合，而是在被扰动的场景分布中测试行为稳定性。"},{"claim_support":"示例 task yaml 启用 random_background、cluttered_table、random_table_height、random_light，并配置 Piper、相机与数据采集选项。","evidence_ref":"p1-snapshot","interpretation":"环境配置将“随机化”落实为可复现的工程参数，复现实验时这些开关和采集设置不能被视为无关细节。"}],"implication":"后续跨任务结果的价值在于显示训练信号是否能在复杂、未见环境中持续提升，而不仅是单点 benchmark 分数。","transition_in":"实验契约固定了平台与 seed。","transition_out":"接下来需要说明 RLinf 在这些环境中到底如何产生训练信号。","evidence_refs":["p1-snapshot"],"table_refs":[],"asset_candidates":[],"visual_intent":"method_diagram","visual_plan":{"layout_family":"pipeline","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"diagram","background_variant":"default","density":"balanced"}},{"id":"s4","layout":"pipeline","composition_id":"causal-flow","role":"method-mechanism","content_priority":"core","action_title":"RLinf 用固定批量 rollout，把 action-level reward 送入 GRPO 更新","audience_question":"RLinf 的训练信号如何从机器人轨迹变成模型更新？","narrative_job":"用一条因果链解释 RLinf 的 GRPO 实验配方：环境 rollout、valid trajectory 过滤、action-level reward、优势估计与 LoRA 更新。","slide_goal":"让观众理解结果背后的训练机制与关键配置，而不是把 RL 视为黑箱。","primary_claim":"RLinf 的训练机制以 8×128=1024 的 rollout batch、group size 8 和 action-level reward 为核心，并在 token-level logprob/entropy 与 LoRA 更新配置下执行 GRPO。","evidence":[{"claim_support":"配置中给出 global batch size 1024、group_size 8、rollout_epoch 8、reward_type action_level、logprob_type token_level、adv_type grpo、is_lora true 与 learning rate 2.0e-4。","evidence_ref":"p4-snapshot","interpretation":"这些参数定义了 RLinf 的训练信号密度、更新规模和参数更新范围，是解释训练效率与最终 SSR 的必要机制证据。"}],"implication":"观众可以把后续性能变化追溯到具体的 rollout、reward 与更新路径，而不是只记住“用了 GRPO”。","transition_in":"OOD 评估说明了要测什么。","transition_out":"训练机制明确后，关键问题变成：与 SimpleVLA 的比较是否真的只改变了框架。","evidence_refs":["p4-snapshot"],"table_refs":[],"asset_candidates":[],"visual_intent":"method_diagram","visual_plan":{"layout_family":"pipeline","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"diagram","background_variant":"default","density":"balanced"}},{"id":"s5","layout":"comparison","composition_id":"evidence-table","role":"comparison-boundary","content_priority":"core","action_title":"RLinf 与 SimpleVLA 的共同基础相同，但训练动态并非同构","audience_question":"两套实现真的在同一实验上吗？","narrative_job":"并列展示共同点与关键差异，提前隔离影响结果解释的精度、超参数、轨迹收集和 reward 设计。","slide_goal":"防止观众把框架级比较误读成仅由算法名称造成的纯粹因果比较。","primary_claim":"RLinf 与 SimpleVLA 共享 SFT 模型、train/eval seeds、模型实现和 GRPO，但在数值精度、超参数、valid trajectory 收集策略与 reward 粒度上存在实质差异。","evidence":[{"claim_support":"对比材料明确列出共同点，以及 RLinf 的 bf16/FP32 loss、rollout batch 1024、learning rate 2.0e-4、LoRA 等与 SimpleVLA 的差异。","evidence_ref":"p4-table-1-crop","interpretation":"这意味着性能差异应被解释为完整训练系统的差异，而不能只归因于“RLinf 使用了 GRPO”。"},{"claim_support":"RLinf 固定轮次后过滤轨迹，并使用 action-level reward；SimpleVLA 即时过滤、使用 buffer，并采用 token-level success reward。","evidence_ref":"p5-table-1-crop","interpretation":"valid trajectory 数量和 reward 传播位置会改变每次更新看到的有效信号，直接影响训练速度与 SSR。"}],"implication":"后续结果可以证明 RLinf 系统有效，但若要声称纯算法优势，还需要进一步控制这些实现变量。","transition_in":"训练配方回答了 RLinf 如何学习。","transition_out":"在比较口径被标注之后，可以先看 RLinf 是否在多个任务上产生一致的 SSR 提升。","evidence_refs":["p4-table-1-crop","p5-table-1-crop"],"table_refs":["p4-table-1","p5-table-1"],"asset_candidates":["p4-table-1-crop","p5-table-1-crop"],"visual_intent":"source_table","visual_plan":{"layout_family":"comparison","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"native_table","background_variant":"light","density":"dense"}},{"id":"s6","layout":"chart-focus","composition_id":"chart-with-interpretation-rail","role":"multi-task-result","content_priority":"core","action_title":"跨 8 个任务，RLinf RL 把平均 train SSR 从 24.48% 推到 84.63%","audience_question":"RLinf 的提升是单个任务的偶然现象吗？","narrative_job":"用任务级 SSR 表格和平均值图表证明 RLinf RL 的提升跨越多种机器人任务，而不是只来自 place_empty_cup。","slide_goal":"建立整套实验最强的性能证据，并让观众看到任务间增益幅度与训练步数差异。","primary_claim":"在 8 个 RoboTwin 任务上，RLinf 的平均 train SSR 从 24.48% 提升到 84.63%，表中记录平均提升为 60.15%。","evidence":[{"claim_support":"place_empty_cup、beat_block_hammer、pick_dual_bottles、move_can_pot、lift_pot、stack_bowls_two、handover_block 和 place_container_plate 均列出 RLinf SFT、RLinf RL、提升幅度与训练步数。","evidence_ref":"p5-table-1","interpretation":"跨任务数据说明 RL 不是只改善高基线任务；低初始 SSR 任务也能获得大幅提升，但通常需要更多训练步数。"},{"claim_support":"平均值汇总为 RLinf SFT 24.48%、RLinf RL 84.63%。","evidence_ref":"p6-table-1","interpretation":"平均结果把任务级波动压缩为一个可比较的总体结论，适合判断 RLinf 的整体训练收益。"}],"implication":"对研究者而言，RLinf 的核心证据是跨任务的平均增益，同时需要把训练步数与初始 SSR 作为成本和条件一起报告。","transition_in":"比较口径已经明确。","transition_out":"下一步要回答：相同的 RL 目标在 SimpleVLA 中是否也能得到同样幅度的收益。","evidence_refs":["p5-table-1","p6-table-1"],"table_refs":["p5-table-1","p6-table-1"],"asset_candidates":[],"visual_intent":"data_chart","visual_plan":{"layout_family":"chart-focus","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"native_chart","background_variant":"light","density":"balanced"}},{"id":"s7","layout":"comparison","composition_id":"argument-pair","role":"framework-uplift","content_priority":"core","action_title":"RLinf 中 RL 的平均增益高于 SimpleVLA，但比较必须保留实现差异","audience_question":"RLinf 的 RL 增益是否超过了 SimpleVLA 的同类增益？","narrative_job":"将两套框架的 SFT→RL 平均变化并置，给出增益幅度的直接比较，同时承接上一页的可比性边界。","slide_goal":"展示 RLinf 的框架级优势，并明确它不是完全控制变量后的纯算法结论。","primary_claim":"RLinf 的平均 SSR 从 24.48% 升至 84.63%，增益为 60.15%；SimpleVLA 从 34.40% 升至 72.18%，增益为 37.78%，RLinf 的平均 RL 增益更大。","evidence":[{"claim_support":"平均 SSR 对比表同时给出 RLinf SFT/RL、Simple SFT/RL 及两者的 Δ Avg。","evidence_ref":"p6-table-1","interpretation":"观众可以直接比较两套框架中 RL 前后的变化，而不是只比较最终分数。"},{"claim_support":"任务级表展示 RLinf 与 SimpleVLA 在各任务上的 train SSR 与训练步数。","evidence_ref":"p5-table-1","interpretation":"平均增益并非凭空产生，但不同任务的初始 SSR、训练步数和收敛路径并不一致。"}],"implication":"最稳妥的表述是 RLinf 的完整训练系统带来了更大的平均提升；若要拆分 reward、精度或采样策略的单独贡献，需要额外消融。","transition_in":"跨任务结果证明 RLinf 自身有效。","transition_out":"但单点结果还可能受初始能力与评估温度影响，因此需要检查结论对评估口径的敏感性。","evidence_refs":["p6-table-1","p5-table-1"],"table_refs":["p6-table-1","p5-table-1"],"asset_candidates":[],"visual_intent":"comparison_matrix","visual_plan":{"layout_family":"comparison","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"native_table","background_variant":"light","density":"balanced"}},{"id":"s8","layout":"insight","composition_id":"answer-and-boundary","role":"sensitivity-boundary","content_priority":"support","action_title":"高基线任务与评估温度，会改变单点结果的解读","audience_question":"为什么 place_empty_cup 上的数字会随模型和温度明显变化？","narrative_job":"用 rebuttal 结果说明 pi0/pi05、SFT/PPO/GRPO、OFT 评估温度和训练步数会影响观察到的成功率。","slide_goal":"给出结果解释边界，避免把一个任务、一个温度下的数字当作普遍能力。","primary_claim":"在 place_empty_cup 上，初始模型能力与评估温度显著影响结果：OFT 在 Temp_eval=-1 与 1.6 下的 PPO/GRPO 表现不同，而 pi05 的 SFT 基线已高于 pi0。","evidence":[{"claim_support":"表格列出 pi0/pi05 在 SFT、PPO、GRPO 下的结果，以及 OFT Temp_eval=-1 与 Temp_eval=1.6 的 PPO/GRPO 结果；RL 统一取 50 step，部分温度结果未重跑。","evidence_ref":"p1-table-1-crop","interpretation":"研究者需要固定评估采样温度、训练步数和模型初始化，才能把差异解释为方法差异而非评估设置差异。"},{"claim_support":"单独表格给出 Temp_eval=1.6 下 PPO 86.72%、GRPO 88.28% 的 place_empty_cup 结果。","evidence_ref":"p1-table-2-crop","interpretation":"这说明评估协议本身会改变可见成绩，报告最终数字时必须同时报告温度与是否重跑。"}],"implication":"单点结果适合用于说明评估敏感性，不适合单独承担 RLinf 普遍优越性的结论。","transition_in":"框架级平均结果已经显示增益。","transition_out":"性能之外，实际采用还取决于 actor 与 rollout 的系统执行成本。","evidence_refs":["p1-table-1-crop","p1-table-2-crop"],"table_refs":["p1-table-1","p1-table-2"],"asset_candidates":["p1-table-1-crop","p1-table-2-crop"],"visual_intent":"source_table","visual_plan":{"layout_family":"insight","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"native_table","background_variant":"quiet","density":"balanced"}},{"id":"s9","layout":"matrix","composition_id":"evidence-table","role":"system-efficiency","content_priority":"core","action_title":"8 卡系统路径可调：colocated 更快，disaggregated 换取隔离与扩展","audience_question":"如果要实际跑起来，哪种 RLinf 并行模式更划算？","narrative_job":"比较 RLinf 的 colocated、disaggregated、Hybrid(pipe=1/2) 与 SimpleVLA 在 actor 和 generate 时间上的表现，并连接到 8/16/32 卡运行配置。","slide_goal":"把算法结果转化为系统部署判断，展示执行模式如何改变训练成本。","primary_claim":"在 8 卡数据中，RLinf colocated 的 actor/generate 时间为 49.15/170.34 秒，优于 SimpleVLA 的 94.05/189.33 秒；disaggregated 与 hybrid 提供不同的隔离和扩展取舍。","evidence":[{"claim_support":"8 卡对比表列出 RLinf 的 colocated、disaggregated、Hybrid(pipe=1)、Hybrid(pipe=2) 与 SimpleVLA 的 actor/rollout 时间。","evidence_ref":"p6-table-2-crop","interpretation":"这把 RLinf 的系统优势落到可测的 actor 和 rollout 成本，而非抽象地声称“更高效”。"},{"claim_support":"RLinf 与 SimpleVLA 在 1、2、4 节点下的 actor/generate 数据展示了随节点数增加的扩展趋势和模式差异。","evidence_ref":"p8-table-1-crop","interpretation":"部署者可以据此选择 colocated、disaggregated 或 hybrid，而不是把单一 8 卡配置当作唯一方案。"}],"implication":"RLinf 的系统价值不仅是最终 SSR，还包括可以通过并行模式在训练隔离、rollout 成本与扩展性之间做工程取舍。","transition_in":"性能结论必须落到实际运行成本。","transition_out":"现在可以把性能、效率和所有限制合并成一个可复现、可审慎引用的最终判断。","evidence_refs":["p6-table-2-crop","p8-table-1-crop"],"table_refs":["p6-table-2","p8-table-1"],"asset_candidates":["p6-table-2-crop","p8-table-1-crop"],"visual_intent":"source_table","visual_plan":{"layout_family":"matrix","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"native_table","background_variant":"light","density":"dense"}},{"id":"s10","layout":"insight","composition_id":"answer-and-boundary","role":"closing-synthesis","content_priority":"core","action_title":"结论成立，但它属于“受控条件下的 RLinf 系统优势”","audience_question":"我现在应该相信什么，又需要保留什么？","narrative_job":"回答开场问题，合并跨任务 SSR、SimpleVLA 对比、系统效率和实验边界，给出可复现与可引用的结论。","slide_goal":"让观众带走一个强但不过度外推的判断。","primary_claim":"在固定 RoboTwin seed、评估协议和 8 卡 A800 条件下，RLinf 的 RL 训练带来显著跨任务 SSR 增益，并提供有竞争力的系统执行路径；但实现差异、硬件敏感性和评估温度限制了无条件外推。","evidence":[{"claim_support":"RLinf 平均 train SSR 从 24.48% 提升到 84.63%，SimpleVLA 从 34.40% 提升到 72.18%。","evidence_ref":"p6-table-1","interpretation":"核心性能结论有跨任务平均值支撑，但应以完整实验设置和比较口径为前提。"},{"claim_support":"RLinf 多种并行模式与 SimpleVLA 的 actor/generate 时间对比显示 colocated 具有竞争力，其他模式存在明确成本差异。","evidence_ref":"p8-table-1-crop","interpretation":"系统效率结论应与部署模式绑定，不能用单一运行模式概括所有 RLinf 配置。"}],"implication":"论文或复现报告应同时报告 seed、GPU、温度、训练步数、reward/采样策略和并行模式；这样才能把 RLinf 的贡献准确定位为可复现的系统性增益。","transition_in":"系统效率补全了“更快”的一半证据。","transition_out":"开场问题得到回答：RLinf 在受控条件下确实更强且具备效率优势，但结论必须连同实验契约与边界一起引用。","evidence_refs":["p6-table-1","p8-table-1-crop"],"table_refs":["p6-table-1","p8-table-1"],"asset_candidates":[],"visual_intent":"text_led","visual_plan":{"layout_family":"insight","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"none","background_variant":"quiet","density":"sparse"}}]}}
+tokens used
+49,764

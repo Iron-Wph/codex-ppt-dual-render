@@ -1,0 +1,10 @@
+{"kind":"slide","id":"sl/cnfhvp","slide":1,"title":"01 / 01","textShapes":5}
+{"kind":"shape","id":"sh/psbqhwza","slide":1,"name":"slide-1-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/2p07mhgj","slide":1,"name":"slide-1-page","text":"01 / 01","textPreview":"01 / 01","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/3qtofmh4","slide":1,"name":"s2-eyebrow","text":"RESEARCH BRIEF","textPreview":"RESEARCH BRIEF","textChars":14,"textLines":1,"bbox":[72,88,500,22]}
+{"kind":"textbox","id":"sh/cv2psbyl","slide":1,"name":"s2-title","text":"先锁定实验契约，再谈 SSR 增益","textPreview":"先锁定实验契约，再谈 SSR 增益","textChars":17,"textLines":1,"bbox":[72,142,560,230]}
+{"kind":"shape","id":"sh/dwbqlgz6","slide":1,"name":"s2-hero-frame","bbox":[690,104,510,418]}
+{"kind":"shape","id":"sh/but8j6hg","slide":1,"name":"s2-note-bg","bbox":[72,572,1128,62]}
+{"kind":"textbox","id":"sh/0zmpwbyx","slide":1,"name":"s2-note-label","text":"CORE CLAIM","textPreview":"CORE CLAIM","textChars":10,"textLines":1,"bbox":[94,593,180,18]}
+{"kind":"textbox","id":"sh/lkvqpgzi","slide":1,"name":"s2-note-value","text":"SFT 与 RL 使用同一组 1,000 个 RoboTwin 随机 seed，评估使用额外 128 个未见 seed，采用 Piper 双臂，并统一在 8 卡 A800 平台上运行。","textPreview":"SFT 与 RL 使用同一组 1,000 个 RoboTwin 随机 seed，评估使用额外 128 个未见 seed，采用 Piper 双臂，并统一在 8 卡 A800 平台上运行。","textChars":92,"textLines":1,"bbox":[286,588,860,26]}
+{"kind":"image","id":"im/b6hwbih0","slide":1,"name":"","alt":"Full-page evidence snapshot from page 1","bbox":[706,120,478,385]}

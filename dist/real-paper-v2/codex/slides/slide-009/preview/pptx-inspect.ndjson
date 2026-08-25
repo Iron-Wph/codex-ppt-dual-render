@@ -1,0 +1,17 @@
+{"kind":"slide","id":"sl/0il7pa","slide":1,"title":"01 / 01","textShapes":12}
+{"kind":"shape","id":"sh/h0fipoje","slide":1,"name":"slide-1-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/ux4jet0n","slide":1,"name":"slide-1-page","text":"01 / 01","textPreview":"01 / 01","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/vyd0ny18","slide":1,"name":"s9-answer-kicker","text":"THE ANSWER","textPreview":"THE ANSWER","textChars":10,"textLines":1,"bbox":[72,72,240,20]}
+{"kind":"textbox","id":"sh/8vmhcj2h","slide":1,"name":"s9-answer-title","text":"可信的是受控系统增益，纯算法优越性尚未证实","textPreview":"可信的是受控系统增益，纯算法优越性尚未证实","textChars":21,"textLines":1,"bbox":[72,128,680,190]}
+{"kind":"textbox","id":"sh/twviloj2","slide":1,"name":"s9-answer-claim","text":"在固定 RoboTwin seed、OOD 评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练在 8 个任务上将平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下表现出有竞争力的 actor/rollout 时间；但精度、超参数、轨迹收集和 reward 设计差异使其不能被表述为纯算法因果结论。","textPreview":"在固定 RoboTwin seed、OOD 评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练在 8 个任务上将平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下表现出有竞争力的 actor/rollout 时间...","textChars":179,"textLines":1,"bbox":[72,344,660,112]}
+{"kind":"textbox","id":"sh/694za9kr","slide":1,"name":"s9-answer-point-1-label","text":"答案：性能成立","textPreview":"答案：性能成立","textChars":7,"textLines":1,"bbox":[790,142,170,18]}
+{"kind":"textbox","id":"sh/7ad0je1c","slide":1,"name":"s9-answer-point-1","text":"8 个任务平均 train SSR：RLinf RL 84.63%，由 SFT 的 24.48% 提升；SimpleVLA RL 为 72.18%。","textPreview":"8 个任务平均 train SSR：RLinf RL 84.63%，由 SFT 的 24.48% 提升；SimpleVLA RL 为 72.18%。","textChars":74,"textLines":1,"bbox":[790,176,390,70]}
+{"kind":"shape","id":"sh/k72h8z2l","slide":1,"name":"s9-answer-point-1-rule","bbox":[790,256,390,0]}
+{"kind":"textbox","id":"sh/l8vih4j6","slide":1,"name":"s9-answer-point-2-label","text":"采用条件：效率有范围","textPreview":"采用条件：效率有范围","textChars":10,"textLines":1,"bbox":[790,268,170,18]}
+{"kind":"textbox","id":"sh/1gvu50ni","slide":1,"name":"s9-answer-point-2","text":"8 卡 colocated 下，RLinf actor/rollout 为 49.15/170.34 秒，优于 SimpleVLA 的 94.05/189.33 秒。","textPreview":"8 卡 colocated 下，RLinf actor/rollout 为 49.15/170.34 秒，优于 SimpleVLA 的 94.05/189.33 秒。","textChars":83,"textLines":1,"bbox":[790,302,390,70]}
+{"kind":"shape","id":"sh/0fmdwvmx","slide":1,"name":"s9-answer-point-2-rule","bbox":[790,382,390,0]}
+{"kind":"textbox","id":"sh/fedc3a5c","slide":1,"name":"s9-answer-point-3-label","text":"边界：不能纯算法归因","textPreview":"边界：不能纯算法归因","textChars":10,"textLines":1,"bbox":[790,394,170,18]}
+{"kind":"textbox","id":"sh/ed4vu5o7","slide":1,"name":"s9-answer-point-3","text":"精度、学习率、LoRA、valid trajectory 收集与 reward 设计不同，不能把增益单独归因于某个算法组件。","textPreview":"精度、学习率、LoRA、valid trajectory 收集与 reward 设计不同，不能把增益单独归因于某个算法组件。","textChars":62,"textLines":1,"bbox":[790,428,390,70]}
+{"kind":"shape","id":"sh/dcvu10nm","slide":1,"name":"s9-boundary-rule","bbox":[72,562,1136,0]}
+{"kind":"textbox","id":"sh/sbmdsv61","slide":1,"name":"s9-boundary-label","text":"最终判断","textPreview":"最终判断","textChars":4,"textLines":1,"bbox":[72,590,160,18]}
+{"kind":"textbox","id":"sh/ratczq5g","slide":1,"name":"s9-boundary","text":"受控条件下 RLinf 系统确实更强且具有效率优势；纯算法因果仍需额外控制变量。","textPreview":"受控条件下 RLinf 系统确实更强且具有效率优势；纯算法因果仍需额外控制变量。","textChars":40,"textLines":1,"bbox":[250,582,930,34]}

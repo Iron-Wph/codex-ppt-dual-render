@@ -1,0 +1,2446 @@
+{"deck":{"id":"rlinf-robotwin-experiment-storyboard-revised","title":"RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束","purpose":"帮助具身智能与机器人学习研究者判断 RLinf 在 RoboTwin 上的性能与系统效率证据，并准确区分受控系统优势与纯算法因果结论。","audience":"具身智能、机器人学习与强化学习研究者、论文评审者和实验复现者。","language":"zh-CN","aspect_ratio":"16:9","communication_job":"By the end, embodied-AI researchers should be able to cite and reproduce RLinf’s RoboTwin result with the correct boundary because the experiments show a large cross-task train SSR gain and competitive execution times under fixed seeds, evaluation protocol, and 8-card A800 conditions, while implementation differences prevent isolating a pure RLinf algorithm effect.","talk_duration_minutes":12,"audience_profile":{"role":"具身智能与机器人学习研究者、论文评审者、实验复现者","prior_knowledge":"熟悉 VLA、SFT、GRPO、RoboTwin、SSR、OOD seed、多卡训练与基本实验对照方法。","cares_about":["RLinf 的性能增益是否跨任务成立","SFT→RL 的比较是否公平","reward、轨迹收集、精度和超参数差异是否改变结论","seed、GPU、评估温度和训练步数是否可复现","不同并行模式下 actor 与 rollout 的实际成本"],"likely_questions":["RLinf 的提升能否归因于 RL 信号本身？","8 个任务上的增益是否一致，训练成本是多少？","RLinf 与 SimpleVLA 的比较到底控制了哪些变量？","评估温度、模型初始化和 GPU 是否会改变 SSR？","实际运行时应该选择哪种并行模式？"],"desired_outcome":"能够复现实验契约，引用跨任务 train SSR 与系统效率结果，并将结论表述为受控条件下的 RLinf 完整训练系统优势，而非 OOD 泛化或无条件的纯算法优越性。"}},"narrative":{"arc":"实验问题 → 实验契约与结果范围 → RLinf 训练信号 → 与 SimpleVLA 的可比性边界 → 跨任务 train SSR → 框架级增益 → 敏感性边界 → 系统效率 → 受控条件下的结论","key_message":"在相同 RoboTwin 训练 seed、128 个 OOD 评估 seed、评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练使 8 个任务的平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下呈现有竞争力的 actor/rollout 时间；128 个 OOD seed 是评估契约，不是当前报告的 OOD SSR 结果。由于精度、超参数、valid trajectory 收集和 reward 设计不同，证据支持的是受控条件下的完整系统优势，而不是纯算法因果结论。","opening_question":"在固定 RoboTwin seed、评估口径和 8 卡 A800 条件下，RLinf 的提升能否归因于 RL 信号本身，还是只能归因于完整训练系统的差异？","closing_answer":"证据支持这样的结论：在固定实验契约下，RLinf 的 RL 训练带来跨 8 个任务的 train SSR 增益，并提供有竞争力的执行路径；128 个 OOD seed 只定义评估契约，当前证据未提供 OOD SSR 结果。由于精度、超参数、轨迹收集和 reward 设计并非完全同构，不能把结果表述为脱离实验契约的纯算法优越性。","sections":[{"id":"sec-1","title":"先锁定实验契约","job":"定义结果可比、可复现和可解释的边界","slide_ids":["s1","s2"]},{"id":"sec-2","title":"解释训练与对照","job":"说明 RLinf 的训练信号，并标出与 SimpleVLA 的关键差异","slide_ids":["s3","s4"]},{"id":"sec-3","title":"建立性能结论","job":"从跨任务 train SSR、框架比较和敏感性分析形成主结果判断","slide_ids":["s5","s6","s7"]},{"id":"sec-4","title":"落到系统与结论","job":"把性能证据连接到运行成本，并回答开场归因问题","slide_ids":["s8","s9"]}],"priority_map":{"core":["s3","s4","s5","s6","s7","s8","s9"],"support":["s2"],"context":["s1"]},"logic_check":{"opening_resolved":true,"core_has_evidence":true,"no_redundant_slides":true,"rationale":"已保留 9 页与原叙事顺序，并将 128 个 OOD seed 明确限定为评估契约；s5 与 s9 的主结果统一显式标注 train SSR，且结论明确当前未报告 OOD SSR。"}},"visual":{"style_family":"academic-evidence","image_policy":"仅使用证据索引中的源表、源图或页面快照；优先使用原生表格、原生图表与可追溯机制图，禁止装饰性图片。","density_profile":"中等密度、证据优先；核心结果使用大图表或大表格，实验边界使用短注释和明确的证据标记。","style_reason":"受众关心可比性、复现性和归因边界，因此采用暖白画布、深蓝标题、珊瑚强调和源证据板的学术证据风格。","layout_system":"Codex Grid evidence-first：统一左对齐标题与宽边距，交替使用证据表、机制流程、结果图表、对照构图和结论边界。","style_reference":"codex/theme-reference.png"},"plan":{"title":"RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束","subtitle":"先确认比较口径，再判断 train SSR、效率与结论边界","slides":[{"id":"s1","layout":"title","composition_id":"thesis-stage","role":"title","content_priority":"context","action_title":"RLinf 的增益成立，但归因受实验契约约束","audience_question":"这组实验最终要让我判断什么？","narrative_job":"提出唯一主问题：如何在性能增益与归因边界之间做出严谨判断。","slide_goal":"让观众带着明确的归因问题进入实验契约、结果和系统效率证据。","primary_claim":"RLinf 的实验结论必须同时回答性能是否提升、运行是否有效率，以及提升能否被归因于 RL 信号本身。","evidence":[],"implication":"后续每页都围绕可比性、跨任务 train SSR、系统成本和外推边界展开。","transition_in":"从观众熟悉的“看最终 SSR”切入，提出更严格的归因问题。","transition_out":"要判断增益属于什么，先必须固定实验在什么条件下发生。","evidence_refs":[],"table_refs":[],"asset_candidates":[],"visual_intent":"text_led","visual_plan":{"layout_family":"title","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"none","background_variant":"quiet","density":"sparse"},"speaker_notes":{"talk_track":"我们通常先看最终 SSR，但这组实验真正需要回答的是：增益来自 RL 信号本身，还是来自一整套训练系统？今天沿着三个问题展开：train SSR 是否跨任务提升，运行是否具有效率，以及哪些实验条件限制归因。先把实验契约锁定，再看训练机制、结果和系统成本，最后给出可复现、但不越界的结论。","delivery_cue":"先读出标题中的“增益成立”和“归因受约束”，随后明确三个判断维度。","source_refs":[],"estimated_seconds":65},"content":{"eyebrow":"RoboTwin 实验解读","title":"RLinf 的增益成立，但归因受实验契约约束","subtitle":"性能、效率与归因边界必须一起判断","kicker":null,"lede":null,"note":{"label":"判断框架","value":"性能提升 ≠ RL 单独贡献"},"body_points":[],"metrics":[],"steps":[],"result":null,"columns":[],"takeaway":null}},{"id":"s2","layout":"evidence","composition_id":"image-thesis-split","role":"problem","content_priority":"support","action_title":"先锁定实验契约，再谈 train SSR","audience_question":"哪些条件决定这组结果能否复现和外推？","narrative_job":"合并实验契约与结果范围，明确训练 seed、OOD seed、机器人、领域随机化、GPU 条件及其复现限制。","slide_goal":"把后续所有数字锁定在明确的实验边界内。","primary_claim":"SFT 与 RL 使用同一组 1,000 个 RoboTwin 随机 seed，评估使用额外 128 个未见 seed，并统一在 8 卡 A800 平台上运行；128 个 OOD seed 是评估契约，不是当前报告的 OOD SSR 结果。","evidence":[{"claim_support":"训练阶段使用 1,000 个随机场景 seed，评估阶段额外使用 128 个未参与训练的 OOD seed，并采用双臂 Piper 机械臂。","evidence_ref":"p1-snapshot","interpretation":"128 个 OOD seed 规定了评估设置，但证据索引中的主结果表报告的是 train SSR，不能将该协议数字当作 OOD 性能结果。"},{"claim_support":"RoboTwin 使用领域随机化；相同 seed 集合在不同 Python、系统和硬件环境下可能无法完全复现，且观察到 H100 与 A800 的初始 SSR 差异。","evidence_ref":"p1-snapshot","interpretation":"复现时必须把运行环境和 GPU 视为实验变量。"}],"implication":"后续结果的有效范围是固定 RoboTwin 配置、seed、评估口径和 8 卡 A800；当前计划不声称已证明 OOD SSR 泛化。","transition_in":"开场的归因问题首先需要一个稳定、可复现的比较边界。","transition_out":"边界确定后，还要看 RLinf 如何把 rollout 轨迹转换为更新信号。","evidence_refs":["p1-snapshot"],"table_refs":[],"asset_candidates":["p1-snapshot"],"visual_intent":"source_figure","visual_plan":{"layout_family":"evidence","primary_visual":"p1-snapshot","image_budget":1,"image_roles":["evidence"],"data_strategy":"native_table","background_variant":"light","density":"balanced"},"speaker_notes":{"talk_track":"先把比较边界锁定。SFT 与 RL 共用 1,000 个 RoboTwin 随机 seed，使用双臂 Piper；评估再加入 128 个未见 seed。这里必须区分协议与结果：128 个 OOD seed 定义了评估契约，但当前主结果表呈现的是 train SSR，并没有提供 OOD SSR 数字。背景、杂乱度、光照、桌高和语言都会变化，运行环境与 GPU 也会影响复现，所以后面的结果只在固定契约内解释。","delivery_cue":"依次强调 1,000、128 和 8 卡三个契约指标，并明确 OOD seed 不是 OOD SSR 结果。","source_refs":["p1-snapshot"],"estimated_seconds":75},"content":{"eyebrow":"实验契约","title":"先锁定实验契约，再谈 train SSR","subtitle":null,"kicker":null,"lede":"128 个 OOD seed 是评估契约；当前主结果报告的是 train SSR，不是 OOD SSR。","note":{"label":"契约说明","value":"1,000 个共同训练 seed；128 个未见 OOD seed；双臂 Piper；统一 8 卡 A800。"},"body_points":[{"label":"训练对齐","text":"SFT 与 RL 共用 1,000 个随机场景 seed，并采用双臂 Piper 机械臂。"},{"label":"OOD 口径","text":"额外使用 128 个未见 seed 作为评估契约；证据索引未提供对应 OOD SSR 主结果。"},{"label":"复现边界","text":"领域随机化与运行环境会改变可用 seed 和初始 SSR，因此统一锁定 8 卡 A800。"}],"metrics":[{"label":"训练 seed","value":"1,000","meaning":"SFT 与 RL 的共同场景起点"},{"label":"OOD 评估 seed","value":"128","meaning":"评估契约，不等于已报告的 OOD SSR 结果"},{"label":"硬件条件","value":"8× A800","meaning":"后续 train SSR 比较的固定平台"}],"steps":[],"result":null,"columns":[],"takeaway":{"label":"实验契约","value":"后续主结果统一标注为 train SSR；128 个 OOD seed 不承担性能结果含义。"}}},{"id":"s3","layout":"pipeline","composition_id":"causal-flow","role":"method_detail","content_priority":"core","action_title":"RLinf 的训练信号来自一条完整链路","audience_question":"RLinf 的训练信号究竟如何产生？","narrative_job":"解释 rollout、valid trajectory、action-level reward、GRPO 优势估计和 LoRA 更新之间的关系。","slide_goal":"让观众知道结果背后的训练配方。","primary_claim":"RLinf 的配置将 128×8 的 rollout 组织为 global batch size 1024，使用 group size 8、action-level reward、token-level logprob/entropy、GRPO 和 LoRA 更新。","evidence":[{"claim_support":"配置给出 rollout batch 128×8=1024、global batch size 1024、group_size 8、reward_type action_level、logprob_type token_level、adv_type grpo、is_lora true 和 learning rate 2.0e-4。","evidence_ref":"p4-snapshot","interpretation":"这些配置共同决定训练信号与参数更新方式。"}],"implication":"性能结果应归因于完整训练路径，而不应只归因于算法名称。","transition_in":"实验契约说明了测什么，训练配置说明了 RLinf 如何学习。","transition_out":"接下来必须检查这套路径与 SimpleVLA 是否真的只差一个框架名称。","evidence_refs":["p4-snapshot"],"table_refs":[],"asset_candidates":[],"visual_intent":"method_diagram","visual_plan":{"layout_family":"pipeline","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"diagram","background_variant":"default","density":"balanced"},"speaker_notes":{"talk_track":"实验契约说明评价什么，这一页补上 RLinf 如何学习。一次更新先按 128×8 组织出 1,024 条 rollout，并以 group size 8 形成比较单元；奖励落在 action level，logprob 与 entropy 保持 token level，再用 GRPO 计算优势并更新 actor。最后通过 LoRA 和 2.0e-4 学习率限定更新方式。配置说明的是完整训练配方，下一页继续核对它与 SimpleVLA 的差异。","delivery_cue":"沿五个节点从左到右阅读，最后停在 LoRA 更新。","source_refs":["p4-snapshot"],"estimated_seconds":100},"content":{"eyebrow":"训练机制","title":"RLinf 的训练信号来自一条完整链路","subtitle":null,"kicker":null,"lede":"训练信号由采样规模、奖励粒度、优势估计和参数更新共同决定。","note":null,"body_points":[],"metrics":[{"label":"每轮 rollout","value":"128 × 8","meaning":"一次更新组织 1024 条轨迹"},{"label":"奖励粒度","value":"action-level","meaning":"奖励绑定到动作"},{"label":"更新方式","value":"GRPO + LoRA","meaning":"用组内优势估计驱动参数高效更新"}],"steps":[{"title":"Rollout 采样","text":"并行生成一轮轨迹。","metric":"128 × 8 = 1024","tone":"navy"},{"title":"Group 组织","text":"按 group size 8 形成比较单元。","metric":"group size = 8","tone":"blue"},{"title":"Action-level reward","text":"把任务反馈落到动作粒度。","metric":"reward_type = action_level","tone":"coral"},{"title":"GRPO 优势估计","text":"计算用于 actor 更新的优势信号。","metric":"adv_type = grpo","tone":"blue"},{"title":"LoRA 更新","text":"在参数高效更新范围内优化策略。","metric":"is_lora = true · lr = 2.0e-4","tone":"navy"}],"result":{"label":"训练配方的含义","value":"性能归因应落在 rollout、reward、优化与参数更新的完整路径上"},"columns":[],"takeaway":null}},{"id":"s4","layout":"comparison","composition_id":"evidence-table","role":"limitations","content_priority":"core","action_title":"共享基础，但不是同构训练","audience_question":"两套实现到底控制了哪些变量？","narrative_job":"并列呈现共同基础与关键差异，阻止把框架比较误读为纯算法消融。","slide_goal":"建立正确的因果解释边界。","primary_claim":"两套方法共享 SFT 模型、train/eval seeds、模型实现和 GRPO，但在精度、rollout batch、学习率、LoRA、valid trajectory 收集和 reward 粒度上存在差异。","evidence":[{"claim_support":"对比表列出 RLinf 使用 bf16、rollout batch 1024、learning rate 2.0e-4、LoRA，而 SimpleVLA 使用混合精度、rollout batch 512、learning rate 5e-6 和全参数训练。","evidence_ref":"p4-table-1-crop","interpretation":"变量差异会改变训练动态。"},{"claim_support":"RLinf 固定轮次后过滤 collected trajectories，并采用 action-level reward；SimpleVLA 即时过滤并缓存轨迹，采用 token-level success reward。","evidence_ref":"p5-table-1-crop","interpretation":"有效轨迹数量和奖励传播位置不同。"}],"implication":"可以比较两套系统的实际结果，但不能证明某个 RLinf 算法组件具有独立因果优势。","transition_in":"训练配方已经明确，公平性问题现在变成变量清单。","transition_out":"在保留这些差异的前提下，先看 RLinf 自身的跨任务收益是否成立。","evidence_refs":["p4-table-1-crop","p5-table-1-crop","p4-table-2-crop"],"table_refs":["p4-table-2","p4-table-1","p5-table-1"],"asset_candidates":["p4-table-2-crop"],"visual_intent":"source_table","visual_plan":{"layout_family":"comparison","primary_visual":"p4-table-2-crop","image_budget":1,"image_roles":["evidence"],"data_strategy":"native_table","background_variant":"light","density":"dense"},"speaker_notes":{"talk_track":"这里把公平比较拆成可检查的变量。两套实现共享 SFT 模型、train/eval seeds、模型实现和 GRPO，因此有共同起点；但 RLinf 与 SimpleVLA 在精度、rollout batch、学习率和 LoRA 上不同。valid trajectory 的收集时机和 reward 粒度也不同，会改变每次更新接收到的学习信号。因此后面的结果可以作为系统级比较，但不能单独归因于某一个算法组件。","delivery_cue":"先读共同基础，再按表格行读取差异，最后明确系统级解释边界。","source_refs":["p4-table-1-crop","p5-table-1-crop"],"estimated_seconds":100},"content":{"eyebrow":"可比性边界","title":"共享基础，但不是同构训练","subtitle":null,"kicker":null,"lede":"共同起点存在，但多项实现差异会改变训练动态与因果解释。","note":{"label":"解释边界","value":"这是完整训练系统的实际比较，不是单一算法组件的因果消融。"},"body_points":[{"label":"共同基础","text":"SFT 模型、train/eval seeds、模型实现和 GRPO 保持一致。"},{"label":"关键差异","text":"精度、rollout batch、学习率、LoRA、valid trajectory 收集和 reward 粒度均不同。"}],"metrics":[{"label":"rollout batch","value":"1024 vs 512","meaning":"每轮采样量不同"},{"label":"learning rate","value":"2.0e-4 vs 5e-6","meaning":"更新尺度不同"},{"label":"reward 粒度","value":"action-level vs token-level","meaning":"奖励传播位置不同"}],"steps":[],"result":null,"columns":[{"label":"RLinf","headline":"完整 RL 训练配置","points":["bf16；rollout batch 1024","learning rate 2.0e-4；LoRA=true","固定轮次后过滤 collected trajectories","action-level reward"],"tone":"navy"},{"label":"SimpleVLA","headline":"另一套完整配置","points":["混合精度；rollout batch 512","learning rate 5e-6；全参数训练","每条 rollout 后即时过滤并缓存","token-level success reward"],"tone":"coral"}],"takeaway":{"label":"页面结论","value":"共享基础不等于同构训练，后续结果按系统级差异解读。"}}},{"id":"s5","layout":"chart-focus","composition_id":"chart-with-interpretation-rail","role":"main_results","content_priority":"core","action_title":"8/8 任务提升，平均 train SSR 显著上升","audience_question":"RLinf 的 train SSR 增益是单个任务的偶然现象吗？","narrative_job":"用任务级结果和平均值突出 RLinf SFT→RL 的跨任务 train SSR 提升。","slide_goal":"建立最强的单系统性能证据。","primary_claim":"8 个 RoboTwin 任务的 RLinf RL train SSR 均高于 RLinf SFT，平均 train SSR 从 24.48% 提升到 84.63%，平均提升为 60.15 个百分点。","evidence":[{"claim_support":"8 个任务分别列出 RLinf SFT、RLinf RL、平均提升和训练步数，所有任务的 RLinf RL 数值高于对应 SFT 数值。","evidence_ref":"p5-table-1","interpretation":"提升跨越不同任务，但幅度和训练步数不同。"},{"claim_support":"平均汇总为 RLinf SFT train SSR 24.48%、RLinf RL train SSR 84.63%，Δ Avg. 为 +60.15%。","evidence_ref":"p6-table-1","interpretation":"平均值支持 RLinf 在这组任务上的总体训练收益，不构成 OOD SSR 证据。"}],"implication":"跨任务结果支持 RLinf 的 RL 训练有效，但当前证据报告的是 train SSR，未回答 OOD SSR 泛化。","transition_in":"比较口径已被标注，先检验 RLinf 自身是否稳定地产生 train SSR 收益。","transition_out":"下一步把相同的 SFT→RL 变化与 SimpleVLA 并置。","evidence_refs":["p5-table-1","p6-table-1","p5-table-1-crop"],"table_refs":["p5-table-1","p6-table-1"],"asset_candidates":["p5-table-1-crop"],"visual_intent":"data_chart","visual_plan":{"layout_family":"chart-focus","primary_visual":"p5-table-1-crop","image_budget":1,"image_roles":["evidence"],"data_strategy":"native_chart","background_variant":"light","density":"balanced"},"speaker_notes":{"talk_track":"在可比性边界明确后，先看 RLinf 自身是否稳定地产生 train SSR 收益。8 个 RoboTwin 任务里，RLinf RL 的 train SSR 全部高于 SFT，平均从 24.48% 升到 84.63%，提升 60.15 个百分点。任务级结果还显示，增益幅度从 18.75 到 85.94 不等，训练步数从 30 到 240。这里证明的是 train SSR 上的跨任务训练收益，不是 OOD SSR 泛化，下一页再比较两套系统。","delivery_cue":"先强调 train SSR、24.48%→84.63% 和 8/8，再指向任务级差异与训练步数。","source_refs":["p5-table-1","p6-table-1"],"estimated_seconds":105},"content":{"eyebrow":"跨任务 train SSR 结果","title":"8/8 任务提升，平均 train SSR 显著上升","subtitle":null,"kicker":null,"lede":"任务级结果显示，RLinf 的 RL train SSR 增益不是单个任务的偶然现象；该页不报告 OOD SSR。","note":null,"body_points":[{"label":"跨任务一致性","text":"8/8 个任务的 RLinf RL train SSR 均高于对应 SFT。"},{"label":"增益幅度有差异","text":"平均提升从 18.75 到 85.94 不等。"},{"label":"训练成本需同时看","text":"RLinf train step 覆盖 30–240，结果不能脱离训练步数与配置口径。"}],"metrics":[{"label":"RLinf SFT 平均 train SSR","value":"24.48%","meaning":"RL 训练前的跨任务平均起点"},{"label":"RLinf RL 平均 train SSR","value":"84.63%","meaning":"RL 训练后的跨任务平均结果"},{"label":"平均提升","value":"+60.15 个百分点","meaning":"8 个任务汇总的 train SSR 训练收益"}],"steps":[],"result":{"label":"核心结果","value":"8/8 任务提升；train SSR 24.48%→84.63%；平均提升 +60.15 个百分点"},"columns":[],"takeaway":null}},{"id":"s6","layout":"comparison","composition_id":"argument-pair","role":"method_overview","content_priority":"core","action_title":"RLinf 的平均 train SSR 增幅高于 SimpleVLA","audience_question":"RLinf 的 train SSR 增益是否超过 SimpleVLA？","narrative_job":"直接比较两套框架的 SFT→RL 平均变化，并绑定前一页的实现差异。","slide_goal":"给出框架级性能判断，同时收紧因果措辞。","primary_claim":"RLinf 的平均 train SSR 从 24.48% 升至 84.63%，增益为 60.15 个百分点；SimpleVLA 从 34.40% 升至 72.18%，增益为 37.78 个百分点。","evidence":[{"claim_support":"平均 SSR 对比表同时给出 RLinf SFT/RL、Simple SFT/RL 及两者的 Δ Avg.。","evidence_ref":"p6-table-1","interpretation":"比较 SFT→RL 的 train SSR 变化比只比较最终值更能回答系统增益问题。"}],"implication":"最稳妥的表述是 RLinf 完整训练系统带来更大的平均 train SSR 提升；当前证据不是 OOD SSR 结果。","transition_in":"跨任务 train SSR 结果证明 RLinf 有效，平均对照显示其系统增幅更大。","transition_out":"但平均数仍可能掩盖评估温度和初始模型能力造成的变化。","evidence_refs":["p6-table-1"],"table_refs":["p6-table-1"],"asset_candidates":[],"visual_intent":"comparison_matrix","visual_plan":{"layout_family":"comparison","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"native_table","background_variant":"light","density":"balanced"},"speaker_notes":{"talk_track":"把两套系统的 SFT→RL 平均 train SSR 变化放在同一张表里。RLinf 从 24.48% 提升到 84.63%，增加 60.15 个百分点；SimpleVLA 从 34.40% 提升到 72.18%，增加 37.78 个百分点，所以 RLinf 的完整训练系统平均增幅更大。但这一页不是 OOD SSR 结果，也不构成单因素消融：精度、学习率、LoRA、轨迹收集和 reward 设计都不同。下一页检查敏感性。","delivery_cue":"先读两组 train SSR 平均值和增幅，再明确“系统级比较”而非“纯算法因果”。","source_refs":["p6-table-1"],"estimated_seconds":105},"content":{"eyebrow":"框架级 train SSR 对照","title":"RLinf 的平均 train SSR 增幅高于 SimpleVLA","subtitle":null,"kicker":null,"lede":"比较 SFT→RL 的 train SSR 变化量，更能回答哪套完整系统带来了更大提升。","note":{"label":"结论边界","value":"支持 train SSR 的系统级比较；不等同于 OOD 泛化或单因素因果。"},"body_points":[{"label":"先看变化量","text":"RLinf 的平均 train SSR 提升为 60.15 个百分点，SimpleVLA 为 37.78 个百分点。"},{"label":"再看可比性","text":"两套系统的实现配置并不完全一致，平均差异不能拆解为单一因素贡献。"},{"label":"因此","text":"RLinf 的完整训练系统 train SSR 平均提升更大，但单因素因果仍需控制变量或消融。"}],"metrics":[{"label":"RLinf Δ Avg. train SSR","value":"+60.15 个百分点","meaning":"24.48% → 84.63%"},{"label":"SimpleVLA Δ Avg. train SSR","value":"+37.78 个百分点","meaning":"34.40% → 72.18%"}],"steps":[],"result":null,"columns":[{"label":"RLinf","headline":"train SSR 24.48% → 84.63%","points":["平均提升 +60.15 个百分点","完整训练系统的平均变化更大"],"tone":"accent"},{"label":"SimpleVLA","headline":"train SSR 34.40% → 72.18%","points":["平均提升 +37.78 个百分点","作为完整系统对照，而非单变量基线"],"tone":"neutral"}],"takeaway":{"label":"一句话判断","value":"RLinf 的平均 train SSR 增幅更大，但证据指向系统级效果，不是 OOD SSR 或独立算法贡献。"}}},{"id":"s7","layout":"insight","composition_id":"answer-and-boundary","role":"limitations","content_priority":"core","action_title":"初始化与评估温度会改变单点 SSR","audience_question":"为什么同一任务的结果会随模型和温度变化？","narrative_job":"用 place_empty_cup 的结果说明初始模型、评估温度、训练步数和是否重跑会影响可见 SSR。","slide_goal":"把单任务结果降级为敏感性证据。","primary_claim":"在 place_empty_cup 上，pi0 与 pi05 的 SFT 基线不同，OFT 在 Temp_eval=-1 与 1.6 下的 PPO/GRPO 结果也不同；部分温度结果未重跑，且 RL 结果统一取 50 step。","evidence":[{"claim_support":"表格列出 pi0/pi05 的 SFT、PPO、GRPO 结果，以及 OFT 在 Temp_eval=-1 和 Temp_eval=1.6 下的 PPO/GRPO 结果。","evidence_ref":"p1-table-1-crop","interpretation":"初始模型和采样温度会改变最终可见 SSR。"},{"claim_support":"Temp_eval=1.6 下 place_empty_cup 的 PPO 为 86.72%，GRPO 为 88.28%。","evidence_ref":"p1-table-2-crop","interpretation":"评估温度是结果定义的一部分。"}],"implication":"跨任务 train SSR 结果应优先于单任务单温度结果；任何引用都应同时报告模型初始化、评估温度、训练步数和是否重跑。","transition_in":"框架级平均 train SSR 增益成立，但单点成绩揭示了结果对评估协议的敏感性。","transition_out":"性能判断之外，研究者还需要知道训练系统在实际运行时付出什么成本。","evidence_refs":["p1-table-1-crop","p1-table-2-crop"],"table_refs":["p1-table-1","p1-table-2"],"asset_candidates":[],"visual_intent":"source_table","visual_plan":{"layout_family":"insight","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"native_table","background_variant":"quiet","density":"balanced"},"speaker_notes":{"talk_track":"平均 train SSR 增益成立后，还要看单任务结果是否依赖评估协议。place_empty_cup 中，pi0 与 pi05 的 SFT 起点不同；OFT 在 Temp_eval=-1 与 1.6 下的 PPO、GRPO 结果也不同，部分温度结果没有重跑，RL 统一取 50 step。因此这些数字适合作为敏感性证据，而不是方法独立能力。它们也不能替代 OOD SSR 结果。复现时应同时报告初始化、评估温度、训练步数和重跑状态，随后转向系统成本。","delivery_cue":"先读两组不同 SFT 基线，再指向温度变化，最后强调单点结果边界。","source_refs":["p1-table-1-crop","p1-table-2-crop"],"estimated_seconds":105},"content":{"eyebrow":"敏感性边界","title":"初始化与评估温度会改变单点 SSR","subtitle":null,"kicker":null,"lede":"同一任务的 SSR 不是只由 PPO/GRPO 决定；初始化、评估温度与实验口径都会改变可见结果。","note":{"label":"边界","value":"单任务、单温度结果只能支持敏感性判断，不能直接承担普遍优越性或 OOD 泛化结论。"},"body_points":[{"label":"起点不同","text":"pi0 的 SFT 为 45.31%，pi05 为 85.16%；RL 增益不能脱离初始模型比较。"},{"label":"温度改变结果","text":"OFT 的 PPO/GRPO 在 Temp_eval=-1 与 1.6 下呈现不同 SSR。"},{"label":"口径需固定","text":"相关温度结果部分未重跑，且 RL 结果统一取 50 step。"}],"metrics":[{"label":"pi0 → pi05 SFT","value":"45.31% → 85.16%","meaning":"初始模型带来不同起点"},{"label":"OFT · Temp_eval=1.6","value":"PPO 86.72%","meaning":"温度是结果定义的一部分"},{"label":"OFT · Temp_eval=1.6","value":"GRPO 88.28%","meaning":"比较时必须固定评估协议"}],"steps":[],"result":null,"columns":[],"takeaway":{"label":"因此","value":"跨任务 train SSR 结果优先于单任务单温度结果，且当前不替代 OOD SSR 证据。"}}},{"id":"s8","layout":"matrix","composition_id":"evidence-table","role":"main_results","content_priority":"core","action_title":"8 卡条件下，colocated 更有竞争力","audience_question":"实际运行 RLinf 时，哪种并行路径更值得选？","narrative_job":"比较 8 卡模式和 1/2/4 节点数据，把效率拆成 actor 与 rollout/generate 两个指标。","slide_goal":"将系统价值转化为具体运行选择。","primary_claim":"8 卡数据中，RLinf colocated 的 actor/rollout 时间为 49.15/170.34 秒，SimpleVLA 为 94.05/189.33 秒；其他 RLinf 模式呈现不同时间成本。","evidence":[{"claim_support":"8 卡表列出 RLinf colocated、disaggregated、Hybrid(pipe=1)、Hybrid(pipe=2) 与 SimpleVLA 的 actor 和 rollout 时间。","evidence_ref":"p6-table-2-crop","interpretation":"在该测试条件下，colocated 的两个时间指标都低于 SimpleVLA 对应数据。"},{"claim_support":"1、2、4 节点表列出 RLinf 各模式随节点数变化的 actor 与 generate 时间，另列出 SimpleVLA colocated 数据。","evidence_ref":"p8-table-1-crop","interpretation":"并行模式和节点数会改变运行成本。"}],"implication":"部署判断应明确节点数、并行模式和测量指标；不存在脱离模式与规模的单一效率结论。","transition_in":"敏感性分析限定了性能数字，系统表则限定了效率数字。","transition_out":"现在可以用性能、效率和归因边界共同回答开场问题。","evidence_refs":["p6-table-2-crop","p8-table-1-crop"],"table_refs":["p6-table-2","p8-table-1"],"asset_candidates":["p6-table-2-crop"],"visual_intent":"source_table","visual_plan":{"layout_family":"matrix","primary_visual":"p6-table-2-crop","image_budget":1,"image_roles":["evidence"],"data_strategy":"native_table","background_variant":"light","density":"dense"},"speaker_notes":{"talk_track":"性能数字受评估协议约束，效率数字也必须绑定部署配置。8 卡对比中，RLinf colocated 的 actor/rollout 为 49.15/170.34 秒，低于 SimpleVLA 的 94.05/189.33 秒；但 disaggregated 的 rollout 达到 546.64 秒，Hybrid 也有不同成本。再看 1、2、4 节点，actor 与 generate 会随模式和规模变化。因此选型应先固定节点数、模式和指标，再判断哪条路径更合适。","delivery_cue":"先读 8 卡横向对照，再指向模式与节点矩阵。","source_refs":["p6-table-2-crop","p8-table-1-crop"],"estimated_seconds":100},"content":{"eyebrow":"系统效率","title":"8 卡条件下，colocated 更有竞争力","subtitle":null,"kicker":null,"lede":"选型不能只问“RLinf 快不快”，要同时看 actor、rollout/generate 和节点规模。","note":{"label":"矩阵轴与阅读顺序","value":"行轴：并行模式；列轴：1n、2n、4n；单元格：actor / generate（秒）。"},"body_points":[{"label":"8 卡对比","text":"colocated 的 actor 与 rollout 都低于 SimpleVLA；disaggregated 与 Hybrid 的 rollout 成本更高。"},{"label":"规模边界","text":"1/2/4 节点下，各模式的 actor 与 generate 随规模变化。"}],"metrics":[{"label":"Colocated actor · 8 卡","value":"49.15 s","meaning":"低于 SimpleVLA 的 94.05 s"},{"label":"Colocated rollout · 8 卡","value":"170.34 s","meaning":"低于 SimpleVLA 的 189.33 s"},{"label":"Disaggregated rollout · 8 卡","value":"546.64 s","meaning":"同为 8 卡但成本更高"}],"steps":[],"result":null,"columns":[{"label":"1n","headline":"actor / generate（s）","points":["colocated 49.15 / 170.34","disaggregated 89.55 / 549.97","Hybrid(pipe=1) 50.14 / 303.70","Hybrid(pipe=2) 50.31 / 317.07"],"tone":"navy"},{"label":"2n","headline":"actor / generate（s）","points":["colocated 27.47 / 100.20","disaggregated 47.92 / 289.74","Hybrid(pipe=1) 27.53 / 166.00","Hybrid(pipe=2) 27.53 / 155.67"],"tone":"blue"},{"label":"4n","headline":"actor / generate（s）","points":["colocated 15.00 / 66.67","disaggregated 26.44 / 168.57","Hybrid(pipe=1) 15.03 / 95.37","Hybrid(pipe=2) 14.97 / 95.73"],"tone":"coral"}],"takeaway":{"label":"选型结论","value":"在当前 8 卡条件下优先考察 colocated；其他模式需结合节点规模与部署约束权衡。"}}},{"id":"s9","layout":"insight","composition_id":"answer-and-boundary","role":"limitations","content_priority":"core","action_title":"相信受控 train SSR 增益，保留纯算法归因边界","audience_question":"我现在应该相信什么，又必须保留什么？","narrative_job":"直接回答开场归因问题，综合跨任务 train SSR、系统效率和实现边界，给出可引用的最终判断。","slide_goal":"让研究者带走一个强但不越界的结论与复现实验要求。","primary_claim":"在固定 RoboTwin seed、OOD 评估契约和 8 卡 A800 条件下，RLinf 的 RL 训练在 8 个任务上将平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下表现出有竞争力的 actor/rollout 时间；128 个 OOD seed 不是 OOD SSR 结果，当前证据未提供 OOD SSR。","evidence":[{"claim_support":"RLinf 平均 train SSR 为 24.48%→84.63%，SimpleVLA 为 34.40%→72.18%。","evidence_ref":"p6-table-1","interpretation":"性能证据支持 RLinf 完整训练系统在这组任务上的较大平均 train SSR 增益。"},{"claim_support":"8 卡 colocated 的 RLinf actor/rollout 为 49.15/170.34 秒，SimpleVLA 为 94.05/189.33 秒。","evidence_ref":"p6-table-2-crop","interpretation":"效率证据支持特定并行配置下的运行优势。"},{"claim_support":"RLinf 与 SimpleVLA 在精度、超参数、valid trajectory 收集和 reward 设计上存在差异。","evidence_ref":"p4-table-1-crop","interpretation":"结论应归因于完整训练系统，而不是单独归因于某个算法组件。"}],"implication":"复现或引用时至少同时报告训练/评估 seed、GPU、评估温度、训练步数、reward 与轨迹收集策略、精度和并行模式，并明确当前主结果为 train SSR。","transition_in":"系统效率补全了“更快”的证据，且所有结果都已绑定到实验契约。","transition_out":"开场问题的答案是：受控条件下 RLinf 系统的 train SSR 更强且具有效率优势，但 OOD SSR 未由当前证据证明，纯算法归因仍需额外控制变量。","evidence_refs":["p6-table-1","p6-table-2-crop","p4-table-1-crop"],"table_refs":["p6-table-1","p6-table-2","p4-table-1"],"asset_candidates":[],"visual_intent":"text_led","visual_plan":{"layout_family":"insight","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"native_table","background_variant":"quiet","density":"sparse"},"speaker_notes":{"talk_track":"现在回到开场问题。固定 RoboTwin seed、OOD 评估契约和 8 卡 A800 后，RLinf 在 8 个任务上的平均 train SSR 从 24.48% 提升到 84.63%，colocated 下 actor 和 rollout 也具竞争力。但要明确：128 个 OOD seed 只是评估设置，当前证据没有给出 OOD SSR 结果。两边在精度、学习率、LoRA、轨迹收集和 reward 设计上并不完全一致，所以结论应归因于完整训练系统，而不是单一算法组件。","delivery_cue":"先给出 train SSR 答案，再读效率证据，最后明确 OOD 结果缺失与系统级归因边界。","source_refs":["p6-table-1","p6-table-2-crop","p4-table-1-crop"],"estimated_seconds":110},"content":{"eyebrow":"最终判断","title":"可信的是受控 train SSR 增益，纯算法优越性尚未证实","subtitle":null,"kicker":null,"lede":"在固定 RoboTwin seed、OOD 评估契约与 8 卡 A800 条件下，RLinf 的完整 RL 训练系统 train SSR 更强且更具效率优势；当前证据未提供 OOD SSR 结果。","note":{"label":"采用条件","value":"引用时同时报告训练/评估 seed、GPU、评估温度、训练步数、reward、轨迹收集、精度与并行模式。"},"body_points":[{"label":"答案：train SSR 成立","text":"8 个任务平均 train SSR：RLinf RL 84.63%，由 SFT 的 24.48% 提升；SimpleVLA RL 为 72.18%。"},{"label":"采用条件：效率有范围","text":"8 卡 colocated 下，RLinf actor/rollout 为 49.15/170.34 秒，低于 SimpleVLA 的 94.05/189.33 秒。"},{"label":"边界：OOD 与纯算法归因未证实","text":"128 个 OOD seed 是评估契约而非 OOD SSR 结果；精度、学习率、LoRA、valid trajectory 收集与 reward 设计不同。"}],"metrics":[{"label":"平均 train SSR","value":"24.48% → 84.63%","meaning":"RLinf 完整训练系统在 8 个任务上的平均 train SSR 提升"},{"label":"colocated actor","value":"49.15 s","meaning":"8 卡条件下低于 SimpleVLA 的 94.05 s"},{"label":"colocated rollout","value":"170.34 s","meaning":"8 卡条件下低于 SimpleVLA 的 189.33 s"}],"steps":[],"result":null,"columns":[],"takeaway":{"label":"最终判断","value":"受控条件下 RLinf 系统 train SSR 更强且具有效率优势；当前无 OOD SSR 结果，纯算法因果仍需额外控制变量。"}}}]}}
+
+
+[stderr]
+2026-07-30T15:58:12.159532Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 86 column 5
+2026-07-30T15:58:13.947557Z  WARN codex_core::shell_snapshot: Failed to create shell snapshot for powershell: Shell snapshot not supported yet for PowerShell
+2026-07-30T15:58:30.839645Z ERROR codex_core::session::session: failed to load skill C:\Users\Wph\.codex\skills\imagen\SKILL.md: missing field `description`
+OpenAI Codex v0.144.4
+--------
+workdir: C:\Users\Wph\Documents\PPT制作
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 019fb3bf-6989-74d2-aeaa-e90c4116e33a
+--------
+user
+You are the final editorial repair pass for a presentation that has already been rendered and reviewed.
+Return a complete revised plan as strict JSON matching schemas/codex-plan.schema.json. Apply every actionable review item; do not merely describe changes.
+
+Repair rules:
+- Preserve the deck's communication job, audience, central takeaway, factual claims, slide IDs, evidence IDs, and overall visual style unless the review explicitly identifies one of them as wrong.
+- Keep the same slide count and narrative order unless the review explicitly requires a structural change.
+- Fix all high-priority issues, then all medium-priority issues that affect comprehension, fit, or delivery.
+- Visible Chinese titles should normally stay within 30 Chinese characters. Move detail into lede, body points, steps, columns, metrics, or speaker notes.
+- A title slide must not repeat a long title as subtitle/lede. A conclusion slide must expose the answer, adoption conditions, and boundary as separate editable content units.
+- Match content to composition. causal-flow needs 3–5 ordered steps; mechanism-triptych needs exactly three parallel mechanisms; argument-pair needs two meaningful columns; answer-and-boundary needs 2–3 body_points plus an explicit takeaway/boundary.
+- No non-title slide may be only a title or slogan. Give it enough visible evidence or explanation to make the claim credible.
+- speaker_notes.talk_track must be a natural 120–260 Chinese-character talk track with transition, claim, evidence, meaning/boundary, and next-step bridge.
+- Preserve source truth. Use only IDs present in the evidence index; never invent a number, result, quote, page, asset, or table.
+- Keep protocol facts and reported outcomes separate. A held-out/OOD evaluation setup is not itself an OOD result. If the source only reports train SSR, every related title, claim, chart label, conclusion, and talk track must explicitly say train SSR and must not imply OOD generalization.
+- Set narrative.logic_check booleans to true only after the repaired plan actually passes.
+
+Final review:
+---
+{
+  "status": "revise",
+  "summary": "QA 渲染通过，但结果证据的范围与实验契约之间存在结构性错位：页面强调 128 个 OOD seed，核心结果却主要呈现 train SSR，容易让观众误读为 OOD 泛化证据。",
+  "changes": [
+    {
+      "slide_id": "s2",
+      "element_id": "s2-metric-2",
+      "issue_id": "result-scope-mismatch",
+      "action": "将“128 个 OOD seed”明确标注为评估契约，而非当前性能结果本身；在 s5 与 s9 的主结果旁显式标注“train SSR”，并补充 OOD SSR 结果或删除泛化暗示。",
+      "priority": "high"
+    }
+  ],
+  "content_flags": []
+}
+---
+
+Deterministic QA:
+---
+{
+  "run_id": "2026-07-30T15:54:29.498Z-rlinf-robotwin-experiment-storyboard-revised",
+  "spec_version": "0.4.0",
+  "status": "pass",
+  "summary": {
+    "slides": 9,
+    "errors": 0,
+    "warnings": 0,
+    "passed": 12
+  },
+  "issues": [],
+  "artifacts": {
+    "spec": "deck.spec.json",
+    "html": "presentation.html",
+    "pptx": "presentation.pptx",
+    "montage": "preview/pptx-montage.webp"
+  }
+}
+---
+
+Current plan:
+---
+{
+  "deck": {
+    "id": "rlinf-robotwin-experiment-storyboard-revised",
+    "title": "RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束",
+    "purpose": "帮助具身智能与机器人学习研究者判断 RLinf 在 RoboTwin 上的性能与系统效率证据，并准确区分受控系统优势与纯算法因果结论。",
+    "audience": "具身智能、机器人学习与强化学习研究者、论文评审者和实验复现者。",
+    "language": "zh-CN",
+    "aspect_ratio": "16:9",
+    "communication_job": "By the end, embodied-AI researchers should be able to cite and reproduce RLinf’s RoboTwin result with the correct boundary because the experiments show a large cross-task SSR gain and competitive execution times under fixed seeds, evaluation protocol, and 8-card A800 conditions, while implementation differences prevent isolating a pure RLinf algorithm effect.",
+    "talk_duration_minutes": 12,
+    "audience_profile": {
+      "role": "具身智能与机器人学习研究者、论文评审者、实验复现者",
+      "prior_knowledge": "熟悉 VLA、SFT、GRPO、RoboTwin、SSR、OOD seed、多卡训练与基本实验对照方法。",
+      "cares_about": [
+        "RLinf 的性能增益是否跨任务成立",
+        "SFT→RL 的比较是否公平",
+        "reward、轨迹收集、精度和超参数差异是否改变结论",
+        "seed、GPU、评估温度和训练步数是否可复现",
+        "不同并行模式下 actor 与 rollout 的实际成本"
+      ],
+      "likely_questions": [
+        "RLinf 的提升能否归因于 RL 信号本身？",
+        "8 个任务上的增益是否一致，训练成本是多少？",
+        "RLinf 与 SimpleVLA 的比较到底控制了哪些变量？",
+        "评估温度、模型初始化和 GPU 是否会改变 SSR？",
+        "实际运行时应该选择哪种并行模式？"
+      ],
+      "desired_outcome": "能够复现实验契约，引用跨任务性能与系统效率结果，并将结论表述为受控条件下的 RLinf 完整训练系统优势，而非无条件的纯算法优越性。"
+    }
+  },
+  "narrative": {
+    "arc": "实验问题 → 实验契约与泛化口径 → RLinf 训练信号 → 与 SimpleVLA 的可比性边界 → 跨任务性能 → 框架级增益 → 敏感性边界 → 系统效率 → 受控条件下的结论",
+    "key_message": "在相同 RoboTwin 训练 seed、128 个 OOD 评估 seed、评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练使 8 个任务的平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下呈现有竞争力的 actor/rollout 时间；但由于精度、超参数、valid trajectory 收集和 reward 设计不同，证据支持的是受控条件下的完整系统优势，而不是纯算法因果结论。",
+    "opening_question": "在固定 RoboTwin seed、评估口径和 8 卡 A800 条件下，RLinf 的提升能否归因于 RL 信号本身，还是只能归因于完整训练系统的差异？",
+    "closing_answer": "证据支持这样的结论：在固定实验契约下，RLinf 的 RL 训练带来跨 8 个任务的显著 SSR 增益，并提供有竞争力的执行路径；但由于精度、超参数、轨迹收集和 reward 设计并非完全同构，不能把该结果表述为脱离实验契约的纯算法优越性。",
+    "sections": [
+      {
+        "id": "sec-1",
+        "title": "先锁定实验契约",
+        "job": "定义结果可比、可复现和可解释的边界",
+        "slide_ids": [
+          "s1",
+          "s2"
+        ]
+      },
+      {
+        "id": "sec-2",
+        "title": "解释训练与对照",
+        "job": "说明 RLinf 的训练信号，并标出与 SimpleVLA 的关键差异",
+        "slide_ids": [
+          "s3",
+          "s4"
+        ]
+      },
+      {
+        "id": "sec-3",
+        "title": "建立性能结论",
+        "job": "从跨任务增益、框架比较和敏感性分析形成主结果判断",
+        "slide_ids": [
+          "s5",
+          "s6",
+          "s7"
+        ]
+      },
+      {
+        "id": "sec-4",
+        "title": "落到系统与结论",
+        "job": "把性能证据连接到运行成本，并回答开场归因问题",
+        "slide_ids": [
+          "s8",
+          "s9"
+        ]
+      }
+    ],
+    "priority_map": {
+      "core": [
+        "s3",
+        "s4",
+        "s5",
+        "s6",
+        "s7",
+        "s8",
+        "s9"
+      ],
+      "support": [
+        "s2"
+      ],
+      "context": [
+        "s1"
+      ]
+    },
+    "logic_check": {
+      "opening_resolved": true,
+      "core_has_evidence": true,
+      "no_redundant_slides": true,
+      "rationale": "已保留 9 页与原叙事顺序，并修复实验契约可见性、训练流程阅读顺序、比较表、平均值证据、效率矩阵、结论边界、标题密度、截断文案和演讲稿长度。所有核心主张均绑定有效证据 ID；结论页分别呈现答案、采用条件和归因边界。"
+    }
+  },
+  "visual": {
+    "style_family": "academic-evidence",
+    "image_policy": "仅使用证据索引中的源表、源图或页面快照；优先使用原生表格、原生图表与可追溯机制图，禁止装饰性图片。",
+    "density_profile": "中等密度、证据优先；核心结果使用大图表或大表格，实验边界使用短注释和明确的证据标记。",
+    "style_reason": "受众关心可比性、复现性和归因边界，因此采用暖白画布、深蓝标题、珊瑚强调和源证据板的学术证据风格。",
+    "layout_system": "Codex Grid evidence-first：统一左对齐标题与宽边距，交替使用证据表、机制流程、结果图表、对照构图和结论边界，避免连续页面使用同一轮廓。",
+    "style_reference": "codex/theme-reference.png",
+    "style_reference_html": "codex/theme-reference.html",
+    "style_inspiration": "codex/style-inspiration.png",
+    "style_lock": "theme-reference",
+    "style_system": {
+      "category": "Academic Research",
+      "visual_profile": "academic",
+      "tags": [
+        "academic",
+        "paper",
+        "evidence",
+        "research",
+        "clean"
+      ],
+      "density": "medium",
+      "mood": "credible, calm, evidence-first",
+      "composition": "warm white canvas, strict evidence grid, navy hierarchy, restrained annotations",
+      "typography_treatment": "compact sans-serif labels with decisive navy action titles",
+      "background_treatment": "quiet paper ground with subtle blue section bands",
+      "image_treatment": "large source figures on white plates with visible captions and provenance",
+      "table_treatment": "native white tables with navy rules and one coral emphasis row",
+      "style_markers": [
+        "paper canvas",
+        "navy thesis",
+        "source figure plate",
+        "coral annotation"
+      ],
+      "layout_families": [
+        "research-cover",
+        "evidence-split",
+        "method-flow",
+        "chart-first",
+        "finding-boundary"
+      ],
+      "avoid": [
+        "decorative stock photography",
+        "poster text walls",
+        "unlabelled charts"
+      ],
+      "inspiration_asset": "themes/style-references/academic-evidence-v1.png",
+      "provenance": {
+        "type": "original",
+        "inspiration": "evidence-led academic editorial systems"
+      },
+      "selection": {
+        "theme_id": "academic-evidence",
+        "basis": "planner_choice",
+        "semantic_scores": {}
+      }
+    }
+  },
+  "plan": {
+    "title": "RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束",
+    "subtitle": "先确认比较口径，再判断性能、效率与结论边界",
+    "slides": [
+      {
+        "id": "s1",
+        "layout": "title",
+        "composition_id": "thesis-stage",
+        "role": "title",
+        "content_priority": "context",
+        "action_title": "RLinf 的增益成立，但归因受实验契约约束",
+        "audience_question": "这组实验最终要让我判断什么？",
+        "narrative_job": "提出唯一主问题：如何在性能增益与归因边界之间做出严谨判断。",
+        "slide_goal": "让观众带着明确的归因问题进入实验契约、结果和系统效率证据。",
+        "primary_claim": "RLinf 的实验结论必须同时回答性能是否提升、运行是否有效率，以及提升能否被归因于 RL 信号本身。",
+        "evidence": [],
+        "implication": "后续每页都围绕可比性、跨任务增益、系统成本和外推边界展开。",
+        "transition_in": "从观众熟悉的“看最终 SSR”切入，提出更严格的归因问题。",
+        "transition_out": "要判断增益属于什么，先必须固定实验在什么条件下发生。",
+        "evidence_refs": [],
+        "table_refs": [],
+        "asset_candidates": [],
+        "visual_intent": "text_led",
+        "visual_plan": {
+          "layout_family": "title",
+          "primary_visual": null,
+          "image_budget": 0,
+          "image_roles": [],
+          "data_strategy": "none",
+          "background_variant": "quiet",
+          "density": "sparse"
+        },
+        "speaker_notes": {
+          "talk_track": "我们通常先看最终 SSR，但这组实验真正需要回答的是：增益来自 RL 信号本身，还是来自一整套训练系统？今天沿着三个问题展开：性能是否跨任务提升，运行是否具有效率，以及哪些实验条件限制归因。先把实验契约锁定，再看训练机制、结果和系统成本，最后给出可复现、但不越界的结论。",
+          "delivery_cue": "先读出标题中的“增益成立”和“归因受约束”，随后明确三个判断维度。",
+          "source_refs": [],
+          "estimated_seconds": 65
+        },
+        "content": {
+          "eyebrow": "RoboTwin 实验解读",
+          "title": "RLinf 的增益成立，但归因受实验契约约束",
+          "subtitle": "性能、效率与归因边界必须一起判断",
+          "kicker": null,
+          "lede": "性能、效率与归因边界必须一起判断",
+          "note": {
+            "label": "判断框架",
+            "value": "性能提升 ≠ RL 单独贡献"
+          },
+          "body_points": [],
+          "metrics": [],
+          "steps": [],
+          "result": null,
+          "columns": [],
+          "takeaway": null
+        },
+        "speaker_note": "我们通常先看最终 SSR，但这组实验真正需要回答的是：增益来自 RL 信号本身，还是来自一整套训练系统？今天沿着三个问题展开：性能是否跨任务提升，运行是否具有效率，以及哪些实验条件限制归因。先把实验契约锁定，再看训练机制、结果和系统成本，最后给出可复现、但不越界的结论。"
+      },
+      {
+        "id": "s2",
+        "layout": "evidence",
+        "composition_id": "image-thesis-split",
+        "role": "problem",
+        "content_priority": "support",
+        "action_title": "先锁定实验契约，再谈 SSR 增益",
+        "audience_question": "哪些条件决定这组结果能否复现和外推？",
+        "narrative_job": "合并实验契约与泛化口径，明确训练 seed、OOD seed、机器人、领域随机化、GPU 条件及其复现限制。",
+        "slide_goal": "把后续所有数字锁定在明确的实验边界内。",
+        "primary_claim": "SFT 与 RL 使用同一组 1,000 个 RoboTwin 随机 seed，评估使用额外 128 个未见 seed，采用 Piper 双臂，并统一在 8 卡 A800 平台上运行。",
+        "evidence": [
+          {
+            "claim_support": "训练阶段使用 1,000 个随机场景 seed，评估阶段额外使用 128 个未参与训练的 OOD seed，并采用双臂 Piper 机械臂。",
+            "evidence_ref": "p1-snapshot",
+            "interpretation": "后续 SSR 主要检验受随机化场景与未见 seed 约束的行为表现，而不是单一固定布局上的成功率。"
+          },
+          {
+            "claim_support": "RoboTwin 使用背景纹理、场景杂乱、光照、桌面高度和语言指令等领域随机化；相同 seed 集合在不同 Python、系统和硬件环境下可能无法完全复现，且观察到 H100 与 A800 的初始 SSR 差异。",
+            "evidence_ref": "p1-snapshot",
+            "interpretation": "复现时必须把运行环境和 GPU 视为实验变量，不能只复制 seed 数字。"
+          }
+        ],
+        "implication": "后续结论的有效范围是“固定 RoboTwin 配置、seed、评估口径和 8 卡 A800 条件下”，不是跨硬件、跨环境的普遍保证。",
+        "transition_in": "开场的归因问题首先需要一个稳定、可复现的比较边界。",
+        "transition_out": "边界确定后，还要看 RLinf 如何把 rollout 轨迹转换为更新信号。",
+        "evidence_refs": [
+          "p1-snapshot"
+        ],
+        "table_refs": [],
+        "asset_candidates": [
+          "p1-snapshot"
+        ],
+        "visual_intent": "source_figure",
+        "visual_plan": {
+          "layout_family": "evidence",
+          "primary_visual": "p1-snapshot",
+          "image_budget": 1,
+          "image_roles": [
+            "evidence"
+          ],
+          "data_strategy": "native_table",
+          "background_variant": "light",
+          "density": "balanced"
+        },
+        "speaker_notes": {
+          "talk_track": "先把比较边界锁定。SFT 与 RL 共用 1,000 个 RoboTwin 随机 seed，使用双臂 Piper；评估再加入 128 个未见 seed，因此 SSR 反映的是随机化场景下的泛化，而不是固定布局记忆。背景、杂乱度、光照、桌高和语言都会变化，Python、系统和 GPU 也会影响可用 seed 与初始 SSR，所以本文统一采用 8 卡 A800。后面所有数字都只能在这个实验契约内理解。",
+          "delivery_cue": "依次强调 1,000、128 和 8 卡三个契约指标；右侧快照只作为语义证据补充，不承担唯一阅读任务。",
+          "source_refs": [
+            "p1-snapshot"
+          ],
+          "estimated_seconds": 65
+        },
+        "content": {
+          "eyebrow": "实验契约",
+          "title": "先锁定实验契约，再谈 SSR 增益",
+          "subtitle": null,
+          "kicker": null,
+          "lede": "这组结果只有在训练、评估与硬件条件同时对齐时，才具备可比性。",
+          "note": {
+            "label": "证据说明",
+            "value": "1,000 个共同训练 seed；128 个未见 OOD seed；双臂 Piper；统一 8 卡 A800。领域随机化、运行环境和 GPU 仍是复现边界。"
+          },
+          "body_points": [
+            {
+              "label": "训练对齐",
+              "text": "SFT 与 RL 共用 1,000 个随机场景 seed，并采用双臂 Piper 机械臂。"
+            },
+            {
+              "label": "OOD 口径",
+              "text": "额外使用 128 个未见 seed，检验随机化场景下的外推，而不是固定布局上的记忆。"
+            },
+            {
+              "label": "复现边界",
+              "text": "领域随机化与运行环境会改变可用 seed 和初始 SSR；因此统一锁定 8 卡 A800。"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "训练 seed",
+              "value": "1,000",
+              "meaning": "SFT 与 RL 的共同场景起点"
+            },
+            {
+              "label": "OOD seed",
+              "value": "128",
+              "meaning": "未参与训练的分布外评估"
+            },
+            {
+              "label": "硬件条件",
+              "value": "8× A800",
+              "meaning": "后续 SSR 比较的固定平台"
+            }
+          ],
+          "steps": [],
+          "result": null,
+          "columns": [],
+          "takeaway": {
+            "label": "实验契约",
+            "value": "后续数字只在固定 RoboTwin 配置、seed、评估口径与 A800 条件下成立。"
+          }
+        },
+        "speaker_note": "先把比较边界锁定。SFT 与 RL 共用 1,000 个 RoboTwin 随机 seed，使用双臂 Piper；评估再加入 128 个未见 seed，因此 SSR 反映的是随机化场景下的泛化，而不是固定布局记忆。背景、杂乱度、光照、桌高和语言都会变化，Python、系统和 GPU 也会影响可用 seed 与初始 SSR，所以本文统一采用 8 卡 A800。后面所有数字都只能在这个实验契约内理解。"
+      },
+      {
+        "id": "s3",
+        "layout": "pipeline",
+        "composition_id": "causal-flow",
+        "role": "method_detail",
+        "content_priority": "core",
+        "action_title": "RLinf 的训练信号来自一条完整链路",
+        "audience_question": "RLinf 的训练信号究竟如何产生？",
+        "narrative_job": "用单一有序链条解释 rollout、valid trajectory、action-level reward、GRPO 优势估计和 LoRA 更新之间的关系。",
+        "slide_goal": "让观众知道结果背后的训练配方，而不是把“使用 GRPO”当成完整解释。",
+        "primary_claim": "RLinf 的配置将 128×8 的 rollout 组织为 global batch size 1024，使用 group size 8、action-level reward、token-level logprob/entropy、GRPO 和 LoRA 更新。",
+        "evidence": [
+          {
+            "claim_support": "配置给出 rollout batch 128×8=1024、global batch size 1024、group_size 8、rollout_epoch 8、reward_type action_level、logprob_type token_level、adv_type grpo、is_lora true 和 learning rate 2.0e-4。",
+            "evidence_ref": "p4-snapshot",
+            "interpretation": "这些配置决定每次更新看到多少轨迹、奖励落在哪个动作粒度，以及模型以何种参数范围被更新。"
+          }
+        ],
+        "implication": "后续性能结果应归因于这套完整的 rollout、reward、优化和参数更新路径，而不应只归因于算法名称。",
+        "transition_in": "实验契约说明了测什么，训练配置说明了 RLinf 如何学习。",
+        "transition_out": "接下来必须检查这套路径与 SimpleVLA 是否真的只差一个框架名称。",
+        "evidence_refs": [
+          "p4-snapshot"
+        ],
+        "table_refs": [],
+        "asset_candidates": [],
+        "visual_intent": "method_diagram",
+        "visual_plan": {
+          "layout_family": "pipeline",
+          "primary_visual": null,
+          "image_budget": 0,
+          "image_roles": [],
+          "data_strategy": "diagram",
+          "background_variant": "default",
+          "density": "balanced"
+        },
+        "speaker_notes": {
+          "talk_track": "实验契约说明评价什么，这一页补上 RLinf 如何学习。一次更新先按 128×8 组织出 1,024 条 rollout，并以 group size 8 形成比较单元；奖励落在 action level，logprob 与 entropy 保持 token level，再用 GRPO 计算优势并更新 actor。最后通过 LoRA 和 2.0e-4 学习率限定更新方式。配置说明的是完整训练配方，下一页继续核对它与 SimpleVLA 的差异。",
+          "delivery_cue": "沿五个节点从左到右阅读，最后停在 LoRA 更新，并强调这是完整路径。",
+          "source_refs": [
+            "p4-snapshot"
+          ],
+          "estimated_seconds": 100
+        },
+        "content": {
+          "eyebrow": "训练机制",
+          "title": "RLinf 的训练信号来自一条完整链路",
+          "subtitle": null,
+          "kicker": null,
+          "lede": "训练信号由采样规模、奖励粒度、优势估计和参数更新共同决定。",
+          "note": null,
+          "body_points": [
+            {
+              "label": "规模先定下来",
+              "text": "128 × 8 rollout = global batch size 1024；group size 8 让轨迹按组进入优势估计。"
+            },
+            {
+              "label": "信号再逐层变换",
+              "text": "奖励落在 action level，logprob / entropy 保持 token level，最后用 GRPO 驱动 actor 的 LoRA 更新。"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "每轮 rollout",
+              "value": "128 × 8",
+              "meaning": "一次更新组织 1024 条轨迹"
+            },
+            {
+              "label": "奖励粒度",
+              "value": "action-level",
+              "meaning": "奖励绑定到动作，而不是整条轨迹的单一 token 信号"
+            },
+            {
+              "label": "更新方式",
+              "value": "GRPO + LoRA",
+              "meaning": "用组内优势估计驱动参数高效更新"
+            }
+          ],
+          "steps": [
+            {
+              "title": "Rollout 采样",
+              "text": "并行生成一轮轨迹，形成固定规模的训练输入。",
+              "metric": "128 × 8 = 1024",
+              "tone": "navy"
+            },
+            {
+              "title": "Group 组织",
+              "text": "按 group size 8 将轨迹组成比较单元，为组内优势估计准备数据。",
+              "metric": "group size = 8",
+              "tone": "blue"
+            },
+            {
+              "title": "Action-level reward",
+              "text": "把任务反馈落到动作粒度，明确奖励在行为序列中的位置。",
+              "metric": "reward_type = action_level",
+              "tone": "coral"
+            },
+            {
+              "title": "GRPO 优势估计",
+              "text": "结合 token-level logprob / entropy，计算用于 actor 更新的优势信号。",
+              "metric": "adv_type = grpo",
+              "tone": "blue"
+            },
+            {
+              "title": "LoRA 更新",
+              "text": "在参数高效更新范围内完成策略优化，而非全参数更新。",
+              "metric": "is_lora = true · lr = 2.0e-4",
+              "tone": "navy"
+            }
+          ],
+          "result": {
+            "label": "训练配方的含义",
+            "value": "性能归因应落在 rollout、reward、优化与参数更新的完整路径上"
+          },
+          "columns": [],
+          "takeaway": null
+        },
+        "speaker_note": "实验契约说明评价什么，这一页补上 RLinf 如何学习。一次更新先按 128×8 组织出 1,024 条 rollout，并以 group size 8 形成比较单元；奖励落在 action level，logprob 与 entropy 保持 token level，再用 GRPO 计算优势并更新 actor。最后通过 LoRA 和 2.0e-4 学习率限定更新方式。配置说明的是完整训练配方，下一页继续核对它与 SimpleVLA 的差异。"
+      },
+      {
+        "id": "s4",
+        "layout": "comparison",
+        "composition_id": "evidence-table",
+        "role": "limitations",
+        "content_priority": "core",
+        "action_title": "共享基础，但不是同构训练",
+        "audience_question": "两套实现到底控制了哪些变量？",
+        "narrative_job": "并列呈现共同基础与关键差异，提前阻止把框架比较误读为纯算法消融。",
+        "slide_goal": "建立正确的因果解释边界，为后续平均增益比较提供必要前提。",
+        "primary_claim": "两套方法共享 SFT 模型、train/eval seeds、模型实现和 GRPO，但在精度、rollout batch、学习率、LoRA、valid trajectory 收集和 reward 粒度上存在差异。",
+        "evidence": [
+          {
+            "claim_support": "对比表列出 RLinf 使用 bf16、rollout batch 1024、learning rate 2.0e-4、LoRA，而 SimpleVLA 使用混合精度、rollout batch 512、learning rate 5e-6 和全参数训练。",
+            "evidence_ref": "p4-table-1-crop",
+            "interpretation": "这些变量会改变训练动态，因此最终差异属于完整训练系统差异，而不是单一算法开关。"
+          },
+          {
+            "claim_support": "RLinf 固定轮次后过滤 collected trajectories，并采用 action-level reward；SimpleVLA 即时过滤并缓存轨迹，采用 token-level success reward。",
+            "evidence_ref": "p5-table-1-crop",
+            "interpretation": "有效轨迹数量和奖励传播位置不同，会改变每次更新接收到的学习信号。"
+          }
+        ],
+        "implication": "可以比较两套系统的实际结果，但不能据此单独证明 RLinf 的某个算法组件具有因果优势。",
+        "transition_in": "训练配方已经明确，公平性问题现在变成变量清单。",
+        "transition_out": "在保留这些差异的前提下，先看 RLinf 自身的跨任务收益是否成立。",
+        "evidence_refs": [
+          "p4-table-1-crop",
+          "p5-table-1-crop",
+          "p4-table-2-crop"
+        ],
+        "table_refs": [
+          "p4-table-2",
+          "p4-table-1",
+          "p5-table-1"
+        ],
+        "asset_candidates": [
+          "p4-table-2-crop"
+        ],
+        "visual_intent": "source_table",
+        "visual_plan": {
+          "layout_family": "comparison",
+          "primary_visual": "p4-table-2-crop",
+          "image_budget": 1,
+          "image_roles": [
+            "evidence"
+          ],
+          "data_strategy": "native_table",
+          "background_variant": "light",
+          "density": "dense"
+        },
+        "speaker_notes": {
+          "talk_track": "这里把公平比较拆成可检查的变量。两套实现共享 SFT 模型、train/eval seeds、模型实现和 GRPO，因此有共同起点；但 RLinf 与 SimpleVLA 在精度、rollout batch、学习率和 LoRA 上不同。更关键的是，valid trajectory 的收集时机和 reward 粒度也不同，会改变每次更新接收到的有效样本与学习信号。因此后面的结果可以作为系统级比较，但不能单独归因于某一个算法组件。",
+          "delivery_cue": "先读共同基础，再按表格行读取六项差异，最后明确系统级解释边界。",
+          "source_refs": [
+            "p4-table-1-crop",
+            "p5-table-1-crop"
+          ],
+          "estimated_seconds": 100
+        },
+        "content": {
+          "eyebrow": "可比性边界",
+          "title": "共享基础，但不是同构训练",
+          "subtitle": null,
+          "kicker": null,
+          "lede": "共同起点存在，但多项实现差异会改变训练动态与因果解释。",
+          "note": {
+            "label": "解释边界",
+            "value": "这是完整训练系统的实际比较，不是单一算法组件的因果消融。"
+          },
+          "body_points": [
+            {
+              "label": "共同基础",
+              "text": "SFT 模型、train/eval seeds、模型实现和 GRPO 保持一致；valid action mask 在工程上等价。"
+            },
+            {
+              "label": "关键差异",
+              "text": "精度、rollout batch、学习率、LoRA、valid trajectory 收集和 reward 粒度均不同。"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "rollout batch",
+              "value": "1024 vs 512",
+              "meaning": "每轮采样量不同"
+            },
+            {
+              "label": "learning rate",
+              "value": "2.0e-4 vs 5e-6",
+              "meaning": "更新尺度不同"
+            },
+            {
+              "label": "reward 粒度",
+              "value": "action-level vs token-level",
+              "meaning": "奖励传播位置不同"
+            }
+          ],
+          "steps": [],
+          "result": null,
+          "columns": [
+            {
+              "label": "RLinf",
+              "headline": "完整 RL 训练配置",
+              "points": [
+                "bf16；rollout batch 1024",
+                "learning rate 2.0e-4；LoRA=true",
+                "固定轮次后过滤 collected trajectories",
+                "action-level reward"
+              ],
+              "tone": "navy"
+            },
+            {
+              "label": "SimpleVLA",
+              "headline": "另一套完整配置",
+              "points": [
+                "混合精度；rollout batch 512",
+                "learning rate 5e-6；全参数训练",
+                "每条 rollout 后即时过滤并缓存",
+                "token-level success reward"
+              ],
+              "tone": "coral"
+            }
+          ],
+          "takeaway": {
+            "label": "页面结论",
+            "value": "共享基础不等于同构训练，后续结果应按系统级差异解读。"
+          }
+        },
+        "speaker_note": "这里把公平比较拆成可检查的变量。两套实现共享 SFT 模型、train/eval seeds、模型实现和 GRPO，因此有共同起点；但 RLinf 与 SimpleVLA 在精度、rollout batch、学习率和 LoRA 上不同。更关键的是，valid trajectory 的收集时机和 reward 粒度也不同，会改变每次更新接收到的有效样本与学习信号。因此后面的结果可以作为系统级比较，但不能单独归因于某一个算法组件。"
+      },
+      {
+        "id": "s5",
+        "layout": "chart-focus",
+        "composition_id": "chart-with-interpretation-rail",
+        "role": "main_results",
+        "content_priority": "core",
+        "action_title": "8/8 任务提升，平均 SSR 显著上升",
+        "audience_question": "RLinf 的 RL 增益是单个任务的偶然现象吗？",
+        "narrative_job": "用任务级结果和平均值突出 RLinf SFT→RL 的跨任务提升，同时保留任务间幅度与训练步数差异。",
+        "slide_goal": "建立最强的单系统性能证据。",
+        "primary_claim": "8 个 RoboTwin 任务的 RLinf RL train SSR 均高于 RLinf SFT，平均值从 24.48% 提升到 84.63%，平均提升为 60.15 个百分点。",
+        "evidence": [
+          {
+            "claim_support": "8 个任务分别列出 RLinf SFT、RLinf RL、平均提升和训练步数，所有任务的 RLinf RL 数值高于对应 SFT 数值。",
+            "evidence_ref": "p5-table-1",
+            "interpretation": "提升跨越不同任务，但幅度和所需训练步数不同。"
+          },
+          {
+            "claim_support": "平均汇总为 RLinf SFT 24.48%、RLinf RL 84.63%，Δ Avg. 为 +60.15%。",
+            "evidence_ref": "p6-table-1",
+            "interpretation": "平均值支持 RLinf 在这组任务上的总体训练收益，但仍需连同训练配置与评估口径解释。"
+          }
+        ],
+        "implication": "跨任务结果支持“RLinf 的 RL 训练有效”，但还没有回答这是否优于另一套实现或是否是纯 RL 信号造成的。",
+        "transition_in": "比较口径已被标注，先检验 RLinf 自身是否稳定地产生收益。",
+        "transition_out": "下一步把相同的 SFT→RL 变化与 SimpleVLA 并置，判断系统级增益是否更大。",
+        "evidence_refs": [
+          "p5-table-1",
+          "p6-table-1",
+          "p5-table-1-crop"
+        ],
+        "table_refs": [
+          "p5-table-1",
+          "p6-table-1"
+        ],
+        "asset_candidates": [
+          "p5-table-1-crop"
+        ],
+        "visual_intent": "data_chart",
+        "visual_plan": {
+          "layout_family": "chart-focus",
+          "primary_visual": "p5-table-1-crop",
+          "image_budget": 1,
+          "image_roles": [
+            "evidence"
+          ],
+          "data_strategy": "native_chart",
+          "background_variant": "light",
+          "density": "balanced"
+        },
+        "speaker_notes": {
+          "talk_track": "在可比性边界明确后，先看 RLinf 自身是否稳定地产生收益。8 个 RoboTwin 任务里，RLinf RL 的 train SSR 全部高于 SFT，平均从 24.48% 升到 84.63%，提升 60.15 个百分点。任务级结果还显示，增益幅度从 18.75 到 85.94 不等，训练步数从 30 到 240，因此结果强度不能脱离训练成本与配置口径。这里证明的是 RLinf 自身有效，下一页再比较两套系统。",
+          "delivery_cue": "先强调 24.48%→84.63% 和 8/8，再指向任务级差异与训练步数。",
+          "source_refs": [
+            "p5-table-1",
+            "p6-table-1"
+          ],
+          "estimated_seconds": 100
+        },
+        "content": {
+          "eyebrow": "跨任务结果",
+          "title": "8/8 任务提升，平均 SSR 显著上升",
+          "subtitle": null,
+          "kicker": null,
+          "lede": "任务级结果显示，RLinf 的 RL 增益不是单个任务的偶然现象，但提升幅度与训练步数存在差异。",
+          "note": null,
+          "body_points": [
+            {
+              "label": "跨任务一致性",
+              "text": "8/8 个任务的 RLinf RL train SSR 均高于对应 SFT。"
+            },
+            {
+              "label": "增益幅度有差异",
+              "text": "平均提升从 18.75 到 85.94 不等；任务初始 SSR 与最终结果不能简单等同。"
+            },
+            {
+              "label": "训练成本需同时看",
+              "text": "RLinf train step 覆盖 30–240，结果强度不能脱离训练步数与配置口径解读。"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "RLinf SFT 平均 train SSR",
+              "value": "24.48%",
+              "meaning": "RL 训练前的跨任务平均起点"
+            },
+            {
+              "label": "RLinf RL 平均 train SSR",
+              "value": "84.63%",
+              "meaning": "RL 训练后的跨任务平均结果"
+            },
+            {
+              "label": "平均提升",
+              "value": "+60.15 个百分点",
+              "meaning": "8 个任务汇总的总体训练收益"
+            }
+          ],
+          "steps": [],
+          "result": {
+            "label": "核心结果",
+            "value": "8/8 任务提升；24.48%→84.63%；平均提升 +60.15 个百分点"
+          },
+          "columns": [],
+          "takeaway": null
+        },
+        "speaker_note": "在可比性边界明确后，先看 RLinf 自身是否稳定地产生收益。8 个 RoboTwin 任务里，RLinf RL 的 train SSR 全部高于 SFT，平均从 24.48% 升到 84.63%，提升 60.15 个百分点。任务级结果还显示，增益幅度从 18.75 到 85.94 不等，训练步数从 30 到 240，因此结果强度不能脱离训练成本与配置口径。这里证明的是 RLinf 自身有效，下一页再比较两套系统。"
+      },
+      {
+        "id": "s6",
+        "layout": "comparison",
+        "composition_id": "argument-pair",
+        "role": "method_overview",
+        "content_priority": "core",
+        "action_title": "RLinf 的平均增幅高于 SimpleVLA",
+        "audience_question": "RLinf 的 RL 增益是否超过 SimpleVLA？",
+        "narrative_job": "直接比较两套框架的 SFT→RL 平均变化，并把结论绑定到前一页已经标出的实现差异。",
+        "slide_goal": "给出框架级性能判断，同时主动收紧因果措辞。",
+        "primary_claim": "RLinf 的平均 SSR 从 24.48% 升至 84.63%，增益为 60.15 个百分点；SimpleVLA 从 34.40% 升至 72.18%，增益为 37.78 个百分点，因此 RLinf 的平均 RL 增幅更大。",
+        "evidence": [
+          {
+            "claim_support": "平均 SSR 对比表同时给出 RLinf SFT/RL、Simple SFT/RL 及两者的 Δ Avg.。",
+            "evidence_ref": "p6-table-1",
+            "interpretation": "比较 SFT→RL 的变化比只比较最终 SSR 更能回答“RL 带来多少增益”。"
+          }
+        ],
+        "implication": "最稳妥的表述是“RLinf 完整训练系统带来更大的平均提升”；若要拆分精度、学习率、reward 或采样策略的单独贡献，还需要额外控制变量或消融。",
+        "transition_in": "跨任务结果证明 RLinf 有效，平均对照显示其系统增幅更大。",
+        "transition_out": "但平均数仍可能掩盖评估温度和初始模型能力造成的变化，因此要检查结果边界。",
+        "evidence_refs": [
+          "p6-table-1"
+        ],
+        "table_refs": [
+          "p6-table-1"
+        ],
+        "asset_candidates": [],
+        "visual_intent": "comparison_matrix",
+        "visual_plan": {
+          "layout_family": "comparison",
+          "primary_visual": null,
+          "image_budget": 0,
+          "image_roles": [],
+          "data_strategy": "native_table",
+          "background_variant": "light",
+          "density": "balanced"
+        },
+        "speaker_notes": {
+          "talk_track": "把两套系统的 SFT→RL 平均变化放在同一张表里。RLinf 从 24.48% 提升到 84.63%，增加 60.15 个百分点；SimpleVLA 从 34.40% 提升到 72.18%，增加 37.78 个百分点，所以 RLinf 的完整训练系统平均增幅更大。但这一页不构成单因素消融：精度、学习率、LoRA、轨迹收集和 reward 设计都不同。下一页继续检查初始模型与评估温度带来的敏感性。",
+          "delivery_cue": "先读两组平均值和增幅，再明确“系统级比较”而非“纯算法因果”。",
+          "source_refs": [
+            "p6-table-1"
+          ],
+          "estimated_seconds": 100
+        },
+        "content": {
+          "eyebrow": "框架级对照",
+          "title": "RLinf 的平均增幅高于 SimpleVLA",
+          "subtitle": null,
+          "kicker": null,
+          "lede": "比较 SFT→RL 的变化量，比只比较最终 SSR 更能回答哪套完整系统带来了更大提升。",
+          "note": {
+            "label": "结论边界",
+            "value": "支持系统级比较；不等同于单独归因于精度、学习率、reward 或采样策略。"
+          },
+          "body_points": [
+            {
+              "label": "先看变化量",
+              "text": "RLinf 的平均提升为 60.15 个百分点，SimpleVLA 为 37.78 个百分点。"
+            },
+            {
+              "label": "再看可比性",
+              "text": "两套系统的实现配置并不完全一致，平均差异不能拆解为单一因素贡献。"
+            },
+            {
+              "label": "因此",
+              "text": "RLinf 的完整训练系统平均提升更大，但单因素因果仍需控制变量或消融。"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "RLinf Δ Avg.",
+              "value": "+60.15 个百分点",
+              "meaning": "24.48% → 84.63%，平均提升更大"
+            },
+            {
+              "label": "SimpleVLA Δ Avg.",
+              "value": "+37.78 个百分点",
+              "meaning": "34.40% → 72.18%，作为系统级对照"
+            }
+          ],
+          "steps": [],
+          "result": null,
+          "columns": [
+            {
+              "label": "RLinf",
+              "headline": "24.48% → 84.63%",
+              "points": [
+                "平均提升 +60.15 个百分点",
+                "完整训练系统的平均变化更大"
+              ],
+              "tone": "accent"
+            },
+            {
+              "label": "SimpleVLA",
+              "headline": "34.40% → 72.18%",
+              "points": [
+                "平均提升 +37.78 个百分点",
+                "作为完整系统对照，而非单变量基线"
+              ],
+              "tone": "neutral"
+            }
+          ],
+          "takeaway": {
+            "label": "一句话判断",
+            "value": "RLinf 的平均 RL 增幅更大，但证据指向的是系统级效果，而不是某个实现因素的独立贡献。"
+          }
+        },
+        "speaker_note": "把两套系统的 SFT→RL 平均变化放在同一张表里。RLinf 从 24.48% 提升到 84.63%，增加 60.15 个百分点；SimpleVLA 从 34.40% 提升到 72.18%，增加 37.78 个百分点，所以 RLinf 的完整训练系统平均增幅更大。但这一页不构成单因素消融：精度、学习率、LoRA、轨迹收集和 reward 设计都不同。下一页继续检查初始模型与评估温度带来的敏感性。"
+      },
+      {
+        "id": "s7",
+        "layout": "insight",
+        "composition_id": "answer-and-boundary",
+        "role": "limitations",
+        "content_priority": "core",
+        "action_title": "初始化与评估温度会改变单点 SSR",
+        "audience_question": "为什么同一任务的结果会随模型和温度变化？",
+        "narrative_job": "用 place_empty_cup 的 rebuttal 结果说明初始模型、评估温度、训练步数和是否重跑会影响可见 SSR。",
+        "slide_goal": "把单任务结果降级为敏感性证据，避免其承担普遍优越性结论。",
+        "primary_claim": "在 place_empty_cup 上，pi0 与 pi05 的 SFT 基线不同，OFT 在 Temp_eval=-1 与 1.6 下的 PPO/GRPO 结果也不同；部分温度结果未重跑，且 RL 结果统一取 50 step。",
+        "evidence": [
+          {
+            "claim_support": "表格列出 pi0/pi05 的 SFT、PPO、GRPO 结果，以及 OFT 在 Temp_eval=-1 和 Temp_eval=1.6 下的 PPO/GRPO 结果。",
+            "evidence_ref": "p1-table-1-crop",
+            "interpretation": "初始模型和采样温度会改变最终可见成功率，不能把单点数字直接当作方法独立能力。"
+          },
+          {
+            "claim_support": "Temp_eval=1.6 下 place_empty_cup 的 PPO 为 86.72%，GRPO 为 88.28%；相关结果说明评估口径必须随数字一起报告。",
+            "evidence_ref": "p1-table-2-crop",
+            "interpretation": "评估温度是结果定义的一部分，复现或比较时需要固定并明确记录。"
+          }
+        ],
+        "implication": "跨任务平均结果应优先于单任务单温度结果；任何引用都应同时报告模型初始化、评估温度、训练步数和是否重跑。",
+        "transition_in": "框架级平均增益成立，但单点成绩揭示了结果对评估协议的敏感性。",
+        "transition_out": "性能判断之外，研究者还需要知道这套训练系统在实际运行时付出什么成本。",
+        "evidence_refs": [
+          "p1-table-1-crop",
+          "p1-table-2-crop"
+        ],
+        "table_refs": [
+          "p1-table-1",
+          "p1-table-2"
+        ],
+        "asset_candidates": [],
+        "visual_intent": "source_table",
+        "visual_plan": {
+          "layout_family": "insight",
+          "primary_visual": null,
+          "image_budget": 0,
+          "image_roles": [],
+          "data_strategy": "native_table",
+          "background_variant": "quiet",
+          "density": "balanced"
+        },
+        "speaker_notes": {
+          "talk_track": "平均增益成立后，还要看单任务结果是否依赖评估协议。place_empty_cup 中，pi0 与 pi05 的 SFT 起点不同；OFT 在 Temp_eval=-1 与 1.6 下的 PPO、GRPO 结果也不同，部分温度结果没有重跑，RL 统一取 50 step。因此这些数字适合作为敏感性证据，而不是方法独立能力。复现时应同时报告初始化、评估温度、训练步数和重跑状态，随后转向系统运行成本。",
+          "delivery_cue": "先读两组不同 SFT 基线，再指向温度变化，最后强调单点结果的边界。",
+          "source_refs": [
+            "p1-table-1-crop",
+            "p1-table-2-crop"
+          ],
+          "estimated_seconds": 100
+        },
+        "content": {
+          "eyebrow": "敏感性边界",
+          "title": "初始化与评估温度会改变单点 SSR",
+          "subtitle": null,
+          "kicker": null,
+          "lede": "同一任务的 SSR 不是只由 PPO/GRPO 决定；初始化、评估温度与实验口径都会改变可见结果。",
+          "note": {
+            "label": "边界",
+            "value": "单任务、单温度结果只能支持敏感性判断，不能直接承担普遍优越性结论。"
+          },
+          "body_points": [
+            {
+              "label": "起点不同",
+              "text": "pi0 的 SFT 为 45.31%，pi05 为 85.16%；RL 增益不能脱离初始模型比较。"
+            },
+            {
+              "label": "温度改变结果",
+              "text": "OFT 的 PPO/GRPO 在 Temp_eval=-1 与 1.6 下呈现不同 SSR，评估温度应随数字一并报告。"
+            },
+            {
+              "label": "口径需固定",
+              "text": "相关温度结果部分未重跑，且 RL 结果统一取 50 step；复现时必须注明重跑状态与训练步数。"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "pi0 → pi05 SFT",
+              "value": "45.31% → 85.16%",
+              "meaning": "初始模型本身带来不同的起点"
+            },
+            {
+              "label": "OFT · Temp_eval=1.6",
+              "value": "PPO 86.72%",
+              "meaning": "温度是结果定义的一部分"
+            },
+            {
+              "label": "OFT · Temp_eval=1.6",
+              "value": "GRPO 88.28%",
+              "meaning": "比较时必须固定评估协议"
+            }
+          ],
+          "steps": [],
+          "result": null,
+          "columns": [],
+          "takeaway": {
+            "label": "因此",
+            "value": "跨任务平均结果优先于单任务单温度结果。"
+          }
+        },
+        "speaker_note": "平均增益成立后，还要看单任务结果是否依赖评估协议。place_empty_cup 中，pi0 与 pi05 的 SFT 起点不同；OFT 在 Temp_eval=-1 与 1.6 下的 PPO、GRPO 结果也不同，部分温度结果没有重跑，RL 统一取 50 step。因此这些数字适合作为敏感性证据，而不是方法独立能力。复现时应同时报告初始化、评估温度、训练步数和重跑状态，随后转向系统运行成本。"
+      },
+      {
+        "id": "s8",
+        "layout": "matrix",
+        "composition_id": "evidence-table",
+        "role": "main_results",
+        "content_priority": "core",
+        "action_title": "8 卡条件下，colocated 更有竞争力",
+        "audience_question": "实际运行 RLinf 时，哪种并行路径更值得选？",
+        "narrative_job": "比较 8 卡模式和 1/2/4 节点数据，把“更高效”拆成 actor 与 rollout/generate 两个可测指标。",
+        "slide_goal": "将系统价值从抽象描述转化为具体的运行选择。",
+        "primary_claim": "8 卡数据中，RLinf colocated 的 actor/rollout 时间为 49.15/170.34 秒，SimpleVLA 为 94.05/189.33 秒；RLinf 的 disaggregated 与 hybrid 模式则显示出不同的时间成本。",
+        "evidence": [
+          {
+            "claim_support": "8 卡表列出 RLinf colocated、disaggregated、Hybrid(pipe=1)、Hybrid(pipe=2) 与 SimpleVLA 的 actor 和 rollout 时间。",
+            "evidence_ref": "p6-table-2-crop",
+            "interpretation": "在该测试条件下，colocated 的两个时间指标都低于 SimpleVLA 对应数据，而其他 RLinf 模式需要按具体成本选择。"
+          },
+          {
+            "claim_support": "1、2、4 节点表列出 RLinf 各模式随节点数变化的 actor 与 generate 时间，另列出 SimpleVLA colocated 数据。",
+            "evidence_ref": "p8-table-1-crop",
+            "interpretation": "并行模式和节点数会改变运行成本，因此不存在脱离模式与规模的单一效率结论。"
+          }
+        ],
+        "implication": "部署判断应明确节点数、并行模式和测量指标；“RLinf 更快”只能具体化为某一配置下的 actor/rollout 时间优势。",
+        "transition_in": "敏感性分析限定了性能数字，系统表则限定了效率数字。",
+        "transition_out": "现在可以用性能、效率和归因边界共同回答开场问题。",
+        "evidence_refs": [
+          "p6-table-2-crop",
+          "p8-table-1-crop"
+        ],
+        "table_refs": [
+          "p6-table-2",
+          "p8-table-1"
+        ],
+        "asset_candidates": [
+          "p6-table-2-crop"
+        ],
+        "visual_intent": "source_table",
+        "visual_plan": {
+          "layout_family": "matrix",
+          "primary_visual": "p6-table-2-crop",
+          "image_budget": 1,
+          "image_roles": [
+            "evidence"
+          ],
+          "data_strategy": "native_table",
+          "background_variant": "light",
+          "density": "dense"
+        },
+        "speaker_notes": {
+          "talk_track": "性能数字受评估协议约束，效率数字也必须绑定部署配置。8 卡对比中，RLinf colocated 的 actor/rollout 为 49.15/170.34 秒，低于 SimpleVLA 的 94.05/189.33 秒；但 disaggregated 的 rollout 达到 546.64 秒，Hybrid 也有不同成本。再看 1、2、4 节点，actor 与 generate 会随模式和规模变化。因此选型应先固定节点数、模式和指标，再判断哪条路径更合适。",
+          "delivery_cue": "先读 8 卡横向对照，再指向矩阵的模式行与节点列，最后强调没有脱离配置的单一“更快”。",
+          "source_refs": [
+            "p6-table-2-crop",
+            "p8-table-1-crop"
+          ],
+          "estimated_seconds": 100
+        },
+        "content": {
+          "eyebrow": "系统效率",
+          "title": "8 卡条件下，colocated 更有竞争力",
+          "subtitle": null,
+          "kicker": null,
+          "lede": "选型不能只问“RLinf 快不快”，要同时看 actor、rollout/generate 和节点规模。",
+          "note": {
+            "label": "矩阵轴与阅读顺序",
+            "value": "行轴：并行模式；列轴：1n、2n、4n；单元格：actor / generate（秒）。先横向比较同一节点数的模式，再沿 colocated 行从 1n 读到 4n，最后回看 8 卡横向对照。"
+          },
+          "body_points": [
+            {
+              "label": "8 卡对比",
+              "text": "colocated 的 actor 与 rollout 都低于 SimpleVLA；disaggregated 与 Hybrid 的 rollout 成本更高。"
+            },
+            {
+              "label": "规模边界",
+              "text": "1/2/4 节点下，各模式的 actor 与 generate 随规模变化，效率结论必须绑定具体配置。"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "Colocated actor · 8 卡",
+              "value": "49.15 s",
+              "meaning": "低于 SimpleVLA 的 94.05 s"
+            },
+            {
+              "label": "Colocated rollout · 8 卡",
+              "value": "170.34 s",
+              "meaning": "低于 SimpleVLA 的 189.33 s"
+            },
+            {
+              "label": "Disaggregated rollout · 8 卡",
+              "value": "546.64 s",
+              "meaning": "同为 8 卡，但 rollout 成本显著更高"
+            }
+          ],
+          "steps": [],
+          "result": null,
+          "columns": [
+            {
+              "label": "1n",
+              "headline": "actor / generate（s）",
+              "points": [
+                "colocated 49.15 / 170.34",
+                "disaggregated 89.55 / 549.97",
+                "Hybrid(pipe=1) 50.14 / 303.70",
+                "Hybrid(pipe=2) 50.31 / 317.07"
+              ],
+              "tone": "navy"
+            },
+            {
+              "label": "2n",
+              "headline": "actor / generate（s）",
+              "points": [
+                "colocated 27.47 / 100.20",
+                "disaggregated 47.92 / 289.74",
+                "Hybrid(pipe=1) 27.53 / 166.00",
+                "Hybrid(pipe=2) 27.53 / 155.67"
+              ],
+              "tone": "blue"
+            },
+            {
+              "label": "4n",
+              "headline": "actor / generate（s）",
+              "points": [
+                "colocated 15.00 / 66.67",
+                "disaggregated 26.44 / 168.57",
+                "Hybrid(pipe=1) 15.03 / 95.37",
+                "Hybrid(pipe=2) 14.97 / 95.73"
+              ],
+              "tone": "coral"
+            }
+          ],
+          "takeaway": {
+            "label": "选型结论",
+            "value": "在当前 8 卡条件下优先考察 colocated；其他模式需结合节点规模与部署约束重新权衡。"
+          }
+        },
+        "speaker_note": "性能数字受评估协议约束，效率数字也必须绑定部署配置。8 卡对比中，RLinf colocated 的 actor/rollout 为 49.15/170.34 秒，低于 SimpleVLA 的 94.05/189.33 秒；但 disaggregated 的 rollout 达到 546.64 秒，Hybrid 也有不同成本。再看 1、2、4 节点，actor 与 generate 会随模式和规模变化。因此选型应先固定节点数、模式和指标，再判断哪条路径更合适。"
+      },
+      {
+        "id": "s9",
+        "layout": "insight",
+        "composition_id": "answer-and-boundary",
+        "role": "limitations",
+        "content_priority": "core",
+        "action_title": "相信受控系统增益，保留纯算法归因边界",
+        "audience_question": "我现在应该相信什么，又必须保留什么？",
+        "narrative_job": "直接回答开场归因问题，综合跨任务性能、系统效率和实现边界，给出可引用的最终判断。",
+        "slide_goal": "让研究者带走一个强但不越界的结论与复现实验要求。",
+        "primary_claim": "在固定 RoboTwin seed、OOD 评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练在 8 个任务上将平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下表现出有竞争力的 actor/rollout 时间；但精度、超参数、轨迹收集和 reward 设计差异使其不能被表述为纯算法因果结论。",
+        "evidence": [
+          {
+            "claim_support": "RLinf 平均 train SSR 为 24.48%→84.63%，SimpleVLA 为 34.40%→72.18%。",
+            "evidence_ref": "p6-table-1",
+            "interpretation": "性能证据支持 RLinf 完整训练系统在这组任务上的较大平均增益。"
+          },
+          {
+            "claim_support": "8 卡 colocated 的 RLinf actor/rollout 为 49.15/170.34 秒，SimpleVLA 为 94.05/189.33 秒。",
+            "evidence_ref": "p6-table-2-crop",
+            "interpretation": "效率证据支持特定并行配置下的运行优势，但不代表所有模式和规模都相同。"
+          },
+          {
+            "claim_support": "RLinf 与 SimpleVLA 在精度、超参数、valid trajectory 收集和 reward 设计上存在差异。",
+            "evidence_ref": "p4-table-1-crop",
+            "interpretation": "这些差异决定了结论应归因于完整训练系统，而不是单独归因于 RLinf 的某一个算法组件。"
+          }
+        ],
+        "implication": "复现或引用时至少同时报告训练/评估 seed、GPU、评估温度、训练步数、reward 与轨迹收集策略、精度和并行模式。",
+        "transition_in": "系统效率补全了“更快”的证据，且所有结果都已绑定到实验契约。",
+        "transition_out": "开场问题的答案是：受控条件下 RLinf 系统确实更强且具有效率优势，但其纯算法归因仍需额外控制变量。",
+        "evidence_refs": [
+          "p6-table-1",
+          "p6-table-2-crop",
+          "p4-table-1-crop"
+        ],
+        "table_refs": [
+          "p6-table-1",
+          "p6-table-2",
+          "p4-table-1"
+        ],
+        "asset_candidates": [],
+        "visual_intent": "text_led",
+        "visual_plan": {
+          "layout_family": "insight",
+          "primary_visual": null,
+          "image_budget": 0,
+          "image_roles": [],
+          "data_strategy": "native_table",
+          "background_variant": "quiet",
+          "density": "sparse"
+        },
+        "speaker_notes": {
+          "talk_track": "现在回到开场问题。固定 RoboTwin seed、OOD 评估口径和 8 卡 A800 后，RLinf 在 8 个任务上的平均 train SSR 从 24.48% 提升到 84.63%，colocated 下 actor 和 rollout 也具竞争力。但两边在精度、学习率、LoRA、轨迹收集和 reward 设计上并不完全一致，所以结论应归因于完整训练系统，而不是单一算法组件。复现或引用时，必须同时报告这些采用条件与边界。",
+          "delivery_cue": "先给出答案，再读性能和效率证据，最后明确“系统结论，不是纯算法因果”。",
+          "source_refs": [
+            "p6-table-1",
+            "p6-table-2-crop",
+            "p4-table-1-crop"
+          ],
+          "estimated_seconds": 100
+        },
+        "content": {
+          "eyebrow": "最终判断",
+          "title": "可信的是受控系统增益，纯算法优越性尚未证实",
+          "subtitle": null,
+          "kicker": null,
+          "lede": "在固定 RoboTwin seed、OOD 评估口径与 8 卡 A800 条件下，RLinf 的完整 RL 训练系统更强且更具效率优势；但跨实现差异限制了纯算法归因。",
+          "note": {
+            "label": "采用条件",
+            "value": "引用时同时报告训练/评估 seed、GPU、评估温度、训练步数、reward、轨迹收集、精度与并行模式。"
+          },
+          "body_points": [
+            {
+              "label": "答案：性能成立",
+              "text": "8 个任务平均 train SSR：RLinf RL 84.63%，由 SFT 的 24.48% 提升；SimpleVLA RL 为 72.18%。"
+            },
+            {
+              "label": "采用条件：效率有范围",
+              "text": "8 卡 colocated 下，RLinf actor/rollout 为 49.15/170.34 秒，优于 SimpleVLA 的 94.05/189.33 秒。"
+            },
+            {
+              "label": "边界：不能纯算法归因",
+              "text": "精度、学习率、LoRA、valid trajectory 收集与 reward 设计不同，不能把增益单独归因于某个算法组件。"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "平均 train SSR",
+              "value": "24.48% → 84.63%",
+              "meaning": "RLinf 完整训练系统在 8 个任务上的平均提升"
+            },
+            {
+              "label": "colocated actor",
+              "value": "49.15 s",
+              "meaning": "8 卡条件下，低于 SimpleVLA 的 94.05 s"
+            },
+            {
+              "label": "colocated rollout",
+              "value": "170.34 s",
+              "meaning": "8 卡条件下，低于 SimpleVLA 的 189.33 s"
+            }
+          ],
+          "steps": [],
+          "result": null,
+          "columns": [],
+          "takeaway": {
+            "label": "最终判断",
+            "value": "受控条件下 RLinf 系统确实更强且具有效率优势；纯算法因果仍需额外控制变量。"
+          }
+        },
+        "speaker_note": "现在回到开场问题。固定 RoboTwin seed、OOD 评估口径和 8 卡 A800 后，RLinf 在 8 个任务上的平均 train SSR 从 24.48% 提升到 84.63%，colocated 下 actor 和 rollout 也具竞争力。但两边在精度、学习率、LoRA、轨迹收集和 reward 设计上并不完全一致，所以结论应归因于完整训练系统，而不是单一算法组件。复现或引用时，必须同时报告这些采用条件与边界。"
+      }
+    ]
+  }
+}
+---
+
+Evidence index:
+---
+证据索引摘要：
+parser=pymupdf version=0.3.0
+diagnostics={"block_types":{"title":5,"text":573,"table":10,"figure":13,"list":6},"structured_block_count":607,"asset_count":29,"table_count":10,"formula_count":0,"captioned_asset_count":0}
+
+章节：
+p1-block-1 | page=1 | level=1 | RLinf 论文实验 ​
+p1-block-4 | page=1 | level=2 | Rebuttal ​
+p1-block-26 | page=1 | level=2 | Details​
+p4-block-28 | page=4 | level=2 | 与 SimpleVLA 对比 ​
+p6-block-20 | page=6 | level=2 | Lora ​
+
+图片/图表资产：
+p1-table-1-crop | type=evidence_crop | page=1 | bbox=[36.999969482421875,182.5,408.9999694824219,345.5] | path=assets/page-001-table-01-crop.png | Cropped paper figure or table region from page 1
+p1-table-2-crop | type=evidence_crop | page=1 | bbox=[36.999969482421875,362.5,222.99996948242188,417] | path=assets/page-001-table-02-crop.png | Cropped paper figure or table region from page 1
+p1-snapshot | type=evidence_page_snapshot | page=1 | bbox=null | path=assets/page-001-snapshot.png | Full-page evidence snapshot from page 1
+p1-image-1 | type=evidence_figure | page=1 | bbox=[38,87.50001525878906,48,97.50001525878906] | path=assets/page-001-image-01.jpeg | 论文第 1 页嵌入图片 1
+p1-image-2 | type=evidence_figure | page=1 | bbox=[79,87.50001525878906,89,97.50001525878906] | path=assets/page-001-image-02.jpeg | 论文第 1 页嵌入图片 2
+p1-image-3 | type=evidence_figure | page=1 | bbox=[208.49998474121094,207.5,277,224] | path=assets/page-001-image-03.png | 论文第 1 页嵌入图片 3
+p1-image-4 | type=evidence_figure | page=1 | bbox=[285.9999694824219,207.50001525878906,354.4999694824219,223.50001525878906] | path=assets/page-001-image-04.png | 论文第 1 页嵌入图片 4
+p1-image-5 | type=evidence_figure | page=1 | bbox=[130.99998474121094,252.5,199.5,259.5] | path=assets/page-001-image-05.png | 论文第 1 页嵌入图片 5
+p1-image-6 | type=evidence_figure | page=1 | bbox=[208.49998474121094,252.5,277,262.5] | path=assets/page-001-image-06.png | 论文第 1 页嵌入图片 6
+p1-image-7 | type=evidence_figure | page=1 | bbox=[285.9999694824219,252.5,354.4999694824219,262.5] | path=assets/page-001-image-07.png | 论文第 1 页嵌入图片 7
+p1-image-8 | type=evidence_figure | page=1 | bbox=[285.9999694824219,291,354.4999694824219,300] | path=assets/page-001-image-08.png | 论文第 1 页嵌入图片 8
+p1-image-9 | type=evidence_figure | page=1 | bbox=[127.49996948242188,387.5,168.49996948242188,393] | path=assets/page-001-image-09.png | 论文第 1 页嵌入图片 9
+p1-image-10 | type=evidence_figure | page=1 | bbox=[177.49996948242188,387.5,218.49996948242188,393] | path=assets/page-001-image-10.png | 论文第 1 页嵌入图片 10
+p4-table-1-crop | type=evidence_crop | page=4 | bbox=[36.74998612837358,28.500039100646973,402.2749847412109,380.7083740234375] | path=assets/page-004-table-01-crop.png | Cropped paper figure or table region from page 4
+p4-table-2-crop | type=evidence_crop | page=4 | bbox=[36.74998612837358,708.875,402.2749847412109,791.125] | path=assets/page-004-table-02-crop.png | Cropped paper figure or table region from page 4
+p4-snapshot | type=evidence_page_snapshot | page=4 | bbox=null | path=assets/page-004-snapshot.png | Full-page evidence snapshot from page 4
+p5-table-1-crop | type=evidence_crop | page=5 | bbox=[36.94996948242188,583.444566514757,523.55,795.055677625868] | path=assets/page-005-table-01-crop.png | Cropped paper figure or table region from page 5
+p5-snapshot | type=evidence_page_snapshot | page=5 | bbox=null | path=assets/page-005-snapshot.png | Full-page evidence snapshot from page 5
+p5-image-1 | type=evidence_figure | page=5 | bbox=[196.00001525878906,240.50015258789062,408.0000305175781,366.0001525878906] | path=assets/page-005-image-01.png | 论文第 5 页嵌入图片 1
+p5-image-2 | type=evidence_figure | page=5 | bbox=[203,429.000244140625,426,539.000244140625] | path=assets/page-005-image-02.png | 论文第 5 页嵌入图片 2
+p6-table-1-crop | type=evidence_crop | page=6 | bbox=[36.81577180561266,28.916666666666668,286.1249694824219,90.58333333333333] | path=assets/page-006-table-01-crop.png | Cropped paper figure or table region from page 6
+p6-table-2-crop | type=evidence_crop | page=6 | bbox=[36.81577180561266,496.3747253417969,227.07139805385046,619.624755859375] | path=assets/page-006-table-02-crop.png | Cropped paper figure or table region from page 6
+p6-snapshot | type=evidence_page_snapshot | page=6 | bbox=null | path=assets/page-006-snapshot.png | Full-page evidence snapshot from page 6
+p6-image-1 | type=evidence_figure | page=6 | bbox=[238.00001525878906,144.50015258789062,366,256.0001525878906] | path=assets/page-006-image-01.png | 论文第 6 页嵌入图片 1
+p7-table-1-crop | type=evidence_crop | page=7 | bbox=[36.783321126302084,28.500077883402508,401.39285714285717,305.7084096272786] | path=assets/page-007-table-01-crop.png | Cropped paper figure or table region from page 7
+p7-table-2-crop | type=evidence_crop | page=7 | bbox=[36.783321126302084,707.400244140625,251.58330281575522,810.100244140625] | path=assets/page-007-table-02-crop.png | Cropped paper figure or table region from page 7
+p7-snapshot | type=evidence_page_snapshot | page=7 | bbox=null | path=assets/page-007-snapshot.png | Full-page evidence snapshot from page 7
+p8-table-1-crop | type=evidence_crop | page=8 | bbox=[36.899969482421874,58.9,236.09996948242187,141.1] | path=assets/page-008-table-01-crop.png | Cropped paper figure or table region from page 8
+p8-snapshot | type=evidence_page_snapshot | page=8 | bbox=null | path=assets/page-008-snapshot.png | Full-page evidence snapshot from page 8
+
+结构化表格：
+p1-table-1 | page=1 | 5x5 | Paper table region on page 1
+p1-table-2 | page=1 | 2x3 | Paper table region on page 1
+p4-table-1 | page=4 | 1x2 | Paper table region on page 4
+p4-table-2 | page=4 | 4x3 | Paper table region on page 4
+p5-table-1 | page=5 | 9x8 | Paper table region on page 5
+p6-table-1 | page=6 | 3x5 | Paper table region on page 6
+p6-table-2 | page=6 | 6x3 | Paper table region on page 6
+p7-table-1 | page=7 | 1x2 | Paper table region on page 7
+p7-table-2 | page=7 | 5x4 | Paper table region on page 7
+p8-table-1 | page=8 | 4x4 | Paper table region on page 8
+
+公式：
+无结构化公式。
+
+页级文本摘要：
+PAGE 1 [RLinf 论文实验 ​ / Rebuttal ​ / Details​]: RLinf 论文实验​ 王培鸿 韦明杰 3月28日修改 Rebuttal​ place_empty_cup​ Model​ SFT​ PPO​ GRPO​ pi0​ 45.31%​ 82.03%​ 83.59%​ pi05​ 85.16%​ 96.88%​ 95.31%​ RL 都取50 step​ oft(Temp_eval=-1)​ 75.78%​ ​ 92.97%​ (没重跑故不需要重测)​ 92.19%​ oft(Temp_eval=1.6)​ 86.72%​ 88.28%​ Temp_eval=1.6​ PPO​ GRPO​ place_empty_cup​ 86.72%​ 88.28%​ Details​ 1. RoboTwin 的领域随机化设置​ RoboTwin 在数据生成过程中引入了多种领域随机化因素，包括场景杂乱度（添加无关干扰物体）、背景纹理（从约 1.2 万种高质量纹理中采 样）、光照条件（颜色温度与光源类型随机）、桌面高度（在物理合理范围内采样）以及语言指令（生成多样化的任务描述）。这些随机化因素共 同作用，用于增加数据多样性并缓解仿真到真实之间的分布差异。 a. 训练阶段（SFT 与 RL）​ 在训练阶段，监督微调（SFT）和强化学习（RL）均使用同一组 基于robotwin官方随机化场景参数配置的1,000 个随机 seed 对环境进行初始 化，采用 双臂的Piper 机械臂。​ 在 SFT 阶段，每个 seed 仅用于初始化环境一次，共采集 1,0
+PAGE 2: 环境ENV yaml配置​ 代码块 env_type: robotwin​ total_num_envs: null​ auto_reset: False​ ignore_terminations: False​ use_custom_reward: True​ use_rel_reward: True​ seed: 0​ group_size: 1​ use_fixed_reset_state_ids: False​ max_steps_per_rollout_epoch: 200​ max_episode_steps: 200 # max episode steps for truncation​ assets_path: "/mnt/public/peihong/codes/RLinf_RoboTwin_gz"​ seeds_path: "/mnt/project_rlinf/guozhen/test_robotwin/SimpleVLA-RL/verl/utils/en video_cfg: save_video: True​ info_on_video: True​ video_base_dir: ${runner.logger.log_path}/video/train​ task_config:​ task_name: beat_block_hammer​ step_lim: 200​ # if you want to modify the config, plea
+PAGE 3: Generate rollout bsz: 128 * 8 =1024​ Global bsz：1024​ is_lora: True​ lr: 2.0e-4 ​ adam_beta1: 0.9​ adam_beta2: 0.999 adam_eps: 1.0e-05​ weight_decay: 0.01​ clip_grad: 1.0​ 代码块 defaults:​ - env/robotwin_beat_block_hammer@env.train​ - env/robotwin_beat_block_hammer@env.eval​ - model/openvla_oft@actor.model​ - training_backend/fsdp@actor.fsdp_config​ - override hydra/job_logging: stdout​ hydra:​ run:​ dir: .​ output_subdir: null​ searchpath:​ - file://${oc.env:EMBODIED_PATH}/config/​ ​ cluster:​ num_nodes: 1​ component_placement:​ actor, env, rollout: 0-7​ runner:​ task_type: embodied​ logger:​ log_path: "../results"​ project_name: rlinf​ experi
+PAGE 4 [与 SimpleVLA 对比 ​]:  clip_ratio_low: 0.2​ clip_ratio_c: 3.0​ value_clip: 0.2​ huber_delta: 10.0​ gamma: 1.0​ gae_lambda: 0.95​ reward_coef: 5.0​ filter_rewards: True​ rewards_lower_bound: 0.5​ rewards_upper_bound: 4.5​ # params for rollout​ sampling_params:​ do_sample: True​ temperature_train: 1.6​ temperature_eval: 1.6​ top_k: -1​ top_p: 1.0​ repetition_penalty: 1.0​ # length argument for autoregressive sampling​ # max length means max amount of tokens to generate​ length_params:​ max_new_token: null​ max_length: 1024​ min_length: 1​ env:​ group_name: "EnvGroup"​ enable_offload: True​ 与SimpleVLA对比​ 相同点 1. SFT模型、train/eval seeds 均采用simple提供​ 2. 模型的实现与simple一致​ 3
+PAGE 5: 还有框架计算log_prob、模型update的bsz不同，but不影响性能​ 3. Valid traj collect策略不同​ RLinf: 其rollout固定轮次、固定数目的traj后，对collected traj进行reward filter，所以模型每次step得到valid traj数受模型当前对该task的SSR影 响； Simple: 其在每次rollout traj后都立即进行reward filter，剩余的traj存在buffer中；循环往复直到收集到rollout bsz 数量的traj 再进行模型的更新​ 4. GRPO的reward设计不一样​ RLinf：采用action_level的reward​ 具体实现： 设置use_custom_reward & use_rel_reward 为True​ 给最后一个chunk的最后一个action给reward；​ Simple: 采用是 token-level的reward​ 具体实现： 对于该traj如果是success ，则为1；反之为0 ​ 5. 模型train SSR Task​ RLinf SFT​ RLinf RL​ Avg improvement​ train step​ RLinf ​ Simple SFT​ Simple RL​ ​ train step​ Simple​ place_empty_cup​ 75.78%​ 94.53%​ 18.75​ 40​ 77.3%​ 94.2
+PAGE 6 [Lora ​]: RLinf SFT​ RLinf RL​ Simple SFT​ Simple RL​ Average​ 24.48%​ 84.63%​ 34.40%​ 72.18%​ Δ Avg.​ +60.15%​ +37.78%​ notice​ 1. 模型实现微小差异：RLinf加了position_ids，我之前跑的没加，简单验证后性能没差异就忽略了​ Rlinf使用​ 镜像：cr.infini-ai.com/te-dbdcudoygepmq5vx/agentic-rlinf0.1-torch2.6.0-openvlaoft-pi0-robotwin:0.1​ 路径：/mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main/examples/embodiment​ 运行指令：bash run_embodiment.sh​ Simple使用​ 镜像：cr.infini-ai.com/te-dbdcudoygepmq5vx/robotwin_simplevla_openvla_oft:2.2​ 路径： /mnt/project_rlinf_hs/wph/codes/SimpleVLA-RL/SimpleVLA-RL-main​ 运行指令：bash examples/run_openvla_oft_rl_twin2.sh​ 8卡​ actor（s）​ rollout（s）​ Colocated​ 49.15​ 170.34​ Disaggre
+PAGE 7: if [ "$RANK" -eq 0 ]; then​ bash check_ray.sh 8; # 指定任意的卡数​ cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​ bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope else​ sleep 10d​ fi​ if [ "$RANK" -eq 0 ]; then​ bash check_ray.sh 16; # 指定任意的卡数​ cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​ bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope else​ sleep 10d​ fi​ if [ "$RANK" -eq 0 ]; then​ bash check_ray.sh 32; # 指定任意的卡数​ cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​ bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope else​ sleep 10d​ fi​ 
+PAGE 8: Simple​ mode​ nodenum actor​ generate​ colocated​ 1n​ 115.52​ 207.86​ colocated​ 2n​ 66.21​ 117.98​ colocated​ 4n​ 42​ 71.11​ mode nodenum actor generate ​ colocated 1n 49.15 170.34​ colocated 2n 27.47 100.2 ​ colocated 4n 15.0 66.67​ disaggregated 1n 89.55 549.97​ disaggregated 2n 47.92 289.74​ disaggregated 4n 26.44 168.57​ Hybrid(pipe=1) 1n 50.14 303.7​ Hybrid(pipe=1) 2n 27.53 166.0​ Hybrid(pipe=1) 4n 15.03 95.37​ Hybrid(pipe=2) 1n 50.31 317.07​ Hybrid(pipe=2) 2n 27.53 155.67​ Hybrid(pipe=2) 4n 14.97 95.73​ simplevla​ mode nodenum actor generate​ colocated 1n 115.52 207.86​ colocated 2n 66.21 117.98​ colocated 4n 42 71.11​ 2026/4/4 20:47 ‌
+---
+
+Relevant presentation guidance:
+---
+## 19. Review Checklist
+
+按 yes/no 检查：
+
+1. 主旨是否唯一？
+2. 图类型是否与主关系类型匹配？
+3. 起点是否明确？
+4. 主流程是否能不折返读完？
+5. 是否存在两个以上同等主焦点？
+6. 分组是否至少由两种 cue 支撑？
+7. 是否只靠颜色编码关键区别？
+8. 每个关键元素是否被定义？
+9. 箭头语义是否一一对应且已解释？
+10. 是否存在装饰性但无信息贡献的元素？
+11. 文本是否过长或漂浮无锚？
+12. 缩小后是否仍可读？
+13. 是否存在 faux figure 风险？
+14. representational genre 是否无故混杂？
+15. 是否可映射到 HTML / Pretext 的块级布局？
+16. 是否已满足目标期刊/平台的尺寸与字体约束？
+17. 是否存在 review_flags 未处理？
+
+结论规则：
+
+- `pass`：
+  - 第 1, 3, 4, 5, 7, 8, 9, 12, 15, 16 项全部为 yes。
+  - 且 review_flags 中无 high severity。
+- `revise`：
+  - 存在 1 到 3 个 high severity 问题，或多个 medium 问题。
+- `reject`：
+  - 主旨不唯一；或 reading path 不明确；或 faux figure；或颜色唯一编码；或缩小后不可读。
+
+---
+
+### Layout Pattern: pipeline
+- Definition: 明确输入到输出的多步骤流程，节点串联，通常单主链。
+- Suitable For: 方法流程、实验处理链、数据处理链。
+- Unsuitable For: 多个同权对比、无时间关系的概览图。
+- Reading Direction: 默认 left-to-right；空间不足时 top-to-bottom。
+- Required Structural Conditions: 单一主链、步骤间存在顺序依赖。
+- Common Mistakes: 每步塞太多解释、把分支例外混进主链。
+- Machine-friendly Representation: `narrative_structure = "sequential"`。
+- Example: 样本采集 → 预处理 → 模型 → 输出。
+- Strengths: 顺序清晰、最适合缩略浏览。
+- Risks: 容易线性化过度，掩盖并行或反馈。
+- Typical Failure Modes: 把并行结果强行串成时间顺序。
+### Layout Pattern: linear
+- Definition: 广义线性结构，未必是方法 pipeline，但有单一阅读主线。
+- Suitable For: 生物过程、病程演进、概念链。
+- Unsuitable For: 多维映射、矩阵对照。
+- Reading Direction: left-to-right 或 top-to-bottom。
+- Required Structural Conditions: start / middle / end 明确。
+- Common Mistakes: 局部 zoom-in 打断主线。
+- Machine-friendly Representation: `layout_pattern = "linear"`。
+- Example: 刺激 → 信号激活 → 细胞反应。
+- Strengths: 可读性高。
+- Risks: 对复杂系统表达不足。
+- Typical Failure Modes: 用过多交叉箭头破坏直线逻辑。
+### Layout Pattern: forking
+- Definition: 在单主线中至少一次分出多个后续路径。
+- Suitable For: 分化、决策树、不同处理路径。
+- Unsuitable For: 所有路径都同等重要且互相独立的并行比较。
+- Reading Direction: 先主干，后分支。
+- Required Structural Conditions: 分支点必须显著；分支必须有命名。
+- Common Mistakes: 分支无主次、无终点。
+- Machine-friendly Representation: `edges` 中存在 one-to-many branch node。
+- Example: 共同前处理后进入两个实验条件。
+- Strengths: 能表达 divergence。
+- Risks: 焦点过多。
+- Typical Failure Modes: 三个以上分支同时争夺注意力。
+### Layout Pattern: parallel
+- Definition: 多个替代方案、状态或视角并置展示。
+- Suitable For: 基线 vs 方法、条件 A/B、器官间对比。
+- Unsuitable For: 强因果推进过程。
+- Reading Direction: 通常先整体比较，再局部逐列/逐行。
+- Required Structural Conditions: 比较维度统一，对齐一致。
+- Common Mistakes: 每列结构不同，无法对齐比较。
+- Machine-friendly Representation: `narrative_structure = "juxtaposition"`。
+- Example: 对照组与处理组并列。
+- Strengths: 最适合显式比较。
+- Risks: 若无共同参照轴则阅读顺序弱。
+- Typical Failure Modes: 靠颜色区分两组但布局不对齐。
+
+---
+
+### Layout Pattern: comparison
+- Definition: 一类专门以差异点为核心的 parallel 结构。
+- Suitable For: before/after、old/new、baseline/method、normal/disease。
+- Unsuitable For: 无明确对照关系的概览。
+- Reading Direction: 先识别比较对象，再读差异项。
+- Required Structural Conditions: 对照项同位、同尺度、同语义位置。
+- Common Mistakes: 左右内容量差太大，导致一侧成主角。
+- Machine-friendly Representation: `comparison_axes` 明确列出。
+- Example: 传统流程 vs 新流程。
+- Strengths: 差异抓取快。
+- Risks: 容易忽略共性背景。
+- Typical Failure Modes: 把流程图和结果图并置，却没有相同比较轴。
+
+---
+
+# Part F. Final Compact Operational Summary
+
+1. 先问这张图的唯一主旨是什么，不允许把论文全塞进去。
+2. 识别主关系类型：sequence、comparison、cycle、feedback、containment、overview、matrix。
+3. 先选图型，再选表示方式；不要先想“画什么风格”。
+4. process 优先 linear/pipeline；对比优先 comparison/parallel；闭环优先 feedback/circular；多尺度优先 nesting；综述优先 overview；多维映射优先 matrix/grid。
+5. reading order 必须可解释为 start -> middle -> end；若不能，用 layout 重构，不要先补箭头。
+6. 一级、二级、三级信息必须分开；三级细节不能抢一级焦点。
+7. 分组不能只靠颜色；至少两种 cue。
+8. 一种 connector style 只表达一种语义；多语义共存必须区分并解释。
+9. 文字只做 label、short phrase、caption、legend、callout 等结构角色；不要让图变成段落。
+10. decorative icon 禁止；每个表示元素都要有信息贡献。
+11. 颜色用于 emphasis、grouping、status 或学科惯例，不得唯一编码。
+12. graphical abstract 默认按缩略浏览场景设计；Elsevier 场景优先宽幅 500:200 近似比例。
+13. summary / conceptual figure 默认检查 faux figure、overcrowding、ambiguous arrows。
+14. 输出必须是 machine-readable schema，而不是空泛审美说明。
+15. 用 checklist 审查：主旨、路径、焦点、分组、箭头、文字、缩小可读性、HTML 可映射性。
+16. 若失败，回退到 key message、figure type 或 layout 重新生成，不要只做表面美化。
+
+---
+
+---
+
+# Part G. Presentation Narrative and Template Reference Layer
+
+本节在制作完整 PPT / HTML 演示时启用。它补充 Part C 的结构规则，但不把页面锁死为固定模板。
+
+## 1. 先定义 communication job
+
+在生成大纲前，必须回答：
+
+1. audience 是谁，他们已经知道什么；
+2. 他们最关心、最可能质疑什么；
+3. 演讲的工作是 educate、persuade、recommend、review 还是 enable a decision；
+4. 演讲结束时，观众应该 understand / believe / choose / approve / do 什么；
+5. 哪些工作是 core contribution，哪些只是 supporting context。
+
+必须形成一句：
+
+> By the end, [audience] should [outcome] because [central takeaway].
+
+## 2. 大纲不是目录
+
+- 使用累积叙事：上一页提出的问题，由下一页回答或推进。
+- 每页必须有 `audience_question`、`narrative_job`、`primary_claim`、`evidence`、`implication` 和 `transition_out`。
+- 标题必须表达结论，不使用“研究背景 / 方法介绍 / 实验结果”这类纯主题标题。
+- 重要性按 `core / support / context` 标注；当时间不足时，优先删 context，不压缩 core。
+- 开场提出值得听的 tension / question；结尾必须回答它，并给出边界或行动，不用通用 Thank you 结束。
+
+## 3. 每页内容最低论证单元
+
+除极简封面和章节页外，每页至少包含：
+
+1. 一个明确主张；
+2. 两项以内的关键证据，或一项主证据加一个解释；
+3. 证据对观众意味着什么；
+4. 一句通向下一页的过渡。
+
+演讲稿不能复制标题。每页 `talk_track` 应覆盖：承接、解释、证据、边界、过渡；论文汇报建议 120–260 个中文字。
+
+论文结果页必须保持证据口径：
+
+- 实验协议（seed、硬件、评估设置）只定义结论适用范围，不自动构成性能结果。
+- `train / validation / test / OOD` 指标不得互换；标题、图表、结论和演讲稿都必须显式保留原始 split 与 metric。
+- 若论文只展示 train SSR，不得因为存在 OOD 评估协议就推断或暗示 OOD 泛化已经得到验证。
+
+## 4. 模板只提供构图语法
+
+模板选择参考 `skill-references/presentation-layout-catalog.json`。其中的 recipe 是候选轮廓，不是 role 到 layout 的硬编码映射。
+
+- 同一种内容可以因受众问题和证据形态选择不同 recipe。
+- 相邻页面应避免连续使用相同轮廓。
+- 页面优先使用一个整体构图，避免默认生成卡片墙或 UI dashboard。
+- 组件可以复用，但视觉结果必须像 presentation composition，而不是网页后台。
+- React / HTML 与 PPTX 应共享同一 `composition_id` 和内容语义；允许在不同媒介上采用不同实现。
+
+## 5. 生成后必须做逻辑自检
+
+逐页检查：
+
+- 如果删掉本页，故事是否仍成立；若成立，本页可能是次要或重复内容。
+- 本页主张是否由证据支持，而不是只靠措辞。
+- 协议事实是否被误写成结果证据，train / validation / test / OOD 的口径是否贯穿标题、图表、结论与演讲稿。
+- 观众是否知道“这对我意味着什么”。
+- 本页结尾是否自然制造下一页的需求。
+- speaker notes 是否足以让另一个人按同样逻辑讲清楚。
+
+整套检查：
+
+- 开场问题是否在结尾得到回答；
+- core contribution 是否获得最多页面和最强证据；
+- 背景是否抢占过多篇幅；
+- 方法、结果、边界之间是否存在逻辑跳跃；
+- 是否出现连续三页相同构图；
+- 是否存在生产过程文案、占位文案或模型自述泄漏到观众页面。
+
+=== PRESENTATION SKILL ===
+
+
+--- STYLE GUIDELINES ---
+# Presentation Style Guidelines
+
+Apply these guidelines to every deck. Explicit user instructions and supplied references override these defaults.
+
+## Define the Communication Job
+
+Before selecting slides, layouts, or visuals, infer:
+
+- The intended audience; do not assume the audience is the user.
+- The deck's job: educate, persuade, sell, recommend, facilitate, or enable a decision.
+- The audience outcome: what they should understand, believe, choose, approve, discuss, or do.
+- The central takeaway and the essential claims or evidence needed to support it.
+- Every content requirement and source constraint in the user's request.
+
+Express the communication job in one sentence:
+
+> By the end, **[audience]** should **[outcome]** because **[central takeaway]**.
+
+For an exploratory, reference, or neutral deck, define the questions or understanding the audience should leave with instead of forcing a recommendation.
+
+## Choose an Appropriate Narrative Arc
+
+Choose a structure that fits the communication job, such as:
+
+- Context -> stakes -> evidence -> implications -> action.
+- Question -> analysis -> answer.
+- Problem -> causes or options -> recommendation.
+- Current state -> change -> future state.
+- Chronology, process, learning progression, or claim -> evidence -> consequence.
+
+An agenda is not a narrative. Make the sequence cumulative so each section creates the need for the next. Do not force a persuasive or emotional arc onto a technical or reference deck; build those through logic, causality, chronology, learning progression, or decision flow.
+
+## Make Every Slide Advance the Story
+
+- Give each slide one narrative job and one primary claim.
+- Prefer takeaway-style titles that communicate the point instead of merely naming the topic.
+- Order slides so each answers a question raised by the prior slide or introduces one the next slide resolves; add a transition when the logic would otherwise jump.
+- Integrate requested topics into the throughline and remove repeated beats, redundant summaries, and content that does not advance it.
+- Use supplied visual references as constraints without copying irrelevant structure or weakening the narrative.
+
+## Turn Evidence into Meaning
+
+Do not present facts, metrics, charts, examples, or visuals as an inventory. For each important piece of evidence, show what it means, why it matters to this audience, and how it changes the conclusion, decision, discussion, or next step.
+
+Charts and visuals must reinforce the current claim. Use grounded examples, scenarios, case studies, or human impact only when they materially improve understanding. Never invent people, quotes, facts, data, or outcomes.
+
+## Open and Close Deliberately
+
+Open with the context, purpose, stakes, question, or tension that makes the deck worth attention. Close by resolving that opening with the appropriate outcome: a recommendation or decision, an explicit action, a synthesis or application, or implications and productive questions. Do not end abruptly on a detail, technical artifact, unframed summary, or generic "Thank you" slide.
+
+## Write Natural, Audience-Facing Copy
+
+Visible copy must serve the intended audience. Do not expose model instructions, planning notes, timing scaffolds, talk tracks, or implementation details unless the user explicitly requests them.
+
+Use a requested duration to set scope and pacing. Show timings only when explicitly requested or audience-facing; otherwise keep them in speaker notes. Remove anything the user marks irrelevant or out of scope. State exclusions only when the audience needs them or the user asks.
+
+Write titles and body copy in direct, specific, natural language:
+
+- Prefer concrete claims, active verbs, and plain language over vague slogans, jargon, abstract noun clusters, or inflated phrasing.
+- Avoid formulaic constructions such as repeated "From X to Y" titles, punctuation patterns, parallel structures, or advertising-style fragments.
+- Remove duplicated qualifiers and concepts, and vary sentence structure naturally.
+
+A title should communicate a point a human presenter would plausibly say aloud. If it sounds like a prompt, production note, slogan generator, or mechanical template, rewrite it.
+
+## Compose the Slides
+
+- Use a coherent visual system across the deck while varying slide silhouettes to fit the content.
+- Keep the title slide minimal and simple.
+- Prefer lower-density slides with high-value content. Shorten copy or change the layout before shrinking type.
+- Keep layouts clean and balanced. Avoid both crowding and excessive empty space; use equal left and right margins by default.
+- Use one composition instead of a collection of UI panels. Avoid card grids, pills, badges, button-like text boxes, tabs, navigation patterns, dense dashboard layouts, and other component-library styling that implies interactivity.
+- Use stylized text boxes sparingly and favor a flat structure on the canvas.
+- Keep palette, typography, spacing, alignment, and visual treatment consistent unless the content calls for a deliberate change.
+
+## Typography and Fit
+
+When the user does not provide explicit style guidance, use at least:
+
+- 50 pt for deck titles.
+- 35 pt for slide titles.
+- 24 pt for subheadings, callout headers, and text-box titles.
+- 16 pt for body text.
+
+Inspect for unexpected wrapping. Never allow a one-line title or banner to wrap to two lines. Ensure narrative copy fits the chosen layout; shorten it or change the layout instead of adding density or shrinking type below the minimums.
+
+
+=== FLEXIBLE TEMPLATE CATALOG ===
+{
+  "version": "1.0.0",
+  "purpose": "A flexible presentation composition reference derived from the local Presentation Skill and Codex Grid layout library. These are candidate silhouettes, not mandatory page templates.",
+  "selection_principle": "Choose a layout only after defining the audience question, the slide's narrative job, the primary claim, and the evidence required to make that claim credible.",
+  "global_rules": [
+    "Use one dominant composition per slide; do not default to a dashboard of repeated cards.",
+    "Use takeaway titles that state the point, not topic labels.",
+    "Every evidence object must be paired with an interpretation or implication.",
+    "Vary adjacent silhouettes while keeping typography, palette, spacing, and image treatment coherent.",
+    "Prefer shortening or splitting content over shrinking body text.",
+    "A slide may deviate from these recipes when the content requires a clearer composition."
+  ],
+  "recipes": [
+    {
+      "id": "thesis-stage",
+      "best_for": ["opening", "section opener", "closing synthesis"],
+      "audience_question": "Why should I care, and what will I learn?",
+      "composition": "small context line + oversized thesis + one supporting sentence or evidence cue",
+      "density": "sparse",
+      "reference": ["codex-grid#slide-01", "codex-grid#slide-02", "codex-grid#slide-26"],
+      "avoid": ["production notes", "agenda inventory", "more than one competing visual"]
+    },
+    {
+      "id": "image-thesis-split",
+      "best_for": ["problem framing", "method overview with a real figure", "case evidence"],
+      "audience_question": "What does this look like in practice?",
+      "composition": "40–48% claim/explanation + 52–60% evidence image with caption",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-08"],
+      "avoid": ["decorative stock image unrelated to the claim", "tiny unreadable paper screenshot"]
+    },
+    {
+      "id": "argument-pair",
+      "best_for": ["before/after", "baseline/proposal", "trade-off", "known/unknown"],
+      "audience_question": "What changed, or what is the meaningful contrast?",
+      "composition": "one shared claim + two unequal argument fields + one explicit synthesis",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-04", "codex-grid#slide-05", "codex-grid#slide-11"],
+      "avoid": ["two columns with duplicated wording", "comparison without a conclusion"]
+    },
+    {
+      "id": "mechanism-triptych",
+      "best_for": ["three parallel mechanisms", "three contributions", "three failure modes"],
+      "audience_question": "Which parts jointly explain the result?",
+      "composition": "three aligned mechanisms with independent labels and a shared consequence",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-06", "codex-grid#slide-07"],
+      "avoid": ["presenting parallel mechanisms as a sequential pipeline", "generic icon cards"]
+    },
+    {
+      "id": "causal-flow",
+      "best_for": ["training loop", "method sequence", "timeline", "decision process"],
+      "audience_question": "What happens in what order, and where does the signal change?",
+      "composition": "3–5 stages on one visual axis; concise stage explanation; end-state implication",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-17", "codex-grid#slide-18"],
+      "avoid": ["using a flow for independent factors", "long paragraphs inside nodes"]
+    },
+    {
+      "id": "metric-triad",
+      "best_for": ["three headline outcomes", "performance/data-efficiency/transfer", "decision summary"],
+      "audience_question": "What are the three numbers I should remember?",
+      "composition": "brief interpretation rail + three large metrics + one sentence of meaning each",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-19", "codex-grid#slide-23"],
+      "avoid": ["numbers without baseline or unit", "equal emphasis on secondary metrics"]
+    },
+    {
+      "id": "chart-with-interpretation-rail",
+      "best_for": ["main quantitative result", "ablation", "trend", "benchmark comparison"],
+      "audience_question": "What pattern in the data changes the conclusion?",
+      "composition": "dominant native chart occupying 55–70% + 2–3 interpretation callouts",
+      "density": "moderate",
+      "reference": ["codex-grid#slide-20", "codex-grid#slide-21", "codex-grid#slide-22"],
+      "avoid": ["chart as decoration", "callouts that merely repeat axis values"]
+    },
+    {
+      "id": "evidence-table",
+      "best_for": ["experimental setup", "compact benchmark matrix", "method configuration"],
+      "audience_question": "What was compared, under which conditions?",
+      "composition": "claim title + native table + highlighted rows/columns + one interpretation footer",
+      "density": "dense",
+      "reference": ["codex-grid#slide-03", "codex-grid#slide-14", "codex-grid#slide-24"],
+      "avoid": ["full paper table without pruning", "table smaller than readable size"]
+    },
+    {
+      "id": "evidence-collage",
+      "best_for": ["qualitative behavior", "failure modes", "sim-to-real examples"],
+      "audience_question": "Which examples make the claim tangible?",
+      "composition": "one dominant evidence image + up to two supporting crops + a single synthesis statement",
+      "density": "moderate",
+      "reference": ["project extension of image-thesis-split"],
+      "avoid": ["more than three images", "reusing the same image", "unreadable thumbnails"]
+    },
+    {
+      "id": "answer-and-boundary",
+      "best_for": ["conclusion", "recommendation", "limitations"],
+      "audience_question": "What should I believe now, and where does it stop being true?",
+      "composition": "resolved answer + 2–3 implications + explicit boundary or next decision",
+      "density": "sparse",
+      "reference": ["codex-grid#slide-26"],
+      "avoid": ["generic thank-you ending", "new evidence introduced at the end"]
+    }
+  ],
+  "provenance": {
+    "source": "Local OpenAI Presentation Skill 26.727.11326 and Codex Grid layout registry",
+    "adaptation": "The project stores semantic composition rules only. It does not copy sample wording or bind planning to exact coordinates."
+  }
+}
+
+---
+
+Source text:
+---
+--- PAGE 1 ---
+RLinf 论文实验​
+王培鸿
+韦明杰
+3月28日修改
+Rebuttal​
+place_empty_cup​
+Model​
+SFT​
+PPO​
+GRPO​
+pi0​
+45.31%​
+82.03%​
+83.59%​
+pi05​
+85.16%​
+96.88%​
+95.31%​
+RL 都取50 
+step​
+oft(Temp_eval=-1)​
+75.78%​
+​
+92.97%​
+(没重跑故不需要重测)​
+92.19%​
+oft(Temp_eval=1.6)​
+86.72%​
+88.28%​
+Temp_eval=1.6​
+PPO​
+GRPO​
+place_empty_cup​
+86.72%​
+88.28%​
+Details​
+1. RoboTwin 的领域随机化设置​
+ RoboTwin 在数据生成过程中引入了多种领域随机化因素，包括场景杂乱度（添加无关干扰物体）、背景纹理（从约 1.2 万种高质量纹理中采
+样）、光照条件（颜色温度与光源类型随机）、桌面高度（在物理合理范围内采样）以及语言指令（生成多样化的任务描述）。这些随机化因素共
+同作用，用于增加数据多样性并缓解仿真到真实之间的分布差异。
+a. 训练阶段（SFT 与 RL）​
+ 在训练阶段，监督微调（SFT）和强化学习（RL）均使用同一组 基于robotwin官方随机化场景参数配置的1,000 个随机 seed 对环境进行初始
+化，采用 双臂的Piper 机械臂。​
+ 在 SFT 阶段，每个 seed 仅用于初始化环境一次，共采集 1,000 条不同的专家示范轨迹用于训练。​
+ 在 RL 阶段，针对每个任务，基于同样的 1,000 个场景配置进行强化学习训练。​
+b. 评估阶段（OOD Seed）​
+ 在评估阶段，为每个任务额外采集 128 个未在训练阶段使用的 seed，用于初始化模型未见过的强化学习场景，从而评估模型在分布外环境下的
+性能。​
+2. Seed 的可复现性问题​
+ 由于 Python 运行环境（如torch及相关依赖版本）、系统环境（操作系统版本）以及硬件条件（显卡型号等）的差异，在相同随机数区间内可成功
+初始化的 seed 集合并不完全一致。因此，某些在特定运行环境下可用的 seed，可能在其他环境中出现初始化失败或不稳定（如 seed unstable 或 
+scene initialization failed）的情况。​
+3. 训练初始成功率（SSR）的差异​
+ 在固定使用相同 seed 列表的条件下，观察到模型在不同 GPU 平台上训练时的初始成功率（SSR）存在差异。具体而言，在 H100 GPU 上训练的模
+型，其初始 SSR 低于在 A800 GPU 上训练的模型。该现象可能与不同显卡架构以及其对数值计算和仿真过程的影响有关。基于这一观察，本文中所
+有强化学习实验均统一在 8 卡 A800 GPU 平台上进行。​
+4. 示例task yaml配置​
+以beat_block_hammer任务示例​
+2026/4/4 20:47
+‌⁢​‬​‬⁤‬​⁣﻿‬⁡‍​﻿⁢‌​⁢‍‬⁣​‌⁡﻿‬‌‍‬⁣‌​‬⁢﻿⁡​﻿‌⁡RLinf 论文实验 - 飞书云文档
+https://nics-efc.feishu.cn/wiki/MYEMwYNk8ihoNFkn0EbcexkbnTW
+1/8
+
+
+--- PAGE 2 ---
+环境ENV yaml配置​
+代码块
+env_type: robotwin​
+total_num_envs: null​
+auto_reset: False​
+ignore_terminations: False​
+use_custom_reward: True​
+use_rel_reward: True​
+seed: 0​
+group_size: 1​
+use_fixed_reset_state_ids: False​
+max_steps_per_rollout_epoch: 200​
+max_episode_steps: 200 # max episode steps for truncation​
+assets_path: "/mnt/public/peihong/codes/RLinf_RoboTwin_gz"​
+seeds_path: "/mnt/project_rlinf/guozhen/test_robotwin/SimpleVLA-RL/verl/utils/en
+video_cfg:
+  save_video: True​
+  info_on_video: True​
+  video_base_dir: ${runner.logger.log_path}/video/train​
+task_config:​
+  task_name: beat_block_hammer​
+  step_lim: 200​
+  # if you want to modify the config, please check the following tutorial first:
+  # https://robotwin-platform.github.io/doc/usage/configurations.html​
+  render_freq: 0​
+  episode_num: 100​
+  use_seed: false​
+  save_freq: 15​
+  embodiment: [piper, piper, 0.6]​
+  language_num: 100​
+  domain_randomization:​
+    random_background: true​
+    cluttered_table: true​
+    clean_background_rate: 0.02​
+    random_head_camera_dis: 0​
+    random_table_height: 0.03​
+    random_light: true​
+    crazy_random_light_rate: 0.02​
+  camera:​
+    head_camera_type: D435​
+    wrist_camera_type: D435​
+    collect_head_camera: true​
+    collect_wrist_camera: false​
+  data_type:​
+    rgb: true​
+    third_view: false​
+    depth: false​
+    pointcloud: false​
+    observer: false​
+    endpose: false​
+    qpos: true​
+    mesh_segmentation: false​
+    actor_segmentation: false​
+  pcd_down_sample_num: 1024​
+  pcd_crop: true​
+  save_path: ./data​
+  clear_cache_freq: 1​
+  collect_data: true​
+  eval_video_log: true​
+RLinf 模型RL GRPO 训练yaml配置​
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+2026/4/4 20:47
+‌⁢​‬​‬⁤‬​⁣﻿‬⁡‍​﻿⁢‌​⁢‍‬⁣​‌⁡﻿‬‌‍‬⁣‌​‬⁢﻿⁡​﻿‌⁡RLinf 论文实验 - 飞书云文档
+https://nics-efc.feishu.cn/wiki/MYEMwYNk8ihoNFkn0EbcexkbnTW
+2/8
+
+
+--- PAGE 3 ---
+Generate rollout bsz: 128 * 8 =1024​
+Global bsz：1024​
+is_lora: True​
+lr: 2.0e-4 ​
+adam_beta1: 0.9​
+adam_beta2: 0.999
+adam_eps: 1.0e-05​
+weight_decay: 0.01​
+clip_grad: 1.0​
+代码块
+defaults:​
+  - env/robotwin_beat_block_hammer@env.train​
+  - env/robotwin_beat_block_hammer@env.eval​
+  - model/openvla_oft@actor.model​
+  - training_backend/fsdp@actor.fsdp_config​
+  - override hydra/job_logging: stdout​
+hydra:​
+  run:​
+    dir: .​
+  output_subdir: null​
+  searchpath:​
+    - file://${oc.env:EMBODIED_PATH}/config/​
+    ​
+cluster:​
+  num_nodes: 1​
+  component_placement:​
+    actor, env, rollout: 0-7​
+runner:​
+  task_type: embodied​
+  logger:​
+    log_path: "../results"​
+    project_name: rlinf​
+    experiment_name: "robotwin_grpo_openvlaoft"​
+    logger_backends: ["tensorboard"] # wandb, swanlab​
+  max_epochs: 1000​
+  max_steps: -1​
+  only_eval: False​
+  eval_policy_path: null # Optional: .pt file or None, if None, will use the che
+  val_check_interval: 10​
+  save_interval: 10​
+  seq_length: 4096​
+  max_prompt_length: 512​
+  resume_dir: /mnt/public/peihong/codes/RLinf_new/logs/beat_block_hammer_grpo_2e
+  # resume_dir: "/mnt/public/peihong/codes/RLinf_new/logs/test_new/robotwin_grpo
+algorithm:
+  normalize_advantages: True​
+  kl_penalty: kl  # how to estimate kl divergence: kl or kl_penalty​
+  group_size: 8​
+  rollout_epoch: 8​
+  eval_rollout_epoch: 1 # set eval_rollout_epoch > 0 when enable runner.only_eva
+  reward_type: action_level # chunk_level​
+  logprob_type: token_level​
+  entropy_type: token_level​
+  adv_type: grpo​
+  loss_type: actor​
+  loss_agg_func: "token-mean"​
+  kl_beta: 0.0​
+  entropy_bonus: 0​
+  clip_ratio_high: 0.28​
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+2026/4/4 20:47
+‌⁢​‬​‬⁤‬​⁣﻿‬⁡‍​﻿⁢‌​⁢‍‬⁣​‌⁡﻿‬‌‍‬⁣‌​‬⁢﻿⁡​﻿‌⁡RLinf 论文实验 - 飞书云文档
+https://nics-efc.feishu.cn/wiki/MYEMwYNk8ihoNFkn0EbcexkbnTW
+3/8
+
+
+--- PAGE 4 ---
+  clip_ratio_low: 0.2​
+  clip_ratio_c: 3.0​
+  value_clip: 0.2​
+  huber_delta: 10.0​
+  gamma: 1.0​
+  gae_lambda: 0.95​
+  reward_coef: 5.0​
+  filter_rewards: True​
+  rewards_lower_bound: 0.5​
+  rewards_upper_bound: 4.5​
+  # params for rollout​
+  sampling_params:​
+    do_sample: True​
+    temperature_train: 1.6​
+    temperature_eval: 1.6​
+    top_k: -1​
+    top_p: 1.0​
+    repetition_penalty: 1.0​
+  # length argument for autoregressive sampling​
+  # max length means max amount of tokens to generate​
+  length_params:​
+    max_new_token: null​
+    max_length: 1024​
+    min_length: 1​
+env:​
+  group_name: "EnvGroup"​
+  enable_offload: True​
+与SimpleVLA对比​
+相同点
+1. SFT模型、train/eval seeds 均采用simple提供​
+2. 模型的实现与simple一致​
+3. 同为GRPO算法​
+4. RLinf中GRPO使用的valid action mask模式与simple的工程等价，simple是等待所有env trunc / terminate 后一起reset​
+不同点
+1. 模型精度区别​
+Simple：模型精度是FP32，整体是bf16-fp32的混合精度​
+RLinf：模型精度是bf16，除了loss部分是fp32​
+精度的差异最明显体现在模型的SSR上​
+对于初始SSR（指Simple）低的task，如：beat_block_hammer，模型在train_seed的SSR会更低（在RLinf）导致模型的训练步数需要更多；​
+ 对于初始SSR（指Simple）高的task，如：place_empty_cup，影响较小，训练步数是simple的一倍​
+2. 超参数区别​
+RLinf​
+Simple​
+Rollout bsz​
+1024 (8 rollout_epoch * 128 num_envs)​
+512 (8 n_samples * 64 train_bsz)​
+lr​
+2.0e-4​
+5e-6​
+is_lora​
+true​
+false（全参训练）​
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+2026/4/4 20:47
+‌⁢​‬​‬⁤‬​⁣﻿‬⁡‍​﻿⁢‌​⁢‍‬⁣​‌⁡﻿‬‌‍‬⁣‌​‬⁢﻿⁡​﻿‌⁡RLinf 论文实验 - 飞书云文档
+https://nics-efc.feishu.cn/wiki/MYEMwYNk8ihoNFkn0EbcexkbnTW
+4/8
+
+
+--- PAGE 5 ---
+还有框架计算log_prob、模型update的bsz不同，but不影响性能​
+3. Valid traj collect策略不同​
+RLinf: 其rollout固定轮次、固定数目的traj后，对collected traj进行reward filter，所以模型每次step得到valid traj数受模型当前对该task的SSR影
+响；
+Simple: 其在每次rollout traj后都立即进行reward filter，剩余的traj存在buffer中；循环往复直到收集到rollout bsz 数量的traj 再进行模型的更新​
+4. GRPO的reward设计不一样​
+RLinf：采用action_level的reward​
+具体实现：
+设置use_custom_reward & use_rel_reward 为True​
+给最后一个chunk的最后一个action给reward；​
+Simple: 采用是 token-level的reward​
+具体实现：
+对于该traj如果是success ，则为1；反之为0 ​
+5. 模型train SSR
+Task​
+RLinf SFT​
+RLinf RL​
+Avg 
+improvement​
+train step​
+RLinf ​
+Simple SFT​
+Simple RL​
+​
+train step​
+Simple​
+place_empty_cup​
+75.78%​
+94.53%​
+18.75​
+40​
+77.3%​
+94.2%​
+20​
+beat_block_hammer​
+10.15%​
+96.09%​
+85.94​
+200​
+28.1%​
+87.5%​
+40​
+pick_dual_bottles​
+20.31%​
+92.96%​
+72.65​
+240​
+29.7%​
+68.3%​
+100​
+move_can_pot​
+9.37%​
+83.59%​
+74.22​
+160​
+28.1%​
+61.2%​
+50​
+lift_pot​
+3.13%​
+70.31%​
+67.18​
+30​
+10.1%​
+64.1%​
+40​
+stack_bowls_two​
+38.28%​
+67.19%​
+28.91​
+150​
+40.6%​
+75.8%​
+80​
+handover_block​
+28.13%​
+70.31%​
+42.18​
+150​
+33.1%​
+57.8%​
+40​
+place_container_plat
+e​
+54.69%​
+95.31%​
+40.62​
+50​
+2026/4/4 20:47
+‌⁢​‬​‬⁤‬​⁣﻿‬⁡‍​﻿⁢‌​⁢‍‬⁣​‌⁡﻿‬‌‍‬⁣‌​‬⁢﻿⁡​﻿‌⁡RLinf 论文实验 - 飞书云文档
+https://nics-efc.feishu.cn/wiki/MYEMwYNk8ihoNFkn0EbcexkbnTW
+5/8
+
+
+--- PAGE 6 ---
+RLinf SFT​
+RLinf RL​
+Simple SFT​
+Simple RL​
+Average​
+24.48%​
+84.63%​
+34.40%​
+72.18%​
+Δ Avg.​
++60.15%​
++37.78%​
+notice​
+1. 模型实现微小差异：RLinf加了position_ids，我之前跑的没加，简单验证后性能没差异就忽略了​
+Rlinf使用​
+镜像：cr.infini-ai.com/te-dbdcudoygepmq5vx/agentic-rlinf0.1-torch2.6.0-openvlaoft-pi0-robotwin:0.1​
+路径：/mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main/examples/embodiment​
+运行指令：bash run_embodiment.sh​
+Simple使用​
+镜像：cr.infini-ai.com/te-dbdcudoygepmq5vx/robotwin_simplevla_openvla_oft:2.2​
+路径： /mnt/project_rlinf_hs/wph/codes/SimpleVLA-RL/SimpleVLA-RL-main​
+运行指令：bash examples/run_openvla_oft_rl_twin2.sh​
+8卡​
+actor（s）​
+rollout（s）​
+Colocated​
+49.15​
+170.34​
+Disaggregated
+90.67​
+546.64​
+Hybrid(pipe=1)​
+50.14​
+303.7​
+Hybrid(pipe=2)​
+49.91​
+283.54​
+SimpleVLA​
+94.05​
+189.33​
+Lora ​
+代码块
+cd /mnt/public/mjwei/ray_utils_1/;​
+rm /mnt/public/mjwei/ray_utils_1/ray_head_ip.txt;​
+source switch_env openvla-oft​
+export TOKENIZERS_PARALLELISM=false​
+bash start_ray.sh;​
+if [ "$RANK" -eq 0 ]; then​
+    bash check_ray.sh 8; # 指定任意的卡数​
+    cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​
+    bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope
+else​
+    sleep 10d​
+fi​
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+2026/4/4 20:47
+‌⁢​‬​‬⁤‬​⁣﻿‬⁡‍​﻿⁢‌​⁢‍‬⁣​‌⁡﻿‬‌‍‬⁣‌​‬⁢﻿⁡​﻿‌⁡RLinf 论文实验 - 飞书云文档
+https://nics-efc.feishu.cn/wiki/MYEMwYNk8ihoNFkn0EbcexkbnTW
+6/8
+
+
+--- PAGE 7 ---
+if [ "$RANK" -eq 0 ]; then​
+    bash check_ray.sh 8; # 指定任意的卡数​
+    cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​
+    bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope
+else​
+    sleep 10d​
+fi​
+if [ "$RANK" -eq 0 ]; then​
+    bash check_ray.sh 16; # 指定任意的卡数​
+    cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​
+    bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope
+else​
+    sleep 10d​
+fi​
+if [ "$RANK" -eq 0 ]; then​
+    bash check_ray.sh 32; # 指定任意的卡数​
+    cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​
+    bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope
+else​
+    sleep 10d​
+fi​
+代码块
+cd /mnt/public/mjwei/ray_utils_1/;​
+rm /mnt/public/mjwei/ray_utils_1/ray_head_ip.txt;​
+export TOKENIZERS_PARALLELISM=false​
+bash start_ray.sh;​
+if [ "$RANK" -eq 0 ]; then​
+    bash check_ray.sh 8; # 指定任意的卡数​
+    cd /mnt/project_rlinf_hs/wph/codes/SimpleVLA-RL/SimpleVLA-RL-main​
+    bash examples/run_openvla_oft_rl_twin2.sh
+else​
+    sleep 10d​
+fi​
+if [ "$RANK" -eq 0 ]; then​
+    bash check_ray.sh 16; # 指定任意的卡数​
+    cd /mnt/project_rlinf_hs/wph/codes/SimpleVLA-RL/SimpleVLA-RL-main​
+    bash examples/run_openvla_oft_rl_twin2_2n.sh​
+else​
+    sleep 10d​
+fi​
+if [ "$RANK" -eq 0 ]; then​
+    bash check_ray.sh 32; # 指定任意的卡数​
+    cd /mnt/project_rlinf_hs/wph/codes/SimpleVLA-RL/SimpleVLA-RL-main​
+    bash examples/run_openvla_oft_rl_twin2_4n.sh​
+else​
+    sleep 10d​
+fi​
+RLinf​
+mode​
+nodenum
+actor​
+generate​
+Hybrid(pipe=2)​
+1n​
+50.31​
+317.07​
+disaggregated​
+1n​
+89.55​
+549.97​
+disaggregated​
+2n​
+47.92​
+289.74​
+disaggregated​
+4n​
+26.44​
+168.57​
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+2026/4/4 20:47
+‌⁢​‬​‬⁤‬​⁣﻿‬⁡‍​﻿⁢‌​⁢‍‬⁣​‌⁡﻿‬‌‍‬⁣‌​‬⁢﻿⁡​﻿‌⁡RLinf 论文实验 - 飞书云文档
+https://nics-efc.feishu.cn/wiki/MYEMwYNk8ihoNFkn0EbcexkbnTW
+7/8
+
+
+--- PAGE 8 ---
+Simple​
+mode​
+nodenum
+actor​
+generate​
+colocated​
+1n​
+115.52​
+207.86​
+colocated​
+2n​
+66.21​
+117.98​
+colocated​
+4n​
+42​
+71.11​
+ mode               nodenum         actor       generate  ​
+colocated                 1n                 49.15      170.34​
+colocated                 2n                 27.47      100.2 ​
+colocated                 4n                 15.0        66.67​
+disaggregated          1n                 89.55      549.97​
+disaggregated          2n                 47.92      289.74​
+disaggregated          4n                 26.44      168.57​
+Hybrid(pipe=1)          1n                50.14        303.7​
+Hybrid(pipe=1)          2n                27.53        166.0​
+Hybrid(pipe=1)          4n                15.03         95.37​
+Hybrid(pipe=2)          1n                 50.31        317.07​
+Hybrid(pipe=2)          2n                 27.53        155.67​
+Hybrid(pipe=2)          4n                 14.97        95.73​
+simplevla​
+mode           nodenum         actor       generate​
+colocated         1n              115.52       207.86​
+colocated         2n               66.21        117.98​
+colocated         4n                  42           71.11​
+2026/4/4 20:47
+‌⁢​‬​‬⁤‬​⁣﻿‬⁡‍​﻿⁢‌​⁢‍‬⁣​‌⁡﻿‬‌‍‬⁣‌​‬⁢﻿⁡​﻿‌⁡RLinf 论文实验 - 飞书云文档
+https://nics-efc.feishu.cn/wiki/MYEMwYNk8ihoNFkn0EbcexkbnTW
+8/8
+
+---
+warning: Exceeded skills context budget of 2%. All skill descriptions were removed and 777 additional skills were not included in the model-visible skills list.
+2026-07-30T15:58:47.158016Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 86 column 5
+codex
+{"deck":{"id":"rlinf-robotwin-experiment-storyboard-revised","title":"RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束","purpose":"帮助具身智能与机器人学习研究者判断 RLinf 在 RoboTwin 上的性能与系统效率证据，并准确区分受控系统优势与纯算法因果结论。","audience":"具身智能、机器人学习与强化学习研究者、论文评审者和实验复现者。","language":"zh-CN","aspect_ratio":"16:9","communication_job":"By the end, embodied-AI researchers should be able to cite and reproduce RLinf’s RoboTwin result with the correct boundary because the experiments show a large cross-task train SSR gain and competitive execution times under fixed seeds, evaluation protocol, and 8-card A800 conditions, while implementation differences prevent isolating a pure RLinf algorithm effect.","talk_duration_minutes":12,"audience_profile":{"role":"具身智能与机器人学习研究者、论文评审者、实验复现者","prior_knowledge":"熟悉 VLA、SFT、GRPO、RoboTwin、SSR、OOD seed、多卡训练与基本实验对照方法。","cares_about":["RLinf 的性能增益是否跨任务成立","SFT→RL 的比较是否公平","reward、轨迹收集、精度和超参数差异是否改变结论","seed、GPU、评估温度和训练步数是否可复现","不同并行模式下 actor 与 rollout 的实际成本"],"likely_questions":["RLinf 的提升能否归因于 RL 信号本身？","8 个任务上的增益是否一致，训练成本是多少？","RLinf 与 SimpleVLA 的比较到底控制了哪些变量？","评估温度、模型初始化和 GPU 是否会改变 SSR？","实际运行时应该选择哪种并行模式？"],"desired_outcome":"能够复现实验契约，引用跨任务 train SSR 与系统效率结果，并将结论表述为受控条件下的 RLinf 完整训练系统优势，而非 OOD 泛化或无条件的纯算法优越性。"}},"narrative":{"arc":"实验问题 → 实验契约与结果范围 → RLinf 训练信号 → 与 SimpleVLA 的可比性边界 → 跨任务 train SSR → 框架级增益 → 敏感性边界 → 系统效率 → 受控条件下的结论","key_message":"在相同 RoboTwin 训练 seed、128 个 OOD 评估 seed、评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练使 8 个任务的平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下呈现有竞争力的 actor/rollout 时间；128 个 OOD seed 是评估契约，不是当前报告的 OOD SSR 结果。由于精度、超参数、valid trajectory 收集和 reward 设计不同，证据支持的是受控条件下的完整系统优势，而不是纯算法因果结论。","opening_question":"在固定 RoboTwin seed、评估口径和 8 卡 A800 条件下，RLinf 的提升能否归因于 RL 信号本身，还是只能归因于完整训练系统的差异？","closing_answer":"证据支持这样的结论：在固定实验契约下，RLinf 的 RL 训练带来跨 8 个任务的 train SSR 增益，并提供有竞争力的执行路径；128 个 OOD seed 只定义评估契约，当前证据未提供 OOD SSR 结果。由于精度、超参数、轨迹收集和 reward 设计并非完全同构，不能把结果表述为脱离实验契约的纯算法优越性。","sections":[{"id":"sec-1","title":"先锁定实验契约","job":"定义结果可比、可复现和可解释的边界","slide_ids":["s1","s2"]},{"id":"sec-2","title":"解释训练与对照","job":"说明 RLinf 的训练信号，并标出与 SimpleVLA 的关键差异","slide_ids":["s3","s4"]},{"id":"sec-3","title":"建立性能结论","job":"从跨任务 train SSR、框架比较和敏感性分析形成主结果判断","slide_ids":["s5","s6","s7"]},{"id":"sec-4","title":"落到系统与结论","job":"把性能证据连接到运行成本，并回答开场归因问题","slide_ids":["s8","s9"]}],"priority_map":{"core":["s3","s4","s5","s6","s7","s8","s9"],"support":["s2"],"context":["s1"]},"logic_check":{"opening_resolved":true,"core_has_evidence":true,"no_redundant_slides":true,"rationale":"已保留 9 页与原叙事顺序，并将 128 个 OOD seed 明确限定为评估契约；s5 与 s9 的主结果统一显式标注 train SSR，且结论明确当前未报告 OOD SSR。"}},"visual":{"style_family":"academic-evidence","image_policy":"仅使用证据索引中的源表、源图或页面快照；优先使用原生表格、原生图表与可追溯机制图，禁止装饰性图片。","density_profile":"中等密度、证据优先；核心结果使用大图表或大表格，实验边界使用短注释和明确的证据标记。","style_reason":"受众关心可比性、复现性和归因边界，因此采用暖白画布、深蓝标题、珊瑚强调和源证据板的学术证据风格。","layout_system":"Codex Grid evidence-first：统一左对齐标题与宽边距，交替使用证据表、机制流程、结果图表、对照构图和结论边界。","style_reference":"codex/theme-reference.png"},"plan":{"title":"RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束","subtitle":"先确认比较口径，再判断 train SSR、效率与结论边界","slides":[{"id":"s1","layout":"title","composition_id":"thesis-stage","role":"title","content_priority":"context","action_title":"RLinf 的增益成立，但归因受实验契约约束","audience_question":"这组实验最终要让我判断什么？","narrative_job":"提出唯一主问题：如何在性能增益与归因边界之间做出严谨判断。","slide_goal":"让观众带着明确的归因问题进入实验契约、结果和系统效率证据。","primary_claim":"RLinf 的实验结论必须同时回答性能是否提升、运行是否有效率，以及提升能否被归因于 RL 信号本身。","evidence":[],"implication":"后续每页都围绕可比性、跨任务 train SSR、系统成本和外推边界展开。","transition_in":"从观众熟悉的“看最终 SSR”切入，提出更严格的归因问题。","transition_out":"要判断增益属于什么，先必须固定实验在什么条件下发生。","evidence_refs":[],"table_refs":[],"asset_candidates":[],"visual_intent":"text_led","visual_plan":{"layout_family":"title","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"none","background_variant":"quiet","density":"sparse"},"speaker_notes":{"talk_track":"我们通常先看最终 SSR，但这组实验真正需要回答的是：增益来自 RL 信号本身，还是来自一整套训练系统？今天沿着三个问题展开：train SSR 是否跨任务提升，运行是否具有效率，以及哪些实验条件限制归因。先把实验契约锁定，再看训练机制、结果和系统成本，最后给出可复现、但不越界的结论。","delivery_cue":"先读出标题中的“增益成立”和“归因受约束”，随后明确三个判断维度。","source_refs":[],"estimated_seconds":65},"content":{"eyebrow":"RoboTwin 实验解读","title":"RLinf 的增益成立，但归因受实验契约约束","subtitle":"性能、效率与归因边界必须一起判断","kicker":null,"lede":null,"note":{"label":"判断框架","value":"性能提升 ≠ RL 单独贡献"},"body_points":[],"metrics":[],"steps":[],"result":null,"columns":[],"takeaway":null}},{"id":"s2","layout":"evidence","composition_id":"image-thesis-split","role":"problem","content_priority":"support","action_title":"先锁定实验契约，再谈 train SSR","audience_question":"哪些条件决定这组结果能否复现和外推？","narrative_job":"合并实验契约与结果范围，明确训练 seed、OOD seed、机器人、领域随机化、GPU 条件及其复现限制。","slide_goal":"把后续所有数字锁定在明确的实验边界内。","primary_claim":"SFT 与 RL 使用同一组 1,000 个 RoboTwin 随机 seed，评估使用额外 128 个未见 seed，并统一在 8 卡 A800 平台上运行；128 个 OOD seed 是评估契约，不是当前报告的 OOD SSR 结果。","evidence":[{"claim_support":"训练阶段使用 1,000 个随机场景 seed，评估阶段额外使用 128 个未参与训练的 OOD seed，并采用双臂 Piper 机械臂。","evidence_ref":"p1-snapshot","interpretation":"128 个 OOD seed 规定了评估设置，但证据索引中的主结果表报告的是 train SSR，不能将该协议数字当作 OOD 性能结果。"},{"claim_support":"RoboTwin 使用领域随机化；相同 seed 集合在不同 Python、系统和硬件环境下可能无法完全复现，且观察到 H100 与 A800 的初始 SSR 差异。","evidence_ref":"p1-snapshot","interpretation":"复现时必须把运行环境和 GPU 视为实验变量。"}],"implication":"后续结果的有效范围是固定 RoboTwin 配置、seed、评估口径和 8 卡 A800；当前计划不声称已证明 OOD SSR 泛化。","transition_in":"开场的归因问题首先需要一个稳定、可复现的比较边界。","transition_out":"边界确定后，还要看 RLinf 如何把 rollout 轨迹转换为更新信号。","evidence_refs":["p1-snapshot"],"table_refs":[],"asset_candidates":["p1-snapshot"],"visual_intent":"source_figure","visual_plan":{"layout_family":"evidence","primary_visual":"p1-snapshot","image_budget":1,"image_roles":["evidence"],"data_strategy":"native_table","background_variant":"light","density":"balanced"},"speaker_notes":{"talk_track":"先把比较边界锁定。SFT 与 RL 共用 1,000 个 RoboTwin 随机 seed，使用双臂 Piper；评估再加入 128 个未见 seed。这里必须区分协议与结果：128 个 OOD seed 定义了评估契约，但当前主结果表呈现的是 train SSR，并没有提供 OOD SSR 数字。背景、杂乱度、光照、桌高和语言都会变化，运行环境与 GPU 也会影响复现，所以后面的结果只在固定契约内解释。","delivery_cue":"依次强调 1,000、128 和 8 卡三个契约指标，并明确 OOD seed 不是 OOD SSR 结果。","source_refs":["p1-snapshot"],"estimated_seconds":75},"content":{"eyebrow":"实验契约","title":"先锁定实验契约，再谈 train SSR","subtitle":null,"kicker":null,"lede":"128 个 OOD seed 是评估契约；当前主结果报告的是 train SSR，不是 OOD SSR。","note":{"label":"契约说明","value":"1,000 个共同训练 seed；128 个未见 OOD seed；双臂 Piper；统一 8 卡 A800。"},"body_points":[{"label":"训练对齐","text":"SFT 与 RL 共用 1,000 个随机场景 seed，并采用双臂 Piper 机械臂。"},{"label":"OOD 口径","text":"额外使用 128 个未见 seed 作为评估契约；证据索引未提供对应 OOD SSR 主结果。"},{"label":"复现边界","text":"领域随机化与运行环境会改变可用 seed 和初始 SSR，因此统一锁定 8 卡 A800。"}],"metrics":[{"label":"训练 seed","value":"1,000","meaning":"SFT 与 RL 的共同场景起点"},{"label":"OOD 评估 seed","value":"128","meaning":"评估契约，不等于已报告的 OOD SSR 结果"},{"label":"硬件条件","value":"8× A800","meaning":"后续 train SSR 比较的固定平台"}],"steps":[],"result":null,"columns":[],"takeaway":{"label":"实验契约","value":"后续主结果统一标注为 train SSR；128 个 OOD seed 不承担性能结果含义。"}}},{"id":"s3","layout":"pipeline","composition_id":"causal-flow","role":"method_detail","content_priority":"core","action_title":"RLinf 的训练信号来自一条完整链路","audience_question":"RLinf 的训练信号究竟如何产生？","narrative_job":"解释 rollout、valid trajectory、action-level reward、GRPO 优势估计和 LoRA 更新之间的关系。","slide_goal":"让观众知道结果背后的训练配方。","primary_claim":"RLinf 的配置将 128×8 的 rollout 组织为 global batch size 1024，使用 group size 8、action-level reward、token-level logprob/entropy、GRPO 和 LoRA 更新。","evidence":[{"claim_support":"配置给出 rollout batch 128×8=1024、global batch size 1024、group_size 8、reward_type action_level、logprob_type token_level、adv_type grpo、is_lora true 和 learning rate 2.0e-4。","evidence_ref":"p4-snapshot","interpretation":"这些配置共同决定训练信号与参数更新方式。"}],"implication":"性能结果应归因于完整训练路径，而不应只归因于算法名称。","transition_in":"实验契约说明了测什么，训练配置说明了 RLinf 如何学习。","transition_out":"接下来必须检查这套路径与 SimpleVLA 是否真的只差一个框架名称。","evidence_refs":["p4-snapshot"],"table_refs":[],"asset_candidates":[],"visual_intent":"method_diagram","visual_plan":{"layout_family":"pipeline","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"diagram","background_variant":"default","density":"balanced"},"speaker_notes":{"talk_track":"实验契约说明评价什么，这一页补上 RLinf 如何学习。一次更新先按 128×8 组织出 1,024 条 rollout，并以 group size 8 形成比较单元；奖励落在 action level，logprob 与 entropy 保持 token level，再用 GRPO 计算优势并更新 actor。最后通过 LoRA 和 2.0e-4 学习率限定更新方式。配置说明的是完整训练配方，下一页继续核对它与 SimpleVLA 的差异。","delivery_cue":"沿五个节点从左到右阅读，最后停在 LoRA 更新。","source_refs":["p4-snapshot"],"estimated_seconds":100},"content":{"eyebrow":"训练机制","title":"RLinf 的训练信号来自一条完整链路","subtitle":null,"kicker":null,"lede":"训练信号由采样规模、奖励粒度、优势估计和参数更新共同决定。","note":null,"body_points":[],"metrics":[{"label":"每轮 rollout","value":"128 × 8","meaning":"一次更新组织 1024 条轨迹"},{"label":"奖励粒度","value":"action-level","meaning":"奖励绑定到动作"},{"label":"更新方式","value":"GRPO + LoRA","meaning":"用组内优势估计驱动参数高效更新"}],"steps":[{"title":"Rollout 采样","text":"并行生成一轮轨迹。","metric":"128 × 8 = 1024","tone":"navy"},{"title":"Group 组织","text":"按 group size 8 形成比较单元。","metric":"group size = 8","tone":"blue"},{"title":"Action-level reward","text":"把任务反馈落到动作粒度。","metric":"reward_type = action_level","tone":"coral"},{"title":"GRPO 优势估计","text":"计算用于 actor 更新的优势信号。","metric":"adv_type = grpo","tone":"blue"},{"title":"LoRA 更新","text":"在参数高效更新范围内优化策略。","metric":"is_lora = true · lr = 2.0e-4","tone":"navy"}],"result":{"label":"训练配方的含义","value":"性能归因应落在 rollout、reward、优化与参数更新的完整路径上"},"columns":[],"takeaway":null}},{"id":"s4","layout":"comparison","composition_id":"evidence-table","role":"limitations","content_priority":"core","action_title":"共享基础，但不是同构训练","audience_question":"两套实现到底控制了哪些变量？","narrative_job":"并列呈现共同基础与关键差异，阻止把框架比较误读为纯算法消融。","slide_goal":"建立正确的因果解释边界。","primary_claim":"两套方法共享 SFT 模型、train/eval seeds、模型实现和 GRPO，但在精度、rollout batch、学习率、LoRA、valid trajectory 收集和 reward 粒度上存在差异。","evidence":[{"claim_support":"对比表列出 RLinf 使用 bf16、rollout batch 1024、learning rate 2.0e-4、LoRA，而 SimpleVLA 使用混合精度、rollout batch 512、learning rate 5e-6 和全参数训练。","evidence_ref":"p4-table-1-crop","interpretation":"变量差异会改变训练动态。"},{"claim_support":"RLinf 固定轮次后过滤 collected trajectories，并采用 action-level reward；SimpleVLA 即时过滤并缓存轨迹，采用 token-level success reward。","evidence_ref":"p5-table-1-crop","interpretation":"有效轨迹数量和奖励传播位置不同。"}],"implication":"可以比较两套系统的实际结果，但不能证明某个 RLinf 算法组件具有独立因果优势。","transition_in":"训练配方已经明确，公平性问题现在变成变量清单。","transition_out":"在保留这些差异的前提下，先看 RLinf 自身的跨任务收益是否成立。","evidence_refs":["p4-table-1-crop","p5-table-1-crop","p4-table-2-crop"],"table_refs":["p4-table-2","p4-table-1","p5-table-1"],"asset_candidates":["p4-table-2-crop"],"visual_intent":"source_table","visual_plan":{"layout_family":"comparison","primary_visual":"p4-table-2-crop","image_budget":1,"image_roles":["evidence"],"data_strategy":"native_table","background_variant":"light","density":"dense"},"speaker_notes":{"talk_track":"这里把公平比较拆成可检查的变量。两套实现共享 SFT 模型、train/eval seeds、模型实现和 GRPO，因此有共同起点；但 RLinf 与 SimpleVLA 在精度、rollout batch、学习率和 LoRA 上不同。valid trajectory 的收集时机和 reward 粒度也不同，会改变每次更新接收到的学习信号。因此后面的结果可以作为系统级比较，但不能单独归因于某一个算法组件。","delivery_cue":"先读共同基础，再按表格行读取差异，最后明确系统级解释边界。","source_refs":["p4-table-1-crop","p5-table-1-crop"],"estimated_seconds":100},"content":{"eyebrow":"可比性边界","title":"共享基础，但不是同构训练","subtitle":null,"kicker":null,"lede":"共同起点存在，但多项实现差异会改变训练动态与因果解释。","note":{"label":"解释边界","value":"这是完整训练系统的实际比较，不是单一算法组件的因果消融。"},"body_points":[{"label":"共同基础","text":"SFT 模型、train/eval seeds、模型实现和 GRPO 保持一致。"},{"label":"关键差异","text":"精度、rollout batch、学习率、LoRA、valid trajectory 收集和 reward 粒度均不同。"}],"metrics":[{"label":"rollout batch","value":"1024 vs 512","meaning":"每轮采样量不同"},{"label":"learning rate","value":"2.0e-4 vs 5e-6","meaning":"更新尺度不同"},{"label":"reward 粒度","value":"action-level vs token-level","meaning":"奖励传播位置不同"}],"steps":[],"result":null,"columns":[{"label":"RLinf","headline":"完整 RL 训练配置","points":["bf16；rollout batch 1024","learning rate 2.0e-4；LoRA=true","固定轮次后过滤 collected trajectories","action-level reward"],"tone":"navy"},{"label":"SimpleVLA","headline":"另一套完整配置","points":["混合精度；rollout batch 512","learning rate 5e-6；全参数训练","每条 rollout 后即时过滤并缓存","token-level success reward"],"tone":"coral"}],"takeaway":{"label":"页面结论","value":"共享基础不等于同构训练，后续结果按系统级差异解读。"}}},{"id":"s5","layout":"chart-focus","composition_id":"chart-with-interpretation-rail","role":"main_results","content_priority":"core","action_title":"8/8 任务提升，平均 train SSR 显著上升","audience_question":"RLinf 的 train SSR 增益是单个任务的偶然现象吗？","narrative_job":"用任务级结果和平均值突出 RLinf SFT→RL 的跨任务 train SSR 提升。","slide_goal":"建立最强的单系统性能证据。","primary_claim":"8 个 RoboTwin 任务的 RLinf RL train SSR 均高于 RLinf SFT，平均 train SSR 从 24.48% 提升到 84.63%，平均提升为 60.15 个百分点。","evidence":[{"claim_support":"8 个任务分别列出 RLinf SFT、RLinf RL、平均提升和训练步数，所有任务的 RLinf RL 数值高于对应 SFT 数值。","evidence_ref":"p5-table-1","interpretation":"提升跨越不同任务，但幅度和训练步数不同。"},{"claim_support":"平均汇总为 RLinf SFT train SSR 24.48%、RLinf RL train SSR 84.63%，Δ Avg. 为 +60.15%。","evidence_ref":"p6-table-1","interpretation":"平均值支持 RLinf 在这组任务上的总体训练收益，不构成 OOD SSR 证据。"}],"implication":"跨任务结果支持 RLinf 的 RL 训练有效，但当前证据报告的是 train SSR，未回答 OOD SSR 泛化。","transition_in":"比较口径已被标注，先检验 RLinf 自身是否稳定地产生 train SSR 收益。","transition_out":"下一步把相同的 SFT→RL 变化与 SimpleVLA 并置。","evidence_refs":["p5-table-1","p6-table-1","p5-table-1-crop"],"table_refs":["p5-table-1","p6-table-1"],"asset_candidates":["p5-table-1-crop"],"visual_intent":"data_chart","visual_plan":{"layout_family":"chart-focus","primary_visual":"p5-table-1-crop","image_budget":1,"image_roles":["evidence"],"data_strategy":"native_chart","background_variant":"light","density":"balanced"},"speaker_notes":{"talk_track":"在可比性边界明确后，先看 RLinf 自身是否稳定地产生 train SSR 收益。8 个 RoboTwin 任务里，RLinf RL 的 train SSR 全部高于 SFT，平均从 24.48% 升到 84.63%，提升 60.15 个百分点。任务级结果还显示，增益幅度从 18.75 到 85.94 不等，训练步数从 30 到 240。这里证明的是 train SSR 上的跨任务训练收益，不是 OOD SSR 泛化，下一页再比较两套系统。","delivery_cue":"先强调 train SSR、24.48%→84.63% 和 8/8，再指向任务级差异与训练步数。","source_refs":["p5-table-1","p6-table-1"],"estimated_seconds":105},"content":{"eyebrow":"跨任务 train SSR 结果","title":"8/8 任务提升，平均 train SSR 显著上升","subtitle":null,"kicker":null,"lede":"任务级结果显示，RLinf 的 RL train SSR 增益不是单个任务的偶然现象；该页不报告 OOD SSR。","note":null,"body_points":[{"label":"跨任务一致性","text":"8/8 个任务的 RLinf RL train SSR 均高于对应 SFT。"},{"label":"增益幅度有差异","text":"平均提升从 18.75 到 85.94 不等。"},{"label":"训练成本需同时看","text":"RLinf train step 覆盖 30–240，结果不能脱离训练步数与配置口径。"}],"metrics":[{"label":"RLinf SFT 平均 train SSR","value":"24.48%","meaning":"RL 训练前的跨任务平均起点"},{"label":"RLinf RL 平均 train SSR","value":"84.63%","meaning":"RL 训练后的跨任务平均结果"},{"label":"平均提升","value":"+60.15 个百分点","meaning":"8 个任务汇总的 train SSR 训练收益"}],"steps":[],"result":{"label":"核心结果","value":"8/8 任务提升；train SSR 24.48%→84.63%；平均提升 +60.15 个百分点"},"columns":[],"takeaway":null}},{"id":"s6","layout":"comparison","composition_id":"argument-pair","role":"method_overview","content_priority":"core","action_title":"RLinf 的平均 train SSR 增幅高于 SimpleVLA","audience_question":"RLinf 的 train SSR 增益是否超过 SimpleVLA？","narrative_job":"直接比较两套框架的 SFT→RL 平均变化，并绑定前一页的实现差异。","slide_goal":"给出框架级性能判断，同时收紧因果措辞。","primary_claim":"RLinf 的平均 train SSR 从 24.48% 升至 84.63%，增益为 60.15 个百分点；SimpleVLA 从 34.40% 升至 72.18%，增益为 37.78 个百分点。","evidence":[{"claim_support":"平均 SSR 对比表同时给出 RLinf SFT/RL、Simple SFT/RL 及两者的 Δ Avg.。","evidence_ref":"p6-table-1","interpretation":"比较 SFT→RL 的 train SSR 变化比只比较最终值更能回答系统增益问题。"}],"implication":"最稳妥的表述是 RLinf 完整训练系统带来更大的平均 train SSR 提升；当前证据不是 OOD SSR 结果。","transition_in":"跨任务 train SSR 结果证明 RLinf 有效，平均对照显示其系统增幅更大。","transition_out":"但平均数仍可能掩盖评估温度和初始模型能力造成的变化。","evidence_refs":["p6-table-1"],"table_refs":["p6-table-1"],"asset_candidates":[],"visual_intent":"comparison_matrix","visual_plan":{"layout_family":"comparison","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"native_table","background_variant":"light","density":"balanced"},"speaker_notes":{"talk_track":"把两套系统的 SFT→RL 平均 train SSR 变化放在同一张表里。RLinf 从 24.48% 提升到 84.63%，增加 60.15 个百分点；SimpleVLA 从 34.40% 提升到 72.18%，增加 37.78 个百分点，所以 RLinf 的完整训练系统平均增幅更大。但这一页不是 OOD SSR 结果，也不构成单因素消融：精度、学习率、LoRA、轨迹收集和 reward 设计都不同。下一页检查敏感性。","delivery_cue":"先读两组 train SSR 平均值和增幅，再明确“系统级比较”而非“纯算法因果”。","source_refs":["p6-table-1"],"estimated_seconds":105},"content":{"eyebrow":"框架级 train SSR 对照","title":"RLinf 的平均 train SSR 增幅高于 SimpleVLA","subtitle":null,"kicker":null,"lede":"比较 SFT→RL 的 train SSR 变化量，更能回答哪套完整系统带来了更大提升。","note":{"label":"结论边界","value":"支持 train SSR 的系统级比较；不等同于 OOD 泛化或单因素因果。"},"body_points":[{"label":"先看变化量","text":"RLinf 的平均 train SSR 提升为 60.15 个百分点，SimpleVLA 为 37.78 个百分点。"},{"label":"再看可比性","text":"两套系统的实现配置并不完全一致，平均差异不能拆解为单一因素贡献。"},{"label":"因此","text":"RLinf 的完整训练系统 train SSR 平均提升更大，但单因素因果仍需控制变量或消融。"}],"metrics":[{"label":"RLinf Δ Avg. train SSR","value":"+60.15 个百分点","meaning":"24.48% → 84.63%"},{"label":"SimpleVLA Δ Avg. train SSR","value":"+37.78 个百分点","meaning":"34.40% → 72.18%"}],"steps":[],"result":null,"columns":[{"label":"RLinf","headline":"train SSR 24.48% → 84.63%","points":["平均提升 +60.15 个百分点","完整训练系统的平均变化更大"],"tone":"accent"},{"label":"SimpleVLA","headline":"train SSR 34.40% → 72.18%","points":["平均提升 +37.78 个百分点","作为完整系统对照，而非单变量基线"],"tone":"neutral"}],"takeaway":{"label":"一句话判断","value":"RLinf 的平均 train SSR 增幅更大，但证据指向系统级效果，不是 OOD SSR 或独立算法贡献。"}}},{"id":"s7","layout":"insight","composition_id":"answer-and-boundary","role":"limitations","content_priority":"core","action_title":"初始化与评估温度会改变单点 SSR","audience_question":"为什么同一任务的结果会随模型和温度变化？","narrative_job":"用 place_empty_cup 的结果说明初始模型、评估温度、训练步数和是否重跑会影响可见 SSR。","slide_goal":"把单任务结果降级为敏感性证据。","primary_claim":"在 place_empty_cup 上，pi0 与 pi05 的 SFT 基线不同，OFT 在 Temp_eval=-1 与 1.6 下的 PPO/GRPO 结果也不同；部分温度结果未重跑，且 RL 结果统一取 50 step。","evidence":[{"claim_support":"表格列出 pi0/pi05 的 SFT、PPO、GRPO 结果，以及 OFT 在 Temp_eval=-1 和 Temp_eval=1.6 下的 PPO/GRPO 结果。","evidence_ref":"p1-table-1-crop","interpretation":"初始模型和采样温度会改变最终可见 SSR。"},{"claim_support":"Temp_eval=1.6 下 place_empty_cup 的 PPO 为 86.72%，GRPO 为 88.28%。","evidence_ref":"p1-table-2-crop","interpretation":"评估温度是结果定义的一部分。"}],"implication":"跨任务 train SSR 结果应优先于单任务单温度结果；任何引用都应同时报告模型初始化、评估温度、训练步数和是否重跑。","transition_in":"框架级平均 train SSR 增益成立，但单点成绩揭示了结果对评估协议的敏感性。","transition_out":"性能判断之外，研究者还需要知道训练系统在实际运行时付出什么成本。","evidence_refs":["p1-table-1-crop","p1-table-2-crop"],"table_refs":["p1-table-1","p1-table-2"],"asset_candidates":[],"visual_intent":"source_table","visual_plan":{"layout_family":"insight","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"native_table","background_variant":"quiet","density":"balanced"},"speaker_notes":{"talk_track":"平均 train SSR 增益成立后，还要看单任务结果是否依赖评估协议。place_empty_cup 中，pi0 与 pi05 的 SFT 起点不同；OFT 在 Temp_eval=-1 与 1.6 下的 PPO、GRPO 结果也不同，部分温度结果没有重跑，RL 统一取 50 step。因此这些数字适合作为敏感性证据，而不是方法独立能力。它们也不能替代 OOD SSR 结果。复现时应同时报告初始化、评估温度、训练步数和重跑状态，随后转向系统成本。","delivery_cue":"先读两组不同 SFT 基线，再指向温度变化，最后强调单点结果边界。","source_refs":["p1-table-1-crop","p1-table-2-crop"],"estimated_seconds":105},"content":{"eyebrow":"敏感性边界","title":"初始化与评估温度会改变单点 SSR","subtitle":null,"kicker":null,"lede":"同一任务的 SSR 不是只由 PPO/GRPO 决定；初始化、评估温度与实验口径都会改变可见结果。","note":{"label":"边界","value":"单任务、单温度结果只能支持敏感性判断，不能直接承担普遍优越性或 OOD 泛化结论。"},"body_points":[{"label":"起点不同","text":"pi0 的 SFT 为 45.31%，pi05 为 85.16%；RL 增益不能脱离初始模型比较。"},{"label":"温度改变结果","text":"OFT 的 PPO/GRPO 在 Temp_eval=-1 与 1.6 下呈现不同 SSR。"},{"label":"口径需固定","text":"相关温度结果部分未重跑，且 RL 结果统一取 50 step。"}],"metrics":[{"label":"pi0 → pi05 SFT","value":"45.31% → 85.16%","meaning":"初始模型带来不同起点"},{"label":"OFT · Temp_eval=1.6","value":"PPO 86.72%","meaning":"温度是结果定义的一部分"},{"label":"OFT · Temp_eval=1.6","value":"GRPO 88.28%","meaning":"比较时必须固定评估协议"}],"steps":[],"result":null,"columns":[],"takeaway":{"label":"因此","value":"跨任务 train SSR 结果优先于单任务单温度结果，且当前不替代 OOD SSR 证据。"}}},{"id":"s8","layout":"matrix","composition_id":"evidence-table","role":"main_results","content_priority":"core","action_title":"8 卡条件下，colocated 更有竞争力","audience_question":"实际运行 RLinf 时，哪种并行路径更值得选？","narrative_job":"比较 8 卡模式和 1/2/4 节点数据，把效率拆成 actor 与 rollout/generate 两个指标。","slide_goal":"将系统价值转化为具体运行选择。","primary_claim":"8 卡数据中，RLinf colocated 的 actor/rollout 时间为 49.15/170.34 秒，SimpleVLA 为 94.05/189.33 秒；其他 RLinf 模式呈现不同时间成本。","evidence":[{"claim_support":"8 卡表列出 RLinf colocated、disaggregated、Hybrid(pipe=1)、Hybrid(pipe=2) 与 SimpleVLA 的 actor 和 rollout 时间。","evidence_ref":"p6-table-2-crop","interpretation":"在该测试条件下，colocated 的两个时间指标都低于 SimpleVLA 对应数据。"},{"claim_support":"1、2、4 节点表列出 RLinf 各模式随节点数变化的 actor 与 generate 时间，另列出 SimpleVLA colocated 数据。","evidence_ref":"p8-table-1-crop","interpretation":"并行模式和节点数会改变运行成本。"}],"implication":"部署判断应明确节点数、并行模式和测量指标；不存在脱离模式与规模的单一效率结论。","transition_in":"敏感性分析限定了性能数字，系统表则限定了效率数字。","transition_out":"现在可以用性能、效率和归因边界共同回答开场问题。","evidence_refs":["p6-table-2-crop","p8-table-1-crop"],"table_refs":["p6-table-2","p8-table-1"],"asset_candidates":["p6-table-2-crop"],"visual_intent":"source_table","visual_plan":{"layout_family":"matrix","primary_visual":"p6-table-2-crop","image_budget":1,"image_roles":["evidence"],"data_strategy":"native_table","background_variant":"light","density":"dense"},"speaker_notes":{"talk_track":"性能数字受评估协议约束，效率数字也必须绑定部署配置。8 卡对比中，RLinf colocated 的 actor/rollout 为 49.15/170.34 秒，低于 SimpleVLA 的 94.05/189.33 秒；但 disaggregated 的 rollout 达到 546.64 秒，Hybrid 也有不同成本。再看 1、2、4 节点，actor 与 generate 会随模式和规模变化。因此选型应先固定节点数、模式和指标，再判断哪条路径更合适。","delivery_cue":"先读 8 卡横向对照，再指向模式与节点矩阵。","source_refs":["p6-table-2-crop","p8-table-1-crop"],"estimated_seconds":100},"content":{"eyebrow":"系统效率","title":"8 卡条件下，colocated 更有竞争力","subtitle":null,"kicker":null,"lede":"选型不能只问“RLinf 快不快”，要同时看 actor、rollout/generate 和节点规模。","note":{"label":"矩阵轴与阅读顺序","value":"行轴：并行模式；列轴：1n、2n、4n；单元格：actor / generate（秒）。"},"body_points":[{"label":"8 卡对比","text":"colocated 的 actor 与 rollout 都低于 SimpleVLA；disaggregated 与 Hybrid 的 rollout 成本更高。"},{"label":"规模边界","text":"1/2/4 节点下，各模式的 actor 与 generate 随规模变化。"}],"metrics":[{"label":"Colocated actor · 8 卡","value":"49.15 s","meaning":"低于 SimpleVLA 的 94.05 s"},{"label":"Colocated rollout · 8 卡","value":"170.34 s","meaning":"低于 SimpleVLA 的 189.33 s"},{"label":"Disaggregated rollout · 8 卡","value":"546.64 s","meaning":"同为 8 卡但成本更高"}],"steps":[],"result":null,"columns":[{"label":"1n","headline":"actor / generate（s）","points":["colocated 49.15 / 170.34","disaggregated 89.55 / 549.97","Hybrid(pipe=1) 50.14 / 303.70","Hybrid(pipe=2) 50.31 / 317.07"],"tone":"navy"},{"label":"2n","headline":"actor / generate（s）","points":["colocated 27.47 / 100.20","disaggregated 47.92 / 289.74","Hybrid(pipe=1) 27.53 / 166.00","Hybrid(pipe=2) 27.53 / 155.67"],"tone":"blue"},{"label":"4n","headline":"actor / generate（s）","points":["colocated 15.00 / 66.67","disaggregated 26.44 / 168.57","Hybrid(pipe=1) 15.03 / 95.37","Hybrid(pipe=2) 14.97 / 95.73"],"tone":"coral"}],"takeaway":{"label":"选型结论","value":"在当前 8 卡条件下优先考察 colocated；其他模式需结合节点规模与部署约束权衡。"}}},{"id":"s9","layout":"insight","composition_id":"answer-and-boundary","role":"limitations","content_priority":"core","action_title":"相信受控 train SSR 增益，保留纯算法归因边界","audience_question":"我现在应该相信什么，又必须保留什么？","narrative_job":"直接回答开场归因问题，综合跨任务 train SSR、系统效率和实现边界，给出可引用的最终判断。","slide_goal":"让研究者带走一个强但不越界的结论与复现实验要求。","primary_claim":"在固定 RoboTwin seed、OOD 评估契约和 8 卡 A800 条件下，RLinf 的 RL 训练在 8 个任务上将平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下表现出有竞争力的 actor/rollout 时间；128 个 OOD seed 不是 OOD SSR 结果，当前证据未提供 OOD SSR。","evidence":[{"claim_support":"RLinf 平均 train SSR 为 24.48%→84.63%，SimpleVLA 为 34.40%→72.18%。","evidence_ref":"p6-table-1","interpretation":"性能证据支持 RLinf 完整训练系统在这组任务上的较大平均 train SSR 增益。"},{"claim_support":"8 卡 colocated 的 RLinf actor/rollout 为 49.15/170.34 秒，SimpleVLA 为 94.05/189.33 秒。","evidence_ref":"p6-table-2-crop","interpretation":"效率证据支持特定并行配置下的运行优势。"},{"claim_support":"RLinf 与 SimpleVLA 在精度、超参数、valid trajectory 收集和 reward 设计上存在差异。","evidence_ref":"p4-table-1-crop","interpretation":"结论应归因于完整训练系统，而不是单独归因于某个算法组件。"}],"implication":"复现或引用时至少同时报告训练/评估 seed、GPU、评估温度、训练步数、reward 与轨迹收集策略、精度和并行模式，并明确当前主结果为 train SSR。","transition_in":"系统效率补全了“更快”的证据，且所有结果都已绑定到实验契约。","transition_out":"开场问题的答案是：受控条件下 RLinf 系统的 train SSR 更强且具有效率优势，但 OOD SSR 未由当前证据证明，纯算法归因仍需额外控制变量。","evidence_refs":["p6-table-1","p6-table-2-crop","p4-table-1-crop"],"table_refs":["p6-table-1","p6-table-2","p4-table-1"],"asset_candidates":[],"visual_intent":"text_led","visual_plan":{"layout_family":"insight","primary_visual":null,"image_budget":0,"image_roles":[],"data_strategy":"native_table","background_variant":"quiet","density":"sparse"},"speaker_notes":{"talk_track":"现在回到开场问题。固定 RoboTwin seed、OOD 评估契约和 8 卡 A800 后，RLinf 在 8 个任务上的平均 train SSR 从 24.48% 提升到 84.63%，colocated 下 actor 和 rollout 也具竞争力。但要明确：128 个 OOD seed 只是评估设置，当前证据没有给出 OOD SSR 结果。两边在精度、学习率、LoRA、轨迹收集和 reward 设计上并不完全一致，所以结论应归因于完整训练系统，而不是单一算法组件。","delivery_cue":"先给出 train SSR 答案，再读效率证据，最后明确 OOD 结果缺失与系统级归因边界。","source_refs":["p6-table-1","p6-table-2-crop","p4-table-1-crop"],"estimated_seconds":110},"content":{"eyebrow":"最终判断","title":"可信的是受控 train SSR 增益，纯算法优越性尚未证实","subtitle":null,"kicker":null,"lede":"在固定 RoboTwin seed、OOD 评估契约与 8 卡 A800 条件下，RLinf 的完整 RL 训练系统 train SSR 更强且更具效率优势；当前证据未提供 OOD SSR 结果。","note":{"label":"采用条件","value":"引用时同时报告训练/评估 seed、GPU、评估温度、训练步数、reward、轨迹收集、精度与并行模式。"},"body_points":[{"label":"答案：train SSR 成立","text":"8 个任务平均 train SSR：RLinf RL 84.63%，由 SFT 的 24.48% 提升；SimpleVLA RL 为 72.18%。"},{"label":"采用条件：效率有范围","text":"8 卡 colocated 下，RLinf actor/rollout 为 49.15/170.34 秒，低于 SimpleVLA 的 94.05/189.33 秒。"},{"label":"边界：OOD 与纯算法归因未证实","text":"128 个 OOD seed 是评估契约而非 OOD SSR 结果；精度、学习率、LoRA、valid trajectory 收集与 reward 设计不同。"}],"metrics":[{"label":"平均 train SSR","value":"24.48% → 84.63%","meaning":"RLinf 完整训练系统在 8 个任务上的平均 train SSR 提升"},{"label":"colocated actor","value":"49.15 s","meaning":"8 卡条件下低于 SimpleVLA 的 94.05 s"},{"label":"colocated rollout","value":"170.34 s","meaning":"8 卡条件下低于 SimpleVLA 的 189.33 s"}],"steps":[],"result":null,"columns":[],"takeaway":{"label":"最终判断","value":"受控条件下 RLinf 系统 train SSR 更强且具有效率优势；当前无 OOD SSR 结果，纯算法因果仍需额外控制变量。"}}}]}}
+tokens used
+60,378

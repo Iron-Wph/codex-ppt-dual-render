@@ -1,0 +1,9 @@
+{"kind":"slide","id":"sl/hqdr1t","slide":1,"title":"01 / 01","textShapes":4}
+{"kind":"shape","id":"sh/qpgjaxsz","slide":1,"name":"slide-1-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/dsri5cba","slide":1,"name":"slide-1-page","text":"01 / 01","textPreview":"01 / 01","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/cri1c7a5","slide":1,"name":"theme-reference-kicker","text":"VISUAL CONTRACT","textPreview":"VISUAL CONTRACT","textChars":15,"textLines":1,"bbox":[72,76,360,22]}
+{"kind":"textbox","id":"sh/zu907mtg","slide":1,"name":"theme-reference-title","text":"Theme reference / visual contract","textPreview":"Theme reference / visual contract","textChars":33,"textLines":1,"bbox":[72,114,800,86]}
+{"kind":"textbox","id":"sh/1wri9wbm","slide":1,"name":"theme-reference-caption","text":"Editable table treatment used as the deck contract","textPreview":"Editable table treatment used as the deck contract","textChars":50,"textLines":1,"bbox":[92,210,760,16]}
+{"kind":"shape","id":"sh/0vi1gra1","slide":1,"name":"theme-reference-evidence-frame","bbox":[900,232,300,286]}
+{"kind":"table","id":"tb/7at0jupk","slide":1,"name":"","rows":4,"cols":3,"preview":"Evidence | Baseline | Improved","bbox":[92,236,760,350]}
+{"kind":"image","id":"im/u1gfqdwr","slide":1,"name":"","alt":"Academic Evidence PowerPoint style inspiration board with typography, image, data, and table treatment.","bbox":[912,244,276,262]}

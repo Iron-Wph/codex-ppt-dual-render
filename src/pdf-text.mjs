@@ -6,6 +6,7 @@ import { spawn } from "node:child_process";
 const PYTHON_SCRIPT = String.raw`
 import json
 import os
+import statistics
 import sys
 
 pdf_path = sys.argv[1]
@@ -15,35 +16,84 @@ os.makedirs(asset_dir, exist_ok=True)
 pages = []
 assets = []
 tables = []
+formulas = []
 parser = "pypdf"
 
-def semantic_table_metadata(page_number, table_index):
-    mapping = {
-        (9, 1): {
-            "label": "RoboTwin 2.0 task horizon classification",
-            "categories": ["Short", "Medium", "Long", "Extra-long", "Overall"],
-            "rows": 6,
-            "columns": 3,
-            "values": [
-                ["Horizon group", "Representative tasks", "Steps / average"],
-                ["Short", "lift_pot; beat_block_hammer; pick_dual_bottles; place_phone_stand", "112-130 / avg 121"],
-                ["Medium", "move_can_pot; place_a2b_left; place_empty_cup; handover_mic", "151-223 / avg 176"],
-                ["Long", "handover_block; stack_bowls_two", "283-313 / avg 298"],
-                ["Extra-long", "blocks_rank_rgb; put_bottles_dustbin", "466-637 / avg 552"],
-                ["Overall", "12 tasks", "average 256 steps"],
-            ],
-        },
-        (10, 1): {"label": "LIBERO improvement Δ", "categories": ["Space", "Object", "Goal", "Long", "Avg"]},
-        (10, 2): {"label": "RoboTwin 1.0 improvement Δ", "categories": ["Hammer/Beat", "Block Handover", "Blocks Stack", "Shoe Place", "Avg"]},
-        (11, 1): {"label": "Short-horizon improvement Δ", "categories": ["Lift Pot", "Beat Hammer", "Pick Bottles", "Phone Stand", "Avg"]},
-        (11, 2): {"label": "Medium-horizon improvement Δ", "categories": ["Move Can Pot", "A2B Left", "Empty Cup", "Handover Mic", "Avg"]},
-        (11, 3): {"label": "Long/extra-long improvement Δ", "categories": ["Handover Block", "Stack Bowls", "Blocks Rank", "Bottles Dustbin", "Avg"]},
-        (13, 1): {"label": "One-trajectory SFT improvement Δ", "categories": ["Space", "Object", "Goal", "Long", "Avg"]},
-        (13, 2): {"label": "Full-trajectory SFT improvement Δ", "categories": ["Space", "Object", "Goal", "Long", "Avg"]},
-        (16, 1): {"label": "100-trajectory SFT improvement Δ", "categories": ["Move Can Pot", "A2B Lift", "A2B Right", "Phone Stand", "Pick Bottles", "Avg"]},
-        (16, 2): {"label": "1000-trajectory SFT improvement Δ", "categories": ["Move Can Pot", "A2B Lift", "A2B Right", "Phone Stand", "Pick Bottles", "Avg"]},
-    }
-    return mapping.get((page_number, table_index), {})
+def structured_text_blocks(page, page_number):
+    raw_blocks = []
+    font_sizes = []
+    try:
+        document_dict = page.get_text("dict")
+        for block in document_dict.get("blocks", []):
+            if block.get("type") != 0:
+                continue
+            line_texts = []
+            block_sizes = []
+            for line in block.get("lines", []):
+                span_texts = []
+                for span in line.get("spans", []):
+                    value = " ".join(str(span.get("text", "")).split())
+                    if value:
+                        span_texts.append(value)
+                    size = float(span.get("size", 0) or 0)
+                    if size > 0:
+                        block_sizes.append(size)
+                        font_sizes.append(size)
+                if span_texts:
+                    line_texts.append(" ".join(span_texts))
+            text = "\n".join(line_texts).strip()
+            if text:
+                raw_blocks.append({
+                    "text": text,
+                    "bbox": [float(value) for value in block.get("bbox", [0, 0, 0, 0])],
+                    "max_font_size": max(block_sizes) if block_sizes else 0,
+                })
+    except Exception:
+        return []
+    body_size = statistics.median(font_sizes) if font_sizes else 10
+    blocks = []
+    for index, raw in enumerate(raw_blocks, start=1):
+        text = raw["text"]
+        size = raw["max_font_size"]
+        lower = text.lower()
+        block_type = "text"
+        level = None
+        if lower.startswith(("figure ", "fig. ", "fig ", "table ")):
+            block_type = "caption"
+        elif len(text) <= 220 and size >= max(13, body_size * 1.22):
+            block_type = "title"
+            level = 1 if size >= max(17, body_size * 1.55) else 2
+        elif text.lstrip().startswith(("-", "•", "·")):
+            block_type = "list"
+        blocks.append({
+            "id": f"p{page_number}-block-{index}",
+            "type": block_type,
+            "source_page": page_number,
+            "reading_order": index,
+            "bbox": raw["bbox"],
+            "text": text,
+            "level": level,
+            "font_size": round(size, 2),
+            "confidence": None,
+        })
+    return blocks
+
+def nearest_caption(blocks, bbox):
+    if not bbox:
+        return ""
+    x0, y0, x1, y1 = bbox
+    candidates = []
+    for block in blocks:
+        if block.get("type") != "caption":
+            continue
+        bx0, by0, bx1, by1 = block.get("bbox", [0, 0, 0, 0])
+        overlap = max(0, min(x1, bx1) - max(x0, bx0))
+        if overlap <= 0:
+            continue
+        vertical_distance = min(abs(by0 - y1), abs(y0 - by1))
+        candidates.append((vertical_distance, block.get("text", "")))
+    candidates.sort(key=lambda item: item[0])
+    return candidates[0][1] if candidates and candidates[0][0] < 90 else ""
 
 try:
     import fitz
@@ -51,7 +101,8 @@ try:
     document = fitz.open(pdf_path)
     for page_number, page in enumerate(document, start=1):
         text = page.get_text("text") or ""
-        page_record = {"page": page_number, "text": text, "tables": []}
+        blocks = structured_text_blocks(page, page_number)
+        page_record = {"page": page_number, "text": text, "tables": [], "blocks": blocks}
         try:
             if hasattr(page, "find_tables"):
                 finder = page.find_tables()
@@ -74,20 +125,20 @@ try:
                     nonempty = sum(1 for row in rows for cell in row if cell)
                     cell_count = max(1, len(rows) * column_count)
                     table_id = f"p{page_number}-table-{table_index}"
+                    table_bbox = [float(value) for value in table.bbox]
                     table_record = {
                         "id": table_id,
                         "type": "evidence_table",
                         "source_page": page_number,
                         "index": table_index,
-                        "bbox": [float(value) for value in table.bbox],
+                        "bbox": table_bbox,
                         "rows": len(rows),
                         "columns": column_count,
                         "values": rows,
                         "nonempty_ratio": round(nonempty / cell_count, 3),
-                        "caption": f"Paper table or chart region on page {page_number}",
+                        "caption": nearest_caption(blocks, table_bbox) or f"Paper table region on page {page_number}",
                         "editable_level": "native-table",
                     }
-                    table_record.update(semantic_table_metadata(page_number, table_index))
                     try:
                         crop_rect = fitz.Rect(*table.bbox)
                         pad = 5
@@ -112,6 +163,7 @@ try:
                             "source_page": page_number,
                             "index": table_index,
                             "table_ref": table_id,
+                            "bbox": table_bbox,
                             "path": os.path.join("assets", crop_name).replace("\\\\", "/"),
                             "mime_type": "image/png",
                             "caption": f"Cropped paper figure or table region from page {page_number}",
@@ -125,11 +177,28 @@ try:
                         pass
                     tables.append(table_record)
                     page_record["tables"].append(table_record)
+                    page_record["blocks"].append({
+                        "id": f"p{page_number}-table-block-{table_index}",
+                        "type": "table",
+                        "source_page": page_number,
+                        "reading_order": len(page_record["blocks"]) + 1,
+                        "bbox": table_bbox,
+                        "text": "",
+                        "caption": table_record["caption"],
+                        "table_ref": table_id,
+                        "asset_ref": table_record.get("crop_asset_id"),
+                        "confidence": None,
+                    })
         except Exception:
             pass
-        if page_record["tables"] or page_number in (6, 15):
+        page_images = page.get_images(full=True)
+        try:
+            drawing_count = len(page.get_drawings())
+        except Exception:
+            drawing_count = 0
+        if page_record["tables"] or page_images or drawing_count >= 8:
             try:
-                snapshot = page.get_pixmap(matrix=fitz.Matrix(1.35, 1.35), alpha=False, annots=False)
+                snapshot = page.get_pixmap(matrix=fitz.Matrix(1.2, 1.2), alpha=False, annots=False)
                 snapshot_name = f"page-{page_number:03d}-snapshot.png"
                 snapshot_path = os.path.join(asset_dir, snapshot_name)
                 snapshot.save(snapshot_path)
@@ -148,9 +217,8 @@ try:
                 })
             except Exception:
                 pass
-        pages.append(page_record)
         seen_xrefs = set()
-        for image_index, image in enumerate(page.get_images(full=True), start=1):
+        for image_index, image in enumerate(page_images, start=1):
             xref = image[0]
             if xref in seen_xrefs:
                 continue
@@ -162,19 +230,42 @@ try:
                 target = os.path.join(asset_dir, filename)
                 with open(target, "wb") as handle:
                     handle.write(extracted["image"])
+                image_id = f"p{page_number}-image-{image_index}"
+                image_bbox = None
+                try:
+                    image_rects = page.get_image_rects(xref)
+                    if image_rects:
+                        image_bbox = [float(value) for value in image_rects[0]]
+                except Exception:
+                    pass
+                image_caption = nearest_caption(blocks, image_bbox) or f"论文第 {page_number} 页嵌入图片 {image_index}"
                 assets.append({
-                    "id": f"p{page_number}-image-{image_index}",
+                    "id": image_id,
+                    "type": "evidence_figure",
                     "source_page": page_number,
                     "index": image_index,
+                    "bbox": image_bbox,
                     "path": os.path.join("assets", filename).replace("\\\\", "/"),
                     "mime_type": f"image/{extension}",
-                    "caption": f"论文第 {page_number} 页嵌入图片 {image_index}",
+                    "caption": image_caption,
                     "width": extracted.get("width"),
                     "height": extracted.get("height"),
                     "bytes": len(extracted.get("image", b"")),
                 })
+                page_record["blocks"].append({
+                    "id": f"p{page_number}-image-block-{image_index}",
+                    "type": "figure",
+                    "source_page": page_number,
+                    "reading_order": len(page_record["blocks"]) + 1,
+                    "bbox": image_bbox,
+                    "text": "",
+                    "caption": image_caption,
+                    "asset_ref": image_id,
+                    "confidence": None,
+                })
             except Exception:
                 continue
+        pages.append(page_record)
     document.close()
 except Exception:
     from pypdf import PdfReader
@@ -189,7 +280,12 @@ print(json.dumps({
     "pages": pages,
     "assets": assets,
     "tables": tables,
+    "formulas": formulas,
     "parser": parser,
+    "parser_details": {
+        "engine": parser,
+        "structured_blocks": sum(len(page.get("blocks", [])) for page in pages),
+    },
 }, ensure_ascii=False))
 `;
 

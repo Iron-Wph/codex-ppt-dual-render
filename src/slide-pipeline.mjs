@@ -8,8 +8,17 @@ import { assertValidSpec } from "./validate-spec.mjs";
 import { runQa } from "./qa.mjs";
 
 function singleSlidePlan(plan, slide) {
+  const priorityMap = { core: [], support: [], context: [] };
+  priorityMap[slide.content_priority || "support"].push(slide.id);
   return {
     ...plan,
+    narrative: {
+      ...plan.narrative,
+      sections: (plan.narrative?.sections || [])
+        .map((section) => ({ ...section, slide_ids: (section.slide_ids || []).filter((id) => id === slide.id) }))
+        .filter((section) => section.slide_ids.length),
+      priority_map: priorityMap,
+    },
     plan: {
       ...plan.plan,
       slides: [slide],
@@ -28,14 +37,24 @@ export async function materializeSlidePipeline({ plan, evidenceIndex = null, out
       id: slide.id,
       role: slide.role,
       layout: slide.layout,
+      composition_id: slide.composition_id,
+      content_priority: slide.content_priority,
       action_title: slide.action_title,
+      audience_question: slide.audience_question,
+      narrative_job: slide.narrative_job,
       slide_goal: slide.slide_goal,
       primary_claim: slide.primary_claim,
+      evidence: slide.evidence || [],
+      implication: slide.implication,
+      transition_in: slide.transition_in,
+      transition_out: slide.transition_out,
       evidence_refs: slide.evidence_refs || [],
       table_refs: slide.table_refs || [],
       asset_candidates: slide.asset_candidates || [],
       visual_intent: slide.visual_intent,
       visual_plan: slide.visual_plan,
+      speaker_notes: slide.speaker_notes,
+      content: slide.content,
     })),
   });
   const results = [];

@@ -1,0 +1,247 @@
+{
+  "deck": {
+    "id": "rlinf-robotwin-experiment-storyboard-revised",
+    "title": "RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束",
+    "purpose": "帮助具身智能与机器人学习研究者判断 RLinf 在 RoboTwin 上的性能与系统效率证据，并准确区分受控系统优势与纯算法因果结论。",
+    "audience": "具身智能、机器人学习与强化学习研究者、论文评审者和实验复现者。",
+    "language": "zh-CN",
+    "aspect_ratio": "16:9",
+    "communication_job": "By the end, embodied-AI researchers should be able to cite and reproduce RLinf’s RoboTwin result with the correct boundary because the experiments show a large cross-task SSR gain and competitive execution times under fixed seeds, evaluation protocol, and 8-card A800 conditions, while implementation differences prevent isolating a pure RLinf algorithm effect.",
+    "talk_duration_minutes": 12,
+    "audience_profile": {
+      "role": "具身智能与机器人学习研究者、论文评审者、实验复现者",
+      "prior_knowledge": "熟悉 VLA、SFT、GRPO、RoboTwin、SSR、OOD seed、多卡训练与基本实验对照方法。",
+      "cares_about": [
+        "RLinf 的性能增益是否跨任务成立",
+        "SFT→RL 的比较是否公平",
+        "reward、轨迹收集、精度和超参数差异是否改变结论",
+        "seed、GPU、评估温度和训练步数是否可复现",
+        "不同并行模式下 actor 与 rollout 的实际成本"
+      ],
+      "likely_questions": [
+        "RLinf 的提升能否归因于 RL 信号本身？",
+        "8 个任务上的增益是否一致，训练成本是多少？",
+        "RLinf 与 SimpleVLA 的比较到底控制了哪些变量？",
+        "评估温度、模型初始化和 GPU 是否会改变 SSR？",
+        "实际运行时应该选择哪种并行模式？"
+      ],
+      "desired_outcome": "能够复现实验契约，引用跨任务性能与系统效率结果，并将结论表述为受控条件下的 RLinf 完整训练系统优势，而非无条件的纯算法优越性。"
+    }
+  },
+  "narrative": {
+    "arc": "实验问题 → 实验契约与泛化口径 → RLinf 训练信号 → 与 SimpleVLA 的可比性边界 → 跨任务性能 → 框架级增益 → 敏感性边界 → 系统效率 → 受控条件下的结论",
+    "key_message": "在相同 RoboTwin 训练 seed、128 个 OOD 评估 seed、评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练使 8 个任务的平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下呈现有竞争力的 actor/rollout 时间；但由于精度、超参数、valid trajectory 收集和 reward 设计不同，证据支持的是受控条件下的完整系统优势，而不是纯算法因果结论。",
+    "opening_question": "在固定 RoboTwin seed、评估口径和 8 卡 A800 条件下，RLinf 的提升能否归因于 RL 信号本身，还是只能归因于完整训练系统的差异？",
+    "closing_answer": "证据支持这样的结论：在固定实验契约下，RLinf 的 RL 训练带来跨 8 个任务的显著 SSR 增益，并提供有竞争力的执行路径；但由于精度、超参数、轨迹收集和 reward 设计并非完全同构，不能把该结果表述为脱离实验契约的纯算法优越性。",
+    "sections": [
+      {
+        "id": "sec-2",
+        "title": "解释训练与对照",
+        "job": "说明 RLinf 的训练信号，并标出与 SimpleVLA 的关键差异",
+        "slide_ids": [
+          "s4"
+        ]
+      }
+    ],
+    "priority_map": {
+      "core": [
+        "s4"
+      ],
+      "support": [],
+      "context": []
+    },
+    "logic_check": {
+      "opening_resolved": true,
+      "core_has_evidence": true,
+      "no_redundant_slides": true,
+      "rationale": "已保留 9 页与原叙事顺序，并修复实验契约可见性、训练流程阅读顺序、比较表、平均值证据、效率矩阵、结论边界、标题密度、截断文案和演讲稿长度。所有核心主张均绑定有效证据 ID；结论页分别呈现答案、采用条件和归因边界。"
+    }
+  },
+  "visual": {
+    "style_family": "academic-evidence",
+    "image_policy": "仅使用证据索引中的源表、源图或页面快照；优先使用原生表格、原生图表与可追溯机制图，禁止装饰性图片。",
+    "density_profile": "中等密度、证据优先；核心结果使用大图表或大表格，实验边界使用短注释和明确的证据标记。",
+    "style_reason": "受众关心可比性、复现性和归因边界，因此采用暖白画布、深蓝标题、珊瑚强调和源证据板的学术证据风格。",
+    "layout_system": "Codex Grid evidence-first：统一左对齐标题与宽边距，交替使用证据表、机制流程、结果图表、对照构图和结论边界，避免连续页面使用同一轮廓。",
+    "style_reference": "codex/theme-reference.png",
+    "style_reference_html": "codex/theme-reference.html",
+    "style_inspiration": "codex/style-inspiration.png",
+    "style_lock": "theme-reference",
+    "style_system": {
+      "category": "Academic Research",
+      "visual_profile": "academic",
+      "tags": [
+        "academic",
+        "paper",
+        "evidence",
+        "research",
+        "clean"
+      ],
+      "density": "medium",
+      "mood": "credible, calm, evidence-first",
+      "composition": "warm white canvas, strict evidence grid, navy hierarchy, restrained annotations",
+      "typography_treatment": "compact sans-serif labels with decisive navy action titles",
+      "background_treatment": "quiet paper ground with subtle blue section bands",
+      "image_treatment": "large source figures on white plates with visible captions and provenance",
+      "table_treatment": "native white tables with navy rules and one coral emphasis row",
+      "style_markers": [
+        "paper canvas",
+        "navy thesis",
+        "source figure plate",
+        "coral annotation"
+      ],
+      "layout_families": [
+        "research-cover",
+        "evidence-split",
+        "method-flow",
+        "chart-first",
+        "finding-boundary"
+      ],
+      "avoid": [
+        "decorative stock photography",
+        "poster text walls",
+        "unlabelled charts"
+      ],
+      "inspiration_asset": "themes/style-references/academic-evidence-v1.png",
+      "provenance": {
+        "type": "original",
+        "inspiration": "evidence-led academic editorial systems"
+      },
+      "selection": {
+        "theme_id": "academic-evidence",
+        "basis": "planner_choice",
+        "semantic_scores": {}
+      }
+    }
+  },
+  "plan": {
+    "title": "RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束",
+    "subtitle": "先确认比较口径，再判断性能、效率与结论边界",
+    "slides": [
+      {
+        "id": "s4",
+        "layout": "comparison",
+        "composition_id": "evidence-table",
+        "role": "limitations",
+        "content_priority": "core",
+        "action_title": "共享基础，但不是同构训练",
+        "audience_question": "两套实现到底控制了哪些变量？",
+        "narrative_job": "并列呈现共同基础与关键差异，提前阻止把框架比较误读为纯算法消融。",
+        "slide_goal": "建立正确的因果解释边界，为后续平均增益比较提供必要前提。",
+        "primary_claim": "两套方法共享 SFT 模型、train/eval seeds、模型实现和 GRPO，但在精度、rollout batch、学习率、LoRA、valid trajectory 收集和 reward 粒度上存在差异。",
+        "evidence": [
+          {
+            "claim_support": "对比表列出 RLinf 使用 bf16、rollout batch 1024、learning rate 2.0e-4、LoRA，而 SimpleVLA 使用混合精度、rollout batch 512、learning rate 5e-6 和全参数训练。",
+            "evidence_ref": "p4-table-1-crop",
+            "interpretation": "这些变量会改变训练动态，因此最终差异属于完整训练系统差异，而不是单一算法开关。"
+          },
+          {
+            "claim_support": "RLinf 固定轮次后过滤 collected trajectories，并采用 action-level reward；SimpleVLA 即时过滤并缓存轨迹，采用 token-level success reward。",
+            "evidence_ref": "p5-table-1-crop",
+            "interpretation": "有效轨迹数量和奖励传播位置不同，会改变每次更新接收到的学习信号。"
+          }
+        ],
+        "implication": "可以比较两套系统的实际结果，但不能据此单独证明 RLinf 的某个算法组件具有因果优势。",
+        "transition_in": "训练配方已经明确，公平性问题现在变成变量清单。",
+        "transition_out": "在保留这些差异的前提下，先看 RLinf 自身的跨任务收益是否成立。",
+        "evidence_refs": [
+          "p4-table-1-crop",
+          "p5-table-1-crop"
+        ],
+        "table_refs": [
+          "p4-table-1",
+          "p5-table-1"
+        ],
+        "asset_candidates": [],
+        "visual_intent": "source_table",
+        "visual_plan": {
+          "layout_family": "comparison",
+          "primary_visual": null,
+          "image_budget": 0,
+          "image_roles": [],
+          "data_strategy": "native_table",
+          "background_variant": "light",
+          "density": "dense"
+        },
+        "speaker_notes": {
+          "talk_track": "这里把公平比较拆成可检查的变量。两套实现共享 SFT 模型、train/eval seeds、模型实现和 GRPO，因此有共同起点；但 RLinf 与 SimpleVLA 在精度、rollout batch、学习率和 LoRA 上不同。更关键的是，valid trajectory 的收集时机和 reward 粒度也不同，会改变每次更新接收到的有效样本与学习信号。因此后面的结果可以作为系统级比较，但不能单独归因于某一个算法组件。",
+          "delivery_cue": "先读共同基础，再按表格行读取六项差异，最后明确系统级解释边界。",
+          "source_refs": [
+            "p4-table-1-crop",
+            "p5-table-1-crop"
+          ],
+          "estimated_seconds": 100
+        },
+        "content": {
+          "eyebrow": "可比性边界",
+          "title": "共享基础，但不是同构训练",
+          "subtitle": null,
+          "kicker": null,
+          "lede": "共同起点存在，但多项实现差异会改变训练动态与因果解释。",
+          "note": {
+            "label": "解释边界",
+            "value": "这是完整训练系统的实际比较，不是单一算法组件的因果消融。"
+          },
+          "body_points": [
+            {
+              "label": "共同基础",
+              "text": "SFT 模型、train/eval seeds、模型实现和 GRPO 保持一致；valid action mask 在工程上等价。"
+            },
+            {
+              "label": "关键差异",
+              "text": "精度、rollout batch、学习率、LoRA、valid trajectory 收集和 reward 粒度均不同。"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "rollout batch",
+              "value": "1024 vs 512",
+              "meaning": "每轮采样量不同"
+            },
+            {
+              "label": "learning rate",
+              "value": "2.0e-4 vs 5e-6",
+              "meaning": "更新尺度不同"
+            },
+            {
+              "label": "reward 粒度",
+              "value": "action-level vs token-level",
+              "meaning": "奖励传播位置不同"
+            }
+          ],
+          "steps": [],
+          "result": null,
+          "columns": [
+            {
+              "label": "RLinf",
+              "headline": "完整 RL 训练配置",
+              "points": [
+                "bf16；rollout batch 1024",
+                "learning rate 2.0e-4；LoRA=true",
+                "固定轮次后过滤 collected trajectories",
+                "action-level reward"
+              ],
+              "tone": "navy"
+            },
+            {
+              "label": "SimpleVLA",
+              "headline": "另一套完整配置",
+              "points": [
+                "混合精度；rollout batch 512",
+                "learning rate 5e-6；全参数训练",
+                "每条 rollout 后即时过滤并缓存",
+                "token-level success reward"
+              ],
+              "tone": "coral"
+            }
+          ],
+          "takeaway": {
+            "label": "页面结论",
+            "value": "共享基础不等于同构训练，后续结果应按系统级差异解读。"
+          }
+        },
+        "speaker_note": "这里把公平比较拆成可检查的变量。两套实现共享 SFT 模型、train/eval seeds、模型实现和 GRPO，因此有共同起点；但 RLinf 与 SimpleVLA 在精度、rollout batch、学习率和 LoRA 上不同。更关键的是，valid trajectory 的收集时机和 reward 粒度也不同，会改变每次更新接收到的有效样本与学习信号。因此后面的结果可以作为系统级比较，但不能单独归因于某一个算法组件。"
+      }
+    ]
+  }
+}

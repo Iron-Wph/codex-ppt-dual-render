@@ -1,4 +1,17 @@
 node_modules/
-dist/
+dist/*
+!dist/README.md
+!dist/real-paper-v2/
+!dist/real-paper-v2/**
+!dist/theme-gallery/
+!dist/theme-gallery/**
 config/local.json
 *.tmp
+*.log
+.env
+.env.*
+!.env.example
+
+# Local migration packages are written beside the repository, not into it.
+*.bundle
+*.zip

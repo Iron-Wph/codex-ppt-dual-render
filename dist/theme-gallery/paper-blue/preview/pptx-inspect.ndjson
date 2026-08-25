@@ -1,0 +1,25 @@
+{"kind":"slide","id":"sl/wu3brw","slide":1,"title":"01 / 02","textShapes":9}
+{"kind":"shape","id":"sh/4vu1c3il","slide":1,"name":"slide-1-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/julk3yh0","slide":1,"name":"slide-1-page","text":"01 / 02","textPreview":"01 / 02","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/itsjat0f","slide":1,"name":"slide-001-eyebrow","text":"PAPER / RESEARCH BRIEF","textPreview":"PAPER / RESEARCH BRIEF","textChars":22,"textLines":1,"bbox":[72,78,560,24]}
+{"kind":"textbox","id":"sh/hsj21ozu","slide":1,"name":"slide-001-title","text":"SimpleVLA-RL Technical Report","textPreview":"SimpleVLA-RL Technical Report","textChars":29,"textLines":1,"bbox":[72,168,650,150]}
+{"kind":"textbox","id":"sh/wra18ji9","slide":1,"name":"slide-001-subtitle","text":"Full-paper deterministic storyboard generated from 24 PDF pages.","textPreview":"Full-paper deterministic storyboard generated from 24 PDF pages.","textChars":64,"textLines":1,"bbox":[72,352,590,80]}
+{"kind":"shape","id":"sh/vq1kzeh4","slide":1,"name":"slide-001-ring-a","bbox":[728,176,404,332]}
+{"kind":"shape","id":"sh/upsj690j","slide":1,"name":"slide-001-ring-b","bbox":[778,234,304,216]}
+{"kind":"shape","id":"sh/9ojixozy","slide":1,"name":"slide-001-core","bbox":[868,280,124,124]}
+{"kind":"textbox","id":"sh/8na14jid","slide":1,"name":"slide-001-core-text","text":"EVIDENCE","textPreview":"EVIDENCE","textChars":8,"textLines":1,"bbox":[868,321,124,28]}
+{"kind":"textbox","id":"sh/ih4jqtk7","slide":1,"name":"slide-001-html","text":"METHOD","textPreview":"METHOD","textChars":6,"textLines":1,"bbox":[1068,184,100,24]}
+{"kind":"textbox","id":"sh/jixkzels","slide":1,"name":"slide-001-pptx","text":"RESULT","textPreview":"RESULT","textChars":6,"textLines":1,"bbox":[716,506,100,24]}
+{"kind":"shape","id":"sh/kj61sj2d","slide":1,"name":"slide-001-note-bg","bbox":[72,568,720,66]}
+{"kind":"textbox","id":"sh/5kf21o3y","slide":1,"name":"slide-001-note-label","text":"CORE CLAIM","textPreview":"CORE CLAIM","textChars":10,"textLines":1,"bbox":[94,584,170,18]}
+{"kind":"textbox","id":"sh/ad4jm9kb","slide":1,"name":"slide-001-note-value","text":"Full-paper deterministic sto","textPreview":"Full-paper deterministic sto","textChars":28,"textLines":1,"bbox":[270,580,490,28]}
+{"kind":"slide","id":"sl/01pkj0","slide":2,"title":"02 / 02","textShapes":5}
+{"kind":"shape","id":"sh/ehovilon","slide":2,"name":"slide-2-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/1kfud0ny","slide":2,"name":"slide-2-page","text":"02 / 02","textPreview":"02 / 02","textChars":7,"textLines":1,"bbox":[1116,668,92,20]}
+{"kind":"textbox","id":"sh/0j6dkv6d","slide":2,"name":"slide-008-kicker","text":"PAPER EVIDENCE","textPreview":"PAPER EVIDENCE","textChars":14,"textLines":1,"bbox":[72,76,360,22]}
+{"kind":"textbox","id":"sh/rudc765w","slide":2,"name":"slide-008-title","text":"主要结果：性能、数据效率和迁移同时提升","textPreview":"主要结果：性能、数据效率和迁移同时提升","textChars":19,"textLines":1,"bbox":[72,114,800,86]}
+{"kind":"textbox","id":"sh/dgvu9gn2","slide":2,"name":"slide-008-caption","text":"p10-table-1","textPreview":"p10-table-1","textChars":11,"textLines":1,"bbox":[92,210,760,16]}
+{"kind":"shape","id":"sh/sfmdgb6h","slide":2,"name":"slide-008-source-frame","bbox":[900,88,300,112]}
+{"kind":"textbox","id":"sh/3qdc3650","slide":2,"name":"slide-008-source-label","text":"SOURCE CROP","textPreview":"SOURCE CROP","textChars":11,"textLines":1,"bbox":[914,98,110,16]}
+{"kind":"chart","id":"ch/yhs7qpsb","slide":2,"name":"","chartType":"bar","bbox":[92,236,1050,350]}
+{"kind":"image","id":"im/fapwzu1c","slide":2,"name":"","alt":"论文第 10 页图片","bbox":[912,116,276,72]}

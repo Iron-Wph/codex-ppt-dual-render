@@ -1,0 +1,225 @@
+{
+  "deck": {
+    "id": "rlinf-robotwin-experiment-storyboard-revised",
+    "title": "RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束",
+    "purpose": "帮助具身智能与机器人学习研究者判断 RLinf 在 RoboTwin 上的性能与系统效率证据，并准确区分受控系统优势与纯算法因果结论。",
+    "audience": "具身智能、机器人学习与强化学习研究者、论文评审者和实验复现者。",
+    "language": "zh-CN",
+    "aspect_ratio": "16:9",
+    "communication_job": "By the end, embodied-AI researchers should be able to cite and reproduce RLinf’s RoboTwin result with the correct boundary because the experiments show a large cross-task SSR gain and competitive execution times under fixed seeds, evaluation protocol, and 8-card A800 conditions, while implementation differences prevent isolating a pure RLinf algorithm effect.",
+    "talk_duration_minutes": 12,
+    "audience_profile": {
+      "role": "具身智能与机器人学习研究者、论文评审者、实验复现者",
+      "prior_knowledge": "熟悉 VLA、SFT、GRPO、RoboTwin、SSR、OOD seed、多卡训练与基本实验对照方法。",
+      "cares_about": [
+        "RLinf 的性能增益是否跨任务成立",
+        "SFT→RL 的比较是否公平",
+        "reward、轨迹收集、精度和超参数差异是否改变结论",
+        "seed、GPU、评估温度和训练步数是否可复现",
+        "不同并行模式下 actor 与 rollout 的实际成本"
+      ],
+      "likely_questions": [
+        "RLinf 的提升能否归因于 RL 信号本身？",
+        "8 个任务上的增益是否一致，训练成本是多少？",
+        "RLinf 与 SimpleVLA 的比较到底控制了哪些变量？",
+        "评估温度、模型初始化和 GPU 是否会改变 SSR？",
+        "实际运行时应该选择哪种并行模式？"
+      ],
+      "desired_outcome": "能够复现实验契约，引用跨任务性能与系统效率结果，并将结论表述为受控条件下的 RLinf 完整训练系统优势，而非无条件的纯算法优越性。"
+    }
+  },
+  "narrative": {
+    "arc": "实验问题 → 实验契约与泛化口径 → RLinf 训练信号 → 与 SimpleVLA 的可比性边界 → 跨任务性能 → 框架级增益 → 敏感性边界 → 系统效率 → 受控条件下的结论",
+    "key_message": "在相同 RoboTwin 训练 seed、128 个 OOD 评估 seed、评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练使 8 个任务的平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下呈现有竞争力的 actor/rollout 时间；但由于精度、超参数、valid trajectory 收集和 reward 设计不同，证据支持的是受控条件下的完整系统优势，而不是纯算法因果结论。",
+    "opening_question": "在固定 RoboTwin seed、评估口径和 8 卡 A800 条件下，RLinf 的提升能否归因于 RL 信号本身，还是只能归因于完整训练系统的差异？",
+    "closing_answer": "证据支持这样的结论：在固定实验契约下，RLinf 的 RL 训练带来跨 8 个任务的显著 SSR 增益，并提供有竞争力的执行路径；但由于精度、超参数、轨迹收集和 reward 设计并非完全同构，不能把该结果表述为脱离实验契约的纯算法优越性。",
+    "sections": [
+      {
+        "id": "sec-3",
+        "title": "建立性能结论",
+        "job": "从跨任务增益、框架比较和敏感性分析形成主结果判断",
+        "slide_ids": [
+          "s5"
+        ]
+      }
+    ],
+    "priority_map": {
+      "core": [
+        "s5"
+      ],
+      "support": [],
+      "context": []
+    },
+    "logic_check": {
+      "opening_resolved": true,
+      "core_has_evidence": true,
+      "no_redundant_slides": true,
+      "rationale": "已保留 9 页与原叙事顺序，并修复实验契约可见性、训练流程阅读顺序、比较表、平均值证据、效率矩阵、结论边界、标题密度、截断文案和演讲稿长度。所有核心主张均绑定有效证据 ID；结论页分别呈现答案、采用条件和归因边界。"
+    }
+  },
+  "visual": {
+    "style_family": "academic-evidence",
+    "image_policy": "仅使用证据索引中的源表、源图或页面快照；优先使用原生表格、原生图表与可追溯机制图，禁止装饰性图片。",
+    "density_profile": "中等密度、证据优先；核心结果使用大图表或大表格，实验边界使用短注释和明确的证据标记。",
+    "style_reason": "受众关心可比性、复现性和归因边界，因此采用暖白画布、深蓝标题、珊瑚强调和源证据板的学术证据风格。",
+    "layout_system": "Codex Grid evidence-first：统一左对齐标题与宽边距，交替使用证据表、机制流程、结果图表、对照构图和结论边界，避免连续页面使用同一轮廓。",
+    "style_reference": "codex/theme-reference.png",
+    "style_reference_html": "codex/theme-reference.html",
+    "style_inspiration": "codex/style-inspiration.png",
+    "style_lock": "theme-reference",
+    "style_system": {
+      "category": "Academic Research",
+      "visual_profile": "academic",
+      "tags": [
+        "academic",
+        "paper",
+        "evidence",
+        "research",
+        "clean"
+      ],
+      "density": "medium",
+      "mood": "credible, calm, evidence-first",
+      "composition": "warm white canvas, strict evidence grid, navy hierarchy, restrained annotations",
+      "typography_treatment": "compact sans-serif labels with decisive navy action titles",
+      "background_treatment": "quiet paper ground with subtle blue section bands",
+      "image_treatment": "large source figures on white plates with visible captions and provenance",
+      "table_treatment": "native white tables with navy rules and one coral emphasis row",
+      "style_markers": [
+        "paper canvas",
+        "navy thesis",
+        "source figure plate",
+        "coral annotation"
+      ],
+      "layout_families": [
+        "research-cover",
+        "evidence-split",
+        "method-flow",
+        "chart-first",
+        "finding-boundary"
+      ],
+      "avoid": [
+        "decorative stock photography",
+        "poster text walls",
+        "unlabelled charts"
+      ],
+      "inspiration_asset": "themes/style-references/academic-evidence-v1.png",
+      "provenance": {
+        "type": "original",
+        "inspiration": "evidence-led academic editorial systems"
+      },
+      "selection": {
+        "theme_id": "academic-evidence",
+        "basis": "planner_choice",
+        "semantic_scores": {}
+      }
+    }
+  },
+  "plan": {
+    "title": "RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束",
+    "subtitle": "先确认比较口径，再判断性能、效率与结论边界",
+    "slides": [
+      {
+        "id": "s5",
+        "layout": "chart-focus",
+        "composition_id": "chart-with-interpretation-rail",
+        "role": "main_results",
+        "content_priority": "core",
+        "action_title": "8/8 任务提升，平均 SSR 显著上升",
+        "audience_question": "RLinf 的 RL 增益是单个任务的偶然现象吗？",
+        "narrative_job": "用任务级结果和平均值突出 RLinf SFT→RL 的跨任务提升，同时保留任务间幅度与训练步数差异。",
+        "slide_goal": "建立最强的单系统性能证据。",
+        "primary_claim": "8 个 RoboTwin 任务的 RLinf RL train SSR 均高于 RLinf SFT，平均值从 24.48% 提升到 84.63%，平均提升为 60.15 个百分点。",
+        "evidence": [
+          {
+            "claim_support": "8 个任务分别列出 RLinf SFT、RLinf RL、平均提升和训练步数，所有任务的 RLinf RL 数值高于对应 SFT 数值。",
+            "evidence_ref": "p5-table-1",
+            "interpretation": "提升跨越不同任务，但幅度和所需训练步数不同。"
+          },
+          {
+            "claim_support": "平均汇总为 RLinf SFT 24.48%、RLinf RL 84.63%，Δ Avg. 为 +60.15%。",
+            "evidence_ref": "p6-table-1",
+            "interpretation": "平均值支持 RLinf 在这组任务上的总体训练收益，但仍需连同训练配置与评估口径解释。"
+          }
+        ],
+        "implication": "跨任务结果支持“RLinf 的 RL 训练有效”，但还没有回答这是否优于另一套实现或是否是纯 RL 信号造成的。",
+        "transition_in": "比较口径已被标注，先检验 RLinf 自身是否稳定地产生收益。",
+        "transition_out": "下一步把相同的 SFT→RL 变化与 SimpleVLA 并置，判断系统级增益是否更大。",
+        "evidence_refs": [
+          "p5-table-1",
+          "p6-table-1"
+        ],
+        "table_refs": [
+          "p5-table-1",
+          "p6-table-1"
+        ],
+        "asset_candidates": [],
+        "visual_intent": "data_chart",
+        "visual_plan": {
+          "layout_family": "chart-focus",
+          "primary_visual": null,
+          "image_budget": 0,
+          "image_roles": [],
+          "data_strategy": "native_chart",
+          "background_variant": "light",
+          "density": "balanced"
+        },
+        "speaker_notes": {
+          "talk_track": "在可比性边界明确后，先看 RLinf 自身是否稳定地产生收益。8 个 RoboTwin 任务里，RLinf RL 的 train SSR 全部高于 SFT，平均从 24.48% 升到 84.63%，提升 60.15 个百分点。任务级结果还显示，增益幅度从 18.75 到 85.94 不等，训练步数从 30 到 240，因此结果强度不能脱离训练成本与配置口径。这里证明的是 RLinf 自身有效，下一页再比较两套系统。",
+          "delivery_cue": "先强调 24.48%→84.63% 和 8/8，再指向任务级差异与训练步数。",
+          "source_refs": [
+            "p5-table-1",
+            "p6-table-1"
+          ],
+          "estimated_seconds": 100
+        },
+        "content": {
+          "eyebrow": "跨任务结果",
+          "title": "8/8 任务提升，平均 SSR 显著上升",
+          "subtitle": null,
+          "kicker": null,
+          "lede": "任务级结果显示，RLinf 的 RL 增益不是单个任务的偶然现象，但提升幅度与训练步数存在差异。",
+          "note": null,
+          "body_points": [
+            {
+              "label": "跨任务一致性",
+              "text": "8/8 个任务的 RLinf RL train SSR 均高于对应 SFT。"
+            },
+            {
+              "label": "增益幅度有差异",
+              "text": "平均提升从 18.75 到 85.94 不等；任务初始 SSR 与最终结果不能简单等同。"
+            },
+            {
+              "label": "训练成本需同时看",
+              "text": "RLinf train step 覆盖 30–240，结果强度不能脱离训练步数与配置口径解读。"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "RLinf SFT 平均 train SSR",
+              "value": "24.48%",
+              "meaning": "RL 训练前的跨任务平均起点"
+            },
+            {
+              "label": "RLinf RL 平均 train SSR",
+              "value": "84.63%",
+              "meaning": "RL 训练后的跨任务平均结果"
+            },
+            {
+              "label": "平均提升",
+              "value": "+60.15 个百分点",
+              "meaning": "8 个任务汇总的总体训练收益"
+            }
+          ],
+          "steps": [],
+          "result": {
+            "label": "核心结果",
+            "value": "8/8 任务提升；24.48%→84.63%；平均提升 +60.15 个百分点"
+          },
+          "columns": [],
+          "takeaway": null
+        },
+        "speaker_note": "在可比性边界明确后，先看 RLinf 自身是否稳定地产生收益。8 个 RoboTwin 任务里，RLinf RL 的 train SSR 全部高于 SFT，平均从 24.48% 升到 84.63%，提升 60.15 个百分点。任务级结果还显示，增益幅度从 18.75 到 85.94 不等，训练步数从 30 到 240，因此结果强度不能脱离训练成本与配置口径。这里证明的是 RLinf 自身有效，下一页再比较两套系统。"
+      }
+    ]
+  }
+}

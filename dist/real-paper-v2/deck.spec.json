@@ -1,0 +1,3588 @@
+{
+  "spec_version": "0.4.0",
+  "deck": {
+    "id": "rlinf-robotwin-experiment-storyboard-revised",
+    "title": "RLinf 在 RoboTwin 上：增益成立，但归因受实验契约约束",
+    "purpose": "帮助具身智能与机器人学习研究者判断 RLinf 在 RoboTwin 上的性能与系统效率证据，并准确区分受控系统优势与纯算法因果结论。",
+    "audience": "具身智能、机器人学习与强化学习研究者、论文评审者和实验复现者。",
+    "language": "zh-CN",
+    "aspect_ratio": "16:9",
+    "communication_job": "By the end, embodied-AI researchers should be able to cite and reproduce RLinf’s RoboTwin result with the correct boundary because the experiments show a large cross-task train SSR gain and competitive execution times under fixed seeds, evaluation protocol, and 8-card A800 conditions, while implementation differences prevent isolating a pure RLinf algorithm effect.",
+    "talk_duration_minutes": 12,
+    "audience_profile": {
+      "role": "具身智能与机器人学习研究者、论文评审者、实验复现者",
+      "prior_knowledge": "熟悉 VLA、SFT、GRPO、RoboTwin、SSR、OOD seed、多卡训练与基本实验对照方法。",
+      "cares_about": [
+        "RLinf 的性能增益是否跨任务成立",
+        "SFT→RL 的比较是否公平",
+        "reward、轨迹收集、精度和超参数差异是否改变结论",
+        "seed、GPU、评估温度和训练步数是否可复现",
+        "不同并行模式下 actor 与 rollout 的实际成本"
+      ],
+      "likely_questions": [
+        "RLinf 的提升能否归因于 RL 信号本身？",
+        "8 个任务上的增益是否一致，训练成本是多少？",
+        "RLinf 与 SimpleVLA 的比较到底控制了哪些变量？",
+        "评估温度、模型初始化和 GPU 是否会改变 SSR？",
+        "实际运行时应该选择哪种并行模式？"
+      ],
+      "desired_outcome": "能够复现实验契约，引用跨任务 train SSR 与系统效率结果，并将结论表述为受控条件下的 RLinf 完整训练系统优势，而非 OOD 泛化或无条件的纯算法优越性。"
+    }
+  },
+  "theme": {
+    "id": "academic-evidence",
+    "label": "Academic Evidence",
+    "category": "Academic Research",
+    "visual_profile": "academic",
+    "tags": [
+      "academic",
+      "paper",
+      "evidence",
+      "research",
+      "clean"
+    ],
+    "match_signals": [
+      "academic",
+      "research",
+      "paper",
+      "thesis",
+      "science",
+      "study",
+      "experiment",
+      "论文",
+      "研究",
+      "学术",
+      "实验",
+      "综述"
+    ],
+    "density": "medium",
+    "mood": "credible, calm, evidence-first",
+    "recommended_for": [
+      "academic paper",
+      "literature review",
+      "technical briefing"
+    ],
+    "composition": "warm white canvas, strict evidence grid, navy hierarchy, restrained annotations",
+    "typography_treatment": "compact sans-serif labels with decisive navy action titles",
+    "background_treatment": "quiet paper ground with subtle blue section bands",
+    "image_treatment": "large source figures on white plates with visible captions and provenance",
+    "table_treatment": "native white tables with navy rules and one coral emphasis row",
+    "style_markers": [
+      "paper canvas",
+      "navy thesis",
+      "source figure plate",
+      "coral annotation"
+    ],
+    "layout_families": [
+      "research-cover",
+      "evidence-split",
+      "method-flow",
+      "chart-first",
+      "finding-boundary"
+    ],
+    "avoid": [
+      "decorative stock photography",
+      "poster text walls",
+      "unlabelled charts"
+    ],
+    "style_reference_asset": "themes/style-references/academic-evidence-v1.png",
+    "provenance": {
+      "type": "original",
+      "inspiration": "evidence-led academic editorial systems"
+    },
+    "colors": {
+      "background": "#F5F7FA",
+      "surface": "#FFFFFF",
+      "surface2": "#EAF0F7",
+      "foreground": "#13233A",
+      "muted": "#5C718A",
+      "accent": "#245CB7",
+      "accent2": "#D65F42",
+      "accent3": "#2B8A7E",
+      "border": "#C9D5E3",
+      "white": "#FFFFFF",
+      "black": "#0B1625"
+    },
+    "typography": {
+      "title_px": 56,
+      "slide_title_px": 37,
+      "subtitle_px": 21,
+      "body_px": 17,
+      "caption_px": 12,
+      "metric_px": 46
+    },
+    "fonts": {
+      "heading": [
+        "Aptos Display",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "body": [
+        "Aptos",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "mono": [
+        "Aptos Mono",
+        "Consolas",
+        "monospace"
+      ]
+    },
+    "spacing": {
+      "page_margin": 64,
+      "section_gap": 28,
+      "card_gap": 18,
+      "text_gap": 10
+    }
+  },
+  "visual": {
+    "style_family": "academic-evidence",
+    "image_policy": "仅使用证据索引中的源表、源图或页面快照；优先使用原生表格、原生图表与可追溯机制图，禁止装饰性图片。",
+    "density_profile": "中等密度、证据优先；核心结果使用大图表或大表格，实验边界使用短注释和明确的证据标记。",
+    "style_reason": "受众关心可比性、复现性和归因边界，因此采用暖白画布、深蓝标题、珊瑚强调和源证据板的学术证据风格。",
+    "layout_system": "Codex Grid evidence-first：统一左对齐标题与宽边距，交替使用证据表、机制流程、结果图表、对照构图和结论边界。",
+    "style_reference": "codex/theme-reference.png",
+    "style_reference_html": "codex/theme-reference.html",
+    "style_inspiration": "codex/style-inspiration.png",
+    "style_lock": "theme-reference",
+    "style_system": {
+      "category": "Academic Research",
+      "visual_profile": "academic",
+      "tags": [
+        "academic",
+        "paper",
+        "evidence",
+        "research",
+        "clean"
+      ],
+      "density": "medium",
+      "mood": "credible, calm, evidence-first",
+      "composition": "warm white canvas, strict evidence grid, navy hierarchy, restrained annotations",
+      "typography_treatment": "compact sans-serif labels with decisive navy action titles",
+      "background_treatment": "quiet paper ground with subtle blue section bands",
+      "image_treatment": "large source figures on white plates with visible captions and provenance",
+      "table_treatment": "native white tables with navy rules and one coral emphasis row",
+      "style_markers": [
+        "paper canvas",
+        "navy thesis",
+        "source figure plate",
+        "coral annotation"
+      ],
+      "layout_families": [
+        "research-cover",
+        "evidence-split",
+        "method-flow",
+        "chart-first",
+        "finding-boundary"
+      ],
+      "avoid": [
+        "decorative stock photography",
+        "poster text walls",
+        "unlabelled charts"
+      ],
+      "inspiration_asset": "themes/style-references/academic-evidence-v1.png",
+      "provenance": {
+        "type": "original",
+        "inspiration": "evidence-led academic editorial systems"
+      },
+      "selection": {
+        "theme_id": "academic-evidence",
+        "basis": "planner_choice",
+        "semantic_scores": {}
+      }
+    }
+  },
+  "evidence": {
+    "input": {
+      "path": "C:\\Users\\Wph\\Desktop\\2026届本科毕业论文（设计）工作指南\\codex\\RLinf论文实验.pdf",
+      "type": "pdf"
+    },
+    "parser": "pymupdf",
+    "parser_details": {
+      "engine": "pymupdf",
+      "structured_blocks": 607,
+      "requested": "auto",
+      "selected": "pymupdf",
+      "fallback_reason": "MinerU unavailable: spawn mineru.exe ENOENT",
+      "diagnostics": {
+        "page_count": 8,
+        "text_page_ratio": 1,
+        "scanned_like_page_ratio": 0,
+        "character_count": 12722,
+        "asset_count": 29,
+        "table_count": 10,
+        "formula_count": 0,
+        "structured_block_count": 607
+      }
+    },
+    "page_count": 8,
+    "character_count": 12722,
+    "sections": [
+      {
+        "id": "p1-block-1",
+        "source_page": 1,
+        "title": "RLinf 论文实验 ​",
+        "level": 1,
+        "bbox": [
+          36.5,
+          55.01220703125,
+          152.9225616455078,
+          77.44921875
+        ]
+      },
+      {
+        "id": "p1-block-4",
+        "source_page": 1,
+        "title": "Rebuttal ​",
+        "level": 2,
+        "bbox": [
+          36.5,
+          114.99365234375,
+          96.77212524414062,
+          130.68505859375
+        ]
+      },
+      {
+        "id": "p1-block-26",
+        "source_page": 1,
+        "title": "Details​",
+        "level": 2,
+        "bbox": [
+          36.5,
+          474.49365234375,
+          79.16275024414062,
+          490.18505859375
+        ]
+      },
+      {
+        "id": "p4-block-28",
+        "source_page": 4,
+        "title": "与 SimpleVLA 对比 ​",
+        "level": 2,
+        "bbox": [
+          36.5,
+          415.24462890625,
+          139.45962524414062,
+          432.40234375
+        ]
+      },
+      {
+        "id": "p6-block-20",
+        "source_page": 6,
+        "title": "Lora ​",
+        "level": 2,
+        "bbox": [
+          36.5,
+          634.99365234375,
+          69.45181274414062,
+          650.68505859375
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "id": "p1-claim-1",
+        "source_page": 1,
+        "text": "RoboTwin 在数据生成过程中引入了多种领域随机化因素，包括 场景杂乱度（添加无关干扰物体）、背景纹理（从约 1.2 万种高质量纹理中采"
+      },
+      {
+        "id": "p1-claim-2",
+        "source_page": 1,
+        "text": "样）、光照条件（颜色温度与光源类型随机）、桌面高度（在物理合理范围内采样）以及语言指令（生成多样化的任务描述） 。这些随机化因素共"
+      },
+      {
+        "id": "p1-claim-3",
+        "source_page": 1,
+        "text": "在训练阶段，监督微调（ SFT ）和强化学习（ RL ）均使用同一组 基于 robotwin 官方随机化场景参数配置 的 1,000 个随机 seed 对环境进行初始"
+      },
+      {
+        "id": "p1-claim-4",
+        "source_page": 1,
+        "text": "在 SFT 阶段，每个 seed 仅用于初始化环境一次，共采集 1,000 条不同的专家示范轨迹用于训练。 ​"
+      },
+      {
+        "id": "p2-claim-1",
+        "source_page": 2,
+        "text": "max_episode_steps: 200 # max episode steps for truncation ​"
+      },
+      {
+        "id": "p2-claim-2",
+        "source_page": 2,
+        "text": "assets_path: \"/mnt/public/peihong/codes/RLinf_RoboTwin_gz\" ​"
+      },
+      {
+        "id": "p2-claim-3",
+        "source_page": 2,
+        "text": "seeds_path: \"/mnt/project_rlinf/guozhen/test_robotwin/SimpleVLA-RL/verl/utils/en"
+      },
+      {
+        "id": "p2-claim-4",
+        "source_page": 2,
+        "text": "video_base_dir: ${runner.logger.log_path}/video/train ​"
+      },
+      {
+        "id": "p3-claim-1",
+        "source_page": 3,
+        "text": "experiment_name: \"robotwin_grpo_openvlaoft\" ​"
+      },
+      {
+        "id": "p3-claim-2",
+        "source_page": 3,
+        "text": "logger_backends: [ \"tensorboard\" ] # wandb, swanlab ​"
+      },
+      {
+        "id": "p3-claim-3",
+        "source_page": 3,
+        "text": "eval_policy_path: null # Optional: .pt file or None, if None, will use the che"
+      },
+      {
+        "id": "p3-claim-4",
+        "source_page": 3,
+        "text": "resume_dir: /mnt/public/peihong/codes/RLinf_new/logs/beat_block_hammer_grpo_2e"
+      },
+      {
+        "id": "p4-claim-1",
+        "source_page": 4,
+        "text": "1. SFT 模型、 train/eval seeds 均采用 simple 提供 ​"
+      },
+      {
+        "id": "p4-claim-2",
+        "source_page": 4,
+        "text": "4. RLinf 中 GRPO 使用的 valid action mask 模式与 simple 的工程等价， simple 是等待所有 env trunc / terminate 后一起 reset​"
+      },
+      {
+        "id": "p4-claim-3",
+        "source_page": 4,
+        "text": "Simple ：模型精度是 FP32 ，整体是 bf16-fp32 的混合精度 ​"
+      },
+      {
+        "id": "p4-claim-4",
+        "source_page": 4,
+        "text": "对于初始 SSR （指 Simple ）低的 task ，如： beat_block_hammer ，模型在 train_seed 的 SSR 会更低（在 RLinf ）导致模型的训练步数需要更多； ​"
+      },
+      {
+        "id": "p5-claim-1",
+        "source_page": 5,
+        "text": "还有框架计算 log_prob 、模型 update 的 bsz 不同， but 不影响性能 ​"
+      },
+      {
+        "id": "p5-claim-2",
+        "source_page": 5,
+        "text": "RLinf: 其 rollout 固定轮次、固定数目的 traj 后，对 collected traj 进行 reward filter ，所以模型每次 step 得到 valid traj 数受模型当前对该 task 的 SSR 影"
+      },
+      {
+        "id": "p5-claim-3",
+        "source_page": 5,
+        "text": "Simple: 其在每次 rollout traj 后都立即进行 reward filter ，剩余的 traj 存在 buffer 中；循环往复直到收集到 rollout bsz 数量的 traj 再进行模型的更新 ​"
+      },
+      {
+        "id": "p5-claim-4",
+        "source_page": 5,
+        "text": "设置 use_custom_reward & use_rel_reward 为 True​"
+      },
+      {
+        "id": "p6-claim-1",
+        "source_page": 6,
+        "text": "RLinf SFT ​ RLinf RL ​ Simple SFT ​ Simple RL ​"
+      },
+      {
+        "id": "p6-claim-2",
+        "source_page": 6,
+        "text": "Average ​ 24.48%​ 84.63%​ 34.40%​ 72.18%​"
+      },
+      {
+        "id": "p6-claim-3",
+        "source_page": 6,
+        "text": "1. 模型实现微小差异： RLinf 加了 position_ids ，我之前跑的没加，简单验证后性能没差异就忽略了 ​"
+      },
+      {
+        "id": "p6-claim-4",
+        "source_page": 6,
+        "text": "镜像： cr.infini-ai.com/te-dbdcudoygepmq5vx/agentic-rlinf0.1-torch2.6.0-openvlaoft-pi0-robotwin:0.1 ​"
+      },
+      {
+        "id": "p7-claim-1",
+        "source_page": 7,
+        "text": "cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​"
+      },
+      {
+        "id": "p7-claim-2",
+        "source_page": 7,
+        "text": "bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope"
+      },
+      {
+        "id": "p7-claim-3",
+        "source_page": 7,
+        "text": "cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​"
+      },
+      {
+        "id": "p7-claim-4",
+        "source_page": 7,
+        "text": "bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope"
+      },
+      {
+        "id": "p8-claim-1",
+        "source_page": 8,
+        "text": "2026/4/4 20:47 ‌⁢​‬​‬⁤‬​⁣ ‬⁡‍​ ⁢‌​⁢‍‬⁣​‌⁡ ‬‌‍‬⁣‌​‬⁢ ⁡​ ‌⁡RLinf 论文实验 - 飞书云文档"
+      },
+      {
+        "id": "p8-claim-2",
+        "source_page": 8,
+        "text": "https://nics-efc.feishu.cn/wiki/MYEMwYNk8ihoNFkn0EbcexkbnTW 8/8"
+      }
+    ],
+    "diagnostics": {
+      "block_types": {
+        "title": 5,
+        "text": 573,
+        "table": 10,
+        "figure": 13,
+        "list": 6
+      },
+      "structured_block_count": 607,
+      "asset_count": 29,
+      "table_count": 10,
+      "formula_count": 0,
+      "captioned_asset_count": 0
+    }
+  },
+  "assets": [
+    {
+      "id": "p1-table-1-crop",
+      "type": "evidence_crop",
+      "source_page": 1,
+      "index": 1,
+      "bbox": [
+        36.999969482421875,
+        182.5,
+        408.9999694824219,
+        345.5
+      ],
+      "path": "assets/page-001-table-01-crop.png",
+      "mime_type": "image/png",
+      "width": 841,
+      "height": 382,
+      "bytes": 64148,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p1-table-1",
+      "caption": "Cropped paper figure or table region from page 1",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 1",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-table-2-crop",
+      "type": "evidence_crop",
+      "source_page": 1,
+      "index": 2,
+      "bbox": [
+        36.999969482421875,
+        362.5,
+        222.99996948242188,
+        417
+      ],
+      "path": "assets/page-001-table-02-crop.png",
+      "mime_type": "image/png",
+      "width": 432,
+      "height": 143,
+      "bytes": 11507,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p1-table-2",
+      "caption": "Cropped paper figure or table region from page 1",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 1",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-snapshot",
+      "type": "evidence_page_snapshot",
+      "source_page": 1,
+      "index": 1,
+      "bbox": null,
+      "path": "assets/page-001-snapshot.png",
+      "mime_type": "image/png",
+      "width": 714,
+      "height": 1011,
+      "bytes": 141859,
+      "snapshot": true,
+      "crop": false,
+      "table_ref": null,
+      "caption": "Full-page evidence snapshot from page 1",
+      "footnote": null,
+      "alt_text": "Full-page evidence snapshot from page 1",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-1",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 1,
+      "bbox": [
+        38,
+        87.50001525878906,
+        48,
+        97.50001525878906
+      ],
+      "path": "assets/page-001-image-01.jpeg",
+      "mime_type": "image/jpeg",
+      "width": 72,
+      "height": 72,
+      "bytes": 2387,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 1",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 1",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-2",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 2,
+      "bbox": [
+        79,
+        87.50001525878906,
+        89,
+        97.50001525878906
+      ],
+      "path": "assets/page-001-image-02.jpeg",
+      "mime_type": "image/jpeg",
+      "width": 72,
+      "height": 72,
+      "bytes": 1447,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 2",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 2",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-3",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 3,
+      "bbox": [
+        208.49998474121094,
+        207.5,
+        277,
+        224
+      ],
+      "path": "assets/page-001-image-03.png",
+      "mime_type": "image/png",
+      "width": 1124,
+      "height": 268,
+      "bytes": 57166,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 3",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 3",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-4",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 4,
+      "bbox": [
+        285.9999694824219,
+        207.50001525878906,
+        354.4999694824219,
+        223.50001525878906
+      ],
+      "path": "assets/page-001-image-04.png",
+      "mime_type": "image/png",
+      "width": 1280,
+      "height": 301,
+      "bytes": 260176,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 4",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 4",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-5",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 5,
+      "bbox": [
+        130.99998474121094,
+        252.5,
+        199.5,
+        259.5
+      ],
+      "path": "assets/page-001-image-05.png",
+      "mime_type": "image/png",
+      "width": 1943,
+      "height": 195,
+      "bytes": 150432,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 5",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 5",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-6",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 6,
+      "bbox": [
+        208.49998474121094,
+        252.5,
+        277,
+        262.5
+      ],
+      "path": "assets/page-001-image-06.png",
+      "mime_type": "image/png",
+      "width": 1701,
+      "height": 253,
+      "bytes": 59542,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 6",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 6",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-7",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 7,
+      "bbox": [
+        285.9999694824219,
+        252.5,
+        354.4999694824219,
+        262.5
+      ],
+      "path": "assets/page-001-image-07.png",
+      "mime_type": "image/png",
+      "width": 1681,
+      "height": 253,
+      "bytes": 61806,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 7",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 7",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-8",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 8,
+      "bbox": [
+        285.9999694824219,
+        291,
+        354.4999694824219,
+        300
+      ],
+      "path": "assets/page-001-image-08.png",
+      "mime_type": "image/png",
+      "width": 1638,
+      "height": 215,
+      "bytes": 50973,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 8",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 8",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-9",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 9,
+      "bbox": [
+        127.49996948242188,
+        387.5,
+        168.49996948242188,
+        393
+      ],
+      "path": "assets/page-001-image-09.png",
+      "mime_type": "image/png",
+      "width": 1676,
+      "height": 219,
+      "bytes": 44511,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 9",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 9",
+      "editable_level": "image"
+    },
+    {
+      "id": "p1-image-10",
+      "type": "evidence_figure",
+      "source_page": 1,
+      "index": 10,
+      "bbox": [
+        177.49996948242188,
+        387.5,
+        218.49996948242188,
+        393
+      ],
+      "path": "assets/page-001-image-10.png",
+      "mime_type": "image/png",
+      "width": 1719,
+      "height": 241,
+      "bytes": 51865,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 1 页嵌入图片 10",
+      "footnote": null,
+      "alt_text": "论文第 1 页嵌入图片 10",
+      "editable_level": "image"
+    },
+    {
+      "id": "p4-table-1-crop",
+      "type": "evidence_crop",
+      "source_page": 4,
+      "index": 1,
+      "bbox": [
+        36.74998612837358,
+        28.500039100646973,
+        402.2749847412109,
+        380.7083740234375
+      ],
+      "path": "assets/page-004-table-01-crop.png",
+      "mime_type": "image/png",
+      "width": 828,
+      "height": 798,
+      "bytes": 67573,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p4-table-1",
+      "caption": "Cropped paper figure or table region from page 4",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 4",
+      "editable_level": "image"
+    },
+    {
+      "id": "p4-table-2-crop",
+      "type": "evidence_crop",
+      "source_page": 4,
+      "index": 2,
+      "bbox": [
+        36.74998612837358,
+        708.875,
+        402.2749847412109,
+        791.125
+      ],
+      "path": "assets/page-004-table-02-crop.png",
+      "mime_type": "image/png",
+      "width": 828,
+      "height": 204,
+      "bytes": 15728,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p4-table-2",
+      "caption": "Cropped paper figure or table region from page 4",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 4",
+      "editable_level": "image"
+    },
+    {
+      "id": "p4-snapshot",
+      "type": "evidence_page_snapshot",
+      "source_page": 4,
+      "index": 1,
+      "bbox": null,
+      "path": "assets/page-004-snapshot.png",
+      "mime_type": "image/png",
+      "width": 714,
+      "height": 1011,
+      "bytes": 80815,
+      "snapshot": true,
+      "crop": false,
+      "table_ref": null,
+      "caption": "Full-page evidence snapshot from page 4",
+      "footnote": null,
+      "alt_text": "Full-page evidence snapshot from page 4",
+      "editable_level": "image"
+    },
+    {
+      "id": "p5-table-1-crop",
+      "type": "evidence_crop",
+      "source_page": 5,
+      "index": 1,
+      "bbox": [
+        36.94996948242188,
+        583.444566514757,
+        523.55,
+        795.055677625868
+      ],
+      "path": "assets/page-005-table-01-crop.png",
+      "mime_type": "image/png",
+      "width": 1093,
+      "height": 489,
+      "bytes": 65846,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p5-table-1",
+      "caption": "Cropped paper figure or table region from page 5",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 5",
+      "editable_level": "image"
+    },
+    {
+      "id": "p5-snapshot",
+      "type": "evidence_page_snapshot",
+      "source_page": 5,
+      "index": 1,
+      "bbox": null,
+      "path": "assets/page-005-snapshot.png",
+      "mime_type": "image/png",
+      "width": 714,
+      "height": 1011,
+      "bytes": 129638,
+      "snapshot": true,
+      "crop": false,
+      "table_ref": null,
+      "caption": "Full-page evidence snapshot from page 5",
+      "footnote": null,
+      "alt_text": "Full-page evidence snapshot from page 5",
+      "editable_level": "image"
+    },
+    {
+      "id": "p5-image-1",
+      "type": "evidence_figure",
+      "source_page": 5,
+      "index": 1,
+      "bbox": [
+        196.00001525878906,
+        240.50015258789062,
+        408.0000305175781,
+        366.0001525878906
+      ],
+      "path": "assets/page-005-image-01.png",
+      "mime_type": "image/png",
+      "width": 1280,
+      "height": 758,
+      "bytes": 291259,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 5 页嵌入图片 1",
+      "footnote": null,
+      "alt_text": "论文第 5 页嵌入图片 1",
+      "editable_level": "image"
+    },
+    {
+      "id": "p5-image-2",
+      "type": "evidence_figure",
+      "source_page": 5,
+      "index": 2,
+      "bbox": [
+        203,
+        429.000244140625,
+        426,
+        539.000244140625
+      ],
+      "path": "assets/page-005-image-02.png",
+      "mime_type": "image/png",
+      "width": 1280,
+      "height": 631,
+      "bytes": 276830,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 5 页嵌入图片 2",
+      "footnote": null,
+      "alt_text": "论文第 5 页嵌入图片 2",
+      "editable_level": "image"
+    },
+    {
+      "id": "p6-table-1-crop",
+      "type": "evidence_crop",
+      "source_page": 6,
+      "index": 1,
+      "bbox": [
+        36.81577180561266,
+        28.916666666666668,
+        286.1249694824219,
+        90.58333333333333
+      ],
+      "path": "assets/page-006-table-01-crop.png",
+      "mime_type": "image/png",
+      "width": 572,
+      "height": 159,
+      "bytes": 11437,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p6-table-1",
+      "caption": "Cropped paper figure or table region from page 6",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 6",
+      "editable_level": "image"
+    },
+    {
+      "id": "p6-table-2-crop",
+      "type": "evidence_crop",
+      "source_page": 6,
+      "index": 2,
+      "bbox": [
+        36.81577180561266,
+        496.3747253417969,
+        227.07139805385046,
+        619.624755859375
+      ],
+      "path": "assets/page-006-table-02-crop.png",
+      "mime_type": "image/png",
+      "width": 442,
+      "height": 294,
+      "bytes": 18975,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p6-table-2",
+      "caption": "Cropped paper figure or table region from page 6",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 6",
+      "editable_level": "image"
+    },
+    {
+      "id": "p6-snapshot",
+      "type": "evidence_page_snapshot",
+      "source_page": 6,
+      "index": 1,
+      "bbox": null,
+      "path": "assets/page-006-snapshot.png",
+      "mime_type": "image/png",
+      "width": 714,
+      "height": 1011,
+      "bytes": 80328,
+      "snapshot": true,
+      "crop": false,
+      "table_ref": null,
+      "caption": "Full-page evidence snapshot from page 6",
+      "footnote": null,
+      "alt_text": "Full-page evidence snapshot from page 6",
+      "editable_level": "image"
+    },
+    {
+      "id": "p6-image-1",
+      "type": "evidence_figure",
+      "source_page": 6,
+      "index": 1,
+      "bbox": [
+        238.00001525878906,
+        144.50015258789062,
+        366,
+        256.0001525878906
+      ],
+      "path": "assets/page-006-image-01.png",
+      "mime_type": "image/png",
+      "width": 812,
+      "height": 709,
+      "bytes": 25942,
+      "snapshot": false,
+      "crop": false,
+      "table_ref": null,
+      "caption": "论文第 6 页嵌入图片 1",
+      "footnote": null,
+      "alt_text": "论文第 6 页嵌入图片 1",
+      "editable_level": "image"
+    },
+    {
+      "id": "p7-table-1-crop",
+      "type": "evidence_crop",
+      "source_page": 7,
+      "index": 1,
+      "bbox": [
+        36.783321126302084,
+        28.500077883402508,
+        401.39285714285717,
+        305.7084096272786
+      ],
+      "path": "assets/page-007-table-01-crop.png",
+      "mime_type": "image/png",
+      "width": 826,
+      "height": 633,
+      "bytes": 69623,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p7-table-1",
+      "caption": "Cropped paper figure or table region from page 7",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 7",
+      "editable_level": "image"
+    },
+    {
+      "id": "p7-table-2-crop",
+      "type": "evidence_crop",
+      "source_page": 7,
+      "index": 2,
+      "bbox": [
+        36.783321126302084,
+        707.400244140625,
+        251.58330281575522,
+        810.100244140625
+      ],
+      "path": "assets/page-007-table-02-crop.png",
+      "mime_type": "image/png",
+      "width": 496,
+      "height": 249,
+      "bytes": 18024,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p7-table-2",
+      "caption": "Cropped paper figure or table region from page 7",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 7",
+      "editable_level": "image"
+    },
+    {
+      "id": "p7-snapshot",
+      "type": "evidence_page_snapshot",
+      "source_page": 7,
+      "index": 1,
+      "bbox": null,
+      "path": "assets/page-007-snapshot.png",
+      "mime_type": "image/png",
+      "width": 714,
+      "height": 1011,
+      "bytes": 80979,
+      "snapshot": true,
+      "crop": false,
+      "table_ref": null,
+      "caption": "Full-page evidence snapshot from page 7",
+      "footnote": null,
+      "alt_text": "Full-page evidence snapshot from page 7",
+      "editable_level": "image"
+    },
+    {
+      "id": "p8-table-1-crop",
+      "type": "evidence_crop",
+      "source_page": 8,
+      "index": 1,
+      "bbox": [
+        36.899969482421874,
+        58.9,
+        236.09996948242187,
+        141.1
+      ],
+      "path": "assets/page-008-table-01-crop.png",
+      "mime_type": "image/png",
+      "width": 461,
+      "height": 204,
+      "bytes": 12278,
+      "snapshot": false,
+      "crop": true,
+      "table_ref": "p8-table-1",
+      "caption": "Cropped paper figure or table region from page 8",
+      "footnote": null,
+      "alt_text": "Cropped paper figure or table region from page 8",
+      "editable_level": "image"
+    },
+    {
+      "id": "p8-snapshot",
+      "type": "evidence_page_snapshot",
+      "source_page": 8,
+      "index": 1,
+      "bbox": null,
+      "path": "assets/page-008-snapshot.png",
+      "mime_type": "image/png",
+      "width": 714,
+      "height": 1011,
+      "bytes": 45470,
+      "snapshot": true,
+      "crop": false,
+      "table_ref": null,
+      "caption": "Full-page evidence snapshot from page 8",
+      "footnote": null,
+      "alt_text": "Full-page evidence snapshot from page 8",
+      "editable_level": "image"
+    }
+  ],
+  "tables": [
+    {
+      "id": "p1-table-1",
+      "type": "evidence_table",
+      "source_page": 1,
+      "index": 1,
+      "bbox": [
+        36.999969482421875,
+        182.5,
+        408.9999694824219,
+        345.5
+      ],
+      "rows": 5,
+      "columns": 5,
+      "values": [
+        [
+          "Model​",
+          "SFT​",
+          "PPO​",
+          "GRPO​",
+          ""
+        ],
+        [
+          "pi0​",
+          "45.31%​",
+          "82.03%​",
+          "83.59%​",
+          ""
+        ],
+        [
+          "pi05​",
+          "85.16%​",
+          "96.88%​",
+          "95.31%​",
+          "RL 都取50 step​"
+        ],
+        [
+          "oft(Temp_eval=-1)​",
+          "75.78%​ ​",
+          "92.97%​ (没重跑故不需要重测)​",
+          "92.19%​",
+          ""
+        ],
+        [
+          "oft(Temp_eval=1.6)​",
+          "",
+          "86.72%​",
+          "88.28%​",
+          ""
+        ]
+      ],
+      "nonempty_ratio": 0.8,
+      "caption": "Paper table region on page 1",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p1-table-1-crop",
+      "editable_level": "native-table"
+    },
+    {
+      "id": "p1-table-2",
+      "type": "evidence_table",
+      "source_page": 1,
+      "index": 2,
+      "bbox": [
+        36.999969482421875,
+        362.5,
+        222.99996948242188,
+        417
+      ],
+      "rows": 2,
+      "columns": 3,
+      "values": [
+        [
+          "Temp_eval=1.6​",
+          "PPO​",
+          "GRPO​"
+        ],
+        [
+          "place_empty_cup​",
+          "86.72%​",
+          "88.28%​"
+        ]
+      ],
+      "nonempty_ratio": 1,
+      "caption": "Paper table region on page 1",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p1-table-2-crop",
+      "editable_level": "native-table"
+    },
+    {
+      "id": "p4-table-1",
+      "type": "evidence_table",
+      "source_page": 4,
+      "index": 1,
+      "bbox": [
+        36.74998612837358,
+        28.500039100646973,
+        402.2749847412109,
+        380.7083740234375
+      ],
+      "rows": 1,
+      "columns": 2,
+      "values": [
+        [
+          "58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89",
+          "clip_ratio_low: 0.2​ clip_ratio_c: 3.0​ value_clip: 0.2​ huber_delta: 10.0​ gamma: 1.0​ gae_lambda: 0.95​ reward_coef: 5.0​ filter_rewards: True​ rewards_lower_bound: 0.5​ rewards_upper_bound: 4.5​ # params for rollout​ sampling_params:​ do_sample: True​ temperature_train: 1.6​ temperature_eval: 1.6​ top_k: -1​ top_p: 1.0​ repetition_penalty: 1.0​ # length argument for autoregressive sampling​ # max length means max amount of tokens to generate​ length_params:​ max_new_token: null​ max_length: 1024​ min_length: 1​ env:​ group_name: \"EnvGroup\"​ enable_offload: True​"
+        ]
+      ],
+      "nonempty_ratio": 1,
+      "caption": "Paper table region on page 4",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p4-table-1-crop",
+      "editable_level": "native-table"
+    },
+    {
+      "id": "p4-table-2",
+      "type": "evidence_table",
+      "source_page": 4,
+      "index": 2,
+      "bbox": [
+        36.74998612837358,
+        708.875,
+        402.2749847412109,
+        791.125
+      ],
+      "rows": 4,
+      "columns": 3,
+      "values": [
+        [
+          "",
+          "RLinf​",
+          "Simple​"
+        ],
+        [
+          "Rollout bsz​",
+          "1024 (8 rollout_epoch * 128 num_envs)​",
+          "512 (8 n_samples * 64 train_bsz)​"
+        ],
+        [
+          "lr​",
+          "2.0e-4​",
+          "5e-6​"
+        ],
+        [
+          "is_lora​",
+          "true​",
+          "false（全参训练）​"
+        ]
+      ],
+      "nonempty_ratio": 0.917,
+      "caption": "Paper table region on page 4",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p4-table-2-crop",
+      "editable_level": "native-table"
+    },
+    {
+      "id": "p5-table-1",
+      "type": "evidence_table",
+      "source_page": 5,
+      "index": 1,
+      "bbox": [
+        36.94996948242188,
+        583.444566514757,
+        523.55,
+        795.055677625868
+      ],
+      "rows": 9,
+      "columns": 8,
+      "values": [
+        [
+          "Task​",
+          "RLinf SFT​",
+          "RLinf RL​",
+          "Avg improvement​",
+          "train step​ RLinf ​",
+          "Simple SFT​",
+          "Simple RL​ ​",
+          "train step​ Simple​"
+        ],
+        [
+          "place_empty_cup​",
+          "75.78%​",
+          "94.53%​",
+          "18.75​",
+          "40​",
+          "77.3%​",
+          "94.2%​",
+          "20​"
+        ],
+        [
+          "beat_block_hammer​",
+          "10.15%​",
+          "96.09%​",
+          "85.94​",
+          "200​",
+          "28.1%​",
+          "87.5%​",
+          "40​"
+        ],
+        [
+          "pick_dual_bottles​",
+          "20.31%​",
+          "92.96%​",
+          "72.65​",
+          "240​",
+          "29.7%​",
+          "68.3%​",
+          "100​"
+        ],
+        [
+          "move_can_pot​",
+          "9.37%​",
+          "83.59%​",
+          "74.22​",
+          "160​",
+          "28.1%​",
+          "61.2%​",
+          "50​"
+        ],
+        [
+          "lift_pot​",
+          "3.13%​",
+          "70.31%​",
+          "67.18​",
+          "30​",
+          "10.1%​",
+          "64.1%​",
+          "40​"
+        ],
+        [
+          "stack_bowls_two​",
+          "38.28%​",
+          "67.19%​",
+          "28.91​",
+          "150​",
+          "40.6%​",
+          "75.8%​",
+          "80​"
+        ],
+        [
+          "handover_block​",
+          "28.13%​",
+          "70.31%​",
+          "42.18​",
+          "150​",
+          "33.1%​",
+          "57.8%​",
+          "40​"
+        ],
+        [
+          "place_container_plat e​",
+          "54.69%​",
+          "95.31%​",
+          "40.62​",
+          "50​",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "nonempty_ratio": 0.958,
+      "caption": "Paper table region on page 5",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p5-table-1-crop",
+      "editable_level": "native-table"
+    },
+    {
+      "id": "p6-table-1",
+      "type": "evidence_table",
+      "source_page": 6,
+      "index": 1,
+      "bbox": [
+        36.81577180561266,
+        28.916666666666668,
+        286.1249694824219,
+        90.58333333333333
+      ],
+      "rows": 3,
+      "columns": 5,
+      "values": [
+        [
+          "",
+          "RLinf SFT​",
+          "RLinf RL​",
+          "Simple SFT​",
+          "Simple RL​"
+        ],
+        [
+          "Average​",
+          "24.48%​",
+          "84.63%​",
+          "34.40%​",
+          "72.18%​"
+        ],
+        [
+          "Δ Avg.​",
+          "",
+          "+60.15%​",
+          "",
+          "+37.78%​"
+        ]
+      ],
+      "nonempty_ratio": 0.8,
+      "caption": "Paper table region on page 6",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p6-table-1-crop",
+      "editable_level": "native-table"
+    },
+    {
+      "id": "p6-table-2",
+      "type": "evidence_table",
+      "source_page": 6,
+      "index": 2,
+      "bbox": [
+        36.81577180561266,
+        496.3747253417969,
+        227.07139805385046,
+        619.624755859375
+      ],
+      "rows": 6,
+      "columns": 3,
+      "values": [
+        [
+          "8卡​",
+          "actor（s）​",
+          "rollout（s）​"
+        ],
+        [
+          "Colocated​",
+          "49.15​",
+          "170.34​"
+        ],
+        [
+          "Disaggregated",
+          "90.67​",
+          "546.64​"
+        ],
+        [
+          "Hybrid(pipe=1)​",
+          "50.14​",
+          "303.7​"
+        ],
+        [
+          "Hybrid(pipe=2)​",
+          "49.91​",
+          "283.54​"
+        ],
+        [
+          "SimpleVLA​",
+          "94.05​",
+          "189.33​"
+        ]
+      ],
+      "nonempty_ratio": 1,
+      "caption": "Paper table region on page 6",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p6-table-2-crop",
+      "editable_level": "native-table"
+    },
+    {
+      "id": "p7-table-1",
+      "type": "evidence_table",
+      "source_page": 7,
+      "index": 1,
+      "bbox": [
+        36.783321126302084,
+        28.500077883402508,
+        401.39285714285717,
+        305.7084096272786
+      ],
+      "rows": 1,
+      "columns": 2,
+      "values": [
+        [
+          "13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36",
+          "if [ \"$RANK\" -eq 0 ]; then​ bash check_ray.sh 8; # 指定任意的卡数​ cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​ bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope else​ sleep 10d​ fi​ if [ \"$RANK\" -eq 0 ]; then​ bash check_ray.sh 16; # 指定任意的卡数​ cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​ bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope else​ sleep 10d​ fi​ if [ \"$RANK\" -eq 0 ]; then​ bash check_ray.sh 32; # 指定任意的卡数​ cd /mnt/project_rlinf_hs/wph/codes/RLinf_main/RLinf-main​ bash examples/embodiment/run_embodiment.sh robotwin_place_empty_cup_grpo_ope else​ sleep 10d​ fi​"
+        ]
+      ],
+      "nonempty_ratio": 1,
+      "caption": "Paper table region on page 7",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p7-table-1-crop",
+      "editable_level": "native-table"
+    },
+    {
+      "id": "p7-table-2",
+      "type": "evidence_table",
+      "source_page": 7,
+      "index": 2,
+      "bbox": [
+        36.783321126302084,
+        707.400244140625,
+        251.58330281575522,
+        810.100244140625
+      ],
+      "rows": 5,
+      "columns": 4,
+      "values": [
+        [
+          "mode​",
+          "nodenum",
+          "actor​",
+          "generate​"
+        ],
+        [
+          "Hybrid(pipe=2)​",
+          "1n​",
+          "50.31​",
+          "317.07​"
+        ],
+        [
+          "disaggregated​",
+          "1n​",
+          "89.55​",
+          "549.97​"
+        ],
+        [
+          "disaggregated​",
+          "2n​",
+          "47.92​",
+          "289.74​"
+        ],
+        [
+          "disaggregated​",
+          "4n​",
+          "26.44​",
+          "168.57​"
+        ]
+      ],
+      "nonempty_ratio": 1,
+      "caption": "Paper table region on page 7",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p7-table-2-crop",
+      "editable_level": "native-table"
+    },
+    {
+      "id": "p8-table-1",
+      "type": "evidence_table",
+      "source_page": 8,
+      "index": 1,
+      "bbox": [
+        36.899969482421874,
+        58.9,
+        236.09996948242187,
+        141.1
+      ],
+      "rows": 4,
+      "columns": 4,
+      "values": [
+        [
+          "mode​",
+          "nodenum",
+          "actor​",
+          "generate​"
+        ],
+        [
+          "colocated​",
+          "1n​",
+          "115.52​",
+          "207.86​"
+        ],
+        [
+          "colocated​",
+          "2n​",
+          "66.21​",
+          "117.98​"
+        ],
+        [
+          "colocated​",
+          "4n​",
+          "42​",
+          "71.11​"
+        ]
+      ],
+      "nonempty_ratio": 1,
+      "caption": "Paper table region on page 8",
+      "footnote": null,
+      "label": null,
+      "categories": [],
+      "crop_asset_id": "p8-table-1-crop",
+      "editable_level": "native-table"
+    }
+  ],
+  "formulas": [],
+  "narrative": {
+    "arc": "实验问题 → 实验契约与结果范围 → RLinf 训练信号 → 与 SimpleVLA 的可比性边界 → 跨任务 train SSR → 框架级增益 → 敏感性边界 → 系统效率 → 受控条件下的结论",
+    "key_message": "在相同 RoboTwin 训练 seed、128 个 OOD 评估 seed、评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练使 8 个任务的平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下呈现有竞争力的 actor/rollout 时间；128 个 OOD seed 是评估契约，不是当前报告的 OOD SSR 结果。由于精度、超参数、valid trajectory 收集和 reward 设计不同，证据支持的是受控条件下的完整系统优势，而不是纯算法因果结论。",
+    "opening_question": "在固定 RoboTwin seed、评估口径和 8 卡 A800 条件下，RLinf 的提升能否归因于 RL 信号本身，还是只能归因于完整训练系统的差异？",
+    "closing_answer": "证据支持这样的结论：在固定实验契约下，RLinf 的 RL 训练带来跨 8 个任务的 train SSR 增益，并提供有竞争力的执行路径；128 个 OOD seed 只定义评估契约，当前证据未提供 OOD SSR 结果。由于精度、超参数、轨迹收集和 reward 设计并非完全同构，不能把结果表述为脱离实验契约的纯算法优越性。",
+    "sections": [
+      {
+        "id": "sec-1",
+        "title": "先锁定实验契约",
+        "job": "定义结果可比、可复现和可解释的边界",
+        "slide_ids": [
+          "s1",
+          "s2"
+        ]
+      },
+      {
+        "id": "sec-2",
+        "title": "解释训练与对照",
+        "job": "说明 RLinf 的训练信号，并标出与 SimpleVLA 的关键差异",
+        "slide_ids": [
+          "s3",
+          "s4"
+        ]
+      },
+      {
+        "id": "sec-3",
+        "title": "建立性能结论",
+        "job": "从跨任务 train SSR、框架比较和敏感性分析形成主结果判断",
+        "slide_ids": [
+          "s5",
+          "s6",
+          "s7"
+        ]
+      },
+      {
+        "id": "sec-4",
+        "title": "落到系统与结论",
+        "job": "把性能证据连接到运行成本，并回答开场归因问题",
+        "slide_ids": [
+          "s8",
+          "s9"
+        ]
+      }
+    ],
+    "priority_map": {
+      "core": [
+        "s3",
+        "s4",
+        "s5",
+        "s6",
+        "s7",
+        "s8",
+        "s9"
+      ],
+      "support": [
+        "s2"
+      ],
+      "context": [
+        "s1"
+      ]
+    },
+    "logic_check": {
+      "opening_resolved": true,
+      "core_has_evidence": true,
+      "no_redundant_slides": true,
+      "rationale": "已保留 9 页与原叙事顺序，并将 128 个 OOD seed 明确限定为评估契约；s5 与 s9 的主结果统一显式标注 train SSR，且结论明确当前未报告 OOD SSR。"
+    }
+  },
+  "slides": [
+    {
+      "id": "s1",
+      "layout": "title",
+      "role": "title",
+      "composition_id": "thesis-stage",
+      "content_priority": "context",
+      "action_title": "RLinf 的增益成立，但归因受实验契约约束",
+      "audience_question": "这组实验最终要让我判断什么？",
+      "narrative_job": "提出唯一主问题：如何在性能增益与归因边界之间做出严谨判断。",
+      "slide_goal": "让观众带着明确的归因问题进入实验契约、结果和系统效率证据。",
+      "primary_claim": "RLinf 的实验结论必须同时回答性能是否提升、运行是否有效率，以及提升能否被归因于 RL 信号本身。",
+      "evidence": [],
+      "implication": "后续每页都围绕可比性、跨任务 train SSR、系统成本和外推边界展开。",
+      "transition_in": "从观众熟悉的“看最终 SSR”切入，提出更严格的归因问题。",
+      "transition_out": "要判断增益属于什么，先必须固定实验在什么条件下发生。",
+      "evidence_refs": [],
+      "table_refs": [],
+      "asset_candidates": [],
+      "visual_intent": "text_led",
+      "visual_plan": {
+        "layout_family": "title",
+        "primary_visual": null,
+        "image_budget": 0,
+        "image_roles": [],
+        "data_strategy": "none",
+        "background_variant": "quiet",
+        "density": "sparse"
+      },
+      "speaker_note": "我们通常先看最终 SSR，但这组实验真正需要回答的是：增益来自 RL 信号本身，还是来自一整套训练系统？今天沿着三个问题展开：train SSR 是否跨任务提升，运行是否具有效率，以及哪些实验条件限制归因。先把实验契约锁定，再看训练机制、结果和系统成本，最后给出可复现、但不越界的结论。",
+      "speaker_notes": {
+        "talk_track": "我们通常先看最终 SSR，但这组实验真正需要回答的是：增益来自 RL 信号本身，还是来自一整套训练系统？今天沿着三个问题展开：train SSR 是否跨任务提升，运行是否具有效率，以及哪些实验条件限制归因。先把实验契约锁定，再看训练机制、结果和系统成本，最后给出可复现、但不越界的结论。",
+        "delivery_cue": "先读出标题中的“增益成立”和“归因受约束”，随后明确三个判断维度。",
+        "source_refs": [],
+        "estimated_seconds": 65
+      },
+      "content": {
+        "eyebrow": "RoboTwin 实验解读",
+        "title": "RLinf 的增益成立，但归因受实验契约约束",
+        "subtitle": "性能、效率与归因边界必须一起判断",
+        "kicker": null,
+        "lede": "性能、效率与归因边界必须一起判断",
+        "note": {
+          "label": "判断框架",
+          "value": "性能提升 ≠ RL 单独贡献"
+        },
+        "body_points": [],
+        "metrics": [],
+        "steps": [],
+        "result": null,
+        "columns": [],
+        "takeaway": null
+      },
+      "flow_model": null,
+      "reading_order_groups": [],
+      "connector_legend": [],
+      "reading_order": [
+        "s1-eyebrow",
+        "s1-title",
+        "s1-subtitle",
+        "s1-note"
+      ],
+      "elements": [
+        {
+          "id": "s1-eyebrow",
+          "kind": "text",
+          "role": "eyebrow",
+          "text": "RoboTwin 实验解读",
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s1-title",
+          "kind": "text",
+          "role": "title",
+          "text": "RLinf 的增益成立，但归因受实验契约约束",
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s1-subtitle",
+          "kind": "text",
+          "role": "subtitle",
+          "text": "性能、效率与归因边界必须一起判断",
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s1-note",
+          "kind": "shape",
+          "role": "hero-note",
+          "data": {
+            "label": "判断框架",
+            "value": "性能提升 ≠ RL 单独贡献",
+            "tone": "lime"
+          },
+          "editable": true,
+          "render_mode": "native"
+        }
+      ],
+      "review_flags": []
+    },
+    {
+      "id": "s2",
+      "layout": "evidence",
+      "role": "problem",
+      "composition_id": "image-thesis-split",
+      "content_priority": "support",
+      "action_title": "先锁定实验契约，再谈 train SSR",
+      "audience_question": "哪些条件决定这组结果能否复现和外推？",
+      "narrative_job": "合并实验契约与结果范围，明确训练 seed、OOD seed、机器人、领域随机化、GPU 条件及其复现限制。",
+      "slide_goal": "把后续所有数字锁定在明确的实验边界内。",
+      "primary_claim": "SFT 与 RL 使用同一组 1,000 个 RoboTwin 随机 seed，评估使用额外 128 个未见 seed，并统一在 8 卡 A800 平台上运行；128 个 OOD seed 是评估契约，不是当前报告的 OOD SSR 结果。",
+      "evidence": [
+        {
+          "claim_support": "训练阶段使用 1,000 个随机场景 seed，评估阶段额外使用 128 个未参与训练的 OOD seed，并采用双臂 Piper 机械臂。",
+          "evidence_ref": "p1-snapshot",
+          "interpretation": "128 个 OOD seed 规定了评估设置，但证据索引中的主结果表报告的是 train SSR，不能将该协议数字当作 OOD 性能结果。"
+        },
+        {
+          "claim_support": "RoboTwin 使用领域随机化；相同 seed 集合在不同 Python、系统和硬件环境下可能无法完全复现，且观察到 H100 与 A800 的初始 SSR 差异。",
+          "evidence_ref": "p1-snapshot",
+          "interpretation": "复现时必须把运行环境和 GPU 视为实验变量。"
+        }
+      ],
+      "implication": "后续结果的有效范围是固定 RoboTwin 配置、seed、评估口径和 8 卡 A800；当前计划不声称已证明 OOD SSR 泛化。",
+      "transition_in": "开场的归因问题首先需要一个稳定、可复现的比较边界。",
+      "transition_out": "边界确定后，还要看 RLinf 如何把 rollout 轨迹转换为更新信号。",
+      "evidence_refs": [
+        "p1-snapshot"
+      ],
+      "table_refs": [],
+      "asset_candidates": [
+        "p1-snapshot"
+      ],
+      "visual_intent": "source_figure",
+      "visual_plan": {
+        "layout_family": "evidence",
+        "primary_visual": "p1-snapshot",
+        "image_budget": 1,
+        "image_roles": [
+          "evidence"
+        ],
+        "data_strategy": "source_figure",
+        "background_variant": "light",
+        "density": "balanced"
+      },
+      "speaker_note": "先把比较边界锁定。SFT 与 RL 共用 1,000 个 RoboTwin 随机 seed，使用双臂 Piper；评估再加入 128 个未见 seed。这里必须区分协议与结果：128 个 OOD seed 定义了评估契约，但当前主结果表呈现的是 train SSR，并没有提供 OOD SSR 数字。背景、杂乱度、光照、桌高和语言都会变化，运行环境与 GPU 也会影响复现，所以后面的结果只在固定契约内解释。",
+      "speaker_notes": {
+        "talk_track": "先把比较边界锁定。SFT 与 RL 共用 1,000 个 RoboTwin 随机 seed，使用双臂 Piper；评估再加入 128 个未见 seed。这里必须区分协议与结果：128 个 OOD seed 定义了评估契约，但当前主结果表呈现的是 train SSR，并没有提供 OOD SSR 数字。背景、杂乱度、光照、桌高和语言都会变化，运行环境与 GPU 也会影响复现，所以后面的结果只在固定契约内解释。",
+        "delivery_cue": "依次强调 1,000、128 和 8 卡三个契约指标，并明确 OOD seed 不是 OOD SSR 结果。",
+        "source_refs": [
+          "p1-snapshot"
+        ],
+        "estimated_seconds": 75
+      },
+      "content": {
+        "eyebrow": "实验契约",
+        "title": "先锁定实验契约，再谈 train SSR",
+        "subtitle": null,
+        "kicker": null,
+        "lede": "128 个 OOD seed 是评估契约；当前主结果报告的是 train SSR，不是 OOD SSR。",
+        "note": {
+          "label": "契约说明",
+          "value": "1,000 个共同训练 seed；128 个未见 OOD seed；双臂 Piper；统一 8 卡 A800。"
+        },
+        "body_points": [
+          {
+            "label": "训练对齐",
+            "text": "SFT 与 RL 共用 1,000 个随机场景 seed，并采用双臂 Piper 机械臂。"
+          },
+          {
+            "label": "OOD 口径",
+            "text": "额外使用 128 个未见 seed 作为评估契约；证据索引未提供对应 OOD SSR 主结果。"
+          },
+          {
+            "label": "复现边界",
+            "text": "领域随机化与运行环境会改变可用 seed 和初始 SSR，因此统一锁定 8 卡 A800。"
+          }
+        ],
+        "metrics": [
+          {
+            "label": "训练 seed",
+            "value": "1,000",
+            "meaning": "SFT 与 RL 的共同场景起点"
+          },
+          {
+            "label": "OOD 评估 seed",
+            "value": "128",
+            "meaning": "评估契约，不等于已报告的 OOD SSR 结果"
+          },
+          {
+            "label": "硬件条件",
+            "value": "8× A800",
+            "meaning": "后续 train SSR 比较的固定平台"
+          }
+        ],
+        "steps": [],
+        "result": null,
+        "columns": [],
+        "takeaway": {
+          "label": "实验契约",
+          "value": "后续主结果统一标注为 train SSR；128 个 OOD seed 不承担性能结果含义。"
+        }
+      },
+      "flow_model": null,
+      "reading_order_groups": [],
+      "connector_legend": [],
+      "reading_order": [
+        "s2-title",
+        "s2-kicker",
+        "s2-metric-1",
+        "s2-metric-2",
+        "s2-metric-3",
+        "s2-takeaway",
+        "s2-evidence-figure-1"
+      ],
+      "elements": [
+        {
+          "id": "s2-title",
+          "kind": "text",
+          "role": "title",
+          "text": "先锁定实验契约，再谈 train SSR",
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s2-kicker",
+          "kind": "text",
+          "role": "kicker",
+          "text": "PAPER EVIDENCE",
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s2-metric-1",
+          "kind": "shape",
+          "role": "metric",
+          "data": {
+            "label": "训练 seed",
+            "value": "1,000",
+            "meaning": "SFT 与 RL 的共同场景起点"
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s2-metric-2",
+          "kind": "shape",
+          "role": "metric",
+          "data": {
+            "label": "OOD 评估 seed",
+            "value": "128",
+            "meaning": "评估契约，不等于已报告的 OOD SSR 结果"
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s2-metric-3",
+          "kind": "shape",
+          "role": "metric",
+          "data": {
+            "label": "硬件条件",
+            "value": "8× A800",
+            "meaning": "后续 train SSR 比较的固定平台"
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s2-takeaway",
+          "kind": "shape",
+          "role": "takeaway",
+          "data": {
+            "label": "实验契约",
+            "value": "后续主结果统一标注为 train SSR；128 个 OOD seed 不承担性能结果含义。"
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s2-evidence-figure-1",
+          "kind": "image",
+          "role": "source-provenance",
+          "editable": false,
+          "render_mode": "asset",
+          "asset_ref": "p1-snapshot",
+          "source_page": 1,
+          "alt_text": "论文第 1 页来源核验（p1-snapshot）：用于核对“先锁定实验契约，再谈 train SSR”的原始论文表格。",
+          "data": {
+            "path": "assets/page-001-snapshot.png",
+            "caption": "论文第 1 页来源核验（p1-snapshot）：用于核对“先锁定实验契约，再谈 train SSR”的原始论文表格。",
+            "placement": "corner",
+            "fit": "cover",
+            "crop": false,
+            "table_ref": null,
+            "visual_role": "source-provenance"
+          }
+        }
+      ],
+      "review_flags": []
+    },
+    {
+      "id": "s3",
+      "layout": "pipeline",
+      "role": "method_detail",
+      "composition_id": "causal-flow",
+      "content_priority": "core",
+      "action_title": "RLinf 的训练信号来自一条完整链路",
+      "audience_question": "RLinf 的训练信号究竟如何产生？",
+      "narrative_job": "解释 rollout、valid trajectory、action-level reward、GRPO 优势估计和 LoRA 更新之间的关系。",
+      "slide_goal": "让观众知道结果背后的训练配方。",
+      "primary_claim": "RLinf 的配置将 128×8 的 rollout 组织为 global batch size 1024，使用 group size 8、action-level reward、token-level logprob/entropy、GRPO 和 LoRA 更新。",
+      "evidence": [
+        {
+          "claim_support": "配置给出 rollout batch 128×8=1024、global batch size 1024、group_size 8、reward_type action_level、logprob_type token_level、adv_type grpo、is_lora true 和 learning rate 2.0e-4。",
+          "evidence_ref": "p4-snapshot",
+          "interpretation": "这些配置共同决定训练信号与参数更新方式。"
+        }
+      ],
+      "implication": "性能结果应归因于完整训练路径，而不应只归因于算法名称。",
+      "transition_in": "实验契约说明了测什么，训练配置说明了 RLinf 如何学习。",
+      "transition_out": "接下来必须检查这套路径与 SimpleVLA 是否真的只差一个框架名称。",
+      "evidence_refs": [
+        "p4-snapshot"
+      ],
+      "table_refs": [],
+      "asset_candidates": [],
+      "visual_intent": "method_diagram",
+      "visual_plan": {
+        "layout_family": "pipeline",
+        "primary_visual": null,
+        "image_budget": 0,
+        "image_roles": [],
+        "data_strategy": "diagram",
+        "background_variant": "default",
+        "density": "balanced"
+      },
+      "speaker_note": "实验契约说明评价什么，这一页补上 RLinf 如何学习。一次更新先按 128×8 组织出 1,024 条 rollout，并以 group size 8 形成比较单元；奖励落在 action level，logprob 与 entropy 保持 token level，再用 GRPO 计算优势并更新 actor。最后通过 LoRA 和 2.0e-4 学习率限定更新方式。配置说明的是完整训练配方，下一页继续核对它与 SimpleVLA 的差异。",
+      "speaker_notes": {
+        "talk_track": "实验契约说明评价什么，这一页补上 RLinf 如何学习。一次更新先按 128×8 组织出 1,024 条 rollout，并以 group size 8 形成比较单元；奖励落在 action level，logprob 与 entropy 保持 token level，再用 GRPO 计算优势并更新 actor。最后通过 LoRA 和 2.0e-4 学习率限定更新方式。配置说明的是完整训练配方，下一页继续核对它与 SimpleVLA 的差异。",
+        "delivery_cue": "沿五个节点从左到右阅读，最后停在 LoRA 更新。",
+        "source_refs": [
+          "p4-snapshot"
+        ],
+        "estimated_seconds": 100
+      },
+      "content": {
+        "eyebrow": "训练机制",
+        "title": "RLinf 的训练信号来自一条完整链路",
+        "subtitle": null,
+        "kicker": null,
+        "lede": "训练信号由采样规模、奖励粒度、优势估计和参数更新共同决定。",
+        "note": null,
+        "body_points": [],
+        "metrics": [
+          {
+            "label": "每轮 rollout",
+            "value": "128 × 8",
+            "meaning": "一次更新组织 1024 条轨迹"
+          },
+          {
+            "label": "奖励粒度",
+            "value": "action-level",
+            "meaning": "奖励绑定到动作"
+          },
+          {
+            "label": "更新方式",
+            "value": "GRPO + LoRA",
+            "meaning": "用组内优势估计驱动参数高效更新"
+          }
+        ],
+        "steps": [
+          {
+            "title": "Rollout 采样",
+            "text": "并行生成一轮轨迹。",
+            "metric": "128 × 8 = 1024",
+            "tone": "navy"
+          },
+          {
+            "title": "Group 组织",
+            "text": "按 group size 8 形成比较单元。",
+            "metric": "group size = 8",
+            "tone": "blue"
+          },
+          {
+            "title": "Action-level reward",
+            "text": "把任务反馈落到动作粒度。",
+            "metric": "reward_type = action_level",
+            "tone": "coral"
+          },
+          {
+            "title": "GRPO 优势估计",
+            "text": "计算用于 actor 更新的优势信号。",
+            "metric": "adv_type = grpo",
+            "tone": "blue"
+          },
+          {
+            "title": "LoRA 更新",
+            "text": "在参数高效更新范围内优化策略。",
+            "metric": "is_lora = true · lr = 2.0e-4",
+            "tone": "navy"
+          }
+        ],
+        "result": {
+          "label": "训练配方的含义",
+          "value": "性能归因应落在 rollout、reward、优化与参数更新的完整路径上"
+        },
+        "columns": [],
+        "takeaway": null
+      },
+      "flow_model": "linear",
+      "reading_order_groups": [
+        {
+          "id": "heading",
+          "mode": "sequence",
+          "items": [
+            "s3-title",
+            "s3-kicker"
+          ]
+        },
+        {
+          "id": "ordered-steps",
+          "mode": "sequence",
+          "items": [
+            "s3-step-1",
+            "s3-step-2",
+            "s3-step-3",
+            "s3-step-4",
+            "s3-step-5"
+          ]
+        },
+        {
+          "id": "result",
+          "mode": "sequence",
+          "items": [
+            "s3-result"
+          ]
+        }
+      ],
+      "connector_legend": [],
+      "reading_order": [
+        "s3-title",
+        "s3-kicker",
+        "s3-step-1",
+        "s3-connector-1",
+        "s3-step-2",
+        "s3-connector-2",
+        "s3-step-3",
+        "s3-connector-3",
+        "s3-step-4",
+        "s3-connector-4",
+        "s3-step-5",
+        "s3-result"
+      ],
+      "elements": [
+        {
+          "id": "s3-title",
+          "kind": "text",
+          "role": "title",
+          "text": "RLinf 的训练信号来自一条完整链路",
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s3-kicker",
+          "kind": "text",
+          "role": "kicker",
+          "text": "THE PIPELINE",
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s3-step-1",
+          "kind": "shape",
+          "role": "step",
+          "data": {
+            "title": "Rollout 采样",
+            "text": "并行生成一轮轨迹。",
+            "metric": "128 × 8 = 1024",
+            "tone": "navy",
+            "index": 1
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s3-connector-1",
+          "kind": "connector",
+          "role": "connector",
+          "data": {
+            "from": "s3-step-1",
+            "to": "s3-step-2",
+            "semantic": "ordered step",
+            "connector_style": {
+              "stroke": "primary",
+              "arrow": "end",
+              "path": "straight",
+              "label": "下一步"
+            }
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s3-step-2",
+          "kind": "shape",
+          "role": "step",
+          "data": {
+            "title": "Group 组织",
+            "text": "按 group size 8 形成比较单元。",
+            "metric": "group size = 8",
+            "tone": "blue",
+            "index": 2
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s3-connector-2",
+          "kind": "connector",
+          "role": "connector",
+          "data": {
+            "from": "s3-step-2",
+            "to": "s3-step-3",
+            "semantic": "ordered step",
+            "connector_style": {
+              "stroke": "primary",
+              "arrow": "end",
+              "path": "straight",
+              "label": "下一步"
+            }
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s3-step-3",
+          "kind": "shape",
+          "role": "step",
+          "data": {
+            "title": "Action-level reward",
+            "text": "把任务反馈落到动作粒度。",
+            "metric": "reward_type = action_level",
+            "tone": "coral",
+            "index": 3
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s3-connector-3",
+          "kind": "connector",
+          "role": "connector",
+          "data": {
+            "from": "s3-step-3",
+            "to": "s3-step-4",
+            "semantic": "ordered step",
+            "connector_style": {
+              "stroke": "primary",
+              "arrow": "end",
+              "path": "straight",
+              "label": "下一步"
+            }
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s3-step-4",
+          "kind": "shape",
+          "role": "step",
+          "data": {
+            "title": "GRPO 优势估计",
+            "text": "计算用于 actor 更新的优势信号。",
+            "metric": "adv_type = grpo",
+            "tone": "blue",
+            "index": 4
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s3-connector-4",
+          "kind": "connector",
+          "role": "connector",
+          "data": {
+            "from": "s3-step-4",
+            "to": "s3-step-5",
+            "semantic": "ordered step",
+            "connector_style": {
+              "stroke": "primary",
+              "arrow": "end",
+              "path": "straight",
+              "label": "下一步"
+            }
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s3-step-5",
+          "kind": "shape",
+          "role": "step",
+          "data": {
+            "title": "LoRA 更新",
+            "text": "在参数高效更新范围内优化策略。",
+            "metric": "is_lora = true · lr = 2.0e-4",
+            "tone": "navy",
+            "index": 5
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s3-result",
+          "kind": "shape",
+          "role": "result",
+          "data": {
+            "label": "训练配方的含义",
+            "value": "性能归因应落在 rollout、reward、优化与参数更新的完整路径上"
+          },
+          "editable": true,
+          "render_mode": "native"
+        }
+      ],
+      "review_flags": []
+    },
+    {
+      "id": "s4",
+      "layout": "comparison",
+      "role": "limitations",
+      "composition_id": "evidence-table",
+      "content_priority": "core",
+      "action_title": "共享基础，但不是同构训练",
+      "audience_question": "两套实现到底控制了哪些变量？",
+      "narrative_job": "并列呈现共同基础与关键差异，阻止把框架比较误读为纯算法消融。",
+      "slide_goal": "建立正确的因果解释边界。",
+      "primary_claim": "两套方法共享 SFT 模型、train/eval seeds、模型实现和 GRPO，但在精度、rollout batch、学习率、LoRA、valid trajectory 收集和 reward 粒度上存在差异。",
+      "evidence": [
+        {
+          "claim_support": "对比表列出 RLinf 使用 bf16、rollout batch 1024、learning rate 2.0e-4、LoRA，而 SimpleVLA 使用混合精度、rollout batch 512、learning rate 5e-6 和全参数训练。",
+          "evidence_ref": "p4-table-1-crop",
+          "interpretation": "变量差异会改变训练动态。"
+        },
+        {
+          "claim_support": "RLinf 固定轮次后过滤 collected trajectories，并采用 action-level reward；SimpleVLA 即时过滤并缓存轨迹，采用 token-level success reward。",
+          "evidence_ref": "p5-table-1-crop",
+          "interpretation": "有效轨迹数量和奖励传播位置不同。"
+        }
+      ],
+      "implication": "可以比较两套系统的实际结果，但不能证明某个 RLinf 算法组件具有独立因果优势。",
+      "transition_in": "训练配方已经明确，公平性问题现在变成变量清单。",
+      "transition_out": "在保留这些差异的前提下，先看 RLinf 自身的跨任务收益是否成立。",
+      "evidence_refs": [
+        "p4-table-1-crop",
+        "p5-table-1-crop",
+        "p4-table-2-crop"
+      ],
+      "table_refs": [
+        "p4-table-2",
+        "p4-table-1",
+        "p5-table-1"
+      ],
+      "asset_candidates": [
+        "p4-table-2-crop"
+      ],
+      "visual_intent": "source_table",
+      "visual_plan": {
+        "layout_family": "comparison",
+        "primary_visual": "p4-table-2-crop",
+        "image_budget": 1,
+        "image_roles": [
+          "evidence"
+        ],
+        "data_strategy": "native_table",
+        "background_variant": "light",
+        "density": "dense"
+      },
+      "speaker_note": "这里把公平比较拆成可检查的变量。两套实现共享 SFT 模型、train/eval seeds、模型实现和 GRPO，因此有共同起点；但 RLinf 与 SimpleVLA 在精度、rollout batch、学习率和 LoRA 上不同。valid trajectory 的收集时机和 reward 粒度也不同，会改变每次更新接收到的学习信号。因此后面的结果可以作为系统级比较，但不能单独归因于某一个算法组件。",
+      "speaker_notes": {
+        "talk_track": "这里把公平比较拆成可检查的变量。两套实现共享 SFT 模型、train/eval seeds、模型实现和 GRPO，因此有共同起点；但 RLinf 与 SimpleVLA 在精度、rollout batch、学习率和 LoRA 上不同。valid trajectory 的收集时机和 reward 粒度也不同，会改变每次更新接收到的学习信号。因此后面的结果可以作为系统级比较，但不能单独归因于某一个算法组件。",
+        "delivery_cue": "先读共同基础，再按表格行读取差异，最后明确系统级解释边界。",
+        "source_refs": [
+          "p4-table-1-crop",
+          "p5-table-1-crop"
+        ],
+        "estimated_seconds": 100
+      },
+      "content": {
+        "eyebrow": "可比性边界",
+        "title": "共享基础，但不是同构训练",
+        "subtitle": null,
+        "kicker": null,
+        "lede": "共同起点存在，但多项实现差异会改变训练动态与因果解释。",
+        "note": {
+          "label": "解释边界",
+          "value": "这是完整训练系统的实际比较，不是单一算法组件的因果消融。"
+        },
+        "body_points": [
+          {
+            "label": "共同基础",
+            "text": "SFT 模型、train/eval seeds、模型实现和 GRPO 保持一致。"
+          },
+          {
+            "label": "关键差异",
+            "text": "精度、rollout batch、学习率、LoRA、valid trajectory 收集和 reward 粒度均不同。"
+          }
+        ],
+        "metrics": [
+          {
+            "label": "rollout batch",
+            "value": "1024 vs 512",
+            "meaning": "每轮采样量不同"
+          },
+          {
+            "label": "learning rate",
+            "value": "2.0e-4 vs 5e-6",
+            "meaning": "更新尺度不同"
+          },
+          {
+            "label": "reward 粒度",
+            "value": "action-level vs token-level",
+            "meaning": "奖励传播位置不同"
+          }
+        ],
+        "steps": [],
+        "result": null,
+        "columns": [
+          {
+            "label": "RLinf",
+            "headline": "完整 RL 训练配置",
+            "points": [
+              "bf16；rollout batch 1024",
+              "learning rate 2.0e-4；LoRA=true",
+              "固定轮次后过滤 collected trajectories",
+              "action-level reward"
+            ],
+            "tone": "navy"
+          },
+          {
+            "label": "SimpleVLA",
+            "headline": "另一套完整配置",
+            "points": [
+              "混合精度；rollout batch 512",
+              "learning rate 5e-6；全参数训练",
+              "每条 rollout 后即时过滤并缓存",
+              "token-level success reward"
+            ],
+            "tone": "coral"
+          }
+        ],
+        "takeaway": {
+          "label": "页面结论",
+          "value": "共享基础不等于同构训练，后续结果按系统级差异解读。"
+        }
+      },
+      "flow_model": null,
+      "reading_order_groups": [
+        {
+          "id": "heading",
+          "mode": "sequence",
+          "items": [
+            "s4-title"
+          ]
+        },
+        {
+          "id": "aligned-comparison-table",
+          "mode": "sequence",
+          "items": [
+            "s4-evidence-table"
+          ]
+        },
+        {
+          "id": "synthesis",
+          "mode": "sequence",
+          "items": [
+            "s4-takeaway"
+          ]
+        },
+        {
+          "id": "source-provenance",
+          "mode": "sequence",
+          "items": [
+            "s4-evidence-figure-1"
+          ]
+        }
+      ],
+      "connector_legend": [],
+      "reading_order": [
+        "s4-title",
+        "s4-evidence-table",
+        "s4-takeaway",
+        "s4-evidence-figure-1"
+      ],
+      "elements": [
+        {
+          "id": "s4-title",
+          "kind": "text",
+          "role": "title",
+          "text": "共享基础，但不是同构训练",
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s4-takeaway",
+          "kind": "shape",
+          "role": "takeaway",
+          "data": {
+            "label": "页面结论",
+            "value": "共享基础不等于同构训练，后续结果按系统级差异解读。"
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s4-evidence-figure-1",
+          "kind": "image",
+          "role": "source-provenance",
+          "editable": false,
+          "render_mode": "asset",
+          "asset_ref": "p4-table-2-crop",
+          "source_page": 4,
+          "alt_text": "论文第 4 页来源核验（p4-table-2）：用于核对 RLinf 与 SimpleVLA 的 rollout batch、learning rate 和 LoRA 差异。",
+          "data": {
+            "path": "assets/page-004-table-02-crop.png",
+            "caption": "论文第 4 页来源核验（p4-table-2）：用于核对 RLinf 与 SimpleVLA 的 rollout batch、learning rate 和 LoRA 差异。",
+            "placement": "corner",
+            "fit": "contain",
+            "crop": true,
+            "table_ref": "p4-table-2",
+            "visual_role": "source-provenance"
+          }
+        },
+        {
+          "id": "s4-evidence-table",
+          "kind": "table",
+          "role": "evidence-table",
+          "editable": true,
+          "render_mode": "native",
+          "source_page": null,
+          "data": {
+            "table_ref": "s4-content-comparison",
+            "caption": "这是完整训练系统的实际比较，不是单一算法组件的因果消融。",
+            "values": [
+              [
+                "RLinf",
+                "SimpleVLA"
+              ],
+              [
+                "共同基础：SFT 模型、train/eval seeds、模型实现和 GRPO 保持一致。",
+                "共同基础：同左；valid action mask 工程等价"
+              ],
+              [
+                "bf16；rollout batch 1024",
+                "混合精度；rollout batch 512"
+              ],
+              [
+                "learning rate 2.0e-4；LoRA=true",
+                "learning rate 5e-6；全参数训练"
+              ],
+              [
+                "固定轮次后过滤 collected trajectories",
+                "每条 rollout 后即时过滤并缓存"
+              ],
+              [
+                "action-level reward",
+                "token-level success reward"
+              ]
+            ],
+            "categories": [],
+            "rows": 6,
+            "columns": 2
+          }
+        }
+      ],
+      "review_flags": []
+    },
+    {
+      "id": "s5",
+      "layout": "chart-focus",
+      "role": "main_results",
+      "composition_id": "chart-with-interpretation-rail",
+      "content_priority": "core",
+      "action_title": "8/8 任务提升，平均 train SSR 显著上升",
+      "audience_question": "RLinf 的 train SSR 增益是单个任务的偶然现象吗？",
+      "narrative_job": "用任务级结果和平均值突出 RLinf SFT→RL 的跨任务 train SSR 提升。",
+      "slide_goal": "建立最强的单系统性能证据。",
+      "primary_claim": "8 个 RoboTwin 任务的 RLinf RL train SSR 均高于 RLinf SFT，平均 train SSR 从 24.48% 提升到 84.63%，平均提升为 60.15 个百分点。",
+      "evidence": [
+        {
+          "claim_support": "8 个任务分别列出 RLinf SFT、RLinf RL、平均提升和训练步数，所有任务的 RLinf RL 数值高于对应 SFT 数值。",
+          "evidence_ref": "p5-table-1",
+          "interpretation": "提升跨越不同任务，但幅度和训练步数不同。"
+        },
+        {
+          "claim_support": "平均汇总为 RLinf SFT train SSR 24.48%、RLinf RL train SSR 84.63%，Δ Avg. 为 +60.15%。",
+          "evidence_ref": "p6-table-1",
+          "interpretation": "平均值支持 RLinf 在这组任务上的总体训练收益，不构成 OOD SSR 证据。"
+        }
+      ],
+      "implication": "跨任务结果支持 RLinf 的 RL 训练有效，但当前证据报告的是 train SSR，未回答 OOD SSR 泛化。",
+      "transition_in": "比较口径已被标注，先检验 RLinf 自身是否稳定地产生 train SSR 收益。",
+      "transition_out": "下一步把相同的 SFT→RL 变化与 SimpleVLA 并置。",
+      "evidence_refs": [
+        "p5-table-1",
+        "p6-table-1",
+        "p5-table-1-crop"
+      ],
+      "table_refs": [
+        "p5-table-1",
+        "p6-table-1"
+      ],
+      "asset_candidates": [
+        "p5-table-1-crop"
+      ],
+      "visual_intent": "data_chart",
+      "visual_plan": {
+        "layout_family": "chart-focus",
+        "primary_visual": "p5-table-1-crop",
+        "image_budget": 1,
+        "image_roles": [
+          "evidence"
+        ],
+        "data_strategy": "native_chart",
+        "background_variant": "light",
+        "density": "balanced"
+      },
+      "speaker_note": "在可比性边界明确后，先看 RLinf 自身是否稳定地产生 train SSR 收益。8 个 RoboTwin 任务里，RLinf RL 的 train SSR 全部高于 SFT，平均从 24.48% 升到 84.63%，提升 60.15 个百分点。任务级结果还显示，增益幅度从 18.75 到 85.94 不等，训练步数从 30 到 240。这里证明的是 train SSR 上的跨任务训练收益，不是 OOD SSR 泛化，下一页再比较两套系统。",
+      "speaker_notes": {
+        "talk_track": "在可比性边界明确后，先看 RLinf 自身是否稳定地产生 train SSR 收益。8 个 RoboTwin 任务里，RLinf RL 的 train SSR 全部高于 SFT，平均从 24.48% 升到 84.63%，提升 60.15 个百分点。任务级结果还显示，增益幅度从 18.75 到 85.94 不等，训练步数从 30 到 240。这里证明的是 train SSR 上的跨任务训练收益，不是 OOD SSR 泛化，下一页再比较两套系统。",
+        "delivery_cue": "先强调 train SSR、24.48%→84.63% 和 8/8，再指向任务级差异与训练步数。",
+        "source_refs": [
+          "p5-table-1",
+          "p6-table-1"
+        ],
+        "estimated_seconds": 105
+      },
+      "content": {
+        "eyebrow": "跨任务 train SSR 结果",
+        "title": "8/8 任务提升，平均 train SSR 显著上升",
+        "subtitle": null,
+        "kicker": null,
+        "lede": "任务级结果显示，RLinf 的 RL train SSR 增益不是单个任务的偶然现象；该页不报告 OOD SSR。",
+        "note": null,
+        "body_points": [
+          {
+            "label": "跨任务一致性",
+            "text": "8/8 个任务的 RLinf RL train SSR 均高于对应 SFT。"
+          },
+          {
+            "label": "增益幅度有差异",
+            "text": "平均提升从 18.75 到 85.94 不等。"
+          },
+          {
+            "label": "训练成本需同时看",
+            "text": "RLinf train step 覆盖 30–240，结果不能脱离训练步数与配置口径。"
+          }
+        ],
+        "metrics": [
+          {
+            "label": "RLinf SFT 平均 train SSR",
+            "value": "24.48%",
+            "meaning": "RL 训练前的跨任务平均起点"
+          },
+          {
+            "label": "RLinf RL 平均 train SSR",
+            "value": "84.63%",
+            "meaning": "RL 训练后的跨任务平均结果"
+          },
+          {
+            "label": "平均提升",
+            "value": "+60.15 个百分点",
+            "meaning": "8 个任务汇总的 train SSR 训练收益"
+          }
+        ],
+        "steps": [],
+        "result": {
+          "label": "核心结果",
+          "value": "8/8 任务提升；train SSR 24.48%→84.63%；平均提升 +60.15 个百分点"
+        },
+        "columns": [],
+        "takeaway": null
+      },
+      "flow_model": null,
+      "reading_order_groups": [],
+      "connector_legend": [],
+      "reading_order": [
+        "s5-title",
+        "s5-kicker",
+        "s5-result-callout",
+        "s5-evidence-chart",
+        "s5-evidence-figure-1"
+      ],
+      "elements": [
+        {
+          "id": "s5-title",
+          "kind": "text",
+          "role": "title",
+          "text": "8/8 任务提升，平均 train SSR 显著上升",
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s5-kicker",
+          "kind": "text",
+          "role": "kicker",
+          "text": "RESULT FOCUS",
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s5-result-callout",
+          "kind": "shape",
+          "role": "result-callout",
+          "data": {
+            "label": "核心结果",
+            "value": "8/8 任务提升；train SSR 24.48%→84.63%；平均提升 +60.15 个百分点",
+            "detail": "任务级结果显示，RLinf 的 RL train SSR 增益不是单个任务的偶然现象；该页不报告 OOD SSR。",
+            "tone": "lime"
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s5-evidence-figure-1",
+          "kind": "image",
+          "role": "source-provenance",
+          "editable": false,
+          "render_mode": "asset",
+          "asset_ref": "p5-table-1-crop",
+          "source_page": 5,
+          "alt_text": "论文第 5 页来源核验（p5-table-1）：用于核对 8 个任务的 RLinf SFT→RL train SSR、提升幅度与训练步数。",
+          "data": {
+            "path": "assets/page-005-table-01-crop.png",
+            "caption": "论文第 5 页来源核验（p5-table-1）：用于核对 8 个任务的 RLinf SFT→RL train SSR、提升幅度与训练步数。",
+            "placement": "corner",
+            "fit": "contain",
+            "crop": true,
+            "table_ref": "p5-table-1",
+            "visual_role": "source-provenance"
+          }
+        },
+        {
+          "id": "s5-evidence-chart",
+          "kind": "chart",
+          "role": "evidence-chart",
+          "editable": true,
+          "render_mode": "native",
+          "source_page": 5,
+          "data": {
+            "table_ref": "p5-table-1",
+            "chart_type": "bar",
+            "label": null,
+            "title": "各任务 RLinf SFT 与 RL 的 train SSR",
+            "category_axis_label": "RoboTwin task",
+            "value_axis_label": "train SSR (%)",
+            "accessibility_summary": "8 个任务的 RLinf SFT 与 RLinf RL train SSR 对比；所有精确数值均以数据标签呈现。",
+            "categories": [
+              "place empty cup",
+              "beat block hammer",
+              "pick dual bottles",
+              "move can pot",
+              "lift pot",
+              "stack bowls two",
+              "handover block",
+              "place container plat e"
+            ],
+            "series": [
+              {
+                "name": "RLinf SFT",
+                "values": [
+                  75.78,
+                  10.15,
+                  20.31,
+                  9.37,
+                  3.13,
+                  38.28,
+                  28.13,
+                  54.69
+                ]
+              },
+              {
+                "name": "RLinf RL",
+                "values": [
+                  94.53,
+                  96.09,
+                  92.96,
+                  83.59,
+                  70.31,
+                  67.19,
+                  70.31,
+                  95.31
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "review_flags": []
+    },
+    {
+      "id": "s6",
+      "layout": "comparison",
+      "role": "method_overview",
+      "composition_id": "argument-pair",
+      "content_priority": "core",
+      "action_title": "RLinf 的平均 train SSR 增幅高于 SimpleVLA",
+      "audience_question": "RLinf 的 train SSR 增益是否超过 SimpleVLA？",
+      "narrative_job": "直接比较两套框架的 SFT→RL 平均变化，并绑定前一页的实现差异。",
+      "slide_goal": "给出框架级性能判断，同时收紧因果措辞。",
+      "primary_claim": "RLinf 的平均 train SSR 从 24.48% 升至 84.63%，增益为 60.15 个百分点；SimpleVLA 从 34.40% 升至 72.18%，增益为 37.78 个百分点。",
+      "evidence": [
+        {
+          "claim_support": "平均 SSR 对比表同时给出 RLinf SFT/RL、Simple SFT/RL 及两者的 Δ Avg.。",
+          "evidence_ref": "p6-table-1",
+          "interpretation": "比较 SFT→RL 的 train SSR 变化比只比较最终值更能回答系统增益问题。"
+        }
+      ],
+      "implication": "最稳妥的表述是 RLinf 完整训练系统带来更大的平均 train SSR 提升；当前证据不是 OOD SSR 结果。",
+      "transition_in": "跨任务 train SSR 结果证明 RLinf 有效，平均对照显示其系统增幅更大。",
+      "transition_out": "但平均数仍可能掩盖评估温度和初始模型能力造成的变化。",
+      "evidence_refs": [
+        "p6-table-1"
+      ],
+      "table_refs": [
+        "p6-table-1"
+      ],
+      "asset_candidates": [],
+      "visual_intent": "comparison_matrix",
+      "visual_plan": {
+        "layout_family": "comparison",
+        "primary_visual": null,
+        "image_budget": 0,
+        "image_roles": [],
+        "data_strategy": "diagram",
+        "background_variant": "light",
+        "density": "balanced"
+      },
+      "speaker_note": "把两套系统的 SFT→RL 平均 train SSR 变化放在同一张表里。RLinf 从 24.48% 提升到 84.63%，增加 60.15 个百分点；SimpleVLA 从 34.40% 提升到 72.18%，增加 37.78 个百分点，所以 RLinf 的完整训练系统平均增幅更大。但这一页不是 OOD SSR 结果，也不构成单因素消融：精度、学习率、LoRA、轨迹收集和 reward 设计都不同。下一页检查敏感性。",
+      "speaker_notes": {
+        "talk_track": "把两套系统的 SFT→RL 平均 train SSR 变化放在同一张表里。RLinf 从 24.48% 提升到 84.63%，增加 60.15 个百分点；SimpleVLA 从 34.40% 提升到 72.18%，增加 37.78 个百分点，所以 RLinf 的完整训练系统平均增幅更大。但这一页不是 OOD SSR 结果，也不构成单因素消融：精度、学习率、LoRA、轨迹收集和 reward 设计都不同。下一页检查敏感性。",
+        "delivery_cue": "先读两组 train SSR 平均值和增幅，再明确“系统级比较”而非“纯算法因果”。",
+        "source_refs": [
+          "p6-table-1"
+        ],
+        "estimated_seconds": 105
+      },
+      "content": {
+        "eyebrow": "框架级 train SSR 对照",
+        "title": "RLinf 的平均 train SSR 增幅高于 SimpleVLA",
+        "subtitle": null,
+        "kicker": null,
+        "lede": "比较 SFT→RL 的 train SSR 变化量，更能回答哪套完整系统带来了更大提升。",
+        "note": {
+          "label": "结论边界",
+          "value": "支持 train SSR 的系统级比较；不等同于 OOD 泛化或单因素因果。"
+        },
+        "body_points": [
+          {
+            "label": "先看变化量",
+            "text": "RLinf 的平均 train SSR 提升为 60.15 个百分点，SimpleVLA 为 37.78 个百分点。"
+          },
+          {
+            "label": "再看可比性",
+            "text": "两套系统的实现配置并不完全一致，平均差异不能拆解为单一因素贡献。"
+          },
+          {
+            "label": "因此",
+            "text": "RLinf 的完整训练系统 train SSR 平均提升更大，但单因素因果仍需控制变量或消融。"
+          }
+        ],
+        "metrics": [
+          {
+            "label": "RLinf Δ Avg. train SSR",
+            "value": "+60.15 个百分点",
+            "meaning": "24.48% → 84.63%"
+          },
+          {
+            "label": "SimpleVLA Δ Avg. train SSR",
+            "value": "+37.78 个百分点",
+            "meaning": "34.40% → 72.18%"
+          }
+        ],
+        "steps": [],
+        "result": null,
+        "columns": [
+          {
+            "label": "RLinf",
+            "headline": "train SSR 24.48% → 84.63%",
+            "points": [
+              "平均提升 +60.15 个百分点",
+              "完整训练系统的平均变化更大"
+            ],
+            "tone": "accent"
+          },
+          {
+            "label": "SimpleVLA",
+            "headline": "train SSR 34.40% → 72.18%",
+            "points": [
+              "平均提升 +37.78 个百分点",
+              "作为完整系统对照，而非单变量基线"
+            ],
+            "tone": "neutral"
+          }
+        ],
+        "takeaway": {
+          "label": "一句话判断",
+          "value": "RLinf 的平均 train SSR 增幅更大，但证据指向系统级效果，不是 OOD SSR 或独立算法贡献。"
+        }
+      },
+      "flow_model": null,
+      "reading_order_groups": [
+        {
+          "id": "heading",
+          "mode": "sequence",
+          "items": [
+            "s6-title"
+          ]
+        },
+        {
+          "id": "parallel-comparison",
+          "mode": "parallel",
+          "items": [
+            "s6-column-1",
+            "s6-column-2"
+          ]
+        },
+        {
+          "id": "synthesis",
+          "mode": "sequence",
+          "items": [
+            "s6-takeaway"
+          ]
+        }
+      ],
+      "connector_legend": [],
+      "reading_order": [
+        "s6-title",
+        "s6-column-1",
+        "s6-column-2",
+        "s6-takeaway"
+      ],
+      "elements": [
+        {
+          "id": "s6-title",
+          "kind": "text",
+          "role": "title",
+          "text": "RLinf 的平均 train SSR 增幅高于 SimpleVLA",
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s6-column-1",
+          "kind": "shape",
+          "role": "comparison-column",
+          "data": {
+            "label": "RLinf",
+            "headline": "train SSR 24.48% → 84.63%",
+            "points": [
+              "平均提升 +60.15 个百分点",
+              "完整训练系统的平均变化更大"
+            ],
+            "tone": "accent"
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s6-column-2",
+          "kind": "shape",
+          "role": "comparison-column",
+          "data": {
+            "label": "SimpleVLA",
+            "headline": "train SSR 34.40% → 72.18%",
+            "points": [
+              "平均提升 +37.78 个百分点",
+              "作为完整系统对照，而非单变量基线"
+            ],
+            "tone": "neutral"
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s6-takeaway",
+          "kind": "shape",
+          "role": "takeaway",
+          "data": {
+            "label": "一句话判断",
+            "value": "RLinf 的平均 train SSR 增幅更大，但证据指向系统级效果，不是 OOD SSR 或独立算法贡献。"
+          },
+          "editable": true,
+          "render_mode": "native"
+        }
+      ],
+      "review_flags": []
+    },
+    {
+      "id": "s7",
+      "layout": "insight",
+      "role": "limitations",
+      "composition_id": "answer-and-boundary",
+      "content_priority": "core",
+      "action_title": "初始化与评估温度会改变单点 SSR",
+      "audience_question": "为什么同一任务的结果会随模型和温度变化？",
+      "narrative_job": "用 place_empty_cup 的结果说明初始模型、评估温度、训练步数和是否重跑会影响可见 SSR。",
+      "slide_goal": "把单任务结果降级为敏感性证据。",
+      "primary_claim": "在 place_empty_cup 上，pi0 与 pi05 的 SFT 基线不同，OFT 在 Temp_eval=-1 与 1.6 下的 PPO/GRPO 结果也不同；部分温度结果未重跑，且 RL 结果统一取 50 step。",
+      "evidence": [
+        {
+          "claim_support": "表格列出 pi0/pi05 的 SFT、PPO、GRPO 结果，以及 OFT 在 Temp_eval=-1 和 Temp_eval=1.6 下的 PPO/GRPO 结果。",
+          "evidence_ref": "p1-table-1-crop",
+          "interpretation": "初始模型和采样温度会改变最终可见 SSR。"
+        },
+        {
+          "claim_support": "Temp_eval=1.6 下 place_empty_cup 的 PPO 为 86.72%，GRPO 为 88.28%。",
+          "evidence_ref": "p1-table-2-crop",
+          "interpretation": "评估温度是结果定义的一部分。"
+        }
+      ],
+      "implication": "跨任务 train SSR 结果应优先于单任务单温度结果；任何引用都应同时报告模型初始化、评估温度、训练步数和是否重跑。",
+      "transition_in": "框架级平均 train SSR 增益成立，但单点成绩揭示了结果对评估协议的敏感性。",
+      "transition_out": "性能判断之外，研究者还需要知道训练系统在实际运行时付出什么成本。",
+      "evidence_refs": [
+        "p1-table-1-crop",
+        "p1-table-2-crop"
+      ],
+      "table_refs": [
+        "p1-table-1",
+        "p1-table-2"
+      ],
+      "asset_candidates": [],
+      "visual_intent": "source_table",
+      "visual_plan": {
+        "layout_family": "insight",
+        "primary_visual": null,
+        "image_budget": 0,
+        "image_roles": [],
+        "data_strategy": "native_table",
+        "background_variant": "quiet",
+        "density": "balanced"
+      },
+      "speaker_note": "平均 train SSR 增益成立后，还要看单任务结果是否依赖评估协议。place_empty_cup 中，pi0 与 pi05 的 SFT 起点不同；OFT 在 Temp_eval=-1 与 1.6 下的 PPO、GRPO 结果也不同，部分温度结果没有重跑，RL 统一取 50 step。因此这些数字适合作为敏感性证据，而不是方法独立能力。它们也不能替代 OOD SSR 结果。复现时应同时报告初始化、评估温度、训练步数和重跑状态，随后转向系统成本。",
+      "speaker_notes": {
+        "talk_track": "平均 train SSR 增益成立后，还要看单任务结果是否依赖评估协议。place_empty_cup 中，pi0 与 pi05 的 SFT 起点不同；OFT 在 Temp_eval=-1 与 1.6 下的 PPO、GRPO 结果也不同，部分温度结果没有重跑，RL 统一取 50 step。因此这些数字适合作为敏感性证据，而不是方法独立能力。它们也不能替代 OOD SSR 结果。复现时应同时报告初始化、评估温度、训练步数和重跑状态，随后转向系统成本。",
+        "delivery_cue": "先读两组不同 SFT 基线，再指向温度变化，最后强调单点结果边界。",
+        "source_refs": [
+          "p1-table-1-crop",
+          "p1-table-2-crop"
+        ],
+        "estimated_seconds": 105
+      },
+      "content": {
+        "eyebrow": "敏感性边界",
+        "title": "初始化与评估温度会改变单点 SSR",
+        "subtitle": null,
+        "kicker": null,
+        "lede": "同一任务的 SSR 不是只由 PPO/GRPO 决定；初始化、评估温度与实验口径都会改变可见结果。",
+        "note": {
+          "label": "边界",
+          "value": "单任务、单温度结果只能支持敏感性判断，不能直接承担普遍优越性或 OOD 泛化结论。"
+        },
+        "body_points": [
+          {
+            "label": "起点不同",
+            "text": "pi0 的 SFT 为 45.31%，pi05 为 85.16%；RL 增益不能脱离初始模型比较。"
+          },
+          {
+            "label": "温度改变结果",
+            "text": "OFT 的 PPO/GRPO 在 Temp_eval=-1 与 1.6 下呈现不同 SSR。"
+          },
+          {
+            "label": "口径需固定",
+            "text": "相关温度结果部分未重跑，且 RL 结果统一取 50 step。"
+          }
+        ],
+        "metrics": [],
+        "steps": [],
+        "result": null,
+        "columns": [],
+        "takeaway": {
+          "label": "因此",
+          "value": "跨任务 train SSR 结果优先于单任务单温度结果，且当前不替代 OOD SSR 证据。"
+        }
+      },
+      "flow_model": null,
+      "reading_order_groups": [
+        {
+          "id": "heading",
+          "mode": "sequence",
+          "items": [
+            "s7-title"
+          ]
+        },
+        {
+          "id": "anchored-evidence",
+          "mode": "sequence",
+          "items": [
+            "s7-evidence-table"
+          ]
+        },
+        {
+          "id": "evidence-interpretation",
+          "mode": "sequence",
+          "items": [
+            "s7-answer-point-1",
+            "s7-answer-point-2",
+            "s7-answer-point-3"
+          ]
+        },
+        {
+          "id": "synthesis-boundary",
+          "mode": "sequence",
+          "items": [
+            "s7-insight-takeaway"
+          ]
+        }
+      ],
+      "connector_legend": [],
+      "reading_order": [
+        "s7-title",
+        "s7-evidence-table",
+        "s7-answer-point-1",
+        "s7-answer-point-2",
+        "s7-answer-point-3",
+        "s7-insight-takeaway"
+      ],
+      "elements": [
+        {
+          "id": "s7-title",
+          "kind": "text",
+          "role": "title",
+          "text": "初始化与评估温度会改变单点 SSR",
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s7-insight-takeaway",
+          "kind": "shape",
+          "role": "takeaway",
+          "data": {
+            "label": "因此",
+            "value": "跨任务 train SSR 结果优先于单任务单温度结果，且当前不替代 OOD SSR 证据。"
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s7-answer-point-1",
+          "kind": "shape",
+          "role": "answer-point",
+          "data": {
+            "label": "起点不同",
+            "text": "pi0 的 SFT 为 45.31%，pi05 为 85.16%；RL 增益不能脱离初始模型比较。",
+            "tone": "lime"
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s7-answer-point-2",
+          "kind": "shape",
+          "role": "answer-point",
+          "data": {
+            "label": "温度改变结果",
+            "text": "OFT 的 PPO/GRPO 在 Temp_eval=-1 与 1.6 下呈现不同 SSR。",
+            "tone": "lime"
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s7-answer-point-3",
+          "kind": "shape",
+          "role": "answer-point",
+          "data": {
+            "label": "口径需固定",
+            "text": "相关温度结果部分未重跑，且 RL 结果统一取 50 step。",
+            "tone": "coral"
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s7-evidence-table",
+          "kind": "table",
+          "role": "evidence-table",
+          "editable": true,
+          "render_mode": "native",
+          "source_page": 1,
+          "data": {
+            "table_ref": "p1-table-1",
+            "caption": "初始化与评估温度敏感性（精简证据表）",
+            "values": [
+              [
+                "Model",
+                "SFT",
+                "PPO",
+                "GRPO"
+              ],
+              [
+                "pi0",
+                "45.31%",
+                "82.03%",
+                "83.59%"
+              ],
+              [
+                "pi05",
+                "85.16%",
+                "96.88%",
+                "95.31%"
+              ],
+              [
+                "OFT T=-1",
+                "75.78%",
+                "92.97%",
+                "92.19%"
+              ],
+              [
+                "OFT T=1.6",
+                "",
+                "86.72%",
+                "88.28%"
+              ]
+            ],
+            "categories": [],
+            "rows": 5,
+            "columns": 4
+          }
+        }
+      ],
+      "review_flags": []
+    },
+    {
+      "id": "s8",
+      "layout": "matrix",
+      "role": "main_results",
+      "composition_id": "evidence-table",
+      "content_priority": "core",
+      "action_title": "8 卡条件下，colocated 更有竞争力",
+      "audience_question": "实际运行 RLinf 时，哪种并行路径更值得选？",
+      "narrative_job": "在同一 8 卡条件下比较不同并行模式的 actor 与 rollout 时间，给出当前配置的选型判断。",
+      "slide_goal": "将系统价值转化为具体运行选择。",
+      "primary_claim": "8 卡数据中，RLinf colocated 的 actor/rollout 时间为 49.15/170.34 秒，SimpleVLA 为 94.05/189.33 秒；其他 RLinf 模式呈现不同时间成本。",
+      "evidence": [
+        {
+          "claim_support": "8 卡表列出 RLinf colocated、disaggregated、Hybrid(pipe=1)、Hybrid(pipe=2) 与 SimpleVLA 的 actor 和 rollout 时间。",
+          "evidence_ref": "p6-table-2-crop",
+          "interpretation": "在该测试条件下，colocated 的两个时间指标都低于 SimpleVLA 对应数据。"
+        }
+      ],
+      "implication": "在当前 8 卡条件下，colocated 的 actor/rollout 更有竞争力；其他模式应按同一口径逐项比较。",
+      "transition_in": "敏感性分析限定了性能数字，系统表则限定了效率数字。",
+      "transition_out": "现在可以用性能、效率和归因边界共同回答开场问题。",
+      "evidence_refs": [
+        "p6-table-2",
+        "p6-table-2-crop"
+      ],
+      "table_refs": [
+        "p6-table-2"
+      ],
+      "asset_candidates": [
+        "p6-table-2-crop"
+      ],
+      "visual_intent": "source_table",
+      "visual_plan": {
+        "layout_family": "matrix",
+        "primary_visual": "p6-table-2-crop",
+        "image_budget": 1,
+        "image_roles": [
+          "evidence"
+        ],
+        "data_strategy": "native_table",
+        "background_variant": "light",
+        "density": "dense"
+      },
+      "speaker_note": "这一页只回答当前 8 卡条件下应该优先考察哪种并行模式。RLinf colocated 的 actor/rollout 为 49.15/170.34 秒，低于 SimpleVLA 的 94.05/189.33 秒；同为 8 卡，disaggregated 的 rollout 达到 546.64 秒，两个 Hybrid 配置也高于 colocated。因而这里支持的是明确配置下的选型判断，不外推到不同节点规模；进入结论页后，再把效率证据与性能增益、归因边界合并起来。",
+      "speaker_notes": {
+        "talk_track": "这一页只回答当前 8 卡条件下应该优先考察哪种并行模式。RLinf colocated 的 actor/rollout 为 49.15/170.34 秒，低于 SimpleVLA 的 94.05/189.33 秒；同为 8 卡，disaggregated 的 rollout 达到 546.64 秒，两个 Hybrid 配置也高于 colocated。因而这里支持的是明确配置下的选型判断，不外推到不同节点规模；进入结论页后，再把效率证据与性能增益、归因边界合并起来。",
+        "delivery_cue": "先比较 colocated 与 SimpleVLA，再指出其他 8 卡模式的成本，最后限定结论范围。",
+        "source_refs": [
+          "p6-table-2",
+          "p6-table-2-crop"
+        ],
+        "estimated_seconds": 80
+      },
+      "content": {
+        "eyebrow": "系统效率",
+        "title": "8 卡条件下，colocated 更有竞争力",
+        "subtitle": null,
+        "kicker": null,
+        "lede": "在同一 8 卡条件下，对齐比较 actor 与 rollout 时间。",
+        "note": null,
+        "body_points": [],
+        "metrics": [],
+        "steps": [],
+        "result": null,
+        "columns": [],
+        "takeaway": {
+          "label": "选型结论",
+          "value": "在当前 8 卡条件下，colocated 的 actor/rollout 更有竞争力；其他模式应按同一口径逐项比较。"
+        }
+      },
+      "flow_model": null,
+      "reading_order_groups": [],
+      "connector_legend": [],
+      "reading_order": [
+        "s8-title",
+        "s8-kicker",
+        "s8-takeaway",
+        "s8-evidence-table",
+        "s8-evidence-figure-1"
+      ],
+      "elements": [
+        {
+          "id": "s8-title",
+          "kind": "text",
+          "role": "title",
+          "text": "8 卡条件下，colocated 更有竞争力",
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s8-kicker",
+          "kind": "text",
+          "role": "kicker",
+          "text": "SYSTEM EVIDENCE",
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s8-takeaway",
+          "kind": "shape",
+          "role": "takeaway",
+          "data": {
+            "label": "选型结论",
+            "value": "在当前 8 卡条件下，colocated 的 actor/rollout 更有竞争力；其他模式应按同一口径逐项比较。"
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s8-evidence-figure-1",
+          "kind": "image",
+          "role": "source-provenance",
+          "editable": false,
+          "render_mode": "asset",
+          "asset_ref": "p6-table-2-crop",
+          "source_page": 6,
+          "alt_text": "论文第 6 页来源核验（p6-table-2）：用于核对 8 卡并行模式的 actor 与 rollout 时间。",
+          "data": {
+            "path": "assets/page-006-table-02-crop.png",
+            "caption": "论文第 6 页来源核验（p6-table-2）：用于核对 8 卡并行模式的 actor 与 rollout 时间。",
+            "placement": "corner",
+            "fit": "contain",
+            "crop": true,
+            "table_ref": "p6-table-2",
+            "visual_role": "source-provenance"
+          }
+        },
+        {
+          "id": "s8-evidence-table",
+          "kind": "table",
+          "role": "evidence-table",
+          "editable": true,
+          "render_mode": "native",
+          "source_page": 6,
+          "data": {
+            "table_ref": "p6-table-2",
+            "caption": "Paper table region on page 6",
+            "values": [
+              [
+                "8卡​",
+                "actor（s）​",
+                "rollout（s）​"
+              ],
+              [
+                "Colocated​",
+                "49.15​",
+                "170.34​"
+              ],
+              [
+                "Disaggregated",
+                "90.67​",
+                "546.64​"
+              ],
+              [
+                "Hybrid(pipe=1)​",
+                "50.14​",
+                "303.7​"
+              ],
+              [
+                "Hybrid(pipe=2)​",
+                "49.91​",
+                "283.54​"
+              ],
+              [
+                "SimpleVLA​",
+                "94.05​",
+                "189.33​"
+              ]
+            ],
+            "categories": [],
+            "rows": 6,
+            "columns": 3
+          }
+        }
+      ],
+      "review_flags": []
+    },
+    {
+      "id": "s9",
+      "layout": "insight",
+      "role": "limitations",
+      "composition_id": "answer-and-boundary",
+      "content_priority": "core",
+      "action_title": "相信受控 train SSR 增益，保留纯算法归因边界",
+      "audience_question": "我现在应该相信什么，又必须保留什么？",
+      "narrative_job": "直接回答开场归因问题，综合跨任务 train SSR、系统效率和实现边界，给出可引用的最终判断。",
+      "slide_goal": "让研究者带走一个强但不越界的结论与复现实验要求。",
+      "primary_claim": "在固定 RoboTwin seed、OOD 评估契约和 8 卡 A800 条件下，RLinf 的 RL 训练在 8 个任务上将平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下表现出有竞争力的 actor/rollout 时间；128 个 OOD seed 不是 OOD SSR 结果，当前证据未提供 OOD SSR。",
+      "evidence": [
+        {
+          "claim_support": "RLinf 平均 train SSR 为 24.48%→84.63%，SimpleVLA 为 34.40%→72.18%。",
+          "evidence_ref": "p6-table-1",
+          "interpretation": "性能证据支持 RLinf 完整训练系统在这组任务上的较大平均 train SSR 增益。"
+        },
+        {
+          "claim_support": "8 卡 colocated 的 RLinf actor/rollout 为 49.15/170.34 秒，SimpleVLA 为 94.05/189.33 秒。",
+          "evidence_ref": "p6-table-2-crop",
+          "interpretation": "效率证据支持特定并行配置下的运行优势。"
+        },
+        {
+          "claim_support": "RLinf 与 SimpleVLA 在精度、超参数、valid trajectory 收集和 reward 设计上存在差异。",
+          "evidence_ref": "p4-table-1-crop",
+          "interpretation": "结论应归因于完整训练系统，而不是单独归因于某个算法组件。"
+        }
+      ],
+      "implication": "复现或引用时至少同时报告训练/评估 seed、GPU、评估温度、训练步数、reward 与轨迹收集策略、精度和并行模式，并明确当前主结果为 train SSR。",
+      "transition_in": "系统效率补全了“更快”的证据，且所有结果都已绑定到实验契约。",
+      "transition_out": "开场问题的答案是：受控条件下 RLinf 系统的 train SSR 更强且具有效率优势，但 OOD SSR 未由当前证据证明，纯算法归因仍需额外控制变量。",
+      "evidence_refs": [
+        "p6-table-1",
+        "p6-table-2-crop",
+        "p4-table-1-crop"
+      ],
+      "table_refs": [
+        "p6-table-1",
+        "p6-table-2",
+        "p4-table-1"
+      ],
+      "asset_candidates": [],
+      "visual_intent": "text_led",
+      "visual_plan": {
+        "layout_family": "insight",
+        "primary_visual": null,
+        "image_budget": 0,
+        "image_roles": [],
+        "data_strategy": "none",
+        "background_variant": "quiet",
+        "density": "sparse"
+      },
+      "speaker_note": "现在回到开场问题。固定 RoboTwin seed、OOD 评估契约和 8 卡 A800 后，RLinf 在 8 个任务上的平均 train SSR 从 24.48% 提升到 84.63%，colocated 下 actor 和 rollout 也具竞争力。但要明确：128 个 OOD seed 只是评估设置，当前证据没有给出 OOD SSR 结果。两边在精度、学习率、LoRA、轨迹收集和 reward 设计上并不完全一致，所以结论应归因于完整训练系统，而不是单一算法组件。",
+      "speaker_notes": {
+        "talk_track": "现在回到开场问题。固定 RoboTwin seed、OOD 评估契约和 8 卡 A800 后，RLinf 在 8 个任务上的平均 train SSR 从 24.48% 提升到 84.63%，colocated 下 actor 和 rollout 也具竞争力。但要明确：128 个 OOD seed 只是评估设置，当前证据没有给出 OOD SSR 结果。两边在精度、学习率、LoRA、轨迹收集和 reward 设计上并不完全一致，所以结论应归因于完整训练系统，而不是单一算法组件。",
+        "delivery_cue": "先给出 train SSR 答案，再读效率证据，最后明确 OOD 结果缺失与系统级归因边界。",
+        "source_refs": [
+          "p6-table-1",
+          "p6-table-2-crop",
+          "p4-table-1-crop"
+        ],
+        "estimated_seconds": 110
+      },
+      "content": {
+        "eyebrow": "最终判断",
+        "title": "可信的是受控 train SSR 增益，纯算法优越性尚未证实",
+        "subtitle": null,
+        "kicker": null,
+        "lede": "在固定 RoboTwin seed、OOD 评估契约与 8 卡 A800 条件下，RLinf 的完整 RL 训练系统 train SSR 更强且更具效率优势；当前证据未提供 OOD SSR 结果。",
+        "note": {
+          "label": "采用条件",
+          "value": "引用时同时报告训练/评估 seed、GPU、评估温度、训练步数、reward、轨迹收集、精度与并行模式。"
+        },
+        "body_points": [
+          {
+            "label": "答案：train SSR 成立",
+            "text": "8 个任务平均 train SSR：RLinf RL 84.63%，由 SFT 的 24.48% 提升；SimpleVLA RL 为 72.18%。"
+          },
+          {
+            "label": "采用条件：效率有范围",
+            "text": "8 卡 colocated 下，RLinf actor/rollout 为 49.15/170.34 秒，低于 SimpleVLA 的 94.05/189.33 秒。"
+          },
+          {
+            "label": "边界：OOD 与纯算法归因未证实",
+            "text": "128 个 OOD seed 是评估契约而非 OOD SSR 结果；精度、学习率、LoRA、valid trajectory 收集与 reward 设计不同。"
+          }
+        ],
+        "metrics": [],
+        "steps": [],
+        "result": null,
+        "columns": [],
+        "takeaway": {
+          "label": "最终判断",
+          "value": "受控条件下 RLinf 系统 train SSR 更强且具有效率优势；当前无 OOD SSR 结果，纯算法因果仍需额外控制变量。"
+        }
+      },
+      "flow_model": null,
+      "reading_order_groups": [
+        {
+          "id": "heading",
+          "mode": "sequence",
+          "items": [
+            "s9-title"
+          ]
+        },
+        {
+          "id": "evidence-interpretation",
+          "mode": "sequence",
+          "items": [
+            "s9-answer-point-1",
+            "s9-answer-point-2",
+            "s9-answer-point-3"
+          ]
+        },
+        {
+          "id": "synthesis-boundary",
+          "mode": "sequence",
+          "items": [
+            "s9-insight-takeaway"
+          ]
+        }
+      ],
+      "connector_legend": [],
+      "reading_order": [
+        "s9-title",
+        "s9-answer-point-1",
+        "s9-answer-point-2",
+        "s9-answer-point-3",
+        "s9-insight-takeaway"
+      ],
+      "elements": [
+        {
+          "id": "s9-title",
+          "kind": "text",
+          "role": "title",
+          "text": "可信的是受控 train SSR 增益，纯算法优越性尚未证实",
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s9-insight-takeaway",
+          "kind": "shape",
+          "role": "takeaway",
+          "data": {
+            "label": "最终判断",
+            "value": "受控条件下 RLinf 系统 train SSR 更强且具有效率优势；当前无 OOD SSR 结果，纯算法因果仍需额外控制变量。"
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s9-answer-point-1",
+          "kind": "shape",
+          "role": "answer-point",
+          "data": {
+            "label": "答案：train SSR 成立",
+            "text": "8 个任务平均 train SSR：RLinf RL 84.63%，由 SFT 的 24.48% 提升；SimpleVLA RL 为 72.18%。",
+            "tone": "lime"
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s9-answer-point-2",
+          "kind": "shape",
+          "role": "answer-point",
+          "data": {
+            "label": "采用条件：效率有范围",
+            "text": "8 卡 colocated 下，RLinf actor/rollout 为 49.15/170.34 秒，低于 SimpleVLA 的 94.05/189.33 秒。",
+            "tone": "lime"
+          },
+          "editable": true,
+          "render_mode": "native"
+        },
+        {
+          "id": "s9-answer-point-3",
+          "kind": "shape",
+          "role": "answer-point",
+          "data": {
+            "label": "边界：OOD 与纯算法归因未证实",
+            "text": "128 个 OOD seed 是评估契约而非 OOD SSR 结果；精度、学习率、LoRA、valid trajectory 收集与 reward 设计不同。",
+            "tone": "coral"
+          },
+          "editable": true,
+          "render_mode": "native"
+        }
+      ],
+      "review_flags": []
+    }
+  ]
+}

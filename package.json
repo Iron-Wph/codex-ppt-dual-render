@@ -5,6 +5,8 @@
   "type": "module",
   "description": "Local-first Codex MVP for dual HTML and editable PPTX rendering.",
   "scripts": {
+    "test": "node test/mineru-adapter.test.mjs && node test/theme-catalog.test.mjs && node test/narrative-plan.test.mjs && node test/react-renderer.test.mjs",
+    "verify": "npm test && node src/cli.mjs validate --spec dist/real-paper-v2/deck.spec.json",
     "generate": "node src/cli.mjs generate --input examples/demo.md --out dist/demo --format both --planner local-codex",
     "validate": "node src/cli.mjs validate --spec dist/demo/deck.spec.json",
     "render": "node src/cli.mjs render --spec dist/demo/deck.spec.json --format both",
@@ -18,5 +20,9 @@
   },
   "devDependencies": {
     "@openai/codex": "^0.144.4"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   }
 }

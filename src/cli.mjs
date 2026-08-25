@@ -4,9 +4,9 @@ import { writeSpec } from "./schema-writer.mjs";
 import { renderHtml } from "./render-html.mjs";
 import { runQa } from "./qa.mjs";
 import { assertValidSpec, validateSpecFile } from "./validate-spec.mjs";
-import { planWithLocalCodex, reviewWithLocalCodex } from "./codex-bridge.mjs";
-import { ensureDir, parseArgs, readJson } from "./utils.mjs";
-import { extractPdfText } from "./pdf-text.mjs";
+import { planWithLocalCodex, reviewWithLocalCodex, revisePlanWithLocalCodex } from "./codex-bridge.mjs";
+import { ensureDir, parseArgs, readJson, writeJson, writeText } from "./utils.mjs";
+import { extractPdfDocument } from "./document-parser.mjs";
 import { buildEvidenceIndex, writeEvidenceIndex } from "./evidence-index.mjs";
 import { normalizePlan, assertContentPlan } from "./content-planner.mjs";
 import { planFromText } from "./planner.mjs";
@@ -17,8 +17,9 @@ function help() {
   console.log(`Codex PPT dual-render MVP
 
 Commands:
-  plan --input <markdown|pdf> --planner <local-codex|deterministic> [--paper]
-  generate --input <markdown|pdf> --out <dir> --format <html|pptx|both> [--paper] [--theme <auto|graphite-lime|paper-blue|sunset-editorial|signal-dark>] [--slide-previews false]
+  plan --input <markdown|pdf> --planner <local-codex|deterministic> [--paper] [--parser <auto|pymupdf|mineru>]
+  generate --input <markdown|pdf> --out <dir> --format <html|pptx|both> [--paper] [--parser <auto|pymupdf|mineru>] [--mineru-backend <pipeline|hybrid-engine>] [--mineru-effort <medium|high>] [--theme <auto|theme-id>] [--slide-previews false]
+  themes --out <dir>
   validate --spec <deck.spec.json>
   render --spec <deck.spec.json> --format <html|pptx|both>
   qa --input <output-dir> --format <html|pptx|both>
@@ -39,22 +40,45 @@ function isPdfPath(inputPath) {
   return path.extname(inputPath).toLowerCase() === ".pdf";
 }
 
-async function createPlan({ planner, inputPath, workspace, outDir, paperMode, themeId = "auto" }) {
+function parserOptions(args, paperMode) {
+  return {
+    parser: args.parser || "auto",
+    mineruBackend: args["mineru-backend"] || "hybrid-engine",
+    mineruEffort: args["mineru-effort"] || "medium",
+    preferMinerU: paperMode,
+  };
+}
+
+async function createPlan({ planner, inputPath, workspace, outDir, paperMode, themeId = "auto", documentParser = {} }) {
   if (planner === "local-codex") {
-    const result = await planWithLocalCodex({ inputPath, workspace, outDir, paperMode, themeId });
+    const result = await planWithLocalCodex({ inputPath, workspace, outDir, paperMode, themeId, documentParser });
     return result;
   }
   if (planner === "deterministic") {
     if (isPdfPath(inputPath)) {
-      const source = await extractPdfText(inputPath, outDir);
+      const source = await extractPdfDocument(inputPath, outDir, documentParser);
       const evidenceIndex = buildEvidenceIndex({ inputPath, inputType: "pdf", extraction: source });
+      await writeText(path.join(outDir, "codex", "source-extracted.txt"), source.text);
+      await writeJson(path.join(outDir, "codex", "source-manifest.json"), {
+        input: path.resolve(inputPath),
+        type: "pdf",
+        page_count: source.page_count,
+        characters: [...String(source.text || "")].length,
+        paper_mode: true,
+        parser: evidenceIndex.parser,
+        parser_details: evidenceIndex.parser_details,
+        asset_count: evidenceIndex.assets.length,
+        table_count: evidenceIndex.tables.length,
+        formula_count: evidenceIndex.formulas.length,
+      });
       await writeEvidenceIndex(evidenceIndex, path.join(outDir, "codex", "evidence-index.json"));
       const firstPage = String(source.pages?.[0]?.text || "").split(/\r?\n/).map((line) => line.trim()).find(Boolean) || path.basename(inputPath, path.extname(inputPath));
-      const markdown = `# ${firstPage}\n\n> Full-paper deterministic storyboard generated from ${source.page_count} PDF pages.\n\n## Paper evidence\n- ${source.text.replace(/\s+/g, " ").slice(0, 10000)}`;
+      const markdown = `# ${firstPage}\n\n> 从研究问题、方法机制到实验证据与适用边界\n\n## Paper evidence\n- ${source.text.replace(/\s+/g, " ").slice(0, 10000)}`;
       const plan = normalizePlan(planFromText(markdown), { paperMode: true, evidenceIndex });
       return { plan: assertContentPlan(plan, { paperMode: true }), evidenceIndex };
     }
-    return { plan: await planFromMarkdown(inputPath), evidenceIndex: null };
+    const plan = normalizePlan(await planFromMarkdown(inputPath), { paperMode: false, evidenceIndex: null });
+    return { plan: assertContentPlan(plan, { paperMode: false }), evidenceIndex: null };
   }
   throw new Error(`未知 planner: ${planner}`);
 }
@@ -88,9 +112,15 @@ async function main(argv) {
     const inputPath = path.resolve(String(args.input));
     const paperMode = args.paper === true || isPdfPath(inputPath);
     const outDir = path.resolve(String(args.out || "dist/codex-plan"));
-    const created = await createPlan({ planner, inputPath, workspace, paperMode, outDir, themeId: args.theme || "auto" });
+    const created = await createPlan({ planner, inputPath, workspace, paperMode, outDir, themeId: args.theme || "auto", documentParser: parserOptions(args, paperMode) });
     const themed = await ensureThemeReference(created, { outDir, themeId: args.theme || "auto", workspace });
     console.log(JSON.stringify(themed.plan, null, 2));
+    return;
+  }
+  if (command === "themes") {
+    const { writeTemplateGallery } = await import("./template-gallery.mjs");
+    const result = await writeTemplateGallery(path.resolve(String(args.out || "dist/theme-gallery")));
+    console.log(JSON.stringify(result, null, 2));
     return;
   }
   if (command === "validate") {
@@ -104,18 +134,38 @@ async function main(argv) {
     const outDir = path.resolve(String(args.out || "dist/demo"));
     const paperMode = args.paper === true || isPdfPath(input);
     await ensureDir(outDir);
-    const created = await createPlan({ planner, inputPath: input, workspace, paperMode, outDir, themeId: args.theme || "auto" });
+    const created = await createPlan({ planner, inputPath: input, workspace, paperMode, outDir, themeId: args.theme || "auto", documentParser: parserOptions(args, paperMode) });
     const themed = await ensureThemeReference(created, { outDir, themeId: args.theme || "auto", workspace });
-    const plan = themed.plan;
+    let plan = themed.plan;
     await materializeSlidePipeline({ plan, evidenceIndex: created.evidenceIndex || null, outDir, themeId: args.theme || "auto", render: args["slide-previews"] !== false });
-    const spec = await writeSpec(plan, path.join(outDir, "deck.spec.json"), { themeId: args.theme || "auto" });
-    const results = await renderOutputs(spec, outDir, format);
-    const report = await runQa({ specPath: path.join(outDir, "deck.spec.json"), inputDir: outDir, requestedFormat: format });
+    let spec = await writeSpec(plan, path.join(outDir, "deck.spec.json"), { themeId: args.theme || "auto" });
+    let results = await renderOutputs(spec, outDir, format);
+    let report = await runQa({ specPath: path.join(outDir, "deck.spec.json"), inputDir: outDir, requestedFormat: format });
     let codexReview = null;
+    let autoRevision = null;
     if (planner === "local-codex" || args.review === true) {
       codexReview = await reviewWithLocalCodex({ specPath: path.join(outDir, "deck.spec.json"), reportPath: path.join(outDir, "qa", "report.json"), workspace, outDir });
+      if (planner === "local-codex" && codexReview.review?.status === "revise" && args["auto-revise"] !== false) {
+        await writeJson(path.join(outDir, "codex", "review-before-auto-revision.json"), codexReview.review);
+        autoRevision = await revisePlanWithLocalCodex({
+          plan,
+          review: codexReview.review,
+          reportPath: path.join(outDir, "qa", "report.json"),
+          workspace,
+          outDir,
+          evidenceIndex: created.evidenceIndex || null,
+          paperMode,
+        });
+        plan = autoRevision.plan;
+        await materializeSlidePipeline({ plan, evidenceIndex: created.evidenceIndex || null, outDir, themeId: args.theme || "auto", render: args["slide-previews"] !== false });
+        spec = await writeSpec(plan, path.join(outDir, "deck.spec.json"), { themeId: args.theme || "auto" });
+        results = await renderOutputs(spec, outDir, format);
+        report = await runQa({ specPath: path.join(outDir, "deck.spec.json"), inputDir: outDir, requestedFormat: format });
+        codexReview = await reviewWithLocalCodex({ specPath: path.join(outDir, "deck.spec.json"), reportPath: path.join(outDir, "qa", "report.json"), workspace, outDir });
+        await writeJson(path.join(outDir, "codex", "review-after-auto-revision.json"), codexReview.review);
+      }
     }
-    console.log(JSON.stringify({ output: outDir, planner, results, qa: report.summary, codex_review: codexReview?.review || null }, null, 2));
+    console.log(JSON.stringify({ output: outDir, planner, results, qa: report.summary, auto_revision: autoRevision ? { plan: path.join(outDir, "codex", "auto-revised-plan.json"), result: autoRevision.resultPath } : null, codex_review: codexReview?.review || null }, null, 2));
     if (report.status === "fail") process.exitCode = 3;
     return;
   }

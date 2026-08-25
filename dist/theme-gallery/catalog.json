@@ -1,0 +1,1016 @@
+[
+  {
+    "id": "academic-evidence",
+    "label": "Academic Evidence",
+    "category": "Academic Research",
+    "visual_profile": "academic",
+    "tags": [
+      "academic",
+      "paper",
+      "evidence",
+      "research",
+      "clean"
+    ],
+    "match_signals": [
+      "academic",
+      "research",
+      "paper",
+      "thesis",
+      "science",
+      "study",
+      "experiment",
+      "论文",
+      "研究",
+      "学术",
+      "实验",
+      "综述"
+    ],
+    "density": "medium",
+    "mood": "credible, calm, evidence-first",
+    "recommended_for": [
+      "academic paper",
+      "literature review",
+      "technical briefing"
+    ],
+    "composition": "warm white canvas, strict evidence grid, navy hierarchy, restrained annotations",
+    "typography_treatment": "compact sans-serif labels with decisive navy action titles",
+    "background_treatment": "quiet paper ground with subtle blue section bands",
+    "image_treatment": "large source figures on white plates with visible captions and provenance",
+    "table_treatment": "native white tables with navy rules and one coral emphasis row",
+    "style_markers": [
+      "paper canvas",
+      "navy thesis",
+      "source figure plate",
+      "coral annotation"
+    ],
+    "layout_families": [
+      "research-cover",
+      "evidence-split",
+      "method-flow",
+      "chart-first",
+      "finding-boundary"
+    ],
+    "avoid": [
+      "decorative stock photography",
+      "poster text walls",
+      "unlabelled charts"
+    ],
+    "style_reference_asset": "themes/style-references/academic-evidence-v1.png",
+    "provenance": {
+      "type": "original",
+      "inspiration": "evidence-led academic editorial systems"
+    },
+    "colors": {
+      "background": "#F5F7FA",
+      "surface": "#FFFFFF",
+      "surface2": "#EAF0F7",
+      "foreground": "#13233A",
+      "muted": "#5C718A",
+      "accent": "#245CB7",
+      "accent2": "#D65F42",
+      "accent3": "#2B8A7E",
+      "border": "#C9D5E3",
+      "white": "#FFFFFF",
+      "black": "#0B1625"
+    },
+    "typography": {
+      "title_px": 56,
+      "slide_title_px": 37,
+      "subtitle_px": 21,
+      "body_px": 17,
+      "caption_px": 12,
+      "metric_px": 46
+    },
+    "fonts": {
+      "heading": [
+        "Aptos Display",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "body": [
+        "Aptos",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "mono": [
+        "Aptos Mono",
+        "Consolas",
+        "monospace"
+      ]
+    },
+    "spacing": {
+      "page_margin": 64,
+      "section_gap": 28,
+      "card_gap": 18,
+      "text_gap": 10
+    }
+  },
+  {
+    "id": "scientific-plate",
+    "label": "Scientific Figure Plate",
+    "category": "Academic Research",
+    "visual_profile": "scientific",
+    "tags": [
+      "scientific",
+      "figure",
+      "formula",
+      "lab",
+      "diagram"
+    ],
+    "match_signals": [
+      "formula",
+      "equation",
+      "biology",
+      "physics",
+      "chemistry",
+      "benchmark",
+      "科学",
+      "公式",
+      "生物",
+      "物理",
+      "实验图"
+    ],
+    "density": "high",
+    "mood": "precise, analytical, laboratory",
+    "recommended_for": [
+      "scientific results",
+      "methods paper",
+      "benchmark analysis"
+    ],
+    "composition": "figure-led plates, numbered callouts, compact legends, disciplined whitespace",
+    "typography_treatment": "small technical labels paired with compact high-authority headlines",
+    "background_treatment": "cool laboratory white with faint grid coordinates",
+    "image_treatment": "uncropped scientific figures with callout rails and explicit figure captions",
+    "table_treatment": "dense native tables with alternating cool rows and teal significance markers",
+    "style_markers": [
+      "figure plate",
+      "numbered callout",
+      "technical grid",
+      "teal measurement"
+    ],
+    "layout_families": [
+      "figure-cover",
+      "multi-panel-evidence",
+      "formula-focus",
+      "method-plate",
+      "result-annotation"
+    ],
+    "avoid": [
+      "cinematic backgrounds",
+      "oversized decorative metrics",
+      "cropping scientific axes"
+    ],
+    "style_reference_asset": "themes/style-references/academic-evidence-v1.png",
+    "provenance": {
+      "type": "original",
+      "inspiration": "scientific journal plates and laboratory readouts"
+    },
+    "colors": {
+      "background": "#F2F7F7",
+      "surface": "#FFFFFF",
+      "surface2": "#E2EEEE",
+      "foreground": "#153238",
+      "muted": "#587379",
+      "accent": "#007C83",
+      "accent2": "#E36B46",
+      "accent3": "#6D58B3",
+      "border": "#BED1D2",
+      "white": "#FFFFFF",
+      "black": "#0B2024"
+    },
+    "spacing": {
+      "page_margin": 56,
+      "section_gap": 24,
+      "card_gap": 14,
+      "text_gap": 10
+    },
+    "typography": {
+      "title_px": 52,
+      "slide_title_px": 35,
+      "subtitle_px": 21,
+      "body_px": 16,
+      "caption_px": 11,
+      "metric_px": 46
+    },
+    "fonts": {
+      "heading": [
+        "Aptos Display",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "body": [
+        "Aptos",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "mono": [
+        "Aptos Mono",
+        "Consolas",
+        "monospace"
+      ]
+    }
+  },
+  {
+    "id": "engineering-blueprint",
+    "label": "Engineering Blueprint",
+    "category": "Diagram",
+    "visual_profile": "blueprint",
+    "tags": [
+      "engineering",
+      "architecture",
+      "blueprint",
+      "robotics",
+      "system"
+    ],
+    "match_signals": [
+      "engineering",
+      "architecture",
+      "robotics",
+      "system",
+      "pipeline",
+      "开发者",
+      "工程",
+      "架构",
+      "系统",
+      "机器人"
+    ],
+    "density": "medium",
+    "mood": "technical, rigorous, constructed",
+    "recommended_for": [
+      "robotics",
+      "systems architecture",
+      "technical teardown"
+    ],
+    "composition": "deep blueprint field, precise rails, annotated components, one luminous signal",
+    "typography_treatment": "condensed technical labels with strong white system claims",
+    "background_treatment": "midnight blue drafting grid with restrained coordinate marks",
+    "image_treatment": "figures framed as annotated engineering assemblies",
+    "table_treatment": "dark specification tables with cyan headers and amber exceptions",
+    "style_markers": [
+      "blueprint grid",
+      "cyan rail",
+      "component label",
+      "amber exception"
+    ],
+    "layout_families": [
+      "blueprint-cover",
+      "architecture-map",
+      "component-cutaway",
+      "experiment-compare",
+      "spec-table"
+    ],
+    "avoid": [
+      "random neon",
+      "glowing body copy",
+      "unstructured card mosaics"
+    ],
+    "style_reference_asset": "themes/style-references/future-tech-signal-v1.png",
+    "provenance": {
+      "type": "original",
+      "inspiration": "engineering blueprint and technical cutaway grammar"
+    },
+    "colors": {
+      "background": "#071A2A",
+      "surface": "#0D2840",
+      "surface2": "#123652",
+      "foreground": "#F1F7FA",
+      "muted": "#91AEC0",
+      "accent": "#4ED4E8",
+      "accent2": "#F2A53A",
+      "accent3": "#8DE1B7",
+      "border": "#2A5570",
+      "white": "#FFFFFF",
+      "black": "#04111D"
+    },
+    "spacing": {
+      "page_margin": 58,
+      "section_gap": 28,
+      "card_gap": 16,
+      "text_gap": 10
+    },
+    "typography": {
+      "title_px": 56,
+      "slide_title_px": 36,
+      "subtitle_px": 21,
+      "body_px": 16,
+      "caption_px": 11,
+      "metric_px": 46
+    },
+    "fonts": {
+      "heading": [
+        "Aptos Display",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "body": [
+        "Aptos",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "mono": [
+        "Aptos Mono",
+        "Consolas",
+        "monospace"
+      ]
+    }
+  },
+  {
+    "id": "editorial-research",
+    "label": "Editorial Research",
+    "category": "Editorial",
+    "visual_profile": "editorial",
+    "tags": [
+      "editorial",
+      "magazine",
+      "research",
+      "serif",
+      "warm"
+    ],
+    "match_signals": [
+      "editorial",
+      "magazine",
+      "essay",
+      "humanities",
+      "社会",
+      "人文",
+      "杂志",
+      "报告文学"
+    ],
+    "density": "medium",
+    "mood": "thoughtful, literary, premium",
+    "recommended_for": [
+      "research narrative",
+      "humanities",
+      "executive essay"
+    ],
+    "composition": "ivory print grid, asymmetric headlines, warm image wells, deliberate negative space",
+    "typography_treatment": "serif display moments with restrained sans-serif evidence labels",
+    "background_treatment": "soft ivory paper with terracotta rules",
+    "image_treatment": "warm editorial crops with caption blocks aligned to the print grid",
+    "table_treatment": "quiet cream tables with terracotta row markers",
+    "style_markers": [
+      "ivory paper",
+      "serif moment",
+      "print grid",
+      "terracotta rule"
+    ],
+    "layout_families": [
+      "editorial-cover",
+      "essay-split",
+      "quote-interstitial",
+      "evidence-column",
+      "closing-statement"
+    ],
+    "avoid": [
+      "corporate blue gradients",
+      "dashboard card walls",
+      "generic stock office scenes"
+    ],
+    "style_reference_asset": "themes/style-references/minimal-editorial-v1.png",
+    "provenance": {
+      "type": "original",
+      "inspiration": "independent magazine and research editorial systems"
+    },
+    "fonts": {
+      "heading": [
+        "Georgia",
+        "Microsoft YaHei",
+        "serif"
+      ],
+      "body": [
+        "Aptos",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "mono": [
+        "Consolas",
+        "Microsoft YaHei",
+        "monospace"
+      ]
+    },
+    "colors": {
+      "background": "#FBF5E9",
+      "surface": "#FFFDF8",
+      "surface2": "#EFE2CF",
+      "foreground": "#30231F",
+      "muted": "#7A665D",
+      "accent": "#A94B35",
+      "accent2": "#D19A35",
+      "accent3": "#3D7D74",
+      "border": "#DCC9B5",
+      "white": "#FFFFFF",
+      "black": "#241713"
+    },
+    "typography": {
+      "title_px": 60,
+      "slide_title_px": 39,
+      "subtitle_px": 20,
+      "body_px": 17,
+      "caption_px": 13,
+      "metric_px": 46
+    },
+    "spacing": {
+      "page_margin": 64,
+      "section_gap": 28,
+      "card_gap": 18,
+      "text_gap": 10
+    }
+  },
+  {
+    "id": "consulting-data-story",
+    "label": "Consulting Data Story",
+    "category": "Business & Report",
+    "visual_profile": "consulting",
+    "tags": [
+      "consulting",
+      "data",
+      "strategy",
+      "executive",
+      "chart"
+    ],
+    "match_signals": [
+      "consulting",
+      "strategy",
+      "executive",
+      "market",
+      "growth",
+      "business",
+      "咨询",
+      "战略",
+      "高管",
+      "市场",
+      "增长",
+      "商业"
+    ],
+    "density": "high",
+    "mood": "decisive, analytical, executive",
+    "recommended_for": [
+      "strategy",
+      "market analysis",
+      "business review"
+    ],
+    "composition": "answer-first headline, disciplined KPI rail, one primary chart, compact implication panel",
+    "typography_treatment": "strong action titles and small factual labels with clear numerical hierarchy",
+    "background_treatment": "bright neutral field with navy anchors and controlled blue bands",
+    "image_treatment": "images used sparingly as evidence, never as decoration",
+    "table_treatment": "native decision tables with blue headers and green positive deltas",
+    "style_markers": [
+      "answer first",
+      "KPI rail",
+      "blue data hierarchy",
+      "decision table"
+    ],
+    "layout_families": [
+      "answer-cover",
+      "metric-strip",
+      "chart-first",
+      "decision-matrix",
+      "recommendation-close"
+    ],
+    "avoid": [
+      "ornamental illustration",
+      "equal-weight card collections",
+      "unexplained numbers"
+    ],
+    "style_reference_asset": "themes/style-references/minimal-editorial-v1.png",
+    "provenance": {
+      "type": "original",
+      "inspiration": "consulting-grade answer-first data stories"
+    },
+    "colors": {
+      "background": "#F6F8FB",
+      "surface": "#FFFFFF",
+      "surface2": "#E8EEF7",
+      "foreground": "#10233F",
+      "muted": "#60728A",
+      "accent": "#1E5CC8",
+      "accent2": "#13A07A",
+      "accent3": "#F0A33A",
+      "border": "#C9D5E5",
+      "white": "#FFFFFF",
+      "black": "#081529"
+    },
+    "spacing": {
+      "page_margin": 58,
+      "section_gap": 24,
+      "card_gap": 14,
+      "text_gap": 10
+    },
+    "typography": {
+      "title_px": 56,
+      "slide_title_px": 36,
+      "subtitle_px": 21,
+      "body_px": 16,
+      "caption_px": 11,
+      "metric_px": 50
+    },
+    "fonts": {
+      "heading": [
+        "Aptos Display",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "body": [
+        "Aptos",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "mono": [
+        "Aptos Mono",
+        "Consolas",
+        "monospace"
+      ]
+    }
+  },
+  {
+    "id": "dark-frontier-tech",
+    "label": "Dark Frontier Tech",
+    "category": "Product",
+    "visual_profile": "frontier",
+    "tags": [
+      "frontier",
+      "ai",
+      "robotics",
+      "launch",
+      "dark"
+    ],
+    "match_signals": [
+      "frontier",
+      "launch",
+      "product",
+      "innovation",
+      "ai",
+      "robotics",
+      "发布",
+      "产品",
+      "未来",
+      "科技",
+      "人工智能"
+    ],
+    "density": "low",
+    "mood": "cinematic, confident, frontier-facing",
+    "recommended_for": [
+      "AI product",
+      "robotics launch",
+      "future technology"
+    ],
+    "composition": "near-black stage, one immersive visual, oversized claim, cyan signal and magenta counterpoint",
+    "typography_treatment": "large sparse display typography with compact technical microcopy",
+    "background_treatment": "deep navy field with controlled orbital signal geometry",
+    "image_treatment": "one dramatic hero or evidence image in a luminous media well",
+    "table_treatment": "minimal dark tables with cyan structure and lime success states",
+    "style_markers": [
+      "midnight stage",
+      "cyan signal",
+      "orbital geometry",
+      "one bold claim"
+    ],
+    "layout_families": [
+      "frontier-hero",
+      "product-reveal",
+      "orbit-system",
+      "signal-chart",
+      "closing-manifesto"
+    ],
+    "avoid": [
+      "rainbow neon",
+      "multiple competing hero images",
+      "dense small text"
+    ],
+    "style_reference_asset": "themes/style-references/future-tech-signal-v1.png",
+    "provenance": {
+      "type": "original",
+      "inspiration": "cinematic product keynote and frontier technology art direction"
+    },
+    "colors": {
+      "background": "#070B15",
+      "surface": "#0E1728",
+      "surface2": "#14233A",
+      "foreground": "#F4F8FF",
+      "muted": "#91A2BD",
+      "accent": "#4ED8FF",
+      "accent2": "#F35D91",
+      "accent3": "#B6F36B",
+      "border": "#2A4264",
+      "white": "#FFFFFF",
+      "black": "#03060C"
+    },
+    "typography": {
+      "title_px": 64,
+      "slide_title_px": 40,
+      "subtitle_px": 22,
+      "body_px": 17,
+      "caption_px": 13,
+      "metric_px": 58
+    },
+    "fonts": {
+      "heading": [
+        "Aptos Display",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "body": [
+        "Aptos",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "mono": [
+        "Aptos Mono",
+        "Consolas",
+        "monospace"
+      ]
+    },
+    "spacing": {
+      "page_margin": 64,
+      "section_gap": 28,
+      "card_gap": 18,
+      "text_gap": 10
+    }
+  },
+  {
+    "id": "graphite-lime",
+    "label": "Graphite Lime",
+    "category": "Diagram",
+    "visual_profile": "graphite",
+    "tags": [
+      "developer",
+      "engineering",
+      "graphite",
+      "lime"
+    ],
+    "match_signals": [
+      "developer",
+      "platform",
+      "api",
+      "infrastructure",
+      "tooling",
+      "开发者",
+      "平台",
+      "基础设施"
+    ],
+    "density": "medium",
+    "mood": "technical, experimental, high-contrast",
+    "recommended_for": [
+      "AI research",
+      "engineering",
+      "developer tools"
+    ],
+    "composition": "dark canvas, strong left thesis, lime evidence highlight, coral counterpoint",
+    "typography_treatment": "large technical headings with compact mono labels",
+    "background_treatment": "near-black graphite field with subtle technical rails",
+    "image_treatment": "bright source figures inside dark frames",
+    "table_treatment": "high-contrast evidence table with lime header accents",
+    "style_markers": [
+      "near-black canvas",
+      "luminous evidence accent",
+      "technical line work"
+    ],
+    "layout_families": [
+      "thesis-stage",
+      "architecture-map",
+      "experiment-comparison",
+      "metric-strip",
+      "evidence-panel"
+    ],
+    "avoid": [
+      "dense dashboard grids",
+      "low-contrast labels",
+      "decorative neon without evidence"
+    ],
+    "style_reference_asset": "themes/style-references/future-tech-signal-v1.png",
+    "provenance": {
+      "type": "legacy-original"
+    },
+    "colors": {
+      "background": "#101312",
+      "surface": "#181D1A",
+      "surface2": "#202721",
+      "foreground": "#F1F3E9",
+      "muted": "#A5AEA5",
+      "accent": "#D8FF5A",
+      "accent2": "#FF7757",
+      "accent3": "#8EE3C4",
+      "border": "#39443B",
+      "white": "#FFFFFF",
+      "black": "#0A0D0B"
+    },
+    "fonts": {
+      "heading": [
+        "Aptos Display",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "body": [
+        "Aptos",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "mono": [
+        "Aptos Mono",
+        "Consolas",
+        "monospace"
+      ]
+    },
+    "spacing": {
+      "page_margin": 64,
+      "section_gap": 28,
+      "card_gap": 18,
+      "text_gap": 10
+    },
+    "typography": {
+      "title_px": 58,
+      "slide_title_px": 38,
+      "subtitle_px": 21,
+      "body_px": 17,
+      "caption_px": 13,
+      "metric_px": 46
+    }
+  },
+  {
+    "id": "paper-blue",
+    "label": "Paper Blue",
+    "category": "Academic Research",
+    "visual_profile": "academic",
+    "tags": [
+      "paper",
+      "blue",
+      "clean",
+      "legacy"
+    ],
+    "match_signals": [
+      "technical report",
+      "enterprise analysis",
+      "技术报告",
+      "企业分析"
+    ],
+    "density": "medium",
+    "mood": "credible, academic, clean",
+    "recommended_for": [
+      "academic paper",
+      "research review",
+      "technical briefing"
+    ],
+    "composition": "light canvas, blue hierarchy, generous margins, restrained evidence panels",
+    "typography_treatment": "clean sans-serif hierarchy",
+    "background_treatment": "cool paper background",
+    "image_treatment": "clean source figures with white framing",
+    "table_treatment": "white table surface with blue structural rules",
+    "style_markers": [
+      "warm white canvas",
+      "navy thesis",
+      "evidence image crop",
+      "coral annotation"
+    ],
+    "layout_families": [
+      "research-title",
+      "evidence-split",
+      "method-flow",
+      "chart-first",
+      "finding-and-limit"
+    ],
+    "avoid": [
+      "poster-like text walls",
+      "more than one primary chart",
+      "colour-only comparisons"
+    ],
+    "style_reference_asset": "themes/style-references/academic-evidence-v1.png",
+    "provenance": {
+      "type": "legacy-original"
+    },
+    "colors": {
+      "background": "#F4F7FB",
+      "surface": "#FFFFFF",
+      "surface2": "#E8EFF8",
+      "foreground": "#14243A",
+      "muted": "#58708D",
+      "accent": "#1664D8",
+      "accent2": "#E06B47",
+      "accent3": "#2C9D91",
+      "border": "#C7D5E6",
+      "white": "#FFFFFF",
+      "black": "#0C1725"
+    },
+    "fonts": {
+      "heading": [
+        "Aptos Display",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "body": [
+        "Aptos",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "mono": [
+        "Aptos Mono",
+        "Consolas",
+        "monospace"
+      ]
+    },
+    "spacing": {
+      "page_margin": 64,
+      "section_gap": 28,
+      "card_gap": 18,
+      "text_gap": 10
+    },
+    "typography": {
+      "title_px": 58,
+      "slide_title_px": 38,
+      "subtitle_px": 21,
+      "body_px": 17,
+      "caption_px": 13,
+      "metric_px": 46
+    }
+  },
+  {
+    "id": "sunset-editorial",
+    "label": "Sunset Editorial",
+    "category": "Editorial",
+    "visual_profile": "editorial",
+    "tags": [
+      "editorial",
+      "warm",
+      "strategy",
+      "legacy"
+    ],
+    "match_signals": [
+      "brand",
+      "investor",
+      "品牌",
+      "投资"
+    ],
+    "density": "medium",
+    "mood": "warm, editorial, strategic",
+    "recommended_for": [
+      "strategy",
+      "consulting",
+      "product narrative"
+    ],
+    "composition": "warm paper canvas, editorial headline, terracotta thesis, amber emphasis",
+    "typography_treatment": "warm editorial headline with compact supporting copy",
+    "background_treatment": "ivory field with warm surface bands",
+    "image_treatment": "warm framed figures with editorial captions",
+    "table_treatment": "quiet table with warm accent rows and strong labels",
+    "style_markers": [
+      "ivory canvas",
+      "oversized metric",
+      "terracotta rule",
+      "editorial whitespace"
+    ],
+    "layout_families": [
+      "editorial-cover",
+      "metric-stage",
+      "story-split",
+      "decision-table",
+      "closing-statement"
+    ],
+    "avoid": [
+      "generic office stock photography",
+      "blue corporate gradients",
+      "equal-weight card collections"
+    ],
+    "style_reference_asset": "themes/style-references/minimal-editorial-v1.png",
+    "provenance": {
+      "type": "legacy-original"
+    },
+    "colors": {
+      "background": "#FFF8F1",
+      "surface": "#FFFFFF",
+      "surface2": "#F9E8D8",
+      "foreground": "#2B1D1A",
+      "muted": "#7D665F",
+      "accent": "#B9462E",
+      "accent2": "#E5A33A",
+      "accent3": "#2C8C83",
+      "border": "#E5CABC",
+      "white": "#FFFFFF",
+      "black": "#241512"
+    },
+    "fonts": {
+      "heading": [
+        "Aptos Display",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "body": [
+        "Aptos",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "mono": [
+        "Aptos Mono",
+        "Consolas",
+        "monospace"
+      ]
+    },
+    "spacing": {
+      "page_margin": 64,
+      "section_gap": 28,
+      "card_gap": 18,
+      "text_gap": 10
+    },
+    "typography": {
+      "title_px": 58,
+      "slide_title_px": 38,
+      "subtitle_px": 21,
+      "body_px": 17,
+      "caption_px": 13,
+      "metric_px": 46
+    }
+  },
+  {
+    "id": "signal-dark",
+    "label": "Signal Dark",
+    "category": "Product",
+    "visual_profile": "frontier",
+    "tags": [
+      "signal",
+      "dark",
+      "technology",
+      "legacy"
+    ],
+    "match_signals": [
+      "demo",
+      "future-facing",
+      "演示"
+    ],
+    "density": "medium",
+    "mood": "futuristic, energetic, product-forward",
+    "recommended_for": [
+      "frontier technology",
+      "product launch",
+      "systems architecture"
+    ],
+    "composition": "navy canvas, cyan signal lines, magenta contrast, lime success state",
+    "typography_treatment": "bold product typography with technical labels",
+    "background_treatment": "midnight navy with signal-line geometry",
+    "image_treatment": "dark media wells with cyan edge treatment",
+    "table_treatment": "dark evidence table with luminous signal accents",
+    "style_markers": [
+      "midnight navy",
+      "cyan signal lines",
+      "controlled violet and magenta",
+      "dark data grid"
+    ],
+    "layout_families": [
+      "futuristic-hero",
+      "orbit-system",
+      "product-reveal",
+      "signal-chart",
+      "dark-comparison"
+    ],
+    "avoid": [
+      "rainbow neon",
+      "illegible glowing text",
+      "sci-fi decoration without story purpose"
+    ],
+    "style_reference_asset": "themes/style-references/future-tech-signal-v1.png",
+    "provenance": {
+      "type": "legacy-original"
+    },
+    "colors": {
+      "background": "#090E1A",
+      "surface": "#111B2D",
+      "surface2": "#182640",
+      "foreground": "#F1F6FF",
+      "muted": "#97A9C5",
+      "accent": "#55D6FF",
+      "accent2": "#FF6E91",
+      "accent3": "#B6F36B",
+      "border": "#304565",
+      "white": "#FFFFFF",
+      "black": "#060A12"
+    },
+    "fonts": {
+      "heading": [
+        "Aptos Display",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "body": [
+        "Aptos",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "mono": [
+        "Aptos Mono",
+        "Consolas",
+        "monospace"
+      ]
+    },
+    "spacing": {
+      "page_margin": 64,
+      "section_gap": 28,
+      "card_gap": 18,
+      "text_gap": 10
+    },
+    "typography": {
+      "title_px": 58,
+      "slide_title_px": 38,
+      "subtitle_px": 21,
+      "body_px": 17,
+      "caption_px": 13,
+      "metric_px": 46
+    }
+  }
+]

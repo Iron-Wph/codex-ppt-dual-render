@@ -1,0 +1,166 @@
+{"kind":"slide","id":"sl/5bel2m","slide":1,"title":"01 / 09","textShapes":8}
+{"kind":"shape","id":"sh/zm1kv2x4","slide":1,"name":"slide-1-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/kna1o7y9","slide":1,"textChars":7,"textLines":1}
+{"kind":"textbox","id":"sh/loj2xsfu","slide":1,"textChars":13,"textLines":1}
+{"kind":"textbox","id":"sh/ax8jidg7","slide":1,"textChars":22,"textLines":1}
+{"kind":"textbox","id":"sh/bihkrixs","slide":1,"textChars":16,"textLines":1}
+{"kind":"shape","id":"sh/cja1knyd","slide":1,"name":"s1-title-visual-plate","bbox":[738,152,420,390]}
+{"kind":"textbox","id":"sh/xkj2tsfy","slide":1,"textChars":20,"textLines":1}
+{"kind":"shape","id":"sh/utc3uhgr","slide":1,"name":"s1-title-visual-manuscript-line-1","bbox":[778,244,302.4,0]}
+{"kind":"shape","id":"sh/velk3mxc","slide":1,"name":"s1-title-visual-manuscript-line-2","bbox":[778,292,243.6,0]}
+{"kind":"shape","id":"sh/feh4jud4","slide":1,"name":"s1-title-visual-manuscript-line-3","bbox":[778,340,243.6,0]}
+{"kind":"shape","id":"sh/ed8nqpcj","slide":1,"name":"s1-title-visual-manuscript-line-4","bbox":[778,388,243.6,0]}
+{"kind":"shape","id":"sh/10zml4va","slide":1,"name":"s1-title-visual-manuscript-line-5","bbox":[778,436,193.2,0]}
+{"kind":"shape","id":"sh/gfq5szup","slide":1,"name":"s1-title-visual-annotation","bbox":[1023.6,238,75.6,163.8]}
+{"kind":"textbox","id":"sh/3214nedg","slide":1,"textChars":16,"textLines":3}
+{"kind":"shape","id":"sh/218nu9cv","slide":1,"name":"s1-note-bg","bbox":[72,568,720,66]}
+{"kind":"textbox","id":"sh/p4j6p4v6","slide":1,"textChars":4,"textLines":1}
+{"kind":"textbox","id":"sh/o3a5wju1","slide":1,"textChars":14,"textLines":1}
+{"kind":"slide","id":"sl/36u9zi","slide":2,"title":"02 / 09","textShapes":15}
+{"kind":"shape","id":"sh/srexwv6t","slide":2,"name":"slide-2-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/rq5w3qp8","slide":2,"textChars":7,"textLines":1}
+{"kind":"textbox","id":"sh/qpwfulon","slide":2,"textChars":4,"textLines":1}
+{"kind":"textbox","id":"sh/1g7e907a","slide":2,"textChars":20,"textLines":1}
+{"kind":"textbox","id":"sh/0fyx0v6p","slide":2,"textChars":52,"textLines":1}
+{"kind":"shape","id":"sh/fupw7qp4","slide":2,"name":"s2-contract-metric-1","bbox":[72,314,190.67,196]}
+{"kind":"shape","id":"sh/etwfyloz","slide":2,"name":"s2-contract-rule-1","bbox":[72,314,190.67,4]}
+{"kind":"textbox","id":"sh/hk3exg76","slide":2,"textChars":7,"textLines":1}
+{"kind":"textbox","id":"sh/gjudob6l","slide":2,"textChars":5,"textLines":1}
+{"kind":"textbox","id":"sh/yxkjm9wn","slide":2,"textChars":16,"textLines":1}
+{"kind":"shape","id":"sh/zitkfex8","slide":2,"name":"s2-contract-metric-2","bbox":[274.67,314,190.67,196]}
+{"kind":"shape","id":"sh/0j21ojed","slide":2,"name":"s2-contract-rule-2","bbox":[274.67,314,190.67,4]}
+{"kind":"textbox","id":"sh/lkv2hofy","slide":2,"textChars":11,"textLines":1}
+{"kind":"textbox","id":"sh/ml4jqtwj","slide":2,"textChars":3,"textLines":1}
+{"kind":"textbox","id":"sh/nmdkjyx4","slide":2,"textChars":23,"textLines":1}
+{"kind":"shape","id":"sh/8nm1s3ep","slide":2,"name":"s2-contract-metric-3","bbox":[477.33,314,190.67,196]}
+{"kind":"shape","id":"sh/9ov2l8fa","slide":2,"name":"s2-contract-rule-3","bbox":[477.33,314,190.67,4]}
+{"kind":"textbox","id":"sh/ap4jutwv","slide":2,"textChars":4,"textLines":1}
+{"kind":"textbox","id":"sh/vqdknyd0","slide":2,"textChars":7,"textLines":1}
+{"kind":"textbox","id":"sh/7ux0byt8","slide":2,"textChars":20,"textLines":1}
+{"kind":"shape","id":"sh/6toj2dcn","slide":2,"name":"s2-contract-image-frame","bbox":[704,110,496,400]}
+{"kind":"shape","id":"sh/sv6143ut","slide":2,"name":"s2-contract-takeaway-rule","bbox":[72,566,1128,0]}
+{"kind":"textbox","id":"sh/jqd07ytc","slide":2,"textChars":4,"textLines":1}
+{"kind":"textbox","id":"sh/ip4jytcr","slide":2,"textChars":46,"textLines":1}
+{"kind":"image","id":"im/25o3m54n","slide":2,"name":"","alt":"论文第 1 页来源核验（p1-snapshot）：用于核对“先锁定实验契约，再谈 train SSR”的原始论文表格。","bbox":[720,126,464,368]}
+{"kind":"slide","id":"sl/4n3wfr","slide":3,"title":"03 / 09","textShapes":20}
+{"kind":"shape","id":"sh/61wze9wr","slide":3,"name":"slide-3-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/t47yp4fi","slide":3,"textChars":7,"textLines":1}
+{"kind":"textbox","id":"sh/s3ehgzex","slide":3,"textChars":12,"textLines":1}
+{"kind":"textbox","id":"sh/f6pgrex8","slide":3,"textChars":19,"textLines":1}
+{"kind":"shape","id":"sh/u5gzi9w3","slide":3,"name":"s3-flow-axis","bbox":[96,382,1088,0]}
+{"kind":"textbox","id":"sh/hs7itofe","slide":3,"textChars":14,"textLines":1}
+{"kind":"textbox","id":"sh/g7yhkjet","slide":3,"textChars":10,"textLines":1}
+{"kind":"shape","id":"sh/3up0vyxk","slide":3,"name":"s3-flow-1-dot","bbox":[74,372,20,20]}
+{"kind":"textbox","id":"sh/2tgzmtwz","slide":3,"textChars":9,"textLines":1}
+{"kind":"textbox","id":"sh/gfit0vap","slide":3,"textChars":14,"textLines":1}
+{"kind":"textbox","id":"sh/hgrat0ra","slide":3,"textChars":8,"textLines":1}
+{"kind":"shape","id":"sh/udgrylsj","slide":3,"name":"s3-flow-2-dot","bbox":[304.8,372,20,20]}
+{"kind":"textbox","id":"sh/vepsrq94","slide":3,"textChars":22,"textLines":1}
+{"kind":"textbox","id":"sh/4jit4va1","slide":3,"textChars":26,"textLines":1}
+{"kind":"textbox","id":"sh/5krax0r6","slide":3,"textChars":19,"textLines":1}
+{"kind":"shape","id":"sh/ih0b25sv","slide":3,"name":"s3-flow-3-dot","bbox":[535.6,372,20,20]}
+{"kind":"textbox","id":"sh/3i9sva9g","slide":3,"textChars":12,"textLines":1}
+{"kind":"textbox","id":"sh/s72t8fax","slide":3,"textChars":15,"textLines":1}
+{"kind":"textbox","id":"sh/d8ba1kri","slide":3,"textChars":9,"textLines":1}
+{"kind":"shape","id":"sh/147alkjm","slide":3,"name":"s3-flow-4-dot","bbox":[766.4,372,20,20]}
+{"kind":"textbox","id":"sh/03y9sf21","slide":3,"textChars":19,"textLines":1}
+{"kind":"textbox","id":"sh/z2psja1g","slide":3,"textChars":28,"textLines":1}
+{"kind":"textbox","id":"sh/e1grq5kv","slide":3,"textChars":7,"textLines":1}
+{"kind":"shape","id":"sh/9s7apkji","slide":3,"name":"s3-flow-5-dot","bbox":[997.2,372,20,20]}
+{"kind":"textbox","id":"sh/orytwf2d","slide":3,"textChars":15,"textLines":1}
+{"kind":"shape","id":"sh/n6psna1s","slide":3,"name":"s3-flow-result-rule","bbox":[72,562,1136,0]}
+{"kind":"textbox","id":"sh/m5gbu5k7","slide":3,"textChars":7,"textLines":1}
+{"kind":"textbox","id":"sh/pwnad0je","slide":3,"textChars":36,"textLines":1}
+{"kind":"slide","id":"sl/4q6plu","slide":4,"title":"04 / 09","textShapes":7}
+{"kind":"shape","id":"sh/orylg32l","slide":4,"name":"slide-4-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/nqp4ny10","slide":4,"textChars":7,"textLines":1}
+{"kind":"textbox","id":"sh/2pg3etkf","slide":4,"textChars":14,"textLines":1}
+{"kind":"textbox","id":"sh/xgrmt8j2","slide":4,"textChars":12,"textLines":1}
+{"kind":"textbox","id":"sh/bup4ry1w","slide":4,"textChars":28,"textLines":1}
+{"kind":"shape","id":"sh/atgnidkr","slide":4,"name":"s4-source-frame","bbox":[900,88,300,112]}
+{"kind":"textbox","id":"sh/lkrmxsje","slide":4,"textChars":11,"textLines":1}
+{"kind":"shape","id":"sh/25cfitgb","slide":4,"name":"s4-data-takeaway-rule","bbox":[92,608,1040,0]}
+{"kind":"textbox","id":"sh/365wrexw","slide":4,"textChars":4,"textLines":1}
+{"kind":"textbox","id":"sh/o7exkjyh","slide":4,"textChars":25,"textLines":1}
+{"kind":"table","id":"tb/54ve10z2","slide":4,"name":"","rows":6,"cols":2,"preview":"RLinf | SimpleVLA","bbox":[92,236,1040,350]}
+{"kind":"image","id":"im/1cfapgji","slide":4,"name":"","alt":"论文第 4 页来源核验（p4-table-2）：用于核对 RLinf 与 SimpleVLA 的 rollout batch、learning rate 和 LoRA 差异。","bbox":[912,116,276,72]}
+{"kind":"slide","id":"sl/ubj377","slide":5,"title":"05 / 09","textShapes":7}
+{"kind":"shape","id":"sh/kbe18rix","slide":5,"name":"slide-5-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/za5kfmhc","slide":5,"textChars":7,"textLines":1}
+{"kind":"textbox","id":"sh/y9wjmh0r","slide":5,"textChars":12,"textLines":1}
+{"kind":"textbox","id":"sh/x8n2dczm","slide":5,"textChars":26,"textLines":1}
+{"kind":"shape","id":"sh/c7e1k7i1","slide":5,"name":"s5-chart-bg","bbox":[72,240,732,330]}
+{"kind":"textbox","id":"sh/b650bmhg","slide":5,"textChars":13,"textLines":1}
+{"kind":"shape","id":"sh/h4r2pgzq","slide":5,"name":"s5-callout-bg","bbox":[830,240,370,330]}
+{"kind":"textbox","id":"sh/w3y1gbi5","slide":5,"textChars":4,"textLines":1}
+{"kind":"textbox","id":"sh/uls7a1sb","slide":5,"textChars":44,"textLines":3}
+{"kind":"textbox","id":"sh/fm18369w","slide":5,"textChars":57,"textLines":1}
+{"kind":"chart","id":"ch/epwn6dk7","slide":5,"name":"","chartType":"bar","bbox":[96,278,686,260]}
+{"kind":"image","id":"im/rexgze5o","slide":5,"name":"","alt":"论文第 5 页来源核验（p5-table-1）：用于核对 8 个任务的 RLinf SFT→RL train SSR、提升幅度与训练步数。","bbox":[858,522,312,40]}
+{"kind":"slide","id":"sl/uibqm4","slide":6,"title":"06 / 09","textShapes":13}
+{"kind":"shape","id":"sh/knuh8r21","slide":6,"name":"slide-6-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/jmlgzmlg","slide":6,"textChars":7,"textLines":1}
+{"kind":"textbox","id":"sh/ilcz6hkv","slide":6,"textChars":35,"textLines":1}
+{"kind":"textbox","id":"sh/xkjyxc3a","slide":6,"textChars":34,"textLines":1}
+{"kind":"shape","id":"sh/wjah472p","slide":6,"name":"s6-argument-1-rule","bbox":[72,244,642,4]}
+{"kind":"textbox","id":"sh/bi1gv2l4","slide":6,"textChars":5,"textLines":1}
+{"kind":"textbox","id":"sh/ahsz2hkj","slide":6,"textChars":25,"textLines":1}
+{"kind":"textbox","id":"sh/9gjytc3y","slide":6,"textChars":18,"textLines":1}
+{"kind":"textbox","id":"sh/ofah072t","slide":6,"textChars":15,"textLines":1}
+{"kind":"shape","id":"sh/it0na5kv","slide":6,"name":"s6-argument-2-rule","bbox":[734,244,474,4]}
+{"kind":"textbox","id":"sh/ju9o3alg","slide":6,"textChars":9,"textLines":1}
+{"kind":"textbox","id":"sh/4vi5cv21","slide":6,"textChars":25,"textLines":1}
+{"kind":"textbox","id":"sh/5wr6503m","slide":6,"textChars":18,"textLines":1}
+{"kind":"textbox","id":"sh/u50n6lkz","slide":6,"textChars":18,"textLines":1}
+{"kind":"shape","id":"sh/v694zqlk","slide":6,"name":"s6-argument-divider","bbox":[708,244,1,334]}
+{"kind":"textbox","id":"sh/wri58v25","slide":6,"textChars":5,"textLines":1}
+{"kind":"textbox","id":"sh/hsr6103q","slide":6,"textChars":55,"textLines":1}
+{"kind":"slide","id":"sl/lwdau4","slide":7,"title":"07 / 09","textShapes":12}
+{"kind":"shape","id":"sh/b6pkju1w","slide":7,"name":"slide-7-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/c7ylsfih","slide":7,"textChars":7,"textLines":1}
+{"kind":"textbox","id":"sh/x872lkj2","slide":7,"textChars":10,"textLines":1}
+{"kind":"textbox","id":"sh/2hw3m50f","slide":7,"textChars":17,"textLines":1}
+{"kind":"textbox","id":"sh/ni5kfa1k","slide":7,"textChars":114,"textLines":1}
+{"kind":"textbox","id":"sh/pkn2hkjq","slide":7,"textChars":4,"textLines":1}
+{"kind":"textbox","id":"sh/md03y90j","slide":7,"textChars":49,"textLines":1}
+{"kind":"shape","id":"sh/7e94re14","slide":7,"name":"s7-answer-point-1-rule","bbox":[790,256,390,0]}
+{"kind":"textbox","id":"sh/by183u5g","slide":7,"textChars":6,"textLines":1}
+{"kind":"textbox","id":"sh/ax87ap4v","slide":7,"textChars":46,"textLines":1}
+{"kind":"shape","id":"sh/x0jq54nm","slide":7,"name":"s7-answer-point-2-rule","bbox":[790,382,390,0]}
+{"kind":"textbox","id":"sh/wzapczm1","slide":7,"textChars":5,"textLines":1}
+{"kind":"textbox","id":"sh/j2187e5s","slide":7,"textChars":31,"textLines":1}
+{"kind":"shape","id":"sh/y1s7e947","slide":7,"name":"s7-boundary-rule","bbox":[72,562,1136,0]}
+{"kind":"textbox","id":"sh/l4jq9oni","slide":7,"textChars":2,"textLines":1}
+{"kind":"textbox","id":"sh/k3a9gjmd","slide":7,"textChars":46,"textLines":1}
+{"kind":"table","id":"tb/dc7yto7u","slide":7,"name":"","rows":5,"cols":4,"preview":"Model | SFT | PPO | GRPO","bbox":[72,326,660,194]}
+{"kind":"slide","id":"sl/5aws8r","slide":8,"title":"08 / 09","textShapes":7}
+{"kind":"shape","id":"sh/kb69grul","slide":8,"name":"slide-8-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/zad87md0","slide":8,"textChars":7,"textLines":1}
+{"kind":"textbox","id":"sh/y94rehcv","slide":8,"textChars":14,"textLines":1}
+{"kind":"textbox","id":"sh/x8vq5cva","slide":8,"textChars":22,"textLines":1}
+{"kind":"textbox","id":"sh/b6d832d4","slide":8,"textChars":28,"textLines":1}
+{"kind":"shape","id":"sh/a547axcj","slide":8,"name":"s8-source-frame","bbox":[900,88,300,112]}
+{"kind":"textbox","id":"sh/h4zqhgve","slide":8,"textChars":11,"textLines":1}
+{"kind":"shape","id":"sh/mlk7ipcj","slide":8,"name":"s8-data-takeaway-rule","bbox":[92,608,1040,0]}
+{"kind":"textbox","id":"sh/7mtorat4","slide":8,"textChars":4,"textLines":1}
+{"kind":"textbox","id":"sh/8n2pkfu9","slide":8,"textChars":58,"textLines":1}
+{"kind":"table","id":"tb/1gvu5onm","slide":8,"name":"","rows":6,"cols":3,"preview":"8卡​ | actor（s）​ | rollout（s）​","bbox":[92,236,1040,350]}
+{"kind":"image","id":"im/h0zm9oji","slide":8,"name":"","alt":"论文第 6 页来源核验（p6-table-2）：用于核对 8 卡并行模式的 actor 与 rollout 时间。","bbox":[912,116,276,72]}
+{"kind":"slide","id":"sl/7bq6xk","slide":9,"title":"09 / 09","textShapes":12}
+{"kind":"shape","id":"sh/bm9kbytw","slide":9,"name":"slide-9-top-rule","bbox":[72,34,1136,0]}
+{"kind":"textbox","id":"sh/cnilk3ah","slide":9,"textChars":7,"textLines":1}
+{"kind":"textbox","id":"sh/xor2d8bm","slide":9,"textChars":10,"textLines":1}
+{"kind":"textbox","id":"sh/2hgjetsz","slide":9,"textChars":30,"textLines":1}
+{"kind":"textbox","id":"sh/ni9k7ytk","slide":9,"textChars":183,"textLines":1}
+{"kind":"textbox","id":"sh/oji1gja5","slide":9,"textChars":15,"textLines":1}
+{"kind":"textbox","id":"sh/pkr29obq","slide":9,"textChars":74,"textLines":1}
+{"kind":"shape","id":"sh/mdk3adsj","slide":9,"name":"s9-answer-point-1-rule","bbox":[790,256,390,0]}
+{"kind":"textbox","id":"sh/7etkjit4","slide":9,"textChars":10,"textLines":1}
+{"kind":"textbox","id":"sh/3ad4faxc","slide":9,"textChars":83,"textLines":1}
+{"kind":"shape","id":"sh/i943mpwr","slide":9,"name":"s9-answer-point-2-rule","bbox":[790,382,390,0]}
+{"kind":"textbox","id":"sh/5cvmhkfi","slide":9,"textChars":16,"textLines":1}
+{"kind":"textbox","id":"sh/4bmlofex","slide":9,"textChars":79,"textLines":1}
+{"kind":"shape","id":"sh/rex4jux8","slide":9,"name":"s9-boundary-rule","bbox":[72,562,1136,0]}
+{"kind":"textbox","id":"sh/qd43qpwn","slide":9,"textChars":4,"textLines":1}
+{"kind":"textbox","id":"sh/dgfml4fe","slide":9,"textChars":64,"textLines":1}
+{"kind":"notice","message":"Truncated: omitted 0 lines. Increase maxChars or narrow target."}

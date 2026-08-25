@@ -1,0 +1,15 @@
+{
+  "enabled": true,
+  "first_pass": "codex/codex-storyboard.json",
+  "revised_pass": "codex/codex-storyboard-revised.json",
+  "slide_count_before": 10,
+  "slide_count_after": 9,
+  "key_message_before": "在固定 RoboTwin 场景配置、OOD seed 与 8 卡 A800 条件下，RLinf 的 GRPO 训练将 8 个任务的平均 train SSR 从 24.48% 提升到 84.63%，同时提供具有竞争力的 actor/rollout 执行路径；但与 SimpleVLA 的精度、超参数、轨迹收集和 reward 设计差异要求将结论解释为受实验契约约束的系统性证据。",
+  "key_message_after": "在相同 RoboTwin 训练 seed、128 个 OOD 评估 seed、评估口径和 8 卡 A800 条件下，RLinf 的 RL 训练使 8 个任务的平均 train SSR 从 24.48% 提升到 84.63%，并在 colocated 配置下呈现有竞争力的 actor/rollout 时间；但由于精度、超参数、valid trajectory 收集和 reward 设计不同，证据支持的是受控条件下的完整系统优势，而不是纯算法因果结论。",
+  "logic_check": {
+    "opening_resolved": true,
+    "core_has_evidence": true,
+    "no_redundant_slides": true,
+    "rationale": "合并了原先重复展开实验契约与领域随机化的两页，将 seed、OOD 评估、GPU 条件和随机化放在同一页；保留并强化了 RLinf 训练机制、可比性差异、跨任务结果、SimpleVLA 对比、敏感性边界和系统效率六个核心论证环节。结尾直接回答开场的“RL 信号还是完整系统差异”问题，并明确不能做纯算法归因。相邻页面按“先定义口径、再解释机制、再验证结果、再限定外推、最后落到运行与结论”推进。"
+  }
+}

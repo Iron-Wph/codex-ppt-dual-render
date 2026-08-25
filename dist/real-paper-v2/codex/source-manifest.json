@@ -1,0 +1,28 @@
+{
+  "input": "C:\\Users\\Wph\\Desktop\\2026届本科毕业论文（设计）工作指南\\codex\\RLinf论文实验.pdf",
+  "type": "pdf",
+  "page_count": 8,
+  "characters": 12722,
+  "paper_mode": true,
+  "parser": "pymupdf",
+  "parser_details": {
+    "engine": "pymupdf",
+    "structured_blocks": 607,
+    "requested": "auto",
+    "selected": "pymupdf",
+    "fallback_reason": "MinerU unavailable: spawn mineru.exe ENOENT",
+    "diagnostics": {
+      "page_count": 8,
+      "text_page_ratio": 1,
+      "scanned_like_page_ratio": 0,
+      "character_count": 12722,
+      "asset_count": 29,
+      "table_count": 10,
+      "formula_count": 0,
+      "structured_block_count": 607
+    }
+  },
+  "asset_count": 29,
+  "table_count": 10,
+  "formula_count": 0
+}
