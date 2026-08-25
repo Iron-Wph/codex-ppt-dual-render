@@ -8,7 +8,7 @@ $Timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
 
 if ([string]::IsNullOrWhiteSpace($OutputPath)) {
   $Parent = Split-Path -Parent $RepositoryRoot
-  $OutputPath = Join-Path $Parent "PPT制作-full-$Timestamp.zip"
+  $OutputPath = Join-Path $Parent "codex-ppt-full-$Timestamp.zip"
 }
 
 $OutputPath = [System.IO.Path]::GetFullPath($OutputPath)

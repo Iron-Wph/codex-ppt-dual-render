@@ -31,14 +31,14 @@ powershell -ExecutionPolicy Bypass -File scripts/create-migration-archive.ps1
 脚本会在仓库同级目录创建：
 
 ```text
-PPT制作-full-YYYYMMDD-HHMMSS.zip
+codex-ppt-full-YYYYMMDD-HHMMSS.zip
 ```
 
 Git 历史使用独立 bundle 保存：
 
 ```powershell
-git bundle create ..\PPT制作-history.bundle --all
-git bundle verify ..\PPT制作-history.bundle
+git bundle create ..\codex-ppt-history.bundle --all
+git bundle verify ..\codex-ppt-history.bundle
 ```
 
 ZIP 保存完整工作目录，bundle 保存分支和提交历史，两者配合可在没有 GitHub 时完成离线迁移。
@@ -86,7 +86,7 @@ codex login
 ### 从 bundle 恢复
 
 ```powershell
-git clone ..\PPT制作-history.bundle PPT制作
+git clone ..\codex-ppt-history.bundle PPT制作
 Set-Location PPT制作
 git switch codex/migration-checkpoint
 npm ci
